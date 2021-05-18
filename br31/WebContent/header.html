@@ -64,7 +64,7 @@
 	.menu>ul {
 		margin: 0;
 		height: 310px;
-		background-color: white;
+		/*background-color: white;*/
 		overflow: hidden;
 	}
 	.menu>ul>li {
@@ -113,7 +113,17 @@
 	a:hover {
 		color: pink;
 	}
-
+	
+	.submenu2{
+		display:none;
+	}
+	
+	.menu>ul:hover .submenu2 {
+		display:block;
+		margin: 0;	
+		height: 310px;
+		background-color: white;
+	}
 
 </style>
 </head>
@@ -145,53 +155,69 @@
 					<li>
 						<a href="#">login</a>
 						<a href="#">join</a>
+						<div class = "submenu2">
 						<ul>
 							<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
 						</ul>
+						</div>
 					</li>
 					<li>
 						<a href="#">FLAVOR OF THE MONTH</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><img src="http://localhost:9000/br31/images/monthly_menu.png"></li>
 						</ul>
+						</div>
+						
 					</li>
 					<li>
 						<a href="#">MENU</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><a href="#">아이스크림</a></li>
 							<li><a href="#">커피</a></li>
 						</ul>
+						</div>
 					</li>
 					<li>
 						<a href="#">영양성분 및 알레르기</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><a href="#">아이스크림</a></li>
 							<li><a href="#">커피</a></li>
 						</ul>
+						</div>
 					</li>
 					<li>
 						<a href="#">EVENT</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><a href="#">진행이벤트</a></li>
 							<li><a href="#">당첨자발표</a></li>
 						</ul>
+						</div>
 					</li>
 					<li>
 						<a href="#">STORE</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><a href="#">매장정보</a></li>
 							<li><a href="#">고객센터</a></li>
 						</ul>
+						</div>
 					</li>
 					<li>
 						<a href="#">ABOUT</a>
+						<div class = "submenu2">
 						<ul class="submenu">
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">채용정보</a></li>
 						</ul>
+						</div>
 					</li>
 				</ul>
 			</nav>
+			</div>
 		</div>
 		</div>
 	</header>
