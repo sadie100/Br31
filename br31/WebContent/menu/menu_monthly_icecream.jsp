@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/menu/menu_icecream.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
 </head>
 <body>
 
