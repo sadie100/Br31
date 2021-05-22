@@ -1,0 +1,226 @@
+/****공통*************/
+/****공통*************/
+/****공통*************/
+/****공통*************/
+
+h3.title{
+	font-weight:bold;
+	font-size: 16px;
+}
+section.page{
+	margin-bottom: 100px;
+} 
+
+div.content{
+	width: 950px;
+	text-align: center;
+	margin: auto;
+	margin-top: 80px;
+} 
+
+
+/*****상단 설명 ************/
+/*****상단 설명 ************/
+/*****상단 설명 ************/
+
+section.top_info{
+	text-align: center;
+}
+section.top_info label.eng_name{
+	color:rgb(227,182,59);
+	font-size: 11px;
+}
+section.top_info h1.kor_name{
+	font-weight: lighter;
+	font-size: 50px;
+	margin: 0;
+}
+section.top_info label.p_explain{
+	color: rgb(148,135,128);
+	font-size: 14px;
+}
+section.top_info div.bg{
+	border: none;
+	position: relative;
+	width: 100%;
+	margin: auto;
+	background-image: url("../images/img_con.png");
+	background-repeat: no-repeat; 
+	background-position: center bottom;
+	background-size: 70px;
+	height: 500px;
+}
+section.top_info div.icons{
+	position: absolute;
+	bottom: 8px;
+	right: 16px;
+}
+section.top_info div.icons a:first-child{
+	display: inline-block;
+	width: 30px; height: 30px;
+	text-align: center;
+	border: 1px solid rgb(226,216,212);
+	font-size: 20px;
+	margin:0; padding:0;
+	border-radius: 100%;
+	color: rgb(226,216,212);
+	text-decoration: none;
+}
+section.top_info{
+	padding-bottom: 30px;
+	border-bottom: 1px solid rgb(226,216,212);
+}
+
+
+/******* 사이즈 **************/
+/******* 사이즈 **************/
+/******* 사이즈 **************/
+/******* 사이즈 **************/
+
+
+
+section.size_info{
+	padding: 40px 0;
+	text-align: center;
+	margin: auto;
+}
+section.size_info div.depth1 img.title{
+	display: block;
+	margin: auto;
+	text-align: center;
+	padding: 50px 0;
+}
+section.size_info div.depth1{
+	width: 48%;
+	margin-top: 10px; 
+	display: inline-block;
+}
+section.size_info div.depth2{
+	display: inline-block;
+	width: 48%; height: 100px;
+	position: relative;
+}
+section.size_info div.depth1 div.depth2 img{
+	display: inline;
+	position: absolute;
+	left: 0px;
+}
+section.size_info div.depth1 div.depth2 label{
+	padding: 5px 0;
+}
+section.size_info div.depth1 div.depth2 div.text{
+	display: inline-block;
+	width: 140px;
+	position: absolute;
+	right: 0px;
+}
+section.size_info div.depth1 div.depth2 label.title{
+	color: rgb(131,126,124);
+	font-size: 14px;
+	display: block;
+	text-align: left;
+}
+section.size_info div.depth1 div.depth2 label{
+	text-align: left;
+	display: inline-block;
+} 
+section.size_info div.depth1 div.depth2 label.info{
+	color: rgb(172,160,154);
+	display: block;
+	font-size: 10px;
+}
+section.size_info div.depth1 div.depth2 label.price{
+	color: rgb(255,169,76);
+	font-size: 12px;
+	display: block;
+}
+
+
+/* 추천플레이버 *****************/
+/* 추천플레이버 *****************/
+/* 추천플레이버 *****************/
+/* 추천플레이버 *****************/
+/* 추천플레이버 *****************/
+
+
+
+section.recommend_flavor {
+	padding: 70px 0;
+}
+
+section.recommend_flavor table{
+	border-collapse: collapse;
+	margin:auto; padding:0;
+	display: block;
+	width: 600px;
+}
+section.recommend_flavor td, section.recommend_flavor tr{
+	margin: 0; padding: 0;
+	border: 1px solid rgb(235,235,235);
+	height: 170px;
+}
+section.recommend_flavor td{
+	display: inline-block;
+	width: 145px;
+}
+section.recommend_flavor img{
+	width: 100px; height: 100px;
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+}
+section.recommend_flavor label{
+	margin-top: 20px;
+	display: block;
+	width:100%;
+	color: rgb(172,160,154);
+	font-size: 12px;
+}
+section.recommend_flavor span.depth1{
+	display: inline-block;
+	width: 100%; height: 150px;
+	text-align: center;
+}
+section.recommend_flavor span.depth2{
+	display :inline-block;
+	text-align: center;
+	width: 100%; height: 180px;
+	background-image : url("http://localhost:9000/br31/menu/images/img_con.png");
+	background-repeat: no-repeat; 
+	background-position: center bottom;
+	background-size: 25px;
+}
+section.recommend_flavor a{
+	width: 100%; height: 170px;
+	display: inline-block;
+	text-decoration: none;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+/*********인스타그램************/
+/*********인스타그램************/
+/*********인스타그램************/
+/*********인스타그램************/
+/*********인스타그램************/
+
+
+section.instagram label.hashtag {
+	font-size: 13px;
+	color: rgb(255,117,172);
+}
+section.instagram div.pictures {
+	margin : 20px 0;
+}
+section.page button{
+	display: inline-block;
+	color: rgb(245,111,152);
+	border: 2px solid rgb(245,111,152);
+	background-color: white;
+	width: 170px; height: 50px;
+	border-radius: 30px;
+	font-weight: bold;
+	font-size: 16px;
+	
+}

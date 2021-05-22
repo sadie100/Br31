@@ -1,0 +1,247 @@
+/* logo pic */
+section.logo_icecream {
+	background-color: rgb(111,193,226);
+	background-image : url("http://localhost:9000/br31/menu/images/menu_logo.png");
+	overflow: hidden;
+	height: 310px; weight: 100%;
+	display: border;
+	margin-bottom: 100px;
+}
+section.logo_coffee {
+	background-color: rgb(203,176,138);
+	background-image : url("http://localhost:9000/br31/menu/images/coffee_logo.png");
+	overflow: hidden;
+	height: 310px; weight: 100%;
+	display: border;
+	margin-bottom: 100px;
+}
+section.logo_menu {
+	background-color: rgb(233,139,156);
+	background-image : url("http://localhost:9000/br31/menu/images/menu_default_logo.png");
+	overflow: hidden;
+	height: 310px; weight: 100%;
+	display: border;
+	margin-bottom: 100px;
+}
+
+/*** 공통 ***/
+
+h3 {
+	text-align: center;
+}
+
+/**********menu default*************/
+/**********menu default*************/
+/**********menu default*************/
+/**********menu default*************/
+
+div.flavor_of_month {
+	text-align: center;
+	margin: 50px 0;
+} 
+
+div.btn_more {
+	text-align: center;
+}
+
+button.btn_more {
+	border: 2px solid rgb(236,226,222);
+	border-radius: 100px;
+	background-color: white;
+	padding: 5px 18px;
+	color: rgb(164,142,116);
+	font-size: 11px;
+}
+
+/**************monthly best icecream ***********/
+/**************monthly best icecream ***********/
+/**************monthly best icecream ***********/
+/**************monthly best icecream ***********/
+
+div.monthly_best_icecream_content a {
+	text-decoration : none;
+	width: 170px; height: 190px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 0;
+	padding: 10px 25px; 
+	position: relative;
+}
+div.monthly_best_icecream_content span.depth1 {
+	width: 150px; height: 150px;
+	margin: 10px 10px 5px 10px;
+	display: inline-block;
+	background-color: rgb(244,244,244);
+	border-radius: 100%;
+	overflow: hidden;
+}
+div.monthly_best_icecream_content span.depth2{
+	display : inline-block;
+	background-image : url("http://localhost:9000/br31/menu/images/img_con.png");
+	background-repeat: no-repeat; 
+	background-position: center bottom; 
+	background-size: 55px;
+	width: 150px; height: 200px;
+}
+div.monthly_best_icecream_content img {
+	width: 120px; height: 120px;
+	display: block;
+	padding : 15px;
+}
+div.monthly_best_icecream_content li {
+	list-style-type: none;
+	display: inline-block;
+} 
+div.monthly_best_icecream_content label.rank {
+	position: absolute;
+	color: white;
+	font-size: 12px;
+	background-color : rgb(211,193,171);
+	padding: 10px;
+	margin-top: -10px;
+	left: 90px; 
+}
+div.monthly_best_icecream_content label.name {
+	display: inlinde-block;
+	width: 180px;
+	font-size: 13px;
+	color:rgb(145,137,131);
+}
+div.monthly_best_icecream_content li:nth-child(1) label.rank{
+	background-color : rgb(255,124,152);
+}
+div.monthly_best_icecream_content li:nth-child(2) label.rank{
+	background-color : rgb(235,153,92);
+}
+div.monthly_best_icecream_content li:nth-child(3) label.rank{
+	background-color : rgb(209,167,115);
+}
+div.monthly_best_icecream_content li:nth-child(1) span.depth1 {
+	background-color : rgb(255,225,231)
+}
+div.monthly_best_icecream_content li:nth-child(2) span.depth1 {
+	background-color : rgb(255,216,132)
+}
+div.monthly_best_icecream_content li:nth-child(3) span.depth1 {
+	background-color : rgb(227,210,189)
+}
+
+
+/* ***********icecream menu ********* */
+/* ***********icecream menu ********* */
+/* ***********icecream menu ********* */
+/* ***********icecream menu ********* */
+/* ***********icecream menu ********* */
+
+section.icecream_menu {
+	padding-top: 30px;
+}
+div.icecream_menu {
+	width: 1200px; 
+	margin: auto;
+	padding: 0;
+	padding-bottom: 30px;
+}
+div.icecream_menu a{
+	width: 100%; height: 300px;
+	display: inline-block;
+	text-decoration: none;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+div.icecream_menu table{
+	border-collapse: collapse;
+	margin: 0;
+	margin-top: 40px;
+	padding:0;
+	display: block;
+}
+div.icecream_menu td.src_one, div.icecream_menu tr.src_one{
+	width: 300px;
+	}
+div.icecream_menu td, div.icecream_menu tr{ 
+	margin:0; padding: 0;
+	border: 1px solid rgb(235,235,235);
+}	
+
+div.icecream_menu img{
+	width: 60%; height: 200px; 
+	display: block;
+	margin: auto;
+}
+div.icecream_menu span.depth1 label.name{
+	margin-top: 30px;
+	display: block;
+	width: 100%;
+	color: black;
+	font-size: 18px;
+}
+div.icecream_menu span.depth1 label.hashtag{
+	margin-bottom: 20px;
+	display: inline-block;
+	color: rgb(145,137,131);
+	padding-top: 10px;
+	font-size: 13px; 
+}
+div.icecream_menu button.btn_hashtag{
+	border: 1px solid rgb(206,206,206);
+	color: rgb(206,206,206);
+	background-color: white;
+	font-size: 13px;
+	padding: 1px 4px;	
+}
+div.icecream_menu span.depth1 {
+	display: inline-block;
+	width: 100%; height: 150px;
+	text-align: center;
+}
+div.icecream_menu span.depth2 {
+	display :inline-block;
+	text-align: center;
+	width: 100%; height: 370px;
+	background-image : url("http://localhost:9000/br31/menu/images/img_con.png");
+	background-repeat: no-repeat; 
+	background-position: center bottom;
+	background-size: 70px;
+} 
+div.icecream_menu span.depth2_no_bg {
+	display :inline-block;
+	text-align: center;
+	width: 100%; height: 370px;
+} 
+
+/************ 페이지 번호 ********/
+/************ 페이지 번호 ********/
+/************ 페이지 번호 ********/
+/************ 페이지 번호 ********/
+
+section.page{
+	margin-top: 30px;
+	margin-bottom: 300px;
+}
+div.pagination {
+	display: block;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+}
+div.pagination a{
+	border: 1px solid rgb(228,219,215);
+	display: inline-block;
+	margin: 0 5px;
+	width: 45px; height: 45px;
+	border-radius: 100%;
+	text-align: center;
+	line-height: 45px;
+	text-decoration : none;
+	font-size: 15px;
+	background-color: white;
+	color: black;
+}
+div.pagination a:first-child, div.pagination a:last-child{
+	color:rgb(255,167,185);
+	font-weight: bold;
+	font-size: 20px;  
+	line-height: 40px; 
+}
