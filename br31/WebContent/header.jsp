@@ -171,10 +171,10 @@ header .menu>ul:hover .submenu {
 				</nav>
 			</div>
 			<div>
-				<a href="#"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
+				<a href="http://localhost:9000/br31/main.jsp"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
 			</div>
 			<div>
-				<a href="#">고객센터</a>
+				<a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a>
 			</div>
 		</div>
 
@@ -224,7 +224,7 @@ header .menu>ul:hover .submenu {
 						<div class="submenu">
 							<ul>
 								<li><a href="#">매장정보</a></li>
-								<li><a href="#">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a></li>
 							</ul>
 						</div>
 					</li>

@@ -84,6 +84,7 @@
 		position: absolute;
 		top: -263px;
 		border: 1px outset lightgray;
+		display: none;
 	}
 	footer .sub_family_site a {
 		display: inline-block;
@@ -97,7 +98,10 @@
 	footer .btn_family_site:hover .sub_family_site li{
 		display: block;
 	}
-
+	footer .btn_family_site:hover .sub_family_site {
+		display: block;
+	}
+	
 	
 </style>
 </head>
@@ -125,15 +129,15 @@
 					<li><img src="http://localhost:9000/br31/images/btn_ksa.png"></li>
 					<li class="btn_family_site"><span>FAMILY SITE<img src="http://localhost:9000/br31/images/mini_arrow.png"></span>
 						<ul class="sub_family_site">
-							<li><a href="#">배스킨 스쿨</a></li>
-							<li><a href="#">SPC그룹사이트</a></li>
-							<li><a href="#">SPC MAGAZINE</a></li>
-							<li><a href="#">BR코리아</a></li>
-							<li><a href="#">해피포인트카드</a></li>
-							<li><a href="#">파스쿠찌</a></li>
-							<li><a href="#">삼립</a></li>
-							<li><a href="#">파리바게트</a></li>
-							<li><a href="#">던킨도너츠</a></li>
+							<li><a href="https://baskinschool.hunet.co.kr/Login/LoginGate" target="_blink">배스킨 스쿨</a></li>
+							<li><a href="http://www.spc.co.kr/" target="_blink">SPC그룹사이트</a></li>
+							<li><a href="https://www.spcmagazine.com/" target="_blink">SPC MAGAZINE</a></li>
+							<li><a href="http://www.brkorea.co.kr/main/main.php" target="_blink">BR코리아</a></li>
+							<li><a href="http://www.happypointcard.com/page/main/index.spc" target="_blink">해피포인트카드</a></li>
+							<li><a href="https://www.caffe-pascucci.co.kr/index.asp" target="_blink">파스쿠찌</a></li>
+							<li><a href="https://spcsamlip.co.kr/" target="_blink">삼립</a></li>
+							<li><a href="https://www.paris.co.kr/" target="_blink">파리바게트</a></li>
+							<li><a href="http://www.dunkindonuts.co.kr/" target="_blink">던킨도너츠</a></li>
 						</ul>
 					</li>
 				</ul>
