@@ -11,116 +11,104 @@ header ul {
 	padding: 0;
 	display: inline-block;
 }
-
 header {
 	background-image: url("http://localhost:9000/br31/images/bg_header.png");
 }
-
 header>div {
 	width: 1400px;
 	height: 40px;
 	margin: auto;
 }
-
 header .main_bar {
 	height: 150px;
 	text-align: center;
 }
-
 header .main_bar div {
 	height: 150px;
 	line-height: 150px;
 	display: inline-block;
 }
-
 header li {
 	display: inline-block;
 }
-
 header .main_bar li img {
 	width: 35px;
 	height: 35px;
 }
-
 header .main_bar div:nth-child(2) img {
 	width: 100px;
 	height: 100px;
 	padding: 25px;
 }
-
 header .main_bar a {
 	text-decoration: none;
 	font-size: 13px;
 	color: black;
 }
-
 header .main_bar div, .main_bar img {
 	display: inline-block;
 }
-
 header .main_bar div:first-child {
 	float: left;
 	padding-left: 100px;
 }
-
 header .main_bar div:last-child {
 	float: right;
 	padding: 0 150px 0 80px;
 }
-
 /****** 메뉴바 *******/
 header .menu_bar {
 	clear: right;
 	text-align: center;
+	width: 100%;
+	border-bottom: 1px solid darkgray;
 }
-
 header .menu>ul {
-	margin: 0;
-	/* height: 310px; */
-	overflow: hidden;
+	margin: auto;
+	width: 1400px;
+	text-align: center;
 }
-
 header .menu>ul>li {
-	/* border: 1px solid blue; */
 	width: 180px;
-	float: left;
+	/* float: left; */
 	text-align: center;
 	background-color: white;
 }
-
-header .menu>ul>li:nth-child(1) {
+header .menu>ul>li:nth-child(1), header .menu>ul>li:nth-child(1) ul {
 	width: 200px;
 }
-
 header .menu>ul>li:nth-child(1) a {
 	display: inline-block;
 	width: 40%;
 }
-
-header .menu>ul>li ul {
+header .submenu ul {
 	padding-top: 10px;
-	min-width: 170px;
+	min-width: 180px;
 	display: block;
 }
-
-header .menu>ul>li ul li {
+header .submenu li {
 	display: block;
 }
-
+header .menu>ul>li:nth-child(1) a{
+	font-size: 12px;
+}
+header .menu>ul>li:nth-child(1) a:first-child{
+	color: #ff7c97;
+}
+header .menu>ul>li:nth-child(1) a:nth-child(2){
+	color: gray;
+}
 header .menu>ul>li:nth-child(2) {
 	width: 200px;
 	text-align:	center;
 }
-
-header .menu>ul>li:nth-child(2)>ul li img {
-	margin-top: -10px;
+header .menu>ul>li:nth-child(2) ul li img {
+	margin-top: -15px;
 }
-
 header .menu>ul>li ul li a {
 	display: inline-block;
 	margin: 10px 0;
 }
-
 header .menu>ul>li>a {
 	display: inline-block;
 	padding: 10px 0;
@@ -129,30 +117,39 @@ header .menu>ul>li>a {
 	font-weight: bold;
 	font-family: 맑은고딕;
 }
-
 header .menu a {
 	text-decoration: none;
 	color: black;
 	font-size: 14px;
 }
-
-header .menu a:hover {
-	color: pink;
+header .submenu a:hover {
+	color: #ff7c97;
 }
-
-header .menu>ul>li>a:hover {
-	color: rgb(255,124,151);
-}
-
 header .submenu {
 	display: none;
-}
-
-header .menu>ul:hover .submenu {
-	display: block;
+	height: 270px;
 	margin: 0;
-	height: 310px;
+ 	position: absolute;
 	background-color: white;
+}
+header .menu_bg {
+	display: none;
+	width: 100%;
+	height: 280px;
+	margin: -10px;
+	left: 5px;
+	position: absolute;
+	background-color: white;
+	border-bottom: 1px solid darkgray;
+}
+header .menu:hover div.menu_bg {
+	display: block;
+	z-index: 90;
+	overflow: hidden;
+}
+header .menu:hover .submenu {
+	display: block;
+	z-index: 100;
 }
 </style>
 </head>
@@ -182,7 +179,9 @@ header .menu>ul:hover .submenu {
 		<div class="menu_bar">
 			<nav class="menu">
 				<ul>
-					<li><a href="#">login</a> <a href="#">join</a>
+					<li>
+						<a href="#">LOGIN</a>
+						<a href="#">JOIN</a>
 						<div class="submenu">
 							<ul>
 								<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
@@ -237,6 +236,7 @@ header .menu>ul:hover .submenu {
 						</div>
 					</li>
 				</ul>
+				<div class="menu_bg"></div>
 			</nav>
 		</div>
 	</header>
@@ -244,8 +244,3 @@ header .menu>ul:hover .submenu {
 
 </body>
 </html>
-
-
-
-
-

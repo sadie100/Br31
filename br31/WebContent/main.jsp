@@ -72,9 +72,10 @@ section.main .br_menu {
 	margin: 100px 0;
 	text-align: center;
 	display: inline-block;
-	background-image: url("http://localhost:9000/br31/images/bg_menu.jpg");
+/* 	background-image: url("http://localhost:9000/br31/images/bg_menu.jpg");
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: center top; */
+	background: url("http://localhost:9000/br31/images/bg_menu.jpg") no-repeat center top;
 }
 section.main .br_menu div {
 	width: 1400px;
@@ -198,8 +199,12 @@ section.main .instagram div img:hover {
 					<img src="http://localhost:9000/br31/images/h_menu.png">
 				</div>
 				<div>
-					<a href="#"><img src="http://localhost:9000/br31/images/img_icecream.png"></a>
-					<a href="#"><img src="http://localhost:9000/br31/images/img_coffee.png"></a>
+					<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp">
+						<img src="http://localhost:9000/br31/images/img_icecream.png">
+					</a>
+					<a href="http://localhost:9000/br31/menu/menu_coffee.jsp">
+						<img src="http://localhost:9000/br31/images/img_coffee.png">
+					</a>
 				</div>
 			</div>
 			<div class="store_order">

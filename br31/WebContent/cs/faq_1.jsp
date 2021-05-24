@@ -62,9 +62,8 @@ section.faq .faq_list li{
 	line-height: 70px;
 	text-indent: 100px;
 	border-top: 1px solid darkgray;
-	background-image: url("http://localhost:9000/br31/images/icon_question.gif");
-	background-repeat: no-repeat;
-	background-position: 40px 30px;
+ 	background: url("http://localhost:9000/br31/images/icon_question.gif") no-repeat;
+ 	background-position: 40px 30px;
 
 }
 section.faq .faq_list a {
@@ -98,6 +97,21 @@ section.faq .page_button ul li:nth-child(2) a{
 	color: white;
 }
 
+section.faq .faq_list li a {
+	display: block; 
+	position: relative; 
+/* 	padding:25px 65px 25px 68px;  */
+}
+section.faq .faq_list a:after {
+	position: absolute; 
+	top: 50%; 
+	right: 14px; 
+	width: 21px; 
+	height: 12px; 
+	margin-top: -6px; 
+	background: url(http://localhost:9000/br31/images/icon_faq_list.gif) no-repeat; 
+	content:"";
+}
 </style>
 </head>
 <body>
