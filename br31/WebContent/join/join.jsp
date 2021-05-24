@@ -112,6 +112,8 @@ form.join_form li:last-child{
 	background-color:gray;
 	color:white;
 }
+
+
 </style>
 </head>
 <body>

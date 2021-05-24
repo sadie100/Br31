@@ -242,8 +242,8 @@ div.d1 div:first-child, div.d2 div:first-child, div.d3 div:first-child{
 				<div class = "login_option">	
 					<ul>
 						<div>
-							<a href = "login_search.jsp"><li>아이디 찾기</li></a> 
-							<a href = "login_search.jsp"><li>비밀번호 재발급</li></a> 
+							<a href = "login_id_search.jsp"><li>아이디 찾기</li></a> 
+							<a href = "login_pass_search.jsp"><li>비밀번호 재발급</li></a> 
 							<a href = "../join/join.jsp"><li>해피포인트 가입</li></a> 
 						</div>	
 					</ul>

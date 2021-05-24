@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div.pop_content{
+	width:100%;
+	margin:auto;
+}
+
+div.pop_content ul{
+	list-style-type : none;
+	margin:0;
+	padding:0;
+}
+
+div.pop_content label{
+	font-size:15px;
+	display:block;
+	font-weight:bold;
+}
+
+.select_style{
+	padding:3px 8px;
+	margin: 0 10px;
+	background-color:white;
+	border:1px solid rgb(128, 128, 161);
+	border-radius:4px;
+	color: gray;
+}
+
+
+.btn_cancle, .btn_confrim{
+	padding:5px 20px;
+	margin: 0 5px;
+	background-color:white;
+	border:1px solid rgb(128, 128, 161);
+	border-radius:4px;
+	color: gray;
+	font-size:15px;
+}
+.btn_confrim{
+	background-color:gray;
+	color:white;
+}
+
+div.pop_content li, div.pop_content label{
+	margin: 10px 0;
+}
+
+/***
+	휴대전화
+****/
+div.pop_content li:first-child input{
+	width:310px;
+	padding: 3px 0;
+}
+div.pop_content li:first-child select{
+	margin-left:-1px;
+	margin-right:-1px;
+}
+
+/***
+	이메일
+****/
+div.pop_content li:nth-child(2) input{
+	width:80px;
+}
+div.pop_content li:nth-child(2) span:last-child{
+	font-size:13px;
+	display:block;
+	margin:10px 0;
+	color:gray;
+}
+
+/***
+	버튼
+****/
+div.pop_content li:last-child{
+	text-align:center;
+	margin: 30px 0 ;
+}
+</style>
+</head>
+<body>
+	<!-- content -->
+	<div class = "pop_content">
+		<form name = "login_phone_form" action = "#" method = "get">
+			<ul>
+				<li>
+					<label>아이핀</label>
+					<input type = "text" name = "ipin" id = "phone3" placeholder = "아이핀 id를 입력해주세요">
+				</li>
+				<li>
+					<label>이메일</label>
+					<input type = "text" name = "email" id = "email1"><span> @ </span>
+					<input type = "text" name = "email" id = "email2">
+					<select id = "email3" class = "select_style">
+						<option value = "선택">선택</option>
+						<option value = "naver.com" id = "addr1">naver.com</option>
+						<option value = "gmail.com" id = "addr2">gamil.com</option>
+						<option value = "daum.net" id = "addr3">daum.net</option>
+						<option value = "직접입력" id = "addr4">직접입력</option>
+					</select>
+					<span>*등록된 이메일로 아이디가 발송됩니다.</span>
+				</li>
+				<li>
+					<button type = "button" class = "btn_confrim">인증하기</button>
+					<button type = "button" class = "btn_cancle" onclick="self.close();">취소</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+</body>
+</html>
