@@ -5,142 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>VOC 등록</title>
-<style>
-section.voc_write {
-	width: 1400px;
-	margin: auto;
-	text-align: center;
-}
-section.voc_write h3 {
-	margin: 40px 0 20px 0;
-}
-section.voc_write form {
-	margin: auto;
-	margin-bottom: 50px;
-	width: 1000px;
-	border: 1px solid #ff7c97;
-	border-radius: 10px;
-}
-section.voc_write form div {
-	text-align: left;
-	padding: 20px;
-}
-section.voc_write form .agree_info {
-	height: 250px;
-	overflow: auto;
-	padding: 0 20px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
-}
-section.voc_write form .agree_member {
-	height: 160px;
-	overflow: auto;
-	border: 1px solid darkgray;
-	border-radius: 10px;
-}
-section.voc_write form .agree_member h5{
-	margin: 10px 0;
-}
-section.voc_write form span {
-	display: block;
-	padding: 0 20px;
-	line-height: 150%;
-	font-size: 13px;
-}
-section.voc_write .agree_check {
-	text-align: center;
-	padding: 5px;
-}
-section.voc_write .agree_check div {
-	display: inline-block;
-	font-size: 14px;
-}
-section.voc_write .agree_check h5 {
-	display: inline-block;
-	margin-right: 10px;
-}
-section.voc_write .agree_info table {
-	font-size: 13px;
-	margin: 20px;
-}
-section.voc_write .agree_info table th {
-	text-align: center;
-	background-color: lightsteelblue;
-}
-section.voc_write .agree_info table, section.voc_write .agree_info table th, section.voc_write .agree_info table td {
-	border: 1px solid steelblue;
-	border-collapse: collapse; 
-}
-section.voc_write .agree_info table th, section.voc_write .agree_info table td {
-	padding: 10px;
-}
-section.voc_write .details table {
-	width: 950px;
-	font-size: 13px;
-	margin: 15px auto;
-}
-section.voc_write .details table, section.voc_write .details th, section.voc_write .details td {
-	border: 1px solid darkgray;
-	border-collapse: collapse;
-}
-section.voc_write .details th {
-	width: 13%;
-	background-color: #f5f5f5;
-}
-section.voc_write .details td {
-	width: 36%;
-}
-section.voc_write .details th, section.voc_write .details td {
-	padding: 10px 15px;
-}
-section.voc_write .details span {
-	font-weight: bold;
-}
-section.voc_write .details table span, section.voc_write .details span>span {
-	display: inline-block;
-	padding: 0 0 0 2px;
-	color: crimson;
-}
-section.voc_write .details textarea {
- 	width: 770px;
-	height: 200px;
-	resize: none;
-	padding: 10px;
-}
-section.voc_write .details input[type="text"], section.voc_write .details input[type="password"]{
-	width: 85px;
-	padding: 3px 4px;
-	text-indent: 2px;
-}
-section.voc_write .details select {
-	padding: 3px 0;
-	text-indent: 2px;
-}
-section.voc_write .details input[type="datetime-local"], section.voc_write textarea {
-	font-family: "맑은 고딕";
-}
-section.voc_write .details table tr:nth-child(3) input {
-	width: 770px;
-}
-section.voc_write .details .td input{
-	width: 310px;
-}
-section.voc_write form>div:last-child {
-	text-align: center;
-}
-section.voc_write button {
-	margin: 10px 0 30px 0;
-	padding: 10px 60px;
-	font-weight: bold;
-	color: white;
-	border-radius: 10px;
-	background-color: #78909c;
-}
-section.voc_write button:hover {
-	cursor: pointer;
-	background-color: slategray;
-}
-</style>
+<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
 <script>
 	function changeEmail() {
 		var selectEmail = document.getElementById("selectEmail").value;
@@ -160,7 +25,7 @@ section.voc_write button:hover {
 	<jsp:include page="cs_header.jsp"></jsp:include>
 	
 	<!-- content -->
-	<div class="content">
+	<div class="cs_content">
 		<section class="voc_write">
 			<h3>고객센터 1:1 문의</h3>
 			<form name="voc_write_form" action="#" method="get">
@@ -224,10 +89,11 @@ section.voc_write button:hover {
 					</div>
 					<h5>2. 상담 유형 및 내용 유형 선택 후, 의견을 작성해 주세요.</h5>
 					<div class="agree_member">
-						<h5>회원</h5>
-						<span>답변은 고객센터 회신일로부터 15일 이내에만 My VOC메뉴에서 확인 가능하며, 15일 이후에는 확인이 불가능합니다</span>
-						<h5>비회원</h5> 
-						<span>비회원으로 접수하시는 경우 접수 내용 및 답변은 홈페이지에서 확인이 불가능하며 메일 회신을 통해서만 확인 가능합니다.</span>
+						<h5><회원></h5>
+						<span>- 답변은 고객센터 회신일로부터 15일 이내에만 My VOC메뉴에서 확인 가능하며, 15일 이후에는 확인이 불가능합니다</span>
+						<h5><비회원></h5> 
+						<span>- 비회원으로 접수하시는 경우 접수 내용 및 답변은 홈페이지에서 확인이 불가능하며 메일 회신을 통해서만 확인 가능합니다.</span>
+						<h5>※ 제출된 문의는 수정이 불가능합니다. 수정이 필요한 경우 삭제 후 재작성을 부탁드립니다.</h5>
 						<h5>※ 보다 자세한 내용은 고객센터(080-555-3131)로 문의 부탁드립니다.</h5>
 					</div>
 				</div>

@@ -5,51 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의함</title>
-<style>
-section.voc_list {
-	width: 1400px;
-	margin: auto;
-	text-align: center;
-}
-section.voc_list h3 {
-	margin: 40px 0 20px 0;
-}
-section.voc_list form {
-	width: 1000px;
-	margin: auto;
-	margin-bottom: 50px;
-	padding: 20px 0;
-	border: 1px solid #ff7c97;
-	border-radius: 10px;
-}
-section.voc_list table {
-	width: 950px;
-	font-size: 13px;
-	margin: 15px auto;
-}
-section.voc_list table, section.voc_list th, section.voc_list td {
-	border-style: solid none; 
-	border-color: darkgray;
-	border-width: 1px;
-	border-collapse: collapse;
-}
-section.voc_list th {
-	background-color: #ededf0;
-}
-section.voc_list th, section.voc_list td {
-	padding: 10px 15px;
-}
-section.voc_list table a {
-	text-decoration: none;
-	color: black;
-}
-section.voc_list table a:hover {
-	color: #ff7c97;
-}
-section.voc_list table tr th:nth-child(4), section.voc_list table tr td:nth-child(4) {
-	width: 40%;
-}
-</style>
+<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
 </head>
 <body>
 	<!-- header -->
@@ -57,7 +13,7 @@ section.voc_list table tr th:nth-child(4), section.voc_list table tr td:nth-chil
 	<jsp:include page="cs_header.jsp"></jsp:include>
 	
 	<!-- content -->
-	<div class="content">
+	<div class="cs_content">
 		<section class="voc_list">
 			<h3>고객센터 내 문의함</h3>
 			<form name="voc_list_form" action="#" method="get">

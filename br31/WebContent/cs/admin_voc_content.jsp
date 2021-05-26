@@ -10,15 +10,31 @@
 <body>
 	<!-- header -->
 	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="cs_header.jsp"></jsp:include>
 	
 	<!-- content -->
+	<section class="cs_header">
+		<div class="title">
+			<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/images/h_customer_center.png">
+			<div class="title_right"></div>
+			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
+		</div>
+		<div class="cs_menu">
+			<button type="button" class="btn_faq" onclick="location.href='http://localhost:9000/br31/cs/faq_1.jsp'">
+				자주하는 질문</button>
+			<button type="button" class="btn_voc">
+				답변 대기 문의</button>
+			<button type="button" class="btn_myvoc">
+				답변 완료 문의</button>
+		</div>
+	</section>
+	
 	<div class="cs_content">
 		<section class="voc_content">
-			<h3>고객센터 1:1 문의 내용</h3>
+			<h3>[관리자] 고객 1:1 문의</h3>
 			<form name="voc_content_form" action="#" method="get">
 				<div class="details">
-					<span>※ 문의는 수정이 불가능합니다. 수정이 필요하신 경우 삭제 후 재작성을 부탁드립니다.</span>
+					<span>※ 답변이 완료된 문의는 수정이 불가능합니다.</span>
 					<table>
 						<tr>
 							<th colspan=6>문   의   내   용</th>
@@ -78,8 +94,13 @@
 					</table>
 				</div>
 				<div class="btn_area">
+					<div class="area_left">
 						<a href="http://localhost:9000/br31/cs/voc_list.jsp"><button type="button">목록</button></a>
-						<a><button type="button">삭제</button></a>
+					</div>
+					<div class="area_right">
+						<a><button type="button">답변수정</button></a>
+						<a><button type="button">답변삭제</button></a>
+					</div>
 				</div>
 			</form>
 		</section>	

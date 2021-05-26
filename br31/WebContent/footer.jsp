@@ -101,6 +101,9 @@
 	footer .btn_family_site:hover .sub_family_site {
 		display: block;
 	}
+	footer .company_info {
+		margin-bottom: 100px;
+	}
 	
 	
 </style>
@@ -145,7 +148,7 @@
 			
 			<div><img src="http://localhost:9000/br31/images/footer_logo.png"></div>
 		
-			<div>
+			<div class="company_info">
 				<span>사업자 등록번호 : 303-81-09535　비알코리아(주)대표이사 도세호　서울특별시 서초구 남부순환로 2620(양재동 11-149번지)</span><br>
 				<span>TEL : 080-555-3131　개인정보관리책임자 : 김경우</span><br>
 				<span>Copyright ⓒ 2016 BRKOREA Company. All Rights Reserved.</span><br>
