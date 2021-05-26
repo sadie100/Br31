@@ -8,7 +8,24 @@
 <script src="http://localhost:9000/myweb2/js/jquery-3.6.0.min.js"></script>
 <script>
 	//클릭하면 별모양 버튼 색이 바뀌도록 구현
-
+	$(document).ready(function(){
+		
+		$("button[name=btn_f]").click(function(){
+			var btn_f = $(this).attr("id");
+			
+			if(btn_f == "btn_favor"){
+				$(this).removeClass("btn_favor");
+				$(this).addClass("btn_favor_click");
+				$(this).attr("id","btn_favor_click");
+			}else{
+				$(this).removeClass("btn_favor_click");
+				$(this).addClass("btn_favor");
+				$(this).attr("id","btn_favor");
+			}
+		});
+		
+		
+	});
 
 </script>
 
@@ -16,7 +33,8 @@
 
 
 <style>
-div.content{
+div.content{7
+
 	font-family:"맑은고딕";
 	width:1000px;
 	margin:auto;
@@ -185,28 +203,28 @@ div.r_flavor{
 								<span>베리베리 스트로베리</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor4.png">
 							</a>
-							<button type = "button" class = "btn_favor"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>뉴욕 치즈케이크</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor2.png">
 							</a>
-							<button type = "button" class = "btn_favor"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>바람과 함께 사라지다</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor3.png">
 							</a>
-							<button type = "button" class = "btn_favor"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>민트 초콜릿 칩</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor.png">
 							</a>
-							<button type = "button" class = "btn_favor"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
 						</li>
 					</ul>	
 				</div>
@@ -219,7 +237,7 @@ div.r_flavor{
 						<li>
 							<span>사랑에 빠진 딸기</span>
 							<a href = "#"><img src = "http://localhost:9000/br31/images/my_f_flavor.png"></a>
-							<button type = "button" class = "btn_favor_click"></button>
+							<button type = "button" class = "btn_favor_click" id = "btn_favor_click" name = "btn_f"></button>
 						</li>	
 					</ul>	
 				</div>
