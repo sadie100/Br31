@@ -24,11 +24,29 @@ section.logo_menu {
 	margin-bottom: 100px;
 }
 
+
 /*** °øÅë ***/
 
-h3 {
+div.title{
 	text-align: center;
 }
+div.title>div{
+	width: 36px;
+	height: 26px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: center;
+	margin: auto;
+	padding: 0px 10px;
+}
+div.title div.title_left{
+	background-image: url("http://localhost:9000/br31/images/icon_title_1.png");
+}
+div.title div.title_right{
+	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
+}
+
 
 /**********menu default*************/
 /**********menu default*************/
@@ -41,6 +59,8 @@ div.flavor_of_month {
 } 
 
 div.btn_more {
+	margin-top : 10px;
+	margin-bottom: 0px;
 	text-align: center;
 }
 
@@ -58,6 +78,8 @@ button.btn_more {
 /**************monthly best icecream ***********/
 /**************monthly best icecream ***********/
 
+div.monthly_best_icecream_content {
+}
 div.monthly_best_icecream_content a {
 	text-decoration : none;
 	width: 170px; height: 190px;
@@ -146,7 +168,6 @@ div.icecream_menu a{
 	width: 100%; height: 300px;
 	display: inline-block;
 	text-decoration: none;
-	overflow: hidden;
 	padding: 0;
 	margin: 0;
 }
@@ -163,6 +184,7 @@ div.icecream_menu td.src_one, div.icecream_menu tr.src_one{
 div.icecream_menu td, div.icecream_menu tr{ 
 	margin:0; padding: 0;
 	border: 1px solid rgb(235,235,235);
+	overflow:hidden;
 }	
 
 div.icecream_menu img{

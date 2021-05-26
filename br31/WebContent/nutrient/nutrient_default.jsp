@@ -22,7 +22,11 @@ div.pagination a:nth-child(2){
 <div class="content">
 	<section class="page">
 	<section class="text_info">
-	<img src="http://localhost:9000/br31/nutrient/images/h_title_nutrition.png">
+	<div class="title">
+		<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/nutrient/images/h_title_nutrition.png">
+		<div class="title_right"></div>
+	</div>
 	<label>배스킨라빈스 제품의 영양정보를 확인해보세요</label>
 	</section>
 	<section class="search_form">

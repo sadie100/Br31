@@ -11,9 +11,9 @@
 
 <!-- monthly best icecream -->
 	<section class="monthly_best_icecream">
-		<h3>
-		<img src="http://localhost:9000/br31/menu/images/h_monthly_best_icecream.png">
-		</h3>
+		<div class="title">
+			<img src="http://localhost:9000/br31/menu/images/h_monthly_best_icecream.png">
+		</div>
 		<div class="monthly_best_icecream_content">
 		<ul>
 			<li>

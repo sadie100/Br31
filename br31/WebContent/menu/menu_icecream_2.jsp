@@ -35,7 +35,11 @@ div.pagination a:nth-child(3){
 
 
 	<section class="icecream_menu">
-		<h3><img src="http://localhost:9000/br31/menu/images/h_title_icecream.png"></h3>
+		<div class="title">
+			<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/menu/images/h_title_icecream.png">
+			<div class="title_right"></div>
+		</div>
 		<div class="icecream_menu">
 		<table class="icecream_menu">
 			<tr>
