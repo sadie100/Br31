@@ -211,10 +211,10 @@ header .menu:hover .submenu {
 							</ul>
 						</div>
 					</li>
-					<li><a href="#">EVENT</a>
+					<li><a href="http://localhost:9000/br31/event/event_list.jsp">EVENT</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">진행이벤트</a></li>
+								<li><a href="http://localhost:9000/br31/event/event_list.jsp">진행이벤트</a></li>
 								<li><a href="#">당첨자발표</a></li>
 							</ul>
 						</div>
@@ -222,7 +222,7 @@ header .menu:hover .submenu {
 					<li><a href="#">STORE</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">매장정보</a></li>
+								<li><a href="http://localhost:9000/br31/map/map.jsp">매장정보</a></li>
 								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a></li>
 							</ul>
 						</div>
@@ -230,7 +230,7 @@ header .menu:hover .submenu {
 					<li><a href="#">ABOUT</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">공지사항</a></li>
+								<li><a href="http://localhost:9000/br31/notice/notice_list.jsp">공지사항</a></li>
 								<li><a href="#">채용정보</a></li>
 							</ul>
 						</div>
