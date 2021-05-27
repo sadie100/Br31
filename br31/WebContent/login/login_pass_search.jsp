@@ -172,7 +172,7 @@ function showPop2(){
 			<div>
 				<span>아직 배스킨라빈스 회원이 아니세요?</span>
 				<span>ONEPASS 간편 가입으로 멤버십과 SPC 다양한 브랜드 혜택을 모두 이용 할 수 있어요!</span>
-				<a href = "http://loacalhost:9000/br31/join/join.jsp"><button type = "button" class = "go_join_button">회원가입 바로가기</button>
+				<a href = "http://localhost:9000/br31/join/join.jsp"><button type = "button" class = "go_join_button">회원가입 바로가기</button></a>
 			</div>
 		</section>
 	
