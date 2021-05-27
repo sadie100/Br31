@@ -12,8 +12,17 @@
 	<jsp:include page = "../header.jsp"></jsp:include>
 
 <!-- content -->
-<div class="content">
 <section class="page">
+
+<!-- button -->
+	<span class="btn_index">
+		<button class="left">&lt;</button>
+	</span>
+	<span class="btn_index">
+		<button class="right">&gt;</button>
+	</span>
+
+<div class="content">
 	<section class="top_info">
 		<label class="eng_name">PUSS IN BOOTS</label>
 		<h1 class="kor_name">엄마는 외계인</h1>
@@ -164,13 +173,32 @@
 		<label class="hashtag">#엄마는외계인</label>
 		<label class="hashtag">#배스킨라빈스</label>
 		<div class="pictures">
-			<img src="">
+			<div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_1.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_2.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_3.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_4.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_5.jpg"></div>
+			</div>
+			<div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_6.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_7.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_8.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_9.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_10.jpg"></div>
+			</div>
+			<div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_11.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_12.jpg"></div>
+				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_13.jpg"></div>
+			</div>
 		</div>
 	</section>
-	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button>목록</button></a>
-</section>
+	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button class="list">목록</button></a>
 </div>
-
+</section>
+<!-- 이벤트, happy order 하단 띠 -->
+<jsp:include page = "menu_select_footer.jsp"></jsp:include>
 <!-- footer -->
 	<jsp:include page = "../footer.jsp"></jsp:include>
 </body>

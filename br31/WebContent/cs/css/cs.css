@@ -1,0 +1,442 @@
+/************** cs°øÅë **************/
+div.cs_content>section, section.cs_header  {
+	width: 1400px;
+	margin: auto;
+	text-align: center;
+}
+div.cs_content * {
+	font-family: "¸¼Àº °íµñ";
+}
+
+/************** cs_header **************/
+section.cs_header .title {
+	text-align: center;
+	margin: 70px 0;
+}
+section.cs_header .title>div {
+	width: 36px;
+	height: 26px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+section.cs_header .title_left {
+	background-image: url("http://localhost:9000/br31/images/icon_title_1.png");
+}
+section.cs_header .title_right {
+	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
+}
+section.cs_header .title img {
+	display: inline-block;
+	margin: 0 10px;
+}
+section.cs_header .title span {
+	display: block;
+	font-size: 14px;
+	margin-top: 5px;
+}
+section.cs_header .cs_menu {
+	width: 1000px;
+	height: 60px;
+	text-align: center;
+	border: 1px solid darkgray;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom: 2px solid #ff7c97;
+	line-height: 60px;
+	display: inline-block;
+}
+section.cs_header .cs_menu button {
+	width: 200px;
+	height: 40px;
+	line-height: 35px;
+	margin: 0 10px;
+	text-indent: 30px;
+	font-weight: bold;
+	border: none;
+	border-radius: 20px;
+	background: white no-repeat 20px 2px;
+}
+section.cs_header .cs_menu .btn_faq {
+	background-image: url("http://localhost:9000/br31/images/img_faq.png");
+}
+section.cs_header .cs_menu .btn_voc {
+	background-image: url("http://localhost:9000/br31/images/img_inquiry.png");
+}
+section.cs_header .cs_menu .btn_myvoc {
+	background-image: url("http://localhost:9000/br31/images/img_myvoc.png");
+}
+section.cs_header .cs_menu button:hover {
+	border: 2px solid #ff7c97;
+	cursor: pointer;
+}
+
+
+/************** voc_content **************/
+section.voc_content h3 {
+	margin: 40px 0 20px 0;
+}
+section.voc_content form {
+	width: 1000px;
+	margin: auto;
+	margin-bottom: 50px;
+	padding: 20px 0;
+	border: 1px solid #ff7c97;
+	border-radius: 10px;
+}
+section.voc_content .details {
+	text-align: left;
+}
+section.voc_content .details span {
+	font-size: 13px;
+	margin-left: 30px;
+}
+section.voc_content table {
+	width: 950px;
+	font-size: 13px;
+	margin: 15px auto;
+}
+section.voc_content table, section.voc_content th, section.voc_content td {
+	border: 1px solid darkgray;
+	border-collapse: collapse;
+}
+section.voc_content th {
+	width: 16%;
+	text-align: center;
+	background-color: #ededf0;
+}
+section.voc_content .details td {
+	width: 16%;
+	text-align: left;
+}
+section.voc_content th, section.voc_content .details td {
+	padding: 10px 15px;
+}
+section.voc_content .answer td {
+	padding: 20px;
+	text-align: left;
+}
+section.voc_content button {
+	padding: 10px 50px;
+	font-weight: bold;
+	color: white;
+	border-radius: 10px;
+	background-color: #78909c;
+}
+section.voc_content button:hover {
+	cursor: pointer;
+	background-color: slategray;
+}
+
+
+/************** voc_list **************/
+section.voc_list h3 {
+	margin: 40px 0 20px 0;
+}
+section.voc_list form {
+	width: 1000px;
+	margin: auto;
+	margin-bottom: 50px;
+	padding: 20px 0;
+	border: 1px solid #ff7c97;
+	border-radius: 10px;
+}
+section.voc_list table {
+	width: 950px;
+	font-size: 13px;
+	margin: 15px auto;
+}
+section.voc_list table, section.voc_list th, section.voc_list td {
+	border-style: solid none; 
+	border-color: darkgray;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+section.voc_list th {
+	background-color: #ededf0;
+}
+section.voc_list th, section.voc_list td {
+	padding: 10px 15px;
+}
+section.voc_list table a {
+	text-decoration: none;
+	color: black;
+}
+section.voc_list table a:hover {
+	color: #ff7c97;
+}
+section.voc_list table tr th:nth-child(4), section.voc_list table tr td:nth-child(4) {
+	width: 40%;
+}
+
+
+/************** voc_write **************/
+section.voc_write h3 {
+	margin: 40px 0 20px 0;
+}
+section.voc_write form {
+	margin: auto;
+	margin-bottom: 50px;
+	width: 1000px;
+	border: 1px solid #ff7c97;
+	border-radius: 10px;
+}
+section.voc_write form div {
+	text-align: left;
+	padding: 20px;
+}
+div.agree_info {
+	height: 250px;
+	overflow: auto;
+	padding: 0 20px;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+}
+div.agree_member {
+	height: 200px;
+	overflow: auto;
+	text-indent: 20px;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+}
+div.agree_member h5{
+	margin: 15px 0 5px 0;
+}
+section.voc_write form span {
+	display: block;
+	padding: 0 20px;
+	line-height: 150%;
+	font-size: 13px;
+}
+section.voc_write div.agree_check {
+	text-align: center;
+	padding: 5px;
+}
+div.agree_check div {
+	display: inline-block;
+	font-size: 14px;
+}
+div.agree_check h5 {
+	display: inline-block;
+	margin-right: 10px;
+}
+div.agree_info table {
+	font-size: 13px;
+	margin: 20px;
+}
+div.agree_info table th {
+	text-align: center;
+	background-color: lightsteelblue;
+}
+div.agree_info table, div.agree_info table th, div.agree_info table td {
+	border: 1px solid steelblue;
+	border-collapse: collapse; 
+}
+div.agree_info table th, div.agree_info table td {
+	padding: 10px;
+}
+div.details table {
+	width: 950px;
+	font-size: 13px;
+	margin: 15px auto;
+}
+div.details table, div.details th, div.details td {
+	border: 1px solid darkgray;
+	border-collapse: collapse;
+}
+div.details th {
+	width: 13%;
+	background-color: #f5f5f5;
+}
+div.details td {
+	width: 36%;
+}
+div.details th, div.details td {
+	padding: 10px 15px;
+}
+div.details span {
+	font-weight: bold;
+}
+div.details table span, div.details span>span {
+	display: inline-block;
+	padding: 0 0 0 2px;
+	color: crimson;
+}
+div.details textarea {
+ 	width: 770px;
+	height: 200px;
+	resize: none;
+	padding: 10px;
+}
+div.details input[type="text"], div.details input[type="password"]{
+	width: 85px;
+	padding: 3px 4px;
+	text-indent: 2px;
+}
+div.details select {
+	padding: 3px 0;
+	text-indent: 2px;
+}
+div.details input[type="datetime-local"], div.details textarea {
+	font-family: "¸¼Àº °íµñ";
+}
+div.details table tr:nth-child(3) input {
+	width: 770px;
+}
+div.details .td input{
+	width: 310px;
+}
+section.voc_write form>div:last-child {
+	text-align: center;
+}
+section.voc_write button {
+	margin: 10px 0 30px 0;
+	padding: 10px 60px;
+	font-weight: bold;
+	color: white;
+	border-radius: 10px;
+	background-color: #78909c;
+}
+section.voc_write button:hover {
+	cursor: pointer;
+	background-color: slategray;
+} 	
+
+
+/************** faq **************/
+section.faq a {
+	text-decoration: none;
+	color: black;
+}
+section.faq ul {
+	list-style-type: none;
+	display: inline-block;
+	padding: 0;
+}
+section.faq .faq_board {
+	width: 1000px;
+	margin: auto;
+	display: inline-block;
+}
+section.faq .faq_board h3 {
+	margin: 40px 0 20px 0;
+}
+section.faq .faq_type ul {
+	width: 1000px;
+	height: 50px;
+	line-height: 50px;
+	border: 1px solid darkgray;
+	border-radius: 5px;
+}
+section.faq .faq_type li {
+	display: inline-block;
+	float: left;
+}
+section.faq .faq_type a {
+	display: inline-block;
+	width: 200px;
+	margin: 0;
+	font-weight: bold;
+}
+section.faq .faq_type a:hover {
+	background-color: #92867f;
+	color: white;
+}
+section.faq .faq_list ul{
+	display: inline-block;
+	width: 1000px;
+}
+section.faq .faq_list li:last-child {
+	border-bottom: 1px solid darkgray;
+}
+section.faq .faq_list li{
+	text-align: left;
+	height: 70px;
+	line-height: 70px;
+	text-indent: 100px;
+	border-top: 1px solid darkgray;
+ 	background: url("http://localhost:9000/br31/images/icon_question.gif") no-repeat;
+ 	background-position: 40px 30px;
+
+}
+section.faq .faq_list a {
+	display: block;
+	height: 70px;
+}
+
+section.faq .page_button {
+	margin: 30px 0 70px 0;
+}
+section.faq .page_button li {
+	display: inline-block;
+	margin: 0 5px;
+}
+section.faq .page_button a {
+	display: inline-block;
+	border: 1px solid darkgray;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 50%;
+	font-size: 13px;
+}
+section.faq .page_button li:first-child a, section.faq .page_button li:last-child a {
+	color: #ff7c97;
+	font-weight: bold;
+	font-size: 16px;
+}
+section.faq .faq_list li a {
+	display: block; 
+	position: relative; 
+/* 	padding:25px 65px 25px 68px;  */
+}
+section.faq .faq_list a:after {
+	position: absolute; 
+	top: 50%; 
+	right: 14px; 
+	width: 21px; 
+	height: 12px; 
+	margin-top: -6px; 
+	background: url(http://localhost:9000/br31/images/icon_faq_list.gif) no-repeat; 
+	content:"";
+}
+
+
+/************** admin_voc_list **************/
+div.voc_type {
+	text-align: left;
+	padding-left: 30px; 
+}
+div.voc_type select {
+	width: 100px;
+}
+
+
+/************** admin_voc_content **************/
+section.voc_content .btn_area {
+	display: block;
+	height: 50px;
+	position: relative;
+}
+section.voc_content .area_left {
+	float: left;
+	margin-left: 30px;
+}
+section.voc_content .area_right {
+	float: right;
+	margin-right: 30px;
+}
+
+/************** admin_voc_write **************/
+section.voc_content .voc_answer {
+	width: 890px;
+	height: 200px;
+	resize: none;
+	padding: 10px;
+}
+
+
+/************** voc_content **************/
+/************** voc_content **************/
+/************** voc_content **************/
+/************** voc_content **************/

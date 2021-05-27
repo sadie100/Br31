@@ -24,13 +24,21 @@
 <!-- ************coffee menu **********-->
 
 <section class="page">
-		<h3><img src="http://localhost:9000/br31/menu/images/h_title_flavor_of_month.png"></h3>
+		<div class="title">
+			<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/menu/images/h_title_flavor_of_month.png">
+			<div class="title_right"></div>
+		</div>
 
 		<div class="flavor_of_month">
 		<img src="http://localhost:9000/br31/menu/images/logo_flavor_of_month.jpg">
 		</div> 
 
-		<h3><img src="http://localhost:9000/br31/menu/images/h_title_icecream.png"></h3>
+		<div class="title">
+			<div class="title_left"></div>
+				<img src="http://localhost:9000/br31/menu/images/h_title_icecream.png">
+			<div class="title_right"></div>
+		</div>
 		<div class="btn_more"><a href="menu_icecream_1.jsp"><button class="btn_more">MORE</button></a></div>
 		
 	<section class="icecream_menu">
@@ -54,8 +62,12 @@
 		</div>
 	</section>
 	
-		<h3><img src="http://localhost:9000/br31/menu/images/h_title_coffee.png"></h3>
-		<div class="btn_more"><a href="menu_coffee.jsp"><button class="btn_more">MORE</button></a></div>
+	<div class="title">
+		<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/menu/images/h_title_coffee.png">
+		<div class="title_right"></div>
+	</div>
+	<div class="btn_more"><a href="menu_coffee.jsp"><button class="btn_more">MORE</button></a></div>
 	
 	<section class="icecream_menu">
 		<div class="icecream_menu">

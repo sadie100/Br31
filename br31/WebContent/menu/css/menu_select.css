@@ -7,16 +7,33 @@ h3.title{
 	font-weight:bold;
 	font-size: 16px;
 }
-section.page{
-	margin-bottom: 100px;
-} 
-
 div.content{
 	width: 950px;
 	text-align: center;
 	margin: auto;
 	margin-top: 80px;
 } 
+section.page{
+	margin-bottom: 100px;
+} 
+span.btn_index button{
+	border: 1px solid rgb(187,187,187);
+	border-radius: 100%;
+	width: 80px; height: 80px;
+	font-size: 30px;
+	color: rgb(187,187,187);
+	background-color: white;
+	font-weight: lighter;
+	position: sticky;
+}
+span.btn_index button.left{
+	top: 500px;
+	left: 350px;
+}
+span.btn_index button.right{
+	top: 500px;
+	left: 1470px;
+}
 
 
 /*****상단 설명 ************/
@@ -54,14 +71,21 @@ section.top_info div.icons{
 	position: absolute;
 	bottom: 8px;
 	right: 16px;
+	width: 160px;
+	text-align: right;
+}
+section.top_info div.icons a{
+	display: inline-block;
 }
 section.top_info div.icons a:first-child{
 	display: inline-block;
 	width: 30px; height: 30px;
 	text-align: center;
 	border: 1px solid rgb(226,216,212);
+	position: absolute;
+	left: 0;
 	font-size: 20px;
-	margin:0; padding:0;
+	margin:0; padding:2px;
 	border-radius: 100%;
 	color: rgb(226,216,212);
 	text-decoration: none;
@@ -211,9 +235,36 @@ section.instagram label.hashtag {
 	color: rgb(255,117,172);
 }
 section.instagram div.pictures {
-	margin : 20px 0;
+	margin-top: 20px;
+	margin-bottom: 50px;
 }
-section.page button{
+section.instagram div.pictures>div>div{
+	display: inline-block;
+	overflow: hidden;
+	width: 180px; height: 200px;
+	margin: 0; padding: 0;
+}
+section.instagram div.pictures>div{
+	text-align: left;
+	margin: 0;	padding: 0;
+}
+section.instagram div.pictures img{
+	width: 180px; height: 200px;
+	display : inline-border;
+	transition-timing-function : ease;
+	margin: 0; padding: 0;
+}
+section.instagram div.pictures img:hover{
+	transform : scale(1.2);
+	transition : transform 0.7s;
+	
+}
+
+
+
+/*******목록 **************/
+
+section.page button.list{
 	display: inline-block;
 	color: rgb(245,111,152);
 	border: 2px solid rgb(245,111,152);
@@ -223,4 +274,55 @@ section.page button{
 	font-weight: bold;
 	font-size: 16px;
 	
+}
+
+/***********하단 이벤트, 해피오더 띠 **********/
+/***********하단 이벤트, 해피오더 띠 **********/
+/***********하단 이벤트, 해피오더 띠 **********/
+
+section.menu_footer div.bottom_line {
+	background-color: rgb(249,248,247);
+	margin-bottom:-15px;
+	text-align: center;
+	padding: 0;
+}
+section.menu_footer div.bottom_line>div {
+	display : inline-block;
+	text-align: left;
+	padding: 20px;
+	margin: 0;
+	overflow: hidden;
+}
+
+section.menu_footer div.bottom_line div.event{
+	width: 400px;
+	margin-right:60px;
+}
+section.menu_footer div.bottom_line div.order{
+	width: 300px;
+}
+section.menu_footer div.bottom_line div.qr{
+	width: 50px;
+}
+section.menu_footer div.bottom_line div ul{
+	list-style: none;
+}
+section.menu_footer div.bottom_line div.event img{
+	margin-top: 0px; 
+}
+section.menu_footer div.bottom_line div ul.event li a{
+	text-decoration: none;
+	font-size:12px;
+	color: black; 
+}
+section.menu_footer div.bottom_line div ul.event li::before{
+	content: "\2022";
+	color: rgb(255,124,152);
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-left: -2em;
+}
+section.menu_footer div.bottom_line div.order img.title{
+	margin: 10px 0 20px 0;
 }

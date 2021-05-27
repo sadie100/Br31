@@ -11,6 +11,26 @@ div.content {
 	margin: auto;
 }
 
+div.title{
+	text-align: center;
+}
+div.title>div{
+	width: 36px;
+	height: 26px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: center;
+	margin: auto;
+	padding: 0px 10px;
+}
+div.title div.title_left{
+	background-image: url("http://localhost:9000/br31/images/icon_title_1.png");
+}
+div.title div.title_right{
+	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
+}	
+	
 /***nutrient_기본화면****//
 div.content section.text_info{
 	text-align: center;

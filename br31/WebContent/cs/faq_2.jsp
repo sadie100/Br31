@@ -5,99 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
 <style>
-section.faq {
-	width: 1400px;
-	margin: auto;
-	text-align: center;
-}
-section.faq a {
-	text-decoration: none;
-	color: black;
-}
-section.faq ul {
-	list-style-type: none;
-	display: inline-block;
-	padding: 0;
-}
-section.faq .faq_board {
-	width: 1000px;
-	margin: auto;
-	display: inline-block;
-}
-section.faq .faq_board h3 {
-	margin: 40px 0 20px 0;
-}
-section.faq .faq_type ul {
-	width: 1000px;
-	height: 50px;
-	line-height: 50px;
-	border: 1px solid darkgray;
-	border-radius: 5px;
-}
-section.faq .faq_type li {
-	display: inline-block;
-	float: left;
-}
-section.faq .faq_type a {
-	display: inline-block;
-	width: 200px;
-	margin: 0;
-	font-weight: bold;
-}
-section.faq .faq_type a:hover {
-	background-color: #92867f;
-	color: white;
-}
-section.faq .faq_list ul{
-	display: inline-block;
-	width: 1000px;
-}
-section.faq .faq_list li:last-child {
-	border-bottom: 1px solid darkgray;
-}
-section.faq .faq_list li{
-	text-align: left;
-	height: 70px;
-	line-height: 70px;
-	text-indent: 100px;
-	border-top: 1px solid darkgray;
-	background-image: url("http://localhost:9000/br31/images/icon_question.gif");
-	background-repeat: no-repeat;
-	background-position: 40px 30px;
-
-}
-section.faq .faq_list a {
-	display: block;
-	height: 70px;
-}
-
-section.faq .page_button {
-	margin: 30px 0 70px 0;
-}
-section.faq .page_button li {
-	display: inline-block;
-	margin: 0 5px;
-}
-section.faq .page_button a {
-	display: inline-block;
-	border: 1px solid darkgray;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	border-radius: 50%;
-	font-size: 13px;
-}
-section.faq .page_button li:first-child a, section.faq .page_button li:last-child a {
-	color: #ff7c97;
-	font-weight: bold;
-	font-size: 16px;
-}
 section.faq .page_button ul li:nth-child(3) a{
 	background-color: #ff7c97;
 	color: white;
 }
-
 </style>
 </head>
 <body>
@@ -106,7 +19,7 @@ section.faq .page_button ul li:nth-child(3) a{
 	<jsp:include page="cs_header.jsp"></jsp:include>
 	
 	<!-- content -->
-	<div class="content">
+	<div class="cs_content">
 		<section class="faq">
 			<div class="faq_board">
 				<h3>고객센터 FAQ</h3>
