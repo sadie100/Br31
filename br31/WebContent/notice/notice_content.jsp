@@ -17,7 +17,7 @@
 		<div class="inner_content">
 			<div class="board_view_wrap">
 				<h3 class="board_title">
-					<span><img src="../images/ico_notice_view.gif" alt=""></span>
+					<span><img src="http://localhost:9000/br31/images/ico_notice_view.gif" alt=""></span>
 					<span class="txt"><img src="http://localhost:9000/br31/images/tit_notice_view.gif" alt="br notice"></span>
 					공지사항
 				</h3>
