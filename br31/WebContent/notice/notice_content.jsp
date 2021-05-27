@@ -17,8 +17,8 @@
 		<div class="inner_content">
 			<div class="board_view_wrap">
 				<h3 class="board_title">
-					<span><img src="/assets/images/about/ico_notice_view.gif" alt=""></span>
-					<span class="txt"><img src="/assets/images/about/tit_notice_view.gif" alt="br notice"></span>
+					<span><img src="../images/ico_notice_view.gif" alt=""></span>
+					<span class="txt"><img src="http://localhost:9000/br31/images/tit_notice_view.gif" alt="br notice"></span>
 					공지사항
 				</h3>
 			</div>
@@ -30,17 +30,17 @@
 						<ul>
 							<li>
 								<a href="#none" role="button" data-sns="facebook">
-									<img src="/assets/images/common/icon_facebook.png" alt="FACEBOOK">
+									<img src="http://localhost:9000/br31/images/icon_facebook.png" alt="FACEBOOK">
 								</a>
 							</li>
 							<li>
 								<a href="#none" role="button" data-sns="twitter">
-									<img src="/assets/images/common/icon_twitter.png" alt="TWITTER">
+									<img src="http://localhost:9000/br31/images/icon_twitter.png" alt="TWITTER">
 								</a>
 							</li>
 							<li>
 								<a href="#none" role="button" data-sns="copyurl">
-									<img src="/assets/images/common/icon_copy.png" alt="copy">
+									<img src="http://localhost:9000/br31/images/icon_copy.png" alt="copy">
 								</a>
 							</li>
 						</ul>

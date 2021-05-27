@@ -15,7 +15,7 @@
 	<div id="content">
 		<h3 class="line_title">
 			<span>
-				<img src="/assets/images/about/h_notice.png" alt="NOTICE">
+				<img src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
 			</span>
 			배스킨라빈스의 신제품 안내, 신규 CF등 다양한 소식을 알려드립니다!
 		</h3>
