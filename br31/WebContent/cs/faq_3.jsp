@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
 <style>
-section.faq .page_button ul li:nth-child(4) a{
-	background-color: #ff7c97;
+div.pagination a:nth-child(4){
+	background-color: rgb(245,111,152);
 	color: white;
 }
 
@@ -77,14 +77,12 @@ section.faq .page_button ul li:nth-child(4) a{
 						</li>
 					</ul>
 				</div>
-				<div class="page_button">
-					<ul>
-						<li><a href="http://localhost:9000/br31/cs/faq_2.jsp">&lt;</a></li>
-						<li><a href="http://localhost:9000/br31/cs/faq_1.jsp">1</a></li>
-						<li><a href="http://localhost:9000/br31/cs/faq_2.jsp">2</a></li>
-						<li><a href="http://localhost:9000/br31/cs/faq_3.jsp">3</a></li>
-						<li><a href="#">&gt;</a></li>
-					</ul>
+				<div class="pagination">
+					<a href="http://localhost:9000/br31/cs/faq_1.jsp">&lt;</a>
+					<a href="http://localhost:9000/br31/cs/faq_1.jsp">1</a>
+					<a href="http://localhost:9000/br31/cs/faq_2.jsp">2</a>
+					<a href="http://localhost:9000/br31/cs/faq_3.jsp">3</a>
+					<a href="http://localhost:9000/br31/cs/faq_2.jsp">&gt;</a>
 				</div>
 			</div>
 		</section>	

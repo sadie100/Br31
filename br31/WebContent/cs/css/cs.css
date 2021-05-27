@@ -364,6 +364,7 @@ section.faq .faq_list a {
 	height: 70px;
 }
 
+/*
 section.faq .page_button {
 	margin: 30px 0 70px 0;
 }
@@ -374,17 +375,46 @@ section.faq .page_button li {
 section.faq .page_button a {
 	display: inline-block;
 	border: 1px solid darkgray;
-	width: 40px;
-	height: 40px;
+	width: 45px; 
+	height: 45px;
 	line-height: 40px;
+	line-height: 45px;
 	border-radius: 50%;
-	font-size: 13px;
+	font-size: 15px;
 }
 section.faq .page_button li:first-child a, section.faq .page_button li:last-child a {
 	color: #ff7c97;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 20px;
+} */
+
+/**************** 버튼 통일 ******************/
+section.faq div.pagination {
+	display: block;
+	width: 100%;
+	margin: 10px auto 100px auto;
+	text-align: center;
 }
+div.pagination a{
+	border: 1px solid rgb(228,219,215);
+	display: inline-block;
+	margin: 0 5px;
+	width: 45px; height: 45px;
+	border-radius: 100%;
+	text-align: center;
+	line-height: 45px;
+	text-decoration : none;
+	font-size: 15px;
+	background-color: white;
+	color: black;
+}
+div.pagination a:first-child, div.pagination a:last-child{
+	color:rgb(255,167,185);
+	font-weight: bold;
+	font-size: 20px;  
+	line-height: 40px; 
+}
+
 section.faq .faq_list li a {
 	display: block; 
 	position: relative; 
@@ -403,12 +433,21 @@ section.faq .faq_list a:after {
 
 
 /************** admin_voc_list **************/
-div.voc_type {
+div.voc_search_bar {
 	text-align: left;
 	padding-left: 30px; 
 }
-div.voc_type select {
+div.voc_search_bar select {
 	width: 100px;
+}
+div.voc_search_bar #voc_search {
+	margin-left: 500px;
+}
+div.voc_search_bar input:[type="text"] {
+	padding: 0 5px;
+}
+div.voc_search_bar button {
+	padding: 2px 20px;
 }
 
 

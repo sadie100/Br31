@@ -20,12 +20,12 @@
 			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
 		</div>
 		<div class="cs_menu">
-			<button type="button" class="btn_faq" onclick="location.href='http://localhost:9000/br31/cs/faq_1.jsp'">
-				자주하는 질문</button>
-			<button type="button" class="btn_voc">
-				답변 대기 문의</button>
-			<button type="button" class="btn_myvoc">
-				답변 완료 문의</button>
+			<a href="http://localhost:9000/br31/cs/faq_1.jsp"><button type="button" class="btn_faq">
+				자주하는 질문</button></a>
+			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_voc">
+				답변 대기 문의</button></a>
+			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
+				답변 완료 문의</button></a>
 		</div>
 	</section>
 	
@@ -33,7 +33,7 @@
 		<section class="voc_list">
 			<h3>[관리자] 고객센터 문의 목록</h3>
 			<form name="voc_list_form" action="#" method="get">
-				<div class="voc_type">
+				<div class="voc_search_bar">
 					<select>
 						<option value="상담유형">상담유형</option>
 						<option value="칭찬">칭찬</option>
@@ -52,6 +52,8 @@
 						<option value="모바일쿠폰">모바일쿠폰</option>
 						<option value="기타">기타</option>
 					</select>
+					<input type="text" id="voc_search">
+					<button type="button">검색</button>
 				</div>
 				<div class="list">
 					<table>
@@ -67,7 +69,7 @@
 							<td>1</td>
 							<td>칭찬</td>
 							<td>인적서비스</td>
-							<td><a href="http://localhost:9000/br31/cs/voc_content.jsp">배라 수원점 사장님을 칭찬합니다!</a></td>
+							<td><a href="#">배라 수원점 사장님을 칭찬합니다!</a></td>
 							<td>2021-05-22</td>
 							<td>답변완료</td>
 						</tr>
@@ -75,7 +77,7 @@
 							<td>2</td>
 							<td>문의</td>
 							<td>제품</td>
-							<td><a href="#">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
+							<td><a href="http://localhost:9000/br31/cs/admin_voc_content.jsp">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
 							<td>2021-05-24</td>
 							<td>답변대기</td>
 						</tr>
