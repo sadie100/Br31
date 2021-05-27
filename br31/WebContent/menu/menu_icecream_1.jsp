@@ -23,7 +23,7 @@ div.pagination a:nth-child(2){
 	<section class="page">
 	<section class="logo_icecream">
 	</section>
-<!-- monthly best icecream -->
+<!-- common part -->
 	<jsp:include page = "menu_monthly_icecream.jsp"></jsp:include>
 	
 	
@@ -35,13 +35,7 @@ div.pagination a:nth-child(2){
 
 
 	<section class="icecream_menu">
-		<div class="title">
-			<div class="title_left"></div>
-			<img src="http://localhost:9000/br31/menu/images/h_title_icecream.png">
-			<div class="title_right"></div>
-		</div>
 		<div class="icecream_menu">
-		<!-- <a href=""><img src=""></a>-->
 		<table class="icecream_menu">
 			<tr>
 				<td>

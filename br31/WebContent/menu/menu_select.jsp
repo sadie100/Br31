@@ -13,6 +13,8 @@
 
 <!-- content -->
 <section class="page">
+<section class="inner_page">
+
 
 <!-- button -->
 	<span class="btn_index">
@@ -32,7 +34,7 @@
 				<img src="images/ice_mother.png">
 			</div>
 			<div class="icons">
-				<a href="#">☆</a>
+				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG"></a>
 				<a href="#"><img src="images/icon_facebook.png"></a>
 				<a href="#"><img src="images/icon_twitter.png"></a>
 				<a href="#"><img src="images/icon_copy.png"></a>
@@ -196,10 +198,14 @@
 	</section>
 	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button class="list">목록</button></a>
 </div>
+
 </section>
+</section>
+
 <!-- 이벤트, happy order 하단 띠 -->
 <jsp:include page = "menu_select_footer.jsp"></jsp:include>
 <!-- footer -->
 	<jsp:include page = "../footer.jsp"></jsp:include>
+	
 </body>
 </html>

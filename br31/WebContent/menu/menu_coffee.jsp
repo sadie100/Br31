@@ -29,7 +29,11 @@
 			<div class="title_left"></div>
 				<img src="http://localhost:9000/br31/menu/images/h_title_coffee.png">
 			<div class="title_right"></div>
+			<span class="search">
+				<button class="btn_search" id="btn_search">검색</button>
+			</span>
 		</div>
+	<jsp:include page="menu_search_box.jsp"></jsp:include>
 		<div class="icecream_menu">
 		<table class="icecream_menu">
 			<tr>

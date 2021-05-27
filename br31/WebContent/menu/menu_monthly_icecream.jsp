@@ -6,6 +6,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btn_search").click(function(){
+			$("#modal").show();
+			$("#overlay").css({"opacity":"1","pointer-events":"auto"});
+		});
+		$("#exit").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		});
+		$("#overlay").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		})
+		
+	});
+</script>
 </head>
 <body>
 
@@ -130,6 +148,14 @@
 		</div>
 	</section>
 	
-
+	<div class="title">
+		<div class="title_left"></div>
+			<img src="http://localhost:9000/br31/menu/images/h_title_icecream.png">
+		<div class="title_right"></div>
+		<span class="search">
+			<button class="btn_search" id="btn_search">검색</button>
+		</span>
+	</div>
+	<jsp:include page="menu_search_box.jsp"></jsp:include>
 </body>
 </html>

@@ -16,6 +16,11 @@ div.content{
 section.page{
 	margin-bottom: 100px;
 } 
+section.inner_page{
+	display: block;
+	width: 1200px;
+	margin: auto;
+}
 span.btn_index button{
 	border: 1px solid rgb(187,187,187);
 	border-radius: 100%;
@@ -28,11 +33,11 @@ span.btn_index button{
 }
 span.btn_index button.left{
 	top: 500px;
-	left: 350px;
+	left: 0px;
 }
 span.btn_index button.right{
 	top: 500px;
-	left: 1470px;
+	left: 1500px;
 }
 
 
@@ -83,12 +88,12 @@ section.top_info div.icons a:first-child{
 	text-align: center;
 	border: 1px solid rgb(226,216,212);
 	position: absolute;
-	left: 0;
-	font-size: 20px;
+	left: 1px;
 	margin:0; padding:2px;
 	border-radius: 100%;
 	color: rgb(226,216,212);
 	text-decoration: none;
+	overflow: hidden;
 }
 section.top_info{
 	padding-bottom: 30px;
