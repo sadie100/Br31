@@ -7,9 +7,9 @@
 <script>
 	$(document).ready(function(){
 		var memberList = { "memberInfo" : [
-							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naer.com","point":"0","joind":"2021-05-26"},
-							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naer.com","point":"0","joind":"2021-05-26"},
-							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naer.com","point":"0","joind":"2021-05-26"}
+							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naver.com","point":"0","joind":"2021-05-26"},
+							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naver.com","point":"0","joind":"2021-05-26"},
+							{"id":"hong","pass":"1234","name":"홍길동","birth":"1990-01-01","phone":"010-1234-5678","addr":"서울시 강남구 테헤란로","email":"hong1234@naver.com","point":"0","joind":"2021-05-26"}
 							]
 		};
 		
@@ -40,6 +40,15 @@
 </script>
 
 <style>
+*{
+	font-family:"맑은고딕";
+}
+.content{
+	width:1500px;
+	text-align:center;
+	margin:auto;
+}
+
 /******
 	회원관리 페이지 헤더
 ********/
@@ -47,23 +56,48 @@
 section.ad_m_header div:first-child ul{
 	list-style-type : none;
 	text-align:right;
+	padding: 10px 0;
 }
 section.ad_m_header div:first-child ul li{
-	list-style-type : none;
 	display:inline-block;
-	
+}
+section.ad_m_header div:first-child ul li:first-child{
+	margin-right:5px;
+	padding-right:12px;
+	display:inline-block;
+}
+section.ad_m_header div:first-child ul li:nth-child(2){
+	margin-right:5px;
+	padding-right:12px;
+	display:inline-block;
+}
+
+div.m_title{
+	text-align:center;
 }
 
 div.m_title h1{
-	border-bottom:2px solid rgb(255, 124, 152);
-	text-align:center;
+	/*border-bottom:2px solid rgb(255, 124, 152);*/
 	font-size:35px;
 	font-weight:blod;
 	color:#333;
-	padding:35px 0;
+	padding-bottom:35px;
+	margin:0;
+	display:inline-block;
+	
+	
 }
 
 
+div.m_title img.logo_img{
+	width:100px;
+	height:100px;
+	margin:0;
+}
+
+div.m_title img.spoon_img{
+	display:inline-block;
+}
 
 /*********
 	회원관리 페이지-회원목록 표
@@ -73,30 +107,52 @@ section.ad_m_content{
 	height:750px;
 	margin:auto;
 	text-align:center;
-	border:5px solid rgb(148, 135, 128);
+	border:1px solid rgb(148, 135, 128);
 }
+
 table.admtable{
 	width:100%;
 	text-align:center;
 }
 
-table.admtable, table.admtable th, table.admtable td{
+table.admtable{
 	border:1px solid rgb(148, 135, 128);
 	border-collapse : collapse;
+}
+
+table.admtable td, table.admtable th{
+	border-top:none;
+	border:1px solid lightgray;
 	padding:5px;
 }
+
 
 table.admtable th{
 	background-color:rgb(239, 239, 239);
 }
 
+/*section.ad_m_content{
+	/*background-image: url("http://localhost:9000/br31/images/br_logo_admin3.png");
+	opacity:0.7;*/
+}*/
+
+
 /******
 	회원관리 페이지 푸터
 ********/
+section.ad_m_footer{
+	text-align:center;
+}
+
+section.ad_m_footer img{
+	padding:0;
+	width:30%;
+	margin:20px;
+}
 </style>
 </head>
 <body>
-	<div>
+	<div class = "content">
 	
 		<!-- header -->
 		<section class = "ad_m_header">
@@ -107,20 +163,25 @@ table.admtable th{
 				</ul>
 			</div>
 			<div class = "m_title">
-				<h1>회원관리 페이지</h1>
+					<img src = "http://localhost:9000/br31/images/br_logo_admin2.png" class = "logo_img">
+				<div>
+					<img src = "http://localhost:9000/br31/images/spoon_left.PNG" class = "spoon_img">
+					<h1>회원관리 페이지</h1>
+					<img src = "http://localhost:9000/br31/images/spoon_right.PNG" class = "spoon_img">
+				</div>
 			</div>
 		</section>
 		
 		<!-- content -->
 		<section class = "ad_m_content">
 			<div id = "member_list"></div>			
-		
 		</section>
 		
 		<!-- footer -->
-		<section>
-		
+		<section class = "ad_m_footer">
+			<img src = "http://localhost:9000/br31/images/baskin_logo_admin.png">
 		</section>
+		
 	</div>
 </body>
 </html>
