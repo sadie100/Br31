@@ -5,59 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-div.content{
-	font-family:"맑은고딕";
-	width:1000px;
-	margin:auto;
-	margin-top:150px; 
-}
-div.content section.m_menu{
-	text-align:center;
-}
-div.content section.m_menu ul img{
-	margin: 0 10px;
-	height: auto;
-	width:145px;
-}
-div.content section.m_menu ul {
-	border: 1px solid lightgray;
-	border-bottom : 3px solid rgb(255, 124, 152);
-	display: inline-block;
-	border-radius: 30px 30px 0 0 ;
-	margin: 10px 0 70px 0;
-}
-
-div.content section.m_page{
-	width:90%;
-	margin:auto;
-	text-align:center;
-}
-
-section.m_page span{
-	font-size:25px;
-	display: block;
-	margin: 0 0 20px 0;
-}
-
-.btn_cancle, .btn_confrim{
-	padding:5px 20px;
-	margin: 0 5px;
-	background-color:white;
-	border:1px solid rgb(128, 128, 161);
-	border-radius:4px;
-	color: gray;
-	font-size:15px;
-}
-.btn_confrim{
-	background-color:gray;
-	color:white;
-}
-
-div.content section.m_page div{
-	margin-bottom:100px;
-}
-</style>
+<link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
 </head>
 <body>
 	<!-- header -->
@@ -85,7 +33,7 @@ div.content section.m_page div{
 				</ul>
 			</nav>
 		</section>
-		<section class = "m_page">
+		<section class = "m3_page">
 			<img src = "">
 			<span>정말로 탈퇴하시겠습니까?</span>
 			<div>

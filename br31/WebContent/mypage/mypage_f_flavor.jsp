@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
 <script src="http://localhost:9000/myweb2/js/jquery-3.6.0.min.js"></script>
 <script>
 	//클릭하면 별모양 버튼 색이 바뀌도록 구현
@@ -29,142 +30,6 @@
 
 </script>
 
-
-
-
-<style>
-div.content{7
-
-	font-family:"맑은고딕";
-	width:1000px;
-	margin:auto;
-	margin-top:150px; 
-}
-div.content section.m_menu{
-	text-align:center;
-}
-div.content section.m_menu ul img{
-	margin: 0 10px;
-	height: auto;
-	width:145px;
-}
-div.content section.m_menu ul {
-	border: 1px solid lightgray;
-	border-bottom : 3px solid rgb(255, 124, 152);
-	display: inline-block;
-	border-radius: 30px 30px 0 0 ;
-	margin: 10px 0 70px 0;
-}
-
-div.content section.m_page{
-	width:90%;
-	margin:auto;
-}
-
-div.content section.m_page div.m_f_image{
-	text-align:center;
-	margin:150px 0 70px 0;
-}
-
-section.m_page span{
-	margin-left:5px;
-	font-weight:600;
-}
-
-
-/********
-	추천 플레이버
-********/
-div.r_flavor ul{
-	list-style-type : none;
-	padding:0;
-	width:100%;
-	height:210px;
-	text-align:center;
-}
-div.r_flavor ul a{
-	text-decoration : none;
-}
-div.r_flavor ul li{
-	border:1px solid lightgray;
-	display:inline-block;
-	width:180px;
-	margin:0;
-	float:left;
-}
-
-div.r_flavor ul li span{
-	display:block;
-	font-size:11px;
-	padding:20px 25px 45px 25px;
-	color :rgb(148, 135, 128);
-	margin:auto;
-}
-div.r_flavor ul li a img{
-	width:100px;
-	height:100px;
-	text-align:center;
-	
-	background-image: url("http://localhost:9000/br31/images/icream_con.PNG");
-	background-repeat: no-repeat;
-	background-position: bottom;
-	
-	margin-left:35px;
-}
-
-.btn_favor{
-	border:1px solid rgb(148, 135, 128);
-	border-radius:50%;
-	width:35px;
-	height:35px;
-	background-image : url("http://localhost:9000/br31/images/star_button.PNG");
-	background-position : center;
-	
-	display:inline-block;
-	font-size:25px;
-	
-	text-align:center;
-	margin:0;
-	
-}
-
-.btn_favor_click{
-	border:1px solid rgb(148, 135, 128);
-	border-radius:50%;
-	width:35px;
-	height:35px;
-	background-image : url("http://localhost:9000/br31/images/star_button_onclick.PNG");
-	background-position : center;
-	
-	display:inline-block;
-	font-size:25px;
-	
-	text-align:center;
-	margin:0;
-	
-}
-
-
-/***
-	내가 좋아하는 플레이버
-****/
-
-section.m_page{
-	clear:left;
-}
-
-span.m_title{
-	color: black;
-	font-size:15px;
-	display:block;
-}
-
-div.r_flavor{
-	margin-bottom:150px;
-
-}
-
-</style>
 </head>
 <body>
 	<!-- header -->
@@ -192,9 +57,9 @@ div.r_flavor{
 				</ul>
 			</nav>
 		</section>
-		<section class = "m_page">
+		<section class = "m2_page">
 			<div>
-				<span class = "m_title">추천플레이버</span>
+				<span class = "m2_title">추천플레이버</span>
 				<div class = "r_flavor">
 					<ul>
 						<li>
@@ -242,7 +107,7 @@ div.r_flavor{
 					</ul>	
 				</div>
 		</section>
-		<section class = "m_page">	
+		<section class = "m2_page">	
 			<div class = "m_f_image">	
 				<a href = "#"><img src = "http://localhost:9000/br31/images/btn_favor.jpg"></a>
 			</div>	

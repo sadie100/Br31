@@ -5,125 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-div.login_search_content{
-	font-family:"맑은고딕";
-	width:1000px;
-	margin:auto;
-	text-align:center;
-	margin-top:150px; 
-}
-
-div.login_search_title h1{
-	text-align:center;
-	font-size:33px;
-	font-weight:blod;
-	color:#333;
-}
-
-div.login_search_title span{
-	text-align:center;
-	font-size:15px;
-	font-weight:blod;
-	color:gray;
-}
-
-div.login_search_title{
-	margin-bottom:40px;
-}
-
-/****
-아이디 비밀번호 찾기 방법 선택 하는 부분
-***/
-div.s_content div:first-child a{
-	text-decoration:none;
-	
-}
-div.s_content div:first-child span{
-	display:inline-block;
-	width: 330px;
-	padding:15px 0;
-	font-size:15px;
-	font-weight:bold;
-	margin-bottom:50px;
-}
-div.s_content div:first-child a:last-child span{
-	border-bottom: 3px solid rgb(254, 79, 39);
-	color: rgb(254, 79, 39);
-}
-div.s_content div:first-child a:first-child span{
-	border-bottom: 1px solid lightgray;
-	color: gray;
-}
-
-/*휴대폰, 아이핀 이미지*/
-div.s_content>div:nth-child(2){
-	margin-bottom:80px;
-}
-
-div.s_content>div:nth-child(2)>div:first-child, div.s_content>div:nth-child(2)>div:nth-child(2){
-	border:1px solid lightgray;
-	border-radius:4px;
-	display:inline-block;
-	margin: 0 7px;
-}
-
-div.s_content>div:nth-child(2)>div:first-child{
-	padding: 25px 95px;
-}
-
-div.s_content>div:nth-child(2)>div:nth-child(2){
-	padding: 27px 110px;
-}
-
-div.s_content>div:nth-child(2)>div:first-child:hover, div.s_content>div:nth-child(2)>div:nth-child(2):hover{
-	border:1px solid rgb(254, 79, 39);
-}
-
-/*회원가입 페이지로 넘어가는 부분*/
-section.go_join div{
-	margin-bottom:130px;
-}
-section.go_join div span{
-	display:block;
-}
-section.go_join div span:first-child{
-	font-size:16px;
-	font-weight:bold;
-	color:#333;
-	margin-bottom:15px;
-}
-
-div.s_content>div:nth-child(2)>div:first-child button{
-	background-image : url("http://localhost:9000/br31/images/id_search_phone.PNG");
-	width:124px;
-	height:139px;
-	border:none;
-}
-div.s_content>div:nth-child(2)>div:last-child button{
-	background-image : url("http://localhost:9000/br31/images/id_search_ipin.PNG");
-	width:96px;
-	height:137px;
-	border:none;
-}
-
-section.go_join div span:nth-child(2){
-	font-size:12px;
-	color:gray;
-	margin-bottom:30px;
-}
-
-/*회원가입 페이지로 넘어가는 버튼*/
-.go_join_button{
-	border: 1px solid rgb(254, 79, 39);
-	border-radius:8px;
-	background-color:white;
-	color:rgb(254, 79, 39);
-	font-size:15px;
-	font-weight:bold;
-	padding: 11px 30px;
-}
-</style>
+<link rel="stylesheet" href = "http://localhost:9000/br31/choi.css">
 <script>
 
 /******
@@ -154,7 +36,7 @@ function showPop2(){
 		 		본인인증을 통해 아이디를 확인하실 수 있어요!</span>
 		 	</div>
 		 	<div class = "s_content">
-		 		<div>
+		 		<div class = "sp_show">
 		 			<a href = "login_id_search.jsp"><span>아이디 찾기</span></a>
 		 			<a href = "login_pass_search.jsp"><span>비밀번호 초기화</span></a>
 		 		</div>
