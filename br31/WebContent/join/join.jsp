@@ -5,116 +5,103 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<style>
-div.content{
-	font-family:"맑은고딕";
-	width:1000px;
-	margin:auto;
-	margin-top:150px; 
-}
-
-section.join div{
-	text-align:center;
+<link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
+<script src = "http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("button#joinBtn").click(function(){
+			if($("#id").val() == ""){
+				alert("아이디를 입력해주세요");
+				$("#id").focus();
+				return false
+				
+			}else if($("#pass").val() == ""){
+				alert("비밀번호를 입력해주세요");
+				$("#pass").focus();
+				return false
+				
+			}else if($("#cpass").val() == ""){
+				alert("비밀번호 확인을 입력해주세요");
+				$("#cpass").focus();
+				return false
+				
+			}else if($("#name").val() == ""){
+				alert("이름을 입력해주세요");
+				$("#name").focus();
+				return false
+				
+			}else if($("#birth").val() == ""){
+				alert("생년월일을 입력해주세요");
+				$("#birth").focus();
+				return false
+				
+			}else if($("#phone1").val() == $("#pnum").val()){
+				alert("전화번호를 선택해주세요");
+				$("#phone1").focus();
+				return false
+				
+			}else if($("#phone2").val() == ""){
+				alert("두번쨰 전화번호를 입력해주세요");
+				$("#phone2").focus();
+				return false
+				
+			}else if($("#phone3").val() == ""){
+				alert("세번째 전화번호를 입력해주세요");
+				$("#phone3").focus();
+				return false
+				
+			}else if($("#email1").val() == ""){
+				alert("이메일을 입력해주세요");
+				$("#email1").focus();
+				return false
+				
+			}else if($("#email2").val() == ""){
+				alert("이메일 주소를 선택해주세요");
+				$("#email3").focus();
+				return false
+				
+			}else{
+				join_form.submit();
+				
+			}
+			
+		});//form_check
+		
+		
+		//비밀번호와 비밀번호 확인 일치 체크
+		$("#cpass").blur(function(){
+			if($("#pass").val() != "" && $("#cpass").val() != ""){
+				if($("#pass").val() == $("#cpass").val()){
+					alert("비밀번호가 일치합니다");
+					/*$("div#msg").text("비밀번호가 일치합니다.").css({"font-size":"13px","color":"blue","padding":"0"});*/
+				}else{
+					alert("비밀번호가 일치하지 않습니다");
+					/*$("div#msg").text("비밀번호가 일치하지 않습니다.").css({"font-size":"13px","color":"red","padding":"0"});*/
+					$("#pass").focus();
+					$("#pass").val() = "";
+					$("#cpass").val() = "";
+				}
+			}else{
+				alert("비밀번호를 입력해주세요");
+			}
+			
+		});
+		
+		//이메일 체크
+		$("#email3").change(function(){
+			if($("#email3").val() == "choice"){
+				alert("다른 주소를 선택해주세요");
+				$("#email3").focus();
+				$("#email2").val("");
+			}else{
+				$("#email2").val($("#email3").val());
+			}
+		});
+		
+		
+	});//document ready
 	
-}
-
-form.join_form ul{
-	list-style-type : none;
-	width:60%;
-	margin:auto;
-}
-
-form.join_form li label{
-	display:inline-block;
-	width:20%;
-	/*margin:15px 0;*/
-	color:#333;
-}
-
-.li{
-	border:1px solid white;
-	border-bottom : 1px solid rgb(128, 128, 161);
-	border-radius : 2px;
-	margin: 20px  5px 20px 0;
-}
-
-/*주소*/
-form.join_form li:nth-child(7)>input:last-child{
-	/*border:3px solid blue;*/
-	display:block;
-	margin-left:125px;
-	width:450px;
-}
-/*이메일 정보*/
-form.join_form li:nth-child(8) input{
-	width:140px;
-}
-
-form.join_form li:nth-child(8) span:last-child{
-	display : block;
-	margin-left:125px;
-	color:rgb(128, 128, 161);
-	font-size:10px;
-}
-/*휴대폰 정보*/
-form.join_form li:nth-child(6) input{
-	width:60px;
-}
-form.join_form li:nth-child(6) span, form.join_form li:nth-child(8) span:first-child{
-	color:rgb(128, 128, 161);
-	font-size:25px;
-}
-
-
-/*join section(전체)*/
-section.join>div>span{
-	color:rgb(128, 128, 161);
-	font-size:13px;
-	display:inline-block;
-	width:60%;
-	padding: 0 0 50px 0;
-}
-
-section.join>span{
-	color:rgb(128, 128, 161);
-	font-size: 12px;
-	display:block;
-	width:60%;
-	margin:auto;
-	padding: 0 0 10px 0;
-}
-
-/*button*/
-form.join_form li:last-child{
-	text-align:center;
-	margin:50px 0 ;
-}
-.btn_check, .select_style{
-	padding:3px 8px;
-	margin: 0 10px;
-	background-color:white;
-	border:1px solid rgb(128, 128, 161);
-	border-radius:4px;
-	color: gray;
-}
-
-
-.btn_cancle, .btn_confrim{
-	padding:5px 20px;
-	margin: 0 5px;
-	background-color:white;
-	border:1px solid rgb(128, 128, 161);
-	border-radius:4px;
-	color: gray;
-	font-size:15px;
-}
-.btn_confrim{
-	background-color:gray;
-	color:white;
-}
-
-
-</style>
+</script>
 </head>
 <body>
 	<!-- 회원가입 페이지는 외부 페이지와 연결되어서 제가 따로 만들었습니다. -->
@@ -134,29 +121,30 @@ form.join_form li:last-child{
 				<ul>
 					<li>
 						<label>*아이디</label>
-						<input type = "text" name = "id" class = "li">
+						<input type = "text" name = "id" class = "li" id = "id">
 						<button type = "button" name = "check" class = "btn_check">중복확인</button>
 					</li>
 					<li>
 						<label>*비밀번호</label>
-						<input type = "password" name = "pass" class = "li">
+						<input type = "password" name = "pass" class = "li" id = "pass">
 					</li>
 					<li>
 						<label>*비밀번호 확인</label>
-						<input type = "password" name = "pass" class = "li">
+						<input type = "password" name = "pass" class = "li" id = "cpass">
+						<!-- <div id = "msg"></div> -->
 					</li>
 					<li>
 						<label>*이름</label>
-						<input type = "text" name = "name" class = "li">
+						<input type = "text" name = "name" class = "li" id = "name">
 					</li>
 					<li>
 						<label>*생년원일</label>
-						<input type = "date" name = "birthday" class = "li">
+						<input type = "date" name = "birthday" class = "li" id = "birth">
 					</li>
 					<li>
 						<label>*휴대폰</label>
 						<select id = "phone1" class = "select_style">
-						<option value = "선택" >선택</option>
+						<option value = "선택" id = "pnum">선택</option>
 						<option value = "010" id = "pnum1">010</option>
 						<option value = "011" id = "pnum2">011</option>
 						<option value = "017" id = "pnum3">017</option>
@@ -167,26 +155,25 @@ form.join_form li:last-child{
 					</li>
 					<li>
 						<label>주소</label>
-						<input type = "text" name = "adress_number" class = "li">
-						<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check">우편번호 검색</button></a>
-						<input type = "text" name = "adress" class = "li">
+						<input type = "text" name = "adress_number" class = "li" id = "addr1">
+						<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check" id = "addr2">우편번호 검색</button></a>
+						<input type = "text" name = "adress" class = "li" id = "addr3">
 					</li>
 					<li>
 						<label>*이메일</label>
 						<input type = "text" name = "email" class = "li" id = "email1"><span> @ </span>
 						<input type = "text" name = "email" class = "li" id = "email2">
 						<select id = "email3" class = "select_style">
-							<option value = "선택">선택</option>
-							<option value = "naver.com" id = "addr1">naver.com</option>
-							<option value = "gmail.com" id = "addr2">gamil.com</option>
-							<option value = "daum.net" id = "addr3">daum.net</option>
-							<option value = "직접입력" id = "addr4">직접입력</option>
+							<option  value = "choice">선택</option>
+							<option  value = "naver.com">naver.com</option>
+							<option  value = "gmail.com">gamil.com</option>
+							<option value = "daum.net">daum.net</option>
 						</select>
 						<span>* hotmail, yahoo, gmail, msn 등의 해외 메일은 수신이 정상적이지 않을 수 있습니다.</span>
 					</li>
 					<li>
-						<button type = "reset" name = "cancle" class = "btn_cancle">취소</button>
-						<button type = "button" name = "comfirm" class = "btn_confrim">가입하기</button>
+						<button type = "reset" name = "cancle" class = "btn_cancle" id = "joinCancle">취소</button>
+						<button type = "button" name = "comfirm" class = "btn_confrim" id = "joinBtn">가입하기</button>
 					</li>
 				</ul>
 			</form>
