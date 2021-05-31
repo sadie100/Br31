@@ -206,11 +206,11 @@ header .admin_msg {
 							</ul>
 						</div>
 					</li>
-					<li><a href="#">메뉴 관리</a>
+					<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_icecream.jsp">메뉴 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">아이스크림</a></li>
-								<li><a href="#">커피</a></li>
+								<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_icecream.jsp">아이스크림</a></li>
+								<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_coffee.jsp">커피</a></li>
 							</ul>
 						</div>
 					</li>

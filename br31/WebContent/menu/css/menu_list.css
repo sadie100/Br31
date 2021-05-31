@@ -311,9 +311,10 @@ form.search_form div.checkbox div.checkbox_inside{
 form.search_form li.depth1:last-child{
 	clear: left;
 	width: 1200px;
-	display: block;
-	padding: 20px 0;
+	display: block; 
 	text-align: center;
+ 	padding: 0;
+	margin-top: -20px;
 }
 form.search_form input[type="button"]{
 	background-color: rgb(255,124,152);
