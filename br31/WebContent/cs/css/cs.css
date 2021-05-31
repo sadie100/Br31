@@ -1,5 +1,5 @@
 /************** cs공통 **************/
-div.cs_content>section, section.cs_header  {
+div.cs_content>section, section.cs_header, section.recruit  {
 	width: 1400px;
 	margin: auto;
 	text-align: center;
@@ -8,33 +8,37 @@ div.cs_content * {
 	font-family: "맑은 고딕";
 }
 
-/************** cs_header **************/
-section.cs_header .title {
-	text-align: center;
+.title {
 	margin: 70px 0;
 }
-section.cs_header .title>div {
+.title p {
+	margin-bottom: 5px;
+}
+.title span {
+	font-size: 15px;
+}
+.title p:before, .title p:after {
 	width: 36px;
 	height: 26px;
 	display: inline-block;
 	background-repeat: no-repeat;
 	background-position: center;
+	content: "";
 }
-section.cs_header .title_left {
+.title p:before {
+	margin-right: 5px;
 	background-image: url("http://localhost:9000/br31/images/icon_title_1.png");
 }
-section.cs_header .title_right {
+.title p:after {
+	margin-left: 5px;
 	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
 }
-section.cs_header .title img {
+.title img {
 	display: inline-block;
 	margin: 0 10px;
 }
-section.cs_header .title span {
-	display: block;
-	font-size: 14px;
-	margin-top: 5px;
-}
+
+/************** cs_header **************/
 section.cs_header .cs_menu {
 	width: 1000px;
 	height: 60px;
@@ -202,8 +206,8 @@ div.agree_member {
 div.agree_member h5{
 	margin: 15px 0 5px 0;
 }
-section.voc_write form span {
-	display: block;
+section.voc_write form p {
+	margin: 0;
 	padding: 0 20px;
 	line-height: 150%;
 	font-size: 13px;
@@ -256,9 +260,15 @@ div.details th, div.details td {
 }
 div.details span {
 	font-weight: bold;
+	margin: 0;
+	padding: 0 10px;
+	line-height: 150%;
+	font-size: 13px;
 }
-div.details table span, div.details span>span {
-	display: inline-block;
+div.details #passMsg {
+	float: right;
+}
+div.details table span, div.details p>span {
 	padding: 0 0 0 2px;
 	color: crimson;
 }
@@ -300,8 +310,7 @@ section.voc_write button {
 section.voc_write button:hover {
 	cursor: pointer;
 	background-color: slategray;
-} 	
-
+} 
 
 /************** faq **************/
 section.faq a {
@@ -322,7 +331,7 @@ section.faq .faq_board h3 {
 	margin: 40px 0 20px 0;
 }
 section.faq .faq_type ul {
-	width: 1000px;
+	width: 900px;
 	height: 50px;
 	line-height: 50px;
 	border: 1px solid darkgray;
@@ -334,7 +343,7 @@ section.faq .faq_type li {
 }
 section.faq .faq_type a {
 	display: inline-block;
-	width: 200px;
+	width: 180px;
 	margin: 0;
 	font-weight: bold;
 }
@@ -342,60 +351,30 @@ section.faq .faq_type a:hover {
 	background-color: #92867f;
 	color: white;
 }
+
+/*** 리스트 ****/
 section.faq .faq_list ul{
 	display: inline-block;
-	width: 1000px;
+	width: 900px;
 }
 section.faq .faq_list li:last-child {
 	border-bottom: 1px solid darkgray;
 }
 section.faq .faq_list li{
 	text-align: left;
-	height: 70px;
 	line-height: 70px;
-	text-indent: 100px;
+	/* text-indent: 90px; */
 	border-top: 1px solid darkgray;
- 	background: url("http://localhost:9000/br31/images/icon_question.gif") no-repeat;
- 	background-position: 40px 30px;
+ 	background: url("http://localhost:9000/br31/images/icon_question.gif") 40px 30px no-repeat;
 
 }
-section.faq .faq_list a {
-	display: block;
-	height: 70px;
-}
-
-/*
-section.faq .page_button {
-	margin: 30px 0 70px 0;
-}
-section.faq .page_button li {
-	display: inline-block;
-	margin: 0 5px;
-}
-section.faq .page_button a {
-	display: inline-block;
-	border: 1px solid darkgray;
-	width: 45px; 
-	height: 45px;
-	line-height: 40px;
-	line-height: 45px;
-	border-radius: 50%;
-	font-size: 15px;
-}
-section.faq .page_button li:first-child a, section.faq .page_button li:last-child a {
-	color: #ff7c97;
-	font-weight: bold;
-	font-size: 20px;
-} */
-
-/**************** 버튼 통일 ******************/
 section.faq div.pagination {
 	display: block;
 	width: 100%;
 	margin: 10px auto 100px auto;
 	text-align: center;
 }
-div.pagination a{
+div.pagination a {
 	border: 1px solid rgb(228,219,215);
 	display: inline-block;
 	margin: 0 5px;
@@ -408,7 +387,7 @@ div.pagination a{
 	background-color: white;
 	color: black;
 }
-div.pagination a:first-child, div.pagination a:last-child{
+div.pagination a:first-child, div.pagination a:last-child {
 	color:rgb(255,167,185);
 	font-weight: bold;
 	font-size: 20px;  
@@ -416,9 +395,12 @@ div.pagination a:first-child, div.pagination a:last-child{
 }
 
 section.faq .faq_list li a {
+	height: 70px;
+	font-weight: 500;
+	color: #261c17;
 	display: block; 
 	position: relative; 
-/* 	padding:25px 65px 25px 68px;  */
+	padding-left: 100px;
 }
 section.faq .faq_list a:after {
 	position: absolute; 
@@ -430,7 +412,32 @@ section.faq .faq_list a:after {
 	background: url(http://localhost:9000/br31/images/icon_faq_list.gif) no-repeat; 
 	content:"";
 }
-
+section.faq .faq_list .answer {
+	display: none; 
+/* 	padding: 0 0 20px 85px; */
+	padding-left: 90px;
+	background: url(http://localhost:9000/br31/images/icon_answer.gif) 40px 27px no-repeat; 
+	color: black; 
+	font-size: 14px; 
+	line-height: 1.8;
+	word-break: break-all;
+}
+section.faq .faq_list .answer>div {
+ 	border-top: 1px solid #d3d3d3;
+	padding: 20px 70px 20px 10px;
+}
+section.faq .faq_list .answer p {
+	margin: 0;
+}
+section.faq .faq_list .on, section.faq .faq_list .on + li{
+	border-top: 1px solid #ff7c97;	
+}
+section.faq .faq_list .on a {
+	color: palevioletred;
+}
+section.faq .faq_list .on a:after {
+	background-position: 0 -12px; 
+}
 
 /************** admin_voc_list **************/
 div.voc_search_bar {
@@ -475,7 +482,15 @@ section.voc_content .voc_answer {
 }
 
 
-/************** voc_content **************/
+/************** recruit **************/
+
+
+
+
+
+
+
+
 /************** voc_content **************/
 /************** voc_content **************/
 /************** voc_content **************/
