@@ -234,7 +234,7 @@ header .menu:hover .submenu {
 						<div class="submenu">
 							<ul>
 								<li><a href="http://localhost:9000/br31/notice/notice_list.jsp">공지사항</a></li>
-								<li><a href="#">채용정보</a></li>
+								<li><a href="http://localhost:9000/br31/recruit/recruit.jsp">채용정보</a></li>
 							</ul>
 						</div>
 					</li>
