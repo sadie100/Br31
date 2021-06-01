@@ -117,7 +117,7 @@
 				<span>배스킨 라빈스에 오신걸 환영합니다.</span>
 			</div>
 			<span>*표시되어있는 항목은 필수입력 항목입니다.</span>
-			<form name = "join_form" action = "#" method = "get" class = "join_form">
+			<form name = "join_form" action = "join_process.jsp" method = "post" class = "join_form">
 				<ul>
 					<li>
 						<label>*아이디</label>
@@ -130,7 +130,7 @@
 					</li>
 					<li>
 						<label>*비밀번호 확인</label>
-						<input type = "password" name = "pass" class = "li" id = "cpass">
+						<input type = "password" name = "cpass" class = "li" id = "cpass">
 						<!-- <div id = "msg"></div> -->
 					</li>
 					<li>
@@ -138,31 +138,37 @@
 						<input type = "text" name = "name" class = "li" id = "name">
 					</li>
 					<li>
+						<label>*성별</label>
+						<input type = "radio" name = "gender" class = "li" id = "gender" value = "여자">여자
+						<input type = "radio" name = "gender" class = "li" id = "gender" value = "남자">남자
+						<input type = "radio" name = "gender" class = "li" id = "gender" value = "기타">기타
+					</li>
+					<li>
 						<label>*생년원일</label>
 						<input type = "date" name = "birthday" class = "li" id = "birth">
 					</li>
 					<li>
 						<label>*휴대폰</label>
-						<select id = "phone1" class = "select_style">
+						<select name = "phon1" id = "phone1" class = "select_style">
 						<option value = "선택" id = "pnum">선택</option>
 						<option value = "010" id = "pnum1">010</option>
 						<option value = "011" id = "pnum2">011</option>
 						<option value = "017" id = "pnum3">017</option>
 						</select><span> - </span>
-						<input type = "text" name = "phone" class = "li" id = "phone2"><span> - </span>
-						<input type = "text" name = "phone" class = "li" id = "phone3">
+						<input type = "text" name = "phone2" class = "li" id = "phone2"><span> - </span>
+						<input type = "text" name = "phone3" class = "li" id = "phone3">
 						<!-- <button type = "button" name = "check" class = "btn_check">휴대폰 인증</button> -->
 					</li>
 					<li>
 						<label>주소</label>
-						<input type = "text" name = "adress_number" class = "li" id = "addr1">
+						<input type = "text" name = "addr_num" class = "li" id = "addr1">
 						<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check" id = "addr2">우편번호 검색</button></a>
-						<input type = "text" name = "adress" class = "li" id = "addr3">
+						<input type = "text" name = "addr" class = "li" id = "addr3">
 					</li>
 					<li>
 						<label>*이메일</label>
-						<input type = "text" name = "email" class = "li" id = "email1"><span> @ </span>
-						<input type = "text" name = "email" class = "li" id = "email2">
+						<input type = "text" name = "email1" class = "li" id = "email1"><span> @ </span>
+						<input type = "text" name = "email2" class = "li" id = "email2">
 						<select id = "email3" class = "select_style">
 							<option  value = "choice">선택</option>
 							<option  value = "naver.com">naver.com</option>

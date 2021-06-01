@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,32 +51,6 @@
 	margin:auto;
 }
 
-/******
-	회원관리 페이지 헤더
-********/
-
-section.ad_m_header div:first-child ul{
-	list-style-type : none;
-	text-align:right;
-	padding: 10px 0;
-}
-section.ad_m_header div:first-child ul li{
-	display:inline-block;
-}
-section.ad_m_header div:first-child ul li:first-child{
-	margin-right:5px;
-	padding-right:12px;
-	display:inline-block;
-}
-section.ad_m_header div:first-child ul li:nth-child(2){
-	margin-right:5px;
-	padding-right:12px;
-	display:inline-block;
-}
-
-div.m_title{
-	text-align:center;
-}
 
 div.m_title h1{
 	/*border-bottom:2px solid rgb(255, 124, 152);*/
@@ -83,6 +59,8 @@ div.m_title h1{
 	color:#333;
 	padding-bottom:35px;
 	margin:0;
+	margin-top:70px;
+	margin-bottom:15px;
 	display:inline-block;
 	
 	
@@ -155,18 +133,13 @@ section.ad_m_footer img{
 	<div class = "content">
 	
 		<!-- header -->
+		<jsp:include page = "admin_header.jsp"></jsp:include>
+		
 		<section class = "ad_m_header">
-			<div>
-				<ul>
-					<li>홈으로</li>
-					<li>로그아웃</li>
-				</ul>
-			</div>
 			<div class = "m_title">
-					<img src = "http://localhost:9000/br31/images/br_logo_admin2.png" class = "logo_img">
 				<div>
 					<img src = "http://localhost:9000/br31/images/spoon_left.PNG" class = "spoon_img">
-					<h1>회원관리 페이지</h1>
+					<h1>회원관리</h1>
 					<img src = "http://localhost:9000/br31/images/spoon_right.PNG" class = "spoon_img">
 				</div>
 			</div>

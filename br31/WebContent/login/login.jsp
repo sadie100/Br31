@@ -23,6 +23,11 @@
 			
 		});
 		
+		$("#id").keyup(function(){
+			$("#id").css("background-color","rgb(232, 240, 254)");
+			
+		});
+		
 	});
 </script>
 </head>
@@ -43,7 +48,7 @@
 				<span>해피포인트 아이디로 간편하게 로그인 하세요.</span>
 				
 				<!-- 로그인 -->	
-				<form name = "login_form" action = "#" method = "get" class = "login_form"> 
+				<form name = "login_form" action = "login_process.jsp" method = "post" class = "login_form"> 
 					<fieldset>
 						<ul>
 							<div>
