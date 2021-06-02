@@ -7,6 +7,7 @@ div.content{
 	width:1000px;
 	margin:auto;
 	margin-top:150px; 
+	
 }
 
 div.title{
@@ -1025,5 +1026,123 @@ div.content section.m3_page div{
 /**************
 	admin_member_css
 *********************/
+
+
+
+
+/*************
+	error_page_css
+***************/
+
+div.error{
+	text-align:center;
+}
+div.error div img{
+	width:30%;
+}
+
+div.error_content{
+	margin-bottom:25px;
+}
+
+div.error_content span:first-child, div.error_content span:nth-child(2){
+	/*color:rgb(148, 135, 128);*/
+	color:rgb(128, 128, 161);
+	font-size: 20px;
+	font-weight:600;
+	
+}
+
+div.error_content p{
+	color:rgb(148, 135, 128);
+	font-size:15px;
+}
+
+div.error_content span:first-child{
+	color:tomato;
+}
+
+div.error_content span:last-child{
+	color:rgb(128, 128, 161);
+	font-size:17px;
+	
+}
+
+
+/*********
+	joinSuccess.css
+***********/
+section.joinSuccess{
+	text-align:center;
+}
+
+section.joinSuccess h1{
+	font-size:40px;
+}
+
+section.joinSuccess div span{
+	color: rgb(128, 128, 161);
+}
+section.joinSuccess div {
+	margin:30px 0;
+}
+
+section.joinSuccess div:nth-child(3){
+	margin-bottom:150px;
+	
+}
+
+/*****************
+	loginFail.css
+*******************/
+
+section.loginFail{
+	text-align:center;
+}
+section.loginFail h1{
+	margin-bottom:35px;
+}
+section.loginFail div.loginF{
+	margin:auto;
+	width:65%;
+	border:1px solid rgb(128, 128, 161);
+	border-radius:10px;
+	margin-bottom:150px;
+}
+
+div.loginF div:first-child, div.loginF div:nth-child(2){
+	border-bottom:1px solid rgb(128, 128, 161);
+}
+
+div.loginF span{
+	font-size:15px;
+	display:block;
+	margin:20px;
+	
+}
+
+div.loginF div{
+	padding-bottom:15px;
+}
+
+.btn_loginF{
+	padding:5px 20px;
+	margin: 0 5px;
+	background-color:white;
+	border:1px solid rgb(128, 128, 161);
+	border-radius:4px;
+	color: gray;
+	font-size:13px;
+}
+
+
+
+
+
+
+
+
+
+
 
 

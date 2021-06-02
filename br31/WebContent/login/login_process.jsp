@@ -10,10 +10,12 @@
 	String result = "";
 	
 	if(id.equals(did) && pass.equals(dpass)){
-		result = "로그인 성공";
+		/*result = "로그인 성공";*/
+		response.sendRedirect("http://localhost:9000/br31/index.jsp");
 		
 	}else{
-		result = "로그인 실패";
+		/*result = "로그인 실패";*/
+		response.sendRedirect("http://localhost:9000/br31/login/loginFail.jsp");
 		
 	}
 	
@@ -25,9 +27,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- HTML 출력 -->
-	<h1>아이디 : <%= id %></h1>
-	<h1>비밀번호 : <%= pass %></h1>
-	<h1><%= result %></h1>
 </body>
 </html>

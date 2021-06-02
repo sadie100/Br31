@@ -16,7 +16,13 @@
 	
 	String result = "";
 	
-	
+	boolean joinResult = true;
+	if(joinResult == true){
+		response.sendRedirect("joinSuccess.jsp");
+		
+	}else{
+		response.sendRedirect("http://localhost:9000/br31/error_page.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -25,13 +31,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- HTML 출력 -->
-	<h1>아이디 : <%= id %></h1>
-	<h1>비밀번호 : <%= pass %></h1>
-	<h1>이름 : <%= name %></h1>
-	<h1>성별 : <%= gender %></h1>
-	<h1>생년월일 : <%= birthday %></h1>
-	<span>전화번호 : <%= phone1 %> - <%= phone2 %> - <%= phone3 %></span>
-	<h1>이메일 : <%= email1 %> @ <%= email2 %></h1>
 </body>
 </html>
