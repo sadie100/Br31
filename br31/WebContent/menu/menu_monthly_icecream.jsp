@@ -8,7 +8,25 @@
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
+	
 	$(document).ready(function(){
+		var track = document.getElementById("monthly_best_icecream_content");
+		var tracksize = track.offsetWidth;
+		
+		track.onmousemove = function(){
+			var x = - (event.clientX);
+			if(x<= (window.innerWidth-tracksize)+700){
+				x = (window.innerWidth-tracksize)+700;
+			}else if(x>=0){
+				x = 0;
+			}
+			var left = x +"px";
+			track.style.transform = "translateX("+left+")";
+			track.style.transition = "transform 0.2s"
+			/*track.style.transition = "left 0.3s"
+			track.style.left = left;*/
+		}
+			
 		$("#btn_search").click(function(){
 			$("#modal").show();
 			$("#overlay").css({"opacity":"1","pointer-events":"auto"});
@@ -20,9 +38,10 @@
 		$("#overlay").click(function(){
 			$("#modal").hide();
 			$("#overlay").css({"opacity":"0","pointer-events":"none"});
-		})
-		
+		});
 	});
+	
+	
 </script>
 </head>
 <body>
@@ -32,7 +51,8 @@
 		<div class="title">
 			<img src="http://localhost:9000/br31/menu/images/h_monthly_best_icecream.png">
 		</div>
-		<div class="monthly_best_icecream_content">
+		<div class="best_icecream_bg">
+			<div class="monthly_best_icecream_content" id="monthly_best_icecream_content">
 		<ul>
 			<li>
 				<a href="#">
@@ -46,7 +66,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="menu_select.jsp">
+				<a href="menu_icecream_select.jsp">
 					<label class="rank"><strong>2위</strong></label>
 						<span class="depth1">
 							<span class="depth2">
@@ -145,6 +165,7 @@
 				</a>
 			</li>
 		</ul>
+		</div>
 		</div>
 	</section>
 	

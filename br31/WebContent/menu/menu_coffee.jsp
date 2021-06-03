@@ -38,7 +38,7 @@
 		<table class="icecream_menu">
 			<tr>
 				<td>
-					<a href="#">
+					<a href="menu_coffee_select.jsp">
 						<span class="depth1">
 							<span class="depth2_no_bg">
 								<label class="name">아메리카노</label>

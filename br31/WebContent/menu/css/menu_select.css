@@ -12,6 +12,7 @@ div.content{
 	text-align: center;
 	margin: auto;
 	margin-top: 80px;
+	overflow: hidden;
 } 
 section.page{
 	margin-bottom: 100px;
@@ -72,7 +73,21 @@ section.top_info div.bg{
 	background-size: 70px;
 	height: 500px;
 }
+section.top_info div.no_bg{
+	border: none;
+	position: relative;
+	width: 100%;
+	margin: auto;
+	height: 500px;
+}
 section.top_info div.icons{
+	position: absolute;
+	bottom: 8px;
+	right: 16px;
+	width: 160px;
+	text-align: right;
+}
+section.top_info div.icons_cf{
 	position: absolute;
 	bottom: 8px;
 	right: 16px;
@@ -234,7 +249,9 @@ section.recommend_flavor a{
 /*********인스타그램************/
 /*********인스타그램************/
 
-
+section.instagram {
+	padding: 40px 0;
+}
 section.instagram label.hashtag {
 	font-size: 13px;
 	color: rgb(255,117,172);
@@ -331,3 +348,39 @@ section.menu_footer div.bottom_line div ul.event li::before{
 section.menu_footer div.bottom_line div.order img.title{
 	margin: 10px 0 20px 0;
 }
+
+
+/******** 커피 셀렉트 부분 ********/
+/******** 커피 셀렉트 부분 ********/
+/******** 커피 셀렉트 부분 ********/
+/******** 커피 셀렉트 부분 ********/
+
+button.btn_store_check{
+	border: none;
+	border-radius: 10px;
+	background-color: rgb(211,193,171);
+	color: white;
+	width: 120px;
+	height: 40px;
+	position: absolute;
+	left: 16px;
+	bottom: 8px;
+}
+h3.coffee_info_title{
+	font-weight: normal;
+	padding: 60px 0;
+}
+div.coffee_bg{
+	width: 3000px;
+	height: 280px;
+	position: relative;
+	padding: 0;
+	text-align: left;
+}
+div.coffee_list{	/*움직이는 div */
+	margin: 20px 0 50px 0;
+	width: 100%;
+	position: absolute;
+	left: 0; 
+}
+

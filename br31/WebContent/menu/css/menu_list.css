@@ -22,6 +22,10 @@ div.title div.title_right{
 	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
 }
 
+div.content{
+	overflow: hidden;
+}
+
 /* logo pic */
 /* logo pic */
 /* logo pic */
@@ -88,9 +92,24 @@ button.btn_more {
 
 /**************monthly best icecream ***********/
 /**************monthly best icecream ***********/
+section.monthly_best_icecream{
+	padding: 10px 0 50px 0;
+}
+div.best_icecream_bg{
+	width: 3000px;
+	height: 400px;
+	position: relative;
+}
 
-div.monthly_best_icecream_content {
-	margin: 40px 0; 
+div.monthly_best_icecream_content {	/*움직이는 div */
+	margin: 50px 0; 
+	width: 100%;
+	position: absolute;
+	left: 0; 
+}
+
+div.monthly_best_icecream_content ul{
+	padding : 0;
 }
 
 div.monthly_best_icecream_content a {

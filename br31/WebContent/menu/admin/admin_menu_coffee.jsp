@@ -83,7 +83,7 @@ $(document).ready(function(){
 						</ul>
 					</td>
 					<td><img class="p_image" src="http://localhost:9000/br31/menu/images/cf_americano.png"></td>
-					<td><button class="nutrients_more" id="nutrients">보기</button></td>
+					<td><button type="button" class="nutrients_more" id="nutrients">보기</button></td>
 				</tr>
 			</table>
 		</li>
