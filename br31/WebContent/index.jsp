@@ -5,31 +5,114 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		var carouselIndex = 0;
+		var carouselLength = $(".carousel_wrap li").length;
+		
+		setInterval(function() {
+			if(carouselIndex < carouselLength-1) {
+				$(".carousel_wrap").animate({left:"-=100%"}, 500);
+				carouselIndex += 1;
+			} else {
+				$(".carousel_wrap").animate({left:"0"}, 500);
+				carouselIndex = 0;
+			}
+		}, 4000);
+		
+ 		
+		$(".prev").click(function() {
+				if(carouselIndex > 0) {
+					$(".carousel_wrap").animate({left:"+=100%"}, 500);
+					carouselIndex -= 1;
+				} else {
+					$(".carousel_wrap").animate({left:"-200%"}, 500);
+					carouselIndex = carouselLength-1;
+				}
+		});
+		
+ 
+		$(".next").click(function() {
+			if(carouselIndex < carouselLength-1) {
+				$(".carousel_wrap").animate({left:"-=100%"}, 500);
+				carouselIndex += 1;
+			} else {
+				$(".carousel_wrap").animate({left:"0"}, 500);
+				carouselIndex = 0;
+			}
+		});
+		
+	});
+</script>
+
 <style>
 section.main {
 	text-align: center;
 }
-section.main .banner, section.main .carousel {
-	text-align: center;
-	background-color: #c3d600;
-	background-repeat: no-repeat;
-	background-position: center;
+section.main_top {
+	/* position: relative; */
 }
-section.main .banner img, section.main .carousel img {
- 	display: inline-block;
-	border: 1px solid black;
-}
-section.main .banner {
-	margin-bottom: 3px;
+section.main .banner a {
+	margin-bottom: 0;
 	height: 150px;
-	background-image: url("http://localhost:9000/br31/images/main_banner.jpg");
-
+	display: block;
+	background: #c3d600 url("http://localhost:9000/br31/images/main_banner.jpg") no-repeat center;
 }
-section.main .carousel {
+section.main .banner_slide {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+section.main .carousel_wrap {
+	margin: 5px 0;
 	height: 697px;
-	background-image: url("http://localhost:9000/br31/images/main_carousel_1.jpg")
+	width: 300%;
+	overflow: hidden;
+	position: relative;
+} 
+section.main .carousel_wrap li {
+	width: 33.333%;
+	display: inline-block;
+	position: relative;
+	float: left;
+}
+section.main .carousel_wrap li a {
+	height: 697px;
+	display: flex;
+	position: relative;
+}
+section.main .carousel_1:before, section.main .carousel_1:after {
+	content="";
+	position: absolute;
+	height: 597px;
+	width: 100%;
+	
+} 
+section.main .carousel_1 a {
+	background: #c3d600 url("http://localhost:9000/br31/images/main_carousel_1.jpg") no-repeat center;
+}
+section.main .carousel_2 a {
+	background: #76e1e7 url("http://localhost:9000/br31/images/main_carousel_2.jpg") no-repeat center;
+}
+section.main .carousel_3 a {
+	background: #fc637f url("http://localhost:9000/br31/images/main_carousel_3.jpg") no-repeat center;
+}
+section.main .banner_btns a{
+	display: block;
+	position: absolute;
+	top: 40%;
+}
+section.main .banner_btns .prev {
+	left: 20px;
+}
+section.main .banner_btns .next {
+	right: 20px;
 }
 
+
+/*************************************************/
 section.main .br_event {
 	width: 1400px;
 	margin: auto;
@@ -72,9 +155,6 @@ section.main .br_menu {
 	margin: 100px 0;
 	text-align: center;
 	display: inline-block;
-/* 	background-image: url("http://localhost:9000/br31/images/bg_menu.jpg");
-	background-repeat: no-repeat;
-	background-position: center top; */
 	background: url("http://localhost:9000/br31/images/bg_menu.jpg") no-repeat center top;
 }
 section.main .br_menu div {
@@ -146,11 +226,21 @@ section.main .instagram div img:hover {
 	<div class="content">
 		<section class="main">
 			<div class="main_top">
-				<div class="banner">
-					<!-- <img src="http://localhost:9000/br31/images/main_banner.jpg"> -->
-				</div>
-				<div class="carousel">
-					<!-- <img src="http://localhost:9000/br31/images/main_carousel_1.jpg"> -->
+				<div class="banner"><a href="#" class="banner"></a></div>
+				<div class="banner_slide">
+					<div class="carousel">
+						<ul class="carousel_wrap">
+							<!-- <li class="carousel_3"><a href="#"></a></li> -->
+							<li class="carousel_1"><a href="#"></a></li>
+							<li class="carousel_2"><a href="#"></a></li>
+							<li class="carousel_3"><a href="#"></a></li>
+							<!-- <li class="carousel_1"><a href="#"></a></li> -->
+						</ul>
+					</div>
+					<div class="banner_btns">
+						<a href="#" class="prev" onclick="return false"><img src="http://localhost:9000/br31/images/btn_banner_prev.png"></a>
+						<a href="#" class="next" onclick="return false"><img src="http://localhost:9000/br31/images/btn_banner_next.png"></a>
+					</div>
 				</div>
 			</div>
 			<div class="br_event">
