@@ -40,111 +40,23 @@
 		
 	});
 </script>
-
-<style>
-*{
-	font-family:"맑은고딕";
-}
-.content{
-	width:1500px;
-	text-align:center;
-	margin:auto;
-}
-
-
-div.m_title h1{
-	/*border-bottom:2px solid rgb(255, 124, 152);*/
-	font-size:35px;
-	font-weight:blod;
-	color:#333;
-	padding-bottom:35px;
-	margin:0;
-	margin-top:70px;
-	margin-bottom:15px;
-	display:inline-block;
-	
-	
-}
-
-
-div.m_title img.logo_img{
-	width:100px;
-	height:100px;
-	margin:0;
-}
-
-div.m_title img.spoon_img{
-	display:inline-block;
-}
-
-/*********
-	회원관리 페이지-회원목록 표
-********/	
-section.ad_m_content{
-	width:90%;
-	height:750px;
-	margin:auto;
-	text-align:center;
-	border:1px solid rgb(148, 135, 128);
-}
-
-table.admtable{
-	width:100%;
-	text-align:center;
-}
-
-table.admtable{
-	border:1px solid rgb(148, 135, 128);
-	border-collapse : collapse;
-}
-
-table.admtable td, table.admtable th{
-	border-top:none;
-	border:1px solid lightgray;
-	padding:5px;
-}
-
-
-table.admtable th{
-	background-color:rgb(239, 239, 239);
-}
-
-/*section.ad_m_content{
-	/*background-image: url("http://localhost:9000/br31/images/br_logo_admin3.png");
-	opacity:0.7;*/
-}*/
-
-
-/******
-	회원관리 페이지 푸터
-********/
-section.ad_m_footer{
-	text-align:center;
-}
-
-section.ad_m_footer img{
-	padding:0;
-	width:30%;
-	margin:20px;
-}
-</style>
+<link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
 </head>
 <body>
-	<div class = "content">
+	<div class = "member_content">
 	
 		<!-- header -->
 		<jsp:include page = "admin_header.jsp"></jsp:include>
 		
 		<section class = "ad_m_header">
-			<div class = "m_title">
+			<div class = "member_title">
 				<div>
 					<img src = "http://localhost:9000/br31/images/spoon_left.PNG" class = "spoon_img">
-					<h1>회원관리</h1>
+					<h1>회원 관리</h1>
 					<img src = "http://localhost:9000/br31/images/spoon_right.PNG" class = "spoon_img">
 				</div>
 			</div>
 		</section>
-		
 		<!-- content -->
 		<section class = "ad_m_content">
 			<div id = "member_list"></div>			

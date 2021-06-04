@@ -44,6 +44,10 @@
 							<input type = "text" name = "name" class = "li" value = "홍길동" disabled>
 						</li>
 						<li>
+							<label>성별</label>
+							<input type = "text" name = "gender" class = "li" value = "남자" disabled>
+						</li>
+						<li>
 							<label>생년월일</label>
 							<input type = "date" name = "birthday" class = "li">
 						</li>
