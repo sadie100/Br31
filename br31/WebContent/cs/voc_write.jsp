@@ -195,10 +195,10 @@
 							<th>제목<span>*</span></th>
 							<td colspan=3><input type="text" name="voc_title" id="voc_title"></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>발생일시</th>
 							<td colspan=3><input type="datetime-local" name="voc_date" id="voc_date"></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>내용<span>*</span></th>
 							<td colspan=3><textarea name="voc_content" id="voc_content"></textarea></td>

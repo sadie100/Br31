@@ -414,7 +414,6 @@ section.faq .faq_list a:after {
 }
 section.faq .faq_list .answer {
 	display: none; 
-/* 	padding: 0 0 20px 85px; */
 	padding-left: 90px;
 	background: url(http://localhost:9000/br31/images/icon_answer.gif) 40px 27px no-repeat; 
 	color: black; 
@@ -429,7 +428,7 @@ section.faq .faq_list .answer>div {
 section.faq .faq_list .answer p {
 	margin: 0;
 }
-section.faq .faq_list .on, section.faq .faq_list .on + li{
+section.faq .faq_list .on, section.faq .faq_list .on + li {
 	border-top: 1px solid #ff7c97;	
 }
 section.faq .faq_list .on a {

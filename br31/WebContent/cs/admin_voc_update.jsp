@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!-- header -->
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../admin_header.jsp"></jsp:include>
 	
 	<!-- content -->
 	<section class="cs_header">

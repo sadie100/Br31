@@ -6,47 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
-<script>
-	$(document).ready(function() {
-		
-		var carouselIndex = 0;
-		var carouselLength = $(".carousel_wrap li").length;
-		
-		setInterval(function() {
-			if(carouselIndex < carouselLength-1) {
-				$(".carousel_wrap").animate({left:"-=100%"}, 500);
-				carouselIndex += 1;
-			} else {
-				$(".carousel_wrap").animate({left:"0"}, 500);
-				carouselIndex = 0;
-			}
-		}, 4000);
-		
- 		
-		$(".prev").click(function() {
-				if(carouselIndex > 0) {
-					$(".carousel_wrap").animate({left:"+=100%"}, 500);
-					carouselIndex -= 1;
-				} else {
-					$(".carousel_wrap").animate({left:"-200%"}, 500);
-					carouselIndex = carouselLength-1;
-				}
-		});
-		
- 
-		$(".next").click(function() {
-			if(carouselIndex < carouselLength-1) {
-				$(".carousel_wrap").animate({left:"-=100%"}, 500);
-				carouselIndex += 1;
-			} else {
-				$(".carousel_wrap").animate({left:"0"}, 500);
-				carouselIndex = 0;
-			}
-		});
-		
-	});
-</script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
 section.main {
 	text-align: center;
@@ -60,59 +21,6 @@ section.main .banner a {
 	display: block;
 	background: #c3d600 url("http://localhost:9000/br31/images/main_banner.jpg") no-repeat center;
 }
-section.main .banner_slide {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-}
-section.main .carousel_wrap {
-	margin: 5px 0;
-	height: 697px;
-	width: 300%;
-	overflow: hidden;
-	position: relative;
-} 
-section.main .carousel_wrap li {
-	width: 33.333%;
-	display: inline-block;
-	position: relative;
-	float: left;
-}
-section.main .carousel_wrap li a {
-	height: 697px;
-	display: flex;
-	position: relative;
-}
-section.main .carousel_1:before, section.main .carousel_1:after {
-	content="";
-	position: absolute;
-	height: 597px;
-	width: 100%;
-	
-} 
-section.main .carousel_1 a {
-	background: #c3d600 url("http://localhost:9000/br31/images/main_carousel_1.jpg") no-repeat center;
-}
-section.main .carousel_2 a {
-	background: #76e1e7 url("http://localhost:9000/br31/images/main_carousel_2.jpg") no-repeat center;
-}
-section.main .carousel_3 a {
-	background: #fc637f url("http://localhost:9000/br31/images/main_carousel_3.jpg") no-repeat center;
-}
-section.main .banner_btns a{
-	display: block;
-	position: absolute;
-	top: 40%;
-}
-section.main .banner_btns .prev {
-	left: 20px;
-}
-section.main .banner_btns .next {
-	right: 20px;
-}
-
-
-/*************************************************/
 section.main .br_event {
 	width: 1400px;
 	margin: auto;
@@ -147,8 +55,6 @@ section.main .event_list a {
 	text-decoration: none;
 	color: black;
 }
-
-/***********************************/
 section.main .br_menu {
 	width: 100%;
 	height: 700px;
@@ -163,9 +69,6 @@ section.main .br_menu div {
 	margin: auto;
 	padding: 50px
 }
-/***********************************/
-
-
 section.main .store_order, section.main .sns, section.main .instagram {
 	width: 1400px;
 	margin: auto;
@@ -214,8 +117,213 @@ section.main .instagram div img:hover {
 	transform: scale(1.2);
 	transition: transform 0.7s;
 }
+.carousel {
+	position: relative
+}
 
+.carousel.pointer-event {
+	-ms-touch-action: pan-y;
+	touch-action: pan-y
+}
 
+.carousel-inner {
+	position: relative;
+	width: 100%;
+	height: 600px;
+	overflow: hidden;
+	margin-top: 3px;
+}
+
+.carousel-inner div:nth-child(1) {
+	background-color: #c3d600;
+}
+.carousel-inner div:nth-child(2) {
+	background-color: #76e1e7;
+}
+.carousel-inner div:nth-child(3) {
+	background-color: #fc637f;
+}
+
+.carousel-inner::after {
+	display: block;
+	clear: both;
+	content: ""
+}
+
+.carousel-item {
+	position: relative;
+	display: none;
+	float: left;
+	width: 100%;
+	margin-right: -100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: -webkit-transform .6s ease-in-out;
+	transition: transform .6s ease-in-out;
+	transition: transform .6s ease-in-out, -webkit-transform .6s ease-in-out
+}
+
+@media ( prefers-reduced-motion :reduce) {
+	.carousel-item {
+		transition: none
+	}
+}
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+	display: block
+}
+
+.active.carousel-item-right, .carousel-item-next:not (.carousel-item-left
+	){
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%)
+}
+
+.active.carousel-item-left, .carousel-item-prev:not (.carousel-item-right
+	){
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%)
+}
+
+.carousel-fade .carousel-item {
+	opacity: 0;
+	transition-property: opacity;
+	-webkit-transform: none;
+	transform: none
+}
+
+.carousel-fade .carousel-item-next.carousel-item-left, .carousel-fade .carousel-item-prev.carousel-item-right,
+	.carousel-fade .carousel-item.active {
+	z-index: 1;
+	opacity: 1
+}
+
+.carousel-fade .active.carousel-item-left, .carousel-fade .active.carousel-item-right
+	{
+	z-index: 0;
+	opacity: 0;
+	transition: opacity 0s .6s
+}
+
+@media ( prefers-reduced-motion :reduce) {
+	.carousel-fade .active.carousel-item-left, .carousel-fade .active.carousel-item-right
+		{
+		transition: none
+	}
+}
+
+.carousel-control-next, .carousel-control-prev {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 15%;
+	color: #fff;
+	text-align: center;
+	opacity: .5;
+	transition: opacity .15s ease
+}
+
+@media ( prefers-reduced-motion :reduce) {
+	.carousel-control-next, .carousel-control-prev {
+		transition: none
+	}
+}
+
+.carousel-control-next:focus, .carousel-control-next:hover,
+	.carousel-control-prev:focus, .carousel-control-prev:hover {
+	color: #fff;
+	text-decoration: none;
+	outline: 0;
+	opacity: .9
+}
+
+.carousel-control-prev {
+	left: 0
+}
+
+.carousel-control-next {
+	right: 0
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background: no-repeat 50%/100% 100%
+}
+
+.carousel-control-prev-icon {
+	background-image:
+		url("http://localhost:9000/br31/images/btn_banner_prev.png")
+}
+
+.carousel-control-next-icon {
+	background-image:
+		url("http://localhost:9000/br31/images/btn_banner_next.png")
+}
+
+.carousel-indicators {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 15;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: center;
+	justify-content: center;
+	padding-left: 0;
+	margin-right: 15%;
+	margin-left: 15%;
+	list-style: none
+}
+
+.carousel-indicators li {
+	box-sizing: content-box;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	width: 30px;
+	height: 3px;
+	margin-right: 3px;
+	margin-left: 3px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: #fff;
+	background-clip: padding-box;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	opacity: .5;
+	transition: opacity .6s ease
+}
+
+@media ( prefers-reduced-motion :reduce) {
+	.carousel-indicators li {
+		transition: none
+	}
+}
+
+.carousel-indicators .active {
+	opacity: 1
+}
+
+.carousel-caption {
+	position: absolute;
+	right: 15%;
+	bottom: 20px;
+	left: 15%;
+	z-index: 10;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #fff;
+	text-align: center
+}
 </style>
 </head>
 <body>
@@ -227,22 +335,43 @@ section.main .instagram div img:hover {
 		<section class="main">
 			<div class="main_top">
 				<div class="banner"><a href="#" class="banner"></a></div>
-				<div class="banner_slide">
-					<div class="carousel">
-						<ul class="carousel_wrap">
-							<!-- <li class="carousel_3"><a href="#"></a></li> -->
-							<li class="carousel_1"><a href="#"></a></li>
-							<li class="carousel_2"><a href="#"></a></li>
-							<li class="carousel_3"><a href="#"></a></li>
-							<!-- <li class="carousel_1"><a href="#"></a></li> -->
-						</ul>
+				<!-- 캐러셀 -->
+				<div id="demo" class="carousel slide" data-ride="carousel">
+			
+					<!-- Indicators -->
+					<ul class="carousel-indicators">
+						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						<li data-target="#demo" data-slide-to="1"></li>
+						<li data-target="#demo" data-slide-to="2"></li>
+					</ul>
+			
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_1.jpg" alt="carousel1" width="1350" height="600"></a>
+						</div>
+						<div class="carousel-item">
+							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_2.jpg" alt="carousel2" width="1350" height="600"></a>
+						</div>
+						<div class="carousel-item">
+							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_3.jpg" alt="carousel3" width="1350" height="600"></a>
+						</div>
 					</div>
-					<div class="banner_btns">
-						<a href="#" class="prev" onclick="return false"><img src="http://localhost:9000/br31/images/btn_banner_prev.png"></a>
-						<a href="#" class="next" onclick="return false"><img src="http://localhost:9000/br31/images/btn_banner_next.png"></a>
-					</div>
+			
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a> 
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
 				</div>
+				<!-- 캐러셀 종료 -->		
 			</div>
+			
+
+			
+			
 			<div class="br_event">
 				<div>
 					<img src="http://localhost:9000/br31/images/h_event.png">

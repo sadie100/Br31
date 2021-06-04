@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!-- header -->
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../admin_header.jsp"></jsp:include>
 	
 	<!-- content -->
 	<section class="cs_header">
@@ -89,7 +89,7 @@
 				</div>
 				<div class="btn_area">
 					<div class="area_left">
-						<a href="http://localhost:9000/br31/cs/voc_list.jsp"><button type="button">목록</button></a>
+						<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button">목록</button></a>
 					</div>
 					<div class="area_right">
 						<a><button type="button">답변등록</button></a>

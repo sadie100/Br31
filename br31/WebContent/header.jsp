@@ -159,11 +159,11 @@ header .menu:hover .submenu {
 			<div>
 				<nav class="sns">
 					<ul>
-						<li><a href="#"><img src="http://localhost:9000/br31/images/sns_youtube.png"></a></li>
-						<li><a href="#"><img src="http://localhost:9000/br31/images/sns_instagram.png"></a></li>
-						<li><a href="#"><img src="http://localhost:9000/br31/images/sns_blog.png"></a></li>
-						<li><a href="#"><img src="http://localhost:9000/br31/images/sns_twitter.png"></a></li>
-						<li><a href="#"><img src="http://localhost:9000/br31/images/sns_facebook.png"></a></li>
+						<li><a href="https://www.youtube.com/user/baskinrobbinskorea" target="_blank"><img src="http://localhost:9000/br31/images/sns_youtube.png"></a></li>
+						<li><a href="https://www.instagram.com/baskinrobbinskorea/" target="_blank"><img src="http://localhost:9000/br31/images/sns_instagram.png"></a></li>
+						<li><a href="https://blog.naver.com/brgirl31" target="_blank"><img src="http://localhost:9000/br31/images/sns_blog.png"></a></li>
+						<li><a href="https://twitter.com/BaskinrobbinsKR" target="_blank"><img src="http://localhost:9000/br31/images/sns_twitter.png"></a></li>
+						<li><a href="https://www.facebook.com/baskinrobbinskr/" target="_blank"><img src="http://localhost:9000/br31/images/sns_facebook.png"></a></li>
 					</ul>
 				</nav>
 			</div>
