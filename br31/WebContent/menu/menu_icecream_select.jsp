@@ -6,6 +6,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_select.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+		
+		$("#star_button").hover(function(){
+			$("#star_button").attr("src","http://localhost:9000/br31/images/star_button_onclick.PNG")
+		},
+		function(){
+			$("#star_button").attr("src","http://localhost:9000/br31/images/star_button.PNG")
+		});
+		
+		$(window).scroll(function(){
+			if(pageYOffset<=300){
+				$("#btn_left").animate({top : 300+'px'}, 100);
+				$("#btn_right").animate({top : 300+'px'}, 100); 
+			}else if(pageYOffset>500 && pageYOffset<2200){
+				$("#btn_left").animate({top : pageYOffset+100+'px'}, 100);
+				$("#btn_right").animate({top : pageYOffset+100+'px'}, 100);
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <!-- header -->
@@ -13,15 +35,15 @@
 
 <!-- content -->
 <section class="page">
-<section class="inner_page">
+<section class="inner_page" id="inner_page">
 
 
 <!-- button -->
 	<span class="btn_index">
-		<button class="left">&lt;</button>
+		<button class="left" id="btn_left">&lt;</button>
 	</span>
 	<span class="btn_index">
-		<button class="right">&gt;</button>
+		<button class="right" id="btn_right">&gt;</button>
 	</span>
 
 <div class="content">
@@ -34,7 +56,7 @@
 				<img src="images/ice_mother.png">
 			</div>
 			<div class="icons">
-				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG"></a>
+				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" id="star_button"></a>
 				<a href="#"><img src="images/icon_facebook.png"></a>
 				<a href="#"><img src="images/icon_twitter.png"></a>
 				<a href="#"><img src="images/icon_copy.png"></a>

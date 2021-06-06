@@ -2099,24 +2099,24 @@
 						<ul>
 														<li>
 								<a href="/event/view.php?flag=A&amp;seq=8624">
-									<figure><img src="/upload/event/image/1630631151.jpg" alt=""></figure>
-									<span class="type"><img src="/assets/images/event/stit_store.gif" alt="STORE EVENT"></span>
+									<figure><img src="../images/1630631151.jpg" alt=""></figure>
+									<span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
 									<span class="title">KT 멤버십 고객이라면 누구나 파인트 30% 할인!</span>
 								<span class="period">상시진행</span>
 								</a>
 							</li>
 														<li>
 								<a href="/event/view.php?flag=A&amp;seq=4922">
-									<figure><img src="/upload/event/image/1639297260.png" alt=""></figure>
-									<span class="type"><img src="/assets/images/event/stit_store.gif" alt="STORE EVENT"></span>
+									<figure><img src="../images/1639297260.png" alt=""></figure>
+									<span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
 									<span class="title">제휴 할인 카드 혜택 안내</span>
 								<span class="period">상시진행</span>
 								</a>
 							</li>
 														<li>
 								<a href="/event/view.php?flag=A&amp;seq=8324">
-									<figure><img src="/upload/event/image/1625114283.png" alt=""></figure>
-									<span class="type"><img src="/assets/images/event/stit_store.gif" alt="STORE EVENT"></span>
+									<figure><img src="../images/1625114283.png" alt=""></figure>
+									<span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
 									<span class="title">매월 25일, 50% M포인트 사용</span>
 								<span class="period">상시진행</span>
 								</a>
@@ -2128,8 +2128,8 @@
 									<ul>
 																	<li>
 								<a href="/event/view.php?flag=A&amp;seq=3302">
-									<figure><img src="/upload/event/image/1578277305.png" alt=""></figure>
-									<span class="type"><img src="/assets/images/event/stit_store.gif" alt="STORE EVENT"></span>
+									<figure><img src="../images/1578277305.png" alt=""></figure>
+									<span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
 									<span class="title">1회용 컵 사용 줄이기 안내</span>
 								<span class="period">상시진행</span>
 								</a>

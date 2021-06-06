@@ -52,7 +52,7 @@
 																<tr>
 							<td class="num">51</td>
 							<td class="title">
-								<a href="notice_view.php?seq=6621&amp;strPageParam=Page=1|find=|searchword=" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있어진 팥빙수 블라스트 출시!</a>
+								<a href="../notice_content.jsp" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있어진 팥빙수 블라스트 출시!</a>
 								
 								
 															</td>
