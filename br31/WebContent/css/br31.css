@@ -8,6 +8,7 @@ figure {
     margin-inline-end: 0;
 }a{text-decoration:none;font-family:"맑은 고딕"}img{border:0}ol,ul{list-style:none;padding-inline-start: 0;}address{font-style:normal;font-weight:400}hr{display:none}fieldset{border:0}legend{visibility:hidden;font-size:0;line-height:0}input[type=search],input[type=text],input[type=tel],input[type=password],textarea{box-sizing:border-box}input[type=checkbox],input[type=radio]{margin:4px 0 0;line-height:normal}[role=button]{cursor:pointer}.sr_only{overflow:hidden;position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0,0,0,0)}.table{width:100%;border-collapse:collapse;border-spacing:0}.table caption{visibility:hidden;font-size:0;line-height:0}
 
+.subtit{width:900px}
 /*! common */
 
 /*= slide Nav */
