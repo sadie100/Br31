@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<%
+	MemberDAO dao = new MemberDAO();
+	
+	String id = request.getParameter("id");
+	String rno = request.getParameter("rno");
+	
+	MemberVO vo = dao.getMemberContent(id); 
+	dao.close();
+%>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +17,7 @@
 <title>Insert title here</title>
 <script src="http://localhost:9000/myweb2/js/jquery-3.6.0.min.js"></script>
 <link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
+
 </head>
 <body>
 	<div class = "member_content">
@@ -26,33 +37,39 @@
 		<section class = "member_content">
 			<table class = "m_content_table">
 				<tr>
+					<th>번호</th>
+					<td><%= rno %></td>
 					<th>이름</th>
-					<td>홍길동</td>
+					<td><%= vo.getName() %></td>
 					<th>성별</th>
-					<td>남</td>
+					<td><%= vo.getGender() %></td>
 					<th>나이</th>
-					<td>23</td>
+					<td><%= vo.getBirth() %></td>
 					<th>포인트</th>
-					<td>0</td>
+					<td><%= vo.getPoint() %></td>
 					<th>가입일</th>
-					<td>2021-01-01</td>
+					<td><%= vo.getMdate() %></td>
 				</tr>
 				<tr>
 					<th>휴대전화 번호</th>
-					<td colspan = "9">010-1234-5678</td>
+					<td colspan = "11"><%= vo.getHp() %></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td colspan = "9">hong1234@naver.com</td>
+					<td colspan = "11"><%= vo.getEmail() %></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td colspan = "9">(1234)서울시 강남구 테헤란로</td>
+					<td colspan = "11"><%= vo.getAddr() %></td>
 				</tr>
 				<tr class = "admintable_btn">
-					<td colspan = "10">
-						<button type = "button" class = "btn_confrim" disabled>회원 탈퇴</button>
-						<button type = "button" class = "btn_cancle">이전으로</button>
+					<td colspan = "12">
+						<% if(vo.getChoice() == 1){ %>
+						<button type = 'button' class = 'btn_confrim' >회원탈퇴</button>
+						<% }else{ %> 
+						<button type = 'button' class = 'btn_confrim' disabled>회원탈퇴</button>
+						<% } %>
+						<a href = "http://localhost:9000/br31/admin_member.jsp"><button type = "button" class = "btn_cancle">이전으로</button></a>
 					</td>
 				</tr>
 			</table>		

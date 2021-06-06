@@ -1,35 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.br31.dao.*, com.br31.vo.*" %>   
-<% 
+<%@ page import = "com.br31.vo.*, com.br31.dao.*" %> 
+<%
+	MemberDAO dao = new MemberDAO();
 	MemberVO vo = new MemberVO();
-
+	
 	vo.setId(request.getParameter("id"));
 	vo.setPass(request.getParameter("pass"));
-	vo.setName(request.getParameter("name"));
-	vo.setGender(request.getParameter("gender"));
-	vo.setBirth(request.getParameter("birthday"));
 	vo.setHp1(request.getParameter("phone1"));
 	vo.setHp2(request.getParameter("phone2"));
 	vo.setHp3(request.getParameter("phone3"));
-	vo.setAddr1(request.getParameter("addr_num"));
-	vo.setAddr2(request.getParameter("addr"));
+	vo.setAddr1(request.getParameter("address_number"));
+	vo.setAddr2(request.getParameter("address"));
 	vo.setEmail1(request.getParameter("email1"));
 	vo.setEmail2(request.getParameter("email2"));
 	
+	boolean result = dao.mypageUpdateResult(vo); 
+	dao.close();
 	
-	
-	MemberDAO dao = new MemberDAO();
-	boolean result = dao.getJoinResult(vo);
-	
-	
-	if(result == true){
-		response.sendRedirect("joinSuccess.jsp");
-		
-	}else{
-		response.sendRedirect("http://localhost:9000/br31/error_page.jsp");
+	if(result){
+		response.sendRedirect("mypage_update.jsp");
+		//리스트 페이지로 페이지 이동
 	}
-%>
+%>   
 <!DOCTYPE html>
 <html>
 <head>

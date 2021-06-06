@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.br31.vo.*, com.br31.dao.*" %>    
+<%
+	MemberDAO dao = new MemberDAO();
+	String id = "test";
+	MemberVO vo = dao.getMypageData(id);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,12 +48,14 @@
 						<div>
 						<fieldset>
 							<img src = "http://localhost:9000/br31/images/card_img.PNG">
-							<span>1212121212121212</span>
+							<div class = "m_pageDivSpan">
+								<span><%=vo.getCard() %></span>
+							</div>
 						</fieldset>
 						</div>
 						<div class = "hello">
 							<span>안녕하세요</span>
-							<span>홍길동님!</span>
+							<span><%=vo.getName() %>님!</span>
 						</div>
 					</div>
 				</div>	
@@ -76,7 +84,7 @@
 						<span>사용가능 총 포인트</span>
 					</div>
 					<div>
-						<span>0</span>
+						<span><%=vo.getPoint() %></span>
 					</div>	
 					<div>	
 						<img src = "http://localhost:9000/br31/images/point_logo.PNG">

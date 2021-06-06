@@ -149,7 +149,7 @@
 					</li>
 					<li>
 						<label>*휴대폰</label>
-						<select name = "phon1" id = "phone1" class = "select_style">
+						<select name = "phone1" id = "phone1" class = "select_style">
 						<option value = "선택" id = "pnum">선택</option>
 						<option value = "010" id = "pnum1">010</option>
 						<option value = "011" id = "pnum2">011</option>
