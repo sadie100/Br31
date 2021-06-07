@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String id = "";
+	id = request.getParameter("id");
+	String not_login = ""; 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,7 +173,11 @@ header .menu:hover .submenu {
 				</nav>
 			</div>
 			<div>
+				<% if(id != null){ %>
+				<a href="http://localhost:9000/br31/index.jsp?id=<%= id %>"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
+				<% }else{ %>
 				<a href="http://localhost:9000/br31/index.jsp"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
+				<% } %>
 			</div>
 			<div>
 				<a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a>
@@ -180,11 +189,13 @@ header .menu:hover .submenu {
 			<nav class="menu">
 				<ul>
 					<li>
+						<% if(id != null) { %>
+						<a href="http://localhost:9000/br31/index.jsp">LOGOUT</a>
+						<a href="http://localhost:9000/br31/mypage/mypage.jsp?id=<%=id %>">MY PAGE</a>
+						<% }else{ %>
 						<a href="http://localhost:9000/br31/login/login.jsp">LOGIN</a>
-						<!-- <a href="#">LOGOUT</a> -->
 						<a href="http://localhost:9000/br31/join/join.jsp">JOIN</a>
-						<!-- <a href="http://localhost:9000/br31/mypage/mypage.jsp">MY PAGE</a> -->
-						
+						<% } %>
 						<div class="submenu">
 							<ul>
 								<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
@@ -198,43 +209,84 @@ header .menu:hover .submenu {
 							</ul>
 						</div>
 					</li>
-					<li><a href="http://localhost:9000/br31/menu/menu_default.jsp">MENU</a>
+					<li>
+					<% if(id != null) { %>
+					<a href="http://localhost:9000/br31/menu/menu_default.jsp?id=<%= id %>">MENU</a>
+					<% }else{  %>
+					<a href="http://localhost:9000/br31/menu/menu_default.jsp">MENU</a>
+					<% } %>
 						<div class="submenu">
 							<ul>
+								<% if(id != null) { %>
+								<li><a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp?id=<%= id %>">아이스크림</a></li>
+								<li><a href="http://localhost:9000/br31/menu/menu_coffee.jsp?id=<%= id %>">커피</a></li>
+								<% }else{ %>
 								<li><a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp">아이스크림</a></li>
 								<li><a href="http://localhost:9000/br31/menu/menu_coffee.jsp">커피</a></li>
+								<% } %>
 							</ul>
 						</div>
 					</li>
-					<li><a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp">영양성분 및 알레르기</a>
+					<li>
+					<% if(id != null) { %>
+					<a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp?id=<%= id %>">영양성분 및 알레르기</a>
+					<% }else{  %>
+					<a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp">영양성분 및 알레르기</a>
+					<% } %>
 						<div class="submenu">
 							<ul>
+								<% if(id != null) { %>
+								<li><a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp?id=<%= id %>">아이스크림</a></li>
+								<li><a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp?id=<%= id %>">커피</a></li>
+								<% }else{  %>
 								<li><a href="#">아이스크림</a></li>
 								<li><a href="#">커피</a></li>
+								<% } %>
 							</ul>
 						</div>
 					</li>
-					<li><a href="http://localhost:9000/br31/event/event_list.jsp">EVENT</a>
+					<li>
+					
+					<% if(id != null) { %>
+					<a href="http://localhost:9000/br31/event/event_list.jsp">EVENT</a>
+					<% }else{  %>
+					<a href="http://localhost:9000/br31/event/event_list.jsp?id=<%= id %>">EVENT</a>
+					<% } %>
 						<div class="submenu">
 							<ul>
+								<% if(id != null) { %>
+								<li><a href="http://localhost:9000/br31/event/event_list.jsp?id=<%= id %>">진행이벤트</a></li>
+								<li><a href="#">당첨자발표</a></li>
+								<% }else{  %>
 								<li><a href="http://localhost:9000/br31/event/event_list.jsp">진행이벤트</a></li>
 								<li><a href="#">당첨자발표</a></li>
+								<% } %>
 							</ul>
 						</div>
 					</li>
 					<li><a href="#">STORE</a>
 						<div class="submenu">
 							<ul>
+								<% if(id != null) { %>
+								<li><a href="http://localhost:9000/br31/map/map.jsp?id=<%= id %>">매장정보</a></li>
+								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp?id=<%= id %>">고객센터</a></li>
+								<% }else{  %>
 								<li><a href="http://localhost:9000/br31/map/map.jsp">매장정보</a></li>
 								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a></li>
+								<% } %>
 							</ul>
 						</div>
 					</li>
 					<li><a href="#">ABOUT</a>
 						<div class="submenu">
 							<ul>
+								<% if(id != null) { %>
+								<li><a href="http://localhost:9000/br31/notice/notice_list.jsp?id=<%= id %>">공지사항</a></li>
+								<li><a href="http://localhost:9000/br31/recruit/recruit.jsp?id=<%= id %>">채용정보</a></li>
+								<% }else{  %>
 								<li><a href="http://localhost:9000/br31/notice/notice_list.jsp">공지사항</a></li>
 								<li><a href="http://localhost:9000/br31/recruit/recruit.jsp">채용정보</a></li>
+								<% } %>
 							</ul>
 						</div>
 					</li>
