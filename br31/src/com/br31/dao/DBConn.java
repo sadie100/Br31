@@ -22,15 +22,7 @@ public class DBConn {
 			e.printStackTrace();
 		}
 	}
-	
-	public void getStatement() {
-		try {
-			stmt = conn.createStatement();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	public void getPreparedStatement(String sql) {
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -42,8 +34,8 @@ public class DBConn {
 	public void close() {
 		try {
 			if(rs != null) rs.close();
-			if(stmt != null) rs.close();
-			if(conn != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
