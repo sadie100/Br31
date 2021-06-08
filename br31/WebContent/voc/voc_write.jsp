@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>VOC 등록</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -48,14 +48,8 @@
 				alert("이메일을 입력해주세요.");
 				$("#selectEmail").focus();
 				return false;
-			} else if($("#voc_pass").val() == "") {
-				alert("비밀번호를 입력해주세요.");
-				$("#voc_pass").focus();
-				return false;
-			} else if($("#voc_cpass").val() == "") {
-				alert("비밀번호 확인을 입력해주세요.");
-				$("#voc_cpass").focus();
-				return false;
+			} else {
+				voc_write_form.submit();
 			}			
 		});//click
 		
@@ -70,19 +64,6 @@
 			} 
 		});
 		
-		
-		$("#voc_cpass").blur(function() {
-			if($("#voc_pass").val() != "" && $("#voc_cpass").val() != "") {
-				if($("#voc_pass").val() == $("#voc_cpass").val()) {
-					$("#passMsg").text("비밀번호가 일치합니다.").css("color","green");
-				} else{
-					$("#passMsg").text("비밀번호가 일치하지 않습니다.").css("color","red");
-					$("#voc_pass").val("").focus();
-					$("#voc_cpass").val("");
-					return false;
-				}
-			}
-		});
 
 	});//ready
 
@@ -172,56 +153,52 @@
 						<tr>
 							<th>상담유형<span>*</span></th>
 							<td colspan=3>
-								<input type="radio" name="voc_question_type" value="qtype1">칭찬
-								<input type="radio" name="voc_question_type" value="qtype2">불만
-								<input type="radio" name="voc_question_type" value="qtype3">문의
-								<input type="radio" name="voc_question_type" value="qtype4">제안
-								<input type="radio" name="voc_question_type" value="qtype5">제보
+								<input type="radio" name="qtype" value="qtype1">칭찬
+								<input type="radio" name="qtype" value="qtype2">불만
+								<input type="radio" name="qtype" value="qtype3">문의
+								<input type="radio" name="qtype" value="qtype4">제안
+								<input type="radio" name="qtype" value="qtype5">제보
 							</td>
 						</tr>
 						<tr>
 							<th>내용유형<span>*</span></th>
 							<td colspan=3>
-								<input type="radio" name="voc_content_type" value="ctype1">제품
-								<input type="radio" name="voc_content_type" value="ctype2">인적서비스
-								<input type="radio" name="voc_content_type" value="ctype3">점포서비스
-								<input type="radio" name="voc_content_type" value="ctype4">이벤트
-								<input type="radio" name="voc_content_type" value="ctype5">HP카드
-								<input type="radio" name="voc_content_type" value="ctype6">모바일쿠폰
-								<input type="radio" name="voc_content_type" value="ctype7">기타
+								<input type="radio" name="ctype" value="ctype1">제품
+								<input type="radio" name="ctype" value="ctype2">인적서비스
+								<input type="radio" name="ctype" value="ctype3">점포서비스
+								<input type="radio" name="ctype" value="ctype4">이벤트
+								<input type="radio" name="ctype" value="ctype5">HP카드
+								<input type="radio" name="ctype" value="ctype6">모바일쿠폰
+								<input type="radio" name="ctype" value="ctype7">기타
 							</td>
 						</tr>
 						<tr>
 							<th>제목<span>*</span></th>
-							<td colspan=3><input type="text" name="voc_title" id="voc_title"></td>
+							<td colspan=3><input type="text" name="vtitle" id="voc_title"></td>
 						</tr>
-						<!-- <tr>
-							<th>발생일시</th>
-							<td colspan=3><input type="datetime-local" name="voc_date" id="voc_date"></td>
-						</tr> -->
 						<tr>
 							<th>내용<span>*</span></th>
-							<td colspan=3><textarea name="voc_content" id="voc_content"></textarea></td>
+							<td colspan=3><textarea name="vcontent" id="voc_content"></textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td colspan=3><input type="file" name="voc_file"></td>
+							<td colspan=3><input type="file" name="file"></td>
 						</tr>
 						<tr>
 							<th>이름<span>*</span></th>
-							<td class="td"><input type="text" name="voc_name" id="voc_name"></td>
+							<td><input type="text" name="name" id="voc_name"></td>
 							<th>전화번호</th>
 							<td>
-								<input type="text" name="voc_hp1" id="voc_hp1"> -
-								<input type="text" name="voc_hp2" id="voc_hp2"> -
-								<input type="text" name="voc_hp3" id="voc_hp3">
+								<input type="text" name="hp1" id="voc_hp1"> -
+								<input type="text" name="hp2" id="voc_hp2"> -
+								<input type="text" name="hp3" id="voc_hp3">
 							</td>
 						</tr>
 						<tr>
-							<th rowspan=2>이메일<span>*</span></th>
-							<td rowspan=2>
-								<input type="text" name="voc_emailId" id="voc_emailId"> @
-								<input type="text" name="voc_emailAddr" id="voc_emailAddr">
+							<th>이메일<span>*</span></th>
+							<td colspan=3 class="td_email">
+								<input type="text" name="emailId" id="voc_emailId"> @
+								<input type="text" name="emailAddr" id="voc_emailAddr">
 								<select id="selectEmail">
 									<option value="직접입력">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -233,19 +210,12 @@
 								</select>
 								<span>※ 답변 받으실 메일을 정확히 기재해 주시기 바랍니다.</span>
 							</td>
-							<th>비밀번호<span>*</span></th>
-							<td class="td"><input type="password" name="voc_pass" id="voc_pass"></td>
-						</tr>
-						<tr>
-							<th>비밀번호 확인<span>*</span></th>
-							<td class="td"><input type="password" name="voc_cpass" id="voc_cpass"></td>
 						</tr>
 					</table>
 					<span>※ 전화번호를 입력해주시면 보다 원활한 상담이 가능합니다.</span>
-					<span id="passMsg"></span>
 				</div>
 				<div>
-					<button type="button" id="btn_vocSave">저장</button>
+					<button type="button" id="btnVocSave">저장</button>
 				</div>
 			</form>
 		</section>	

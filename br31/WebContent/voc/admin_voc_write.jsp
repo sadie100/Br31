@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 </head>
 <body>
 	<!-- header -->
@@ -20,11 +20,11 @@
 			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
 		</div>
 		<div class="cs_menu">
-			<a href="http://localhost:9000/br31/cs/faq_1.jsp"><button type="button" class="btn_faq">
+			<a href="http://localhost:9000/br31/faq/admin_faq_list.jsp"><button type="button" class="btn_faq">
 				자주하는 질문</button></a>
-			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_voc">
+			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_voc">
 				답변 대기 문의</button></a>
-			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
+			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
 				답변 완료 문의</button></a>
 		</div>
 	</section>
@@ -89,7 +89,7 @@
 				</div>
 				<div class="btn_area">
 					<div class="area_left">
-						<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button">목록</button></a>
+						<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button">목록</button></a>
 					</div>
 					<div class="area_right">
 						<a><button type="button">답변등록</button></a>

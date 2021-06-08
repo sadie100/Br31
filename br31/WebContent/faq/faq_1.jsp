@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -166,11 +166,11 @@ div.pagination a:nth-child(2){
 					</ul>
 				</div>
 				<div class="pagination">
-					<a href="http://localhost:9000/br31/cs/faq_1.jsp">&lt;</a>
-					<a href="http://localhost:9000/br31/cs/faq_1.jsp">1</a>
-					<a href="http://localhost:9000/br31/cs/faq_2.jsp">2</a>
-					<a href="http://localhost:9000/br31/cs/faq_3.jsp">3</a>
-					<a href="http://localhost:9000/br31/cs/faq_2.jsp">&gt;</a>
+					<a href="http://localhost:9000/br31/faq/faq_1.jsp">&lt;</a>
+					<a href="http://localhost:9000/br31/faq/faq_1.jsp">1</a>
+					<a href="http://localhost:9000/br31/faq/faq_2.jsp">2</a>
+					<a href="http://localhost:9000/br31/faq/faq_3.jsp">3</a>
+					<a href="http://localhost:9000/br31/faq/faq_2.jsp">&gt;</a>
 				</div>
 			</div>
 		</section>	

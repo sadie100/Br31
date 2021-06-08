@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의함</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 </head>
 <body>
 	<!-- header -->
@@ -20,11 +20,11 @@
 			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
 		</div>
 		<div class="cs_menu">
-			<a href="http://localhost:9000/br31/cs/faq_1.jsp"><button type="button" class="btn_faq">
+			<a href="http://localhost:9000/br31/faq/admin_faq_list.jsp"><button type="button" class="btn_faq">
 				자주하는 질문</button></a>
-			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_voc">
+			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_voc">
 				답변 대기 문의</button></a>
-			<a href="http://localhost:9000/br31/cs/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
+			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
 				답변 완료 문의</button></a>
 		</div>
 	</section>
@@ -63,7 +63,7 @@
 							<th>내용유형</th>
 							<th>제목</th>
 							<th>접수일</th>
-							<th>상태</th>
+							<th>답변</th>
 						</tr>
 						<tr>
 							<td>1</td>
@@ -71,15 +71,15 @@
 							<td>인적서비스</td>
 							<td><a href="#">배라 수원점 사장님을 칭찬합니다!</a></td>
 							<td>2021-05-22</td>
-							<td>답변완료</td>
+							<td>완료</td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>문의</td>
 							<td>제품</td>
-							<td><a href="http://localhost:9000/br31/cs/admin_voc_content.jsp">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
+							<td><a href="http://localhost:9000/br31/voc/admin_voc_content.jsp">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
 							<td>2021-05-24</td>
-							<td>답변대기</td>
+							<td>대기</td>
 						</tr>
 					</table>
 				</div>

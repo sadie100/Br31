@@ -234,7 +234,7 @@ header .admin_msg {
 						<div class="submenu">
 							<ul>
 								<li><a href="#">매장정보</a></li>
-								<li><a href="#">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/faq/admin_faq_list.jsp">고객센터</a></li>
 							</ul>
 						</div>
 					</li>

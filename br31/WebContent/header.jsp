@@ -180,7 +180,7 @@ header .menu:hover .submenu {
 				<% } %>
 			</div>
 			<div>
-				<a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a>
+				<a href="http://localhost:9000/br31/faq/faq_1.jsp">고객센터</a>
 			</div>
 		</div>
 
@@ -269,10 +269,10 @@ header .menu:hover .submenu {
 							<ul>
 								<% if(id != null) { %>
 								<li><a href="http://localhost:9000/br31/map/map.jsp?id=<%= id %>">매장정보</a></li>
-								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp?id=<%= id %>">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/faq/faq_1.jsp?id=<%= id %>">고객센터</a></li>
 								<% }else{  %>
 								<li><a href="http://localhost:9000/br31/map/map.jsp">매장정보</a></li>
-								<li><a href="http://localhost:9000/br31/cs/faq_1.jsp">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/faq/faq_1.jsp">고객센터</a></li>
 								<% } %>
 							</ul>
 						</div>

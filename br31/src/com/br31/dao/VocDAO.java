@@ -1,5 +1,5 @@
 package com.br31.dao;
 
-public class VocDAO {
-
+public class VocDAO extends DBConn {
+	
 }

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 </head>
 <body>
 	<!-- header -->
@@ -34,8 +34,8 @@
 							<td colspan=5>배라 수원점 사장님을 칭찬합니다!</td>
 						</tr>
 						<tr>
-							<th>발생일시</th>
-							<td colspan=5>2021-05-22 15:00</td>
+							<th>작성일</th>
+							<td colspan=5>2021-05-22</td>
 						</tr>
 						<tr>
 							<th>내용</th>

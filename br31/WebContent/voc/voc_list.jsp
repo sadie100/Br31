@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의함</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 </head>
 <body>
 	<!-- header -->
@@ -31,7 +31,7 @@
 							<td>1</td>
 							<td>칭찬</td>
 							<td>인적서비스</td>
-							<td><a href="http://localhost:9000/br31/cs/voc_content.jsp">배라 수원점 사장님을 칭찬합니다!</a></td>
+							<td><a href="http://localhost:9000/br31/voc/voc_content.jsp">배라 수원점 사장님을 칭찬합니다!</a></td>
 							<td>2021-05-22</td>
 							<td>답변완료</td>
 						</tr>

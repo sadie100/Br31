@@ -265,9 +265,6 @@ div.details span {
 	line-height: 150%;
 	font-size: 13px;
 }
-div.details #passMsg {
-	float: right;
-}
 div.details table span, div.details p>span {
 	padding: 0 0 0 2px;
 	color: crimson;
@@ -278,23 +275,29 @@ div.details textarea {
 	resize: none;
 	padding: 10px;
 }
-div.details input[type="text"], div.details input[type="password"]{
-	width: 85px;
+div.details input[type="text"]{
 	padding: 3px 4px;
 	text-indent: 2px;
 }
 div.details select {
+	width: 130px;
 	padding: 3px 0;
 	text-indent: 2px;
 }
-div.details input[type="datetime-local"], div.details textarea {
+div.details textarea {
 	font-family: "¸¼Àº °íµñ";
 }
-div.details table tr:nth-child(3) input {
-	width: 770px;
+div.details table #voc_title {
+	width: 777px;
 }
-div.details .td input{
+div.details #voc_name {
 	width: 310px;
+}
+div.details input[id^="voc_hp"] {
+	width: 82px;
+}
+div.details .td_email>input {
+	width: 140px;
 }
 section.voc_write form>div:last-child {
 	text-align: center;
@@ -394,7 +397,7 @@ div.pagination a:first-child, div.pagination a:last-child {
 	line-height: 40px; 
 }
 
-section.faq .faq_list li a {
+section.faq .faq_list li>a {
 	height: 70px;
 	font-weight: 500;
 	color: #261c17;
@@ -402,7 +405,7 @@ section.faq .faq_list li a {
 	position: relative; 
 	padding-left: 100px;
 }
-section.faq .faq_list a:after {
+section.faq .faq_list li>a:after {
 	position: absolute; 
 	top: 50%; 
 	right: 14px; 
@@ -431,11 +434,32 @@ section.faq .faq_list .answer p {
 section.faq .faq_list .on, section.faq .faq_list .on + li {
 	border-top: 1px solid #ff7c97;	
 }
-section.faq .faq_list .on a {
+section.faq .faq_list .on>a {
 	color: palevioletred;
 }
-section.faq .faq_list .on a:after {
+section.faq .faq_list .on>a:after {
 	background-position: 0 -12px; 
+}
+
+/************** admin_faq_list **************/
+section.faq button, .faq_write_btns button {
+	padding: 7px 30px;
+	color: white;
+	background-color: #a29791;
+	margin-bottom: 15px;
+	border: 1px solid #a29791;
+	border-radius: 3px;
+	font-weight: bold;
+}
+section.faq .faq_list .btnFaqUpdate {
+	margin-left: 600px;
+}
+section.faq .btnFaqWrite {
+	margin: 0 0 0 800px;
+}
+section.faq button:hover {
+	background-color: #92867f;
+	cursor: pointer;
 }
 
 /************** admin_voc_list **************/
@@ -479,11 +503,6 @@ section.voc_content .voc_answer {
 	resize: none;
 	padding: 10px;
 }
-
-
-/************** recruit **************/
-
-
 
 
 
