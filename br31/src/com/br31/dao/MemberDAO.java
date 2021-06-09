@@ -111,6 +111,11 @@ public class MemberDAO extends DBConn{
 			e.printStackTrace();
 		}
 
+		String hplist[] = vo.getHp().split("-");
+		
+		vo.setHp1(hplist[0]);
+		vo.setHp2(hplist[1]);
+		vo.setHp3(hplist[2]);
 		
 		return vo;
 	}

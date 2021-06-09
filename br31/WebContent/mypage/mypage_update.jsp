@@ -144,14 +144,14 @@
 						</li>
 						<li>
 							<label>휴대폰</label>
-							<select id = "phone1" name = "phone1" class = "select_style">
+							<select id = "phone1" name = "phone1" class = "select_style" value = "<%=vo.getHp1()%>">
 								<option value = "선택" >선택</option>
 								<option value = "010" id = "pnum1">010</option>
 								<option value = "011" id = "pnum2">011</option>
 								<option value = "017" id = "pnum3">017</option>
 							</select><span> - </span>
-							<input type = "text" name = "phone2" class = "li" id = "phone2"><span> - </span>
-							<input type = "text" name = "phone3" class = "li" id = "phone3">
+							<input type = "text" name = "phone2" class = "li" id = "phone2" value = "<%=vo.getHp2()%>"><span> - </span>
+							<input type = "text" name = "phone3" class = "li" id = "phone3" value = "<%=vo.getHp3()%>">
 						</li>
 						<li>
 							<label>아이디</label>
