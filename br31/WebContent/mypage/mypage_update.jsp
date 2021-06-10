@@ -144,7 +144,8 @@
 						</li>
 						<li>
 							<label>휴대폰</label>
-							<select id = "phone1" name = "phone1" class = "select_style" value = "<%=vo.getHp1()%>">
+							<select id = "phone1" name = "phone1" class = "select_style">
+								<option value = "<%=vo.getHp1()%>" hidden><%= vo.getHp1() %></option>
 								<option value = "선택" >선택</option>
 								<option value = "010" id = "pnum1">010</option>
 								<option value = "011" id = "pnum2">011</option>
@@ -167,14 +168,14 @@
 						</li>
 						<li>
 							<label>주소</label>
-							<input type = "text" name = "address_number" class = "li" value="1234">
+							<input type = "text" name = "address_number" class = "li" value="<%=vo.getAddr1()%>">
 							<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check">우편번호 검색</button></a>
-							<input type = "text" name = "address" class = "li" value = "서울시 강남구 테헤란로">
+							<input type = "text" name = "address" class = "li" value = "<%=vo.getAddr2()%>">
 						</li>
 						<li>
 							<label>이메일</label>
-							<input type = "text" name = "email1" class = "li" id = "email1" value = "hong1234"><span> @ </span>
-							<input type = "text" name = "email2" class = "li" id = "email2" value = "naver.com">
+							<input type = "text" name = "email1" class = "li" id = "email1" value = "<%=vo.getEmail1()%>"><span> @ </span>
+							<input type = "text" name = "email2" class = "li" id = "email2" value = "<%= vo.getEmail2()%>">
 							<select id = "email3" class = "select_style">
 								<option value = "선택">선택</option>
 								<option value = "naver.com" id = "addr1">naver.com</option>

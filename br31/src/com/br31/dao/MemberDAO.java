@@ -117,6 +117,17 @@ public class MemberDAO extends DBConn{
 		vo.setHp2(hplist[1]);
 		vo.setHp3(hplist[2]);
 		
+		String emaillist[] = vo.getEmail().split("@");
+		vo.setEmail1(emaillist[0]);
+		vo.setEmail2(emaillist[1]);
+		
+		String addrstr = vo.getAddr();
+		String addrstr2 = vo.getAddr();
+		int firsttarget = addrstr.indexOf("(");
+		int firsttarget2 = addrstr.indexOf(")");
+		vo.setAddr1(addrstr.substring(firsttarget+1, firsttarget2));
+		vo.setAddr2(addrstr2.substring(7, addrstr2.length()));
+		
 		return vo;
 	}
 	
