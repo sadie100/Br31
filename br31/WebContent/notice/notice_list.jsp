@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,21 @@
 						<col width="10%">
 					</colgroup>
 					<tbody>
+					<%
+					// 공지사항 목록 생성
+				StringBuffer tbody = new StringBuffer("");
+				for (NoticeVO vo : list) {
+					tbody.append("<tr>");
+					tbody.append("<td class=\"num\">" + vo.getRno() + "</td>");
+					tbody.append("<td class=\"title\">");
+					tbody.append("	<a href='notice_content.jsp?nid=" + vo.getNid() + "&rno=" + vo.getRno() + "'>" + vo.getNtitle() + "</a>");
+					tbody.append("</td>");
+					tbody.append("<td class=\"period\">" + vo.getNhit() + "</td>");
+					tbody.append("<td>" + vo.getNdate() + "</td>");
+					tbody.append("</tr>");
+				}
+				out.write(tbody.toString());
+				%>
 																<tr>
 							<td class="num">51</td>
 							<td class="title">
