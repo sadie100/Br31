@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<% 
+	MenuDAO dao = new MenuDAO();
+	ArrayList<MenuVO> list = dao.getMonthlyIcecreamList();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,17 +59,24 @@
 		<div class="best_icecream_bg">
 			<div class="monthly_best_icecream_content" id="monthly_best_icecream_content">
 		<ul>
+		<% for(int i=1;i<2;i++){ %>
 			<li>
-				<a href="#">
-					<label class="rank"><strong>1위</strong></label>
+				<a href="menu_icecream_select.jsp?pname=<%=list.get(i-1).getPname()%>">
+					<label class="rank"><strong><%=i %>위</strong></label>
 						<span class="depth1">
 							<span class="depth2">
-								<img src="http://localhost:9000/br31/menu/images/ice_homerun.png">
+								<img src="http://localhost:9000/br31/menu/images/<%=list.get(i-1).getPsfile()%>">
 							</span>
 						</span>
-					<label class="name">아이스 홈런볼</label>
+					<label class="name"><%=list.get(i-1).getPname() %></label>
 				</a>
 			</li>
+			<%} %>
+			
+			
+			
+			
+			
 			<li>
 				<a href="menu_icecream_select.jsp">
 					<label class="rank"><strong>2위</strong></label>

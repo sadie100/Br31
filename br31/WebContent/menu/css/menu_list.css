@@ -388,16 +388,16 @@ section.search_result {
 /* ***********icecream menu ********* */
 /* ***********icecream menu ********* */
 
-section.icecream_menu {
+section.icecream_menu{
 	padding-top: 30px;
 }
-div.icecream_menu {
+div.icecream_menu{
 	width: 1200px; 
 	margin: auto;
 	padding: 0;
 	padding-bottom: 30px;
 }
-div.icecream_menu a{
+div.icecream_menu a {
 	width: 100%; height: 300px;
 	display: inline-block;
 	text-decoration: none;
@@ -432,6 +432,17 @@ div.icecream_menu span.depth1 label.name{
 	color: black;
 	font-size: 18px;
 }
+div.icecream_menu span.depth1 input.hashtag{
+	margin-bottom: 20px;
+	display: inline-block;
+	color: rgb(145,137,131);
+	border: none;
+	background-color: white;
+	padding-top: 10px;
+	font-size: 13px; 
+	z-index : 5;
+}
+
 div.icecream_menu span.depth1 label.hashtag{
 	margin-bottom: 20px;
 	display: inline-block;
@@ -439,6 +450,7 @@ div.icecream_menu span.depth1 label.hashtag{
 	padding-top: 10px;
 	font-size: 13px; 
 }
+
 div.icecream_menu button.btn_hashtag{
 	border: 1px solid rgb(206,206,206);
 	color: rgb(206,206,206);

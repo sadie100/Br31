@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+ <%
+ 	String pname = request.getParameter("pname");
+ 	MenuDAO dao = new MenuDAO();
+ 	MenuVO vo = dao.getMenuIcecreamContent(pname);
+ 	
+ 	int height;
+ 	if(vo.getRec_flavor()!=null){
+ 		height = 2200;
+ 	}else{
+ 		height = 1800;
+ 	}
+ 	
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,20 +26,38 @@
 		
 		$("#star_button").hover(function(){
 			$("#star_button").attr("src","http://localhost:9000/br31/images/star_button_onclick.PNG")
+			$("#arrowbox").show();
 		},
 		function(){
 			$("#star_button").attr("src","http://localhost:9000/br31/images/star_button.PNG")
+			$("#arrowbox").hide();
 		});
-		
 		$(window).scroll(function(){
 			if(pageYOffset<=300){
-				$("#btn_left").animate({top : 300+'px'}, 100);
-				$("#btn_right").animate({top : 300+'px'}, 100); 
-			}else if(pageYOffset>500 && pageYOffset<2200){
-				$("#btn_left").animate({top : pageYOffset+100+'px'}, 100);
-				$("#btn_right").animate({top : pageYOffset+100+'px'}, 100);
+				$("#btn_left").animate({top : 300+'px'}, 110);
+				$("#btn_right").animate({top : 300+'px'}, 110); 
+			}else if(pageYOffset>500 && pageYOffset< <%=height%> ){
+				$("#btn_left").animate({top : pageYOffset+100+'px'}, 110);
+				$("#btn_right").animate({top : pageYOffset+100+'px'}, 110);
 			}
 		});
+		/*
+		$("#btn_left").hover(function(){
+			$("#btn_left").css({"border" : "1px solid rgb(243,125,160)", "width" : "230px",
+				"border-radius" : "40px", "text-align" : "left", "padding-left" : "30px", "transition":"width 300ms"});
+		*/
+	<%--	$(this).append("<img src='images/<%=vo.getPsfile()%>' class='btn_image' id='btn_image'><label class='btn_label' id='btn_label'><%=vo.getPname()%></label>"); --%>
+		/*
+		},
+		function(){
+			$("#btn_left").css({"border" : "1px solid rgb(187,187,187)", "width" : "80px",
+				"border-radius" : "100%", "text-align" : "left","transition":"300ms"});
+			$("#btn_image").remove();
+			$("#btn_label").remove();
+			
+		});
+		*/		
+		
 	});
 </script>
 </head>
@@ -34,27 +66,32 @@
 	<jsp:include page = "../header.jsp"></jsp:include>
 
 <!-- content -->
-<section class="page">
+<section class="page" id="page">
 <section class="inner_page" id="inner_page">
 
 
 <!-- button -->
-	<span class="btn_index">
+	<span class="btn_index" id="btn_index">
 		<button class="left" id="btn_left">&lt;</button>
 	</span>
-	<span class="btn_index">
+	<span class="btn_index" id="btn_index">
 		<button class="right" id="btn_right">&gt;</button>
 	</span>
 
 <div class="content">
 	<section class="top_info">
-		<label class="eng_name">PUSS IN BOOTS</label>
-		<h1 class="kor_name">엄마는 외계인</h1>
-		<label class="p_explain">밀크 초콜릿, 다크 초콜릿, 화이트 무스 세 가지 아이스크림에 달콤 바삭한 초코볼이 더해진 아이스크림</label>
+		<label class="eng_name">
+		<%if(vo.getEng_pname()!=null){ %>
+		 	<%=vo.getEng_pname()%>
+		<%}%>
+	 	</label>
+		<h1 class="kor_name"><%=vo.getPname() %></h1>
+		<label class="p_explain"><%=vo.getIntro() %></label>
 		<div class="bg">
 			<div class="icecream_img">
-				<img src="images/ice_mother.png">
+				<img src="images/<%=vo.getPsfile()%>">
 			</div>
+				<div class="arrowbox" id="arrowbox"><span>좋아하는 플레이버 등록</span></div>
 			<div class="icons">
 				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" id="star_button"></a>
 				<a href="#"><img src="images/icon_facebook.png"></a>
@@ -145,56 +182,31 @@
 			</div>
 		</div>
 	</section>
-	<section class="recommend_flavor">
-		<h3 class="title">추천플레이버</h3>
-		<table>
-			<tr>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">자모카 아몬드 훠지</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_jamoca.png">
-							</span>
-						</span>
-					</a>
-				</td>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">베리베리 스트로베리</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_berry2.png">					
-							</span>
-						</span>
-					</a>
-				</td>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">이상한 나라의 솜사탕</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_strange.png">					
-							</span>
-						</span>
-					</a>
-				</td>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">바람과 함께 사라지다</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_wind.png">					
-							</span>
-						</span>
-					</a>
-				</td>
-			</tr>
-		</table>
-	</section>
+	<% if(vo.getRec_flavor()!=null){ %>
+		<section class="recommend_flavor">
+			<h3 class="title">추천플레이버</h3>
+			<table>
+				<tr>
+					<%  for(String r_ice:vo.getRec_flavor()){ %>
+						<td>
+							<a href="menu_icecream_select.jsp?pname=<%=r_ice%>">
+								<span class="depth1">
+									<span class="depth2">
+										<label class="name"><%=r_ice %></label>
+										<% MenuVO r_vo = dao.getMenuIcecreamContent(r_ice); %>
+										<img src="http://localhost:9000/br31/menu/images/<%=r_vo.getPsfile()%>">
+									</span>
+								</span>
+							</a>
+						</td>
+					<% } %>
+				</tr>
+			</table>
+		</section>
+	<% }%>
 	<section class="instagram">
 		<h3 class="title">인스타그램에서 만나는</h3>
-		<label class="hashtag">#엄마는외계인</label>
+		<label class="hashtag">#<%=vo.getPname() %></label>
 		<label class="hashtag">#배스킨라빈스</label>
 		<div class="pictures">
 			<div>
