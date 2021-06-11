@@ -1,8 +1,8 @@
 package com.br31.vo;
 
 public class NoticeVO {
-	private int rno, nhit;
-	private String ntitle, ncontent, nfile, nsfile, ndate, nid;
+	private int rno, articleno;
+	private String title, ncontent, nfile, nsfile, mdate ;
 
 	public int getRno() {
 		return rno;
@@ -12,20 +12,20 @@ public class NoticeVO {
 		this.rno = rno;
 	}
 
-	public int getNhit() {
-		return nhit;
+	public int getArticleno() {
+		return articleno;
 	}
 
-	public void setNhit(int nhit) {
-		this.nhit = nhit;
+	public void setArticleno(int articleno) {
+		this.articleno = articleno;
 	}
 
-	public String getNtitle() {
-		return ntitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setNtitle(String ntitle) {
-		this.ntitle = ntitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getNcontent() {
@@ -52,19 +52,13 @@ public class NoticeVO {
 		this.nfile = nfile;
 	}
 
-	public String getNdate() {
-		return ndate;
+	public String getMdate() {
+		return mdate;
 	}
 
-	public void setNdate(String ndate) {
-		this.ndate = ndate;
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
 	}
 
-	public void setNid(String nid) {
-		this.nid = nid;
-	}
-
-	public String getNid() {
-		return nid;
-	}
+	
 }

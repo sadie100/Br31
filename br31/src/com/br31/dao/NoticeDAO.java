@@ -2,7 +2,7 @@ package com.br31.dao;
 
 import java.util.ArrayList;
 
-import com.BR31.vo.NoticeVO;
+import com.br31.vo.NoticeVO;
 
 public class NoticeDAO extends DBConn {
 
@@ -10,7 +10,7 @@ public class NoticeDAO extends DBConn {
 	public String getNsfile(String nid) {
 		String result = "";
 		try {
-			String sql = "SELECT NSFILE FROM BR31_NOTICE WHERE NID = ?";
+			String sql = "SELECT NSFILE FROM BR31_NOTICE WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
 			pstmt.setString(1, nid);
@@ -29,12 +29,12 @@ public class NoticeDAO extends DBConn {
 	public boolean getUpdateResultNofile(NoticeVO vo) {
 		boolean result = false;
 		try {
-			String sql = "UPDATE BR31_NOTICE SET TITLE = ?, NCONTENT = ? WHERE NID = ?";
+			String sql = "UPDATE BR31_NOTICE SET TITLE = ?, NCONTENT = ? WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, vo.getTITLE());
+			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getNcontent());
-			pstmt.setString(3, vo.getNid());
+			pstmt.setString(3, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -50,14 +50,14 @@ public class NoticeDAO extends DBConn {
 	public boolean getUpdateResult(NoticeVO vo) {
 		boolean result = false;
 		try {
-			String sql = "UPDATE BR31_NOTICE SET TITLE = ?, NCONTENT = ?, NFILE = ?, NSFILE = ? WHERE NID = ?";
+			String sql = "UPDATE BR31_NOTICE SET TITLE = ?, NCONTENT = ?, NFILE = ?, NSFILE = ? WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, vo.getTITLE());
+			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getNcontent());
 			pstmt.setString(3, vo.getNfile());
 			pstmt.setString(4, vo.getNsfile());
-			pstmt.setString(5, vo.getNid());
+			pstmt.setString(5, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
