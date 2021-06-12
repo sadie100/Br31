@@ -22,7 +22,15 @@ public class DBConn {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void getStatement() {
+		try {
+			stmt = conn.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void getPreparedStatement(String sql) {
 		try {
 			pstmt = conn.prepareStatement(sql);
