@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%
+	VocDAO dao = new VocDAO();
+	ArrayList<VocVO> list = dao.getList();
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +22,7 @@
 	<div class="cs_content">
 		<section class="voc_list">
 			<h3>고객센터 내 문의함</h3>
-			<form name="voc_list_form" action="#" method="get">
+			<div class="voc_list_content">
 				<div class="list">
 					<table>
 						<tr>
@@ -27,25 +33,19 @@
 							<th>접수일</th>
 							<th>상태</th>
 						</tr>
+						<% for(VocVO vo : list) { %>
 						<tr>
-							<td>1</td>
-							<td>칭찬</td>
-							<td>인적서비스</td>
-							<td><a href="http://localhost:9000/br31/voc/voc_content.jsp">배라 수원점 사장님을 칭찬합니다!</a></td>
-							<td>2021-05-22</td>
-							<td>답변완료</td>
+							<td><%= vo.getRno() %></td>
+							<td><%= vo.getQtype() %></td>
+							<td><%= vo.getCtype() %></td>
+							<td><a href="http://localhost:9000/br31/voc/voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<td><%= vo.getVdate() %></td>
+							<td><%= vo.getStatus() %></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>문의</td>
-							<td>제품</td>
-							<td><a href="#">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
-							<td>2021-05-24</td>
-							<td>답변대기</td>
-						</tr>
+						<% } %>
 					</table>
 				</div>
-			</form>
+			</div>
 		</section>	
 	</div>
 	<!-- footer -->

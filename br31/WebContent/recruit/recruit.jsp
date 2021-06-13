@@ -5,8 +5,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/cs/css/cs.css">
 <style>
+section.recruit {
+	width: 1400px;
+	margin: auto;
+	text-align: center;
+}
+.title {
+	margin: 70px 0;
+}
+.title p {
+	margin-bottom: 5px;
+}
+.title span {
+	font-size: 15px;
+}
+.title p:before, .title p:after {
+	width: 36px;
+	height: 26px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	content: "";
+}
+.title p:before {
+	margin-right: 5px;
+	background-image: url("http://localhost:9000/br31/images/icon_title_1.png");
+}
+.title p:after {
+	margin-left: 5px;
+	background-image: url("http://localhost:9000/br31/images/icon_title_2.png");
+}
+.title img {
+	display: inline-block;
+	margin: 0 10px;
+}
 .recruit_type {
 	display: inline-block;
 	width: 900px;

@@ -11,47 +11,58 @@ header ul {
 	padding: 0;
 	display: inline-block;
 }
+
 header {
 	background-image: url("http://localhost:9000/br31/images/bg_header.png");
 }
+
 header>div {
 	width: 1400px;
 	height: 40px;
 	margin: auto;
 }
+
 header .main_bar {
 	height: 150px;
 	text-align: center;
 }
+
 header .main_bar>div {
 	height: 150px;
 	line-height: 150px;
 	display: inline-block;
 }
+
 header li {
 	display: inline-block;
 }
+
 header .main_bar li img {
 	width: 35px;
 	height: 35px;
 }
+
 header .main_bar div:nth-child(2) img {
 	width: 400px;
 	height: 70px;
 	padding-top: 40px;
 }
+
 header .main_bar a {
 	text-decoration: none;
 	font-size: 13px;
 	color: black;
 }
+
 header .main_bar img {
 	display: inline-block;
 }
+
 header .main_bar div:first-child {
 	float: left;
 	padding-left: 100px;
 }
+
 header .main_bar div:last-child {
 	float: right;
 	padding: 0 150px 0 80px;
@@ -64,52 +75,65 @@ header .menu_bar {
 	width: 100%;
 	border-bottom: 1px solid darkgray;
 }
+
 header .menu>ul {
 	margin: auto;
 	width: 1400px;
 	text-align: center;
 }
+
 header .menu>ul>li {
 	width: 180px;
 	/* float: left; */
 	text-align: center;
 	background-color: white;
 }
+
 header .menu>ul>li:nth-child(1), header .menu>ul>li:nth-child(1) ul {
 	width: 200px;
 }
+
 header .menu>ul>li:nth-child(1) a {
 	display: inline-block;
 	width: 40%;
 }
+
 header .submenu ul {
 	padding-top: 10px;
 	min-width: 180px;
 	display: block;
 }
+
 header .submenu li {
 	display: block;
 }
-header .menu>ul>li:nth-child(1) a{
+
+header .menu>ul>li:nth-child(1) a {
 	font-size: 12px;
 }
-header .menu>ul>li:nth-child(1) a:first-child{
+
+header .menu>ul>li:nth-child(1) a:first-child {
 	color: #ff7c97;
 }
-header .menu>ul>li:nth-child(1) a:nth-child(2){
+
+header .menu>ul>li:nth-child(1) a:nth-child(2) {
 	color: gray;
 }
+
 header .menu>ul>li:nth-child(2) {
 	width: 200px;
-	text-align:	center;
+	text-align: center;
 }
+
 header .menu>ul>li:nth-child(2) ul li img {
 	margin-top: -15px;
 }
+
 header .menu>ul>li ul li a {
 	display: inline-block;
 	margin: 10px 0;
 }
+
 header .menu>ul>li>a {
 	display: inline-block;
 	padding: 10px 0;
@@ -118,21 +142,25 @@ header .menu>ul>li>a {
 	font-weight: bold;
 	font-family: 맑은고딕;
 }
+
 header .menu a {
 	text-decoration: none;
 	color: black;
 	font-size: 14px;
 }
+
 header .submenu a:hover {
 	color: #ff7c97;
 }
+
 header .submenu {
 	display: none;
 	height: 270px;
 	margin: 0;
- 	position: absolute;
+	position: absolute;
 	background-color: white;
 }
+
 header .menu_bg {
 	display: none;
 	width: 100%;
@@ -143,11 +171,13 @@ header .menu_bg {
 	background-color: white;
 	border-bottom: 1px solid darkgray;
 }
+
 header .menu:hover div.menu_bg {
 	display: block;
 	z-index: 90;
 	overflow: hidden;
 }
+
 header .menu:hover .submenu {
 	display: block;
 	z-index: 100;
@@ -161,7 +191,9 @@ header .admin_msg {
 	background-color: indianred;
 	font-weight: bold;
 	text-decoration: blink;
+	margin: auto;
 }
+
 </style>
 </head>
 <body>
@@ -234,7 +266,7 @@ header .admin_msg {
 						<div class="submenu">
 							<ul>
 								<li><a href="#">매장정보</a></li>
-								<li><a href="http://localhost:9000/br31/faq/admin_faq_list.jsp">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp">고객센터</a></li>
 							</ul>
 						</div>
 					</li>

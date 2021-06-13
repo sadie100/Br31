@@ -1,13 +1,14 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO" %>
 <%
 	String vid = request.getParameter("vid");
 
 	VocDAO dao = new VocDAO();
 	VocVO vo = dao.getContent(vid);
 	
-	String content = vo.getContent().replace("\r\n", "<br>");
+ 	String content = vo.getContent().replace("\r\n", "<br>");
+	String answer = vo.getAnswer().replace("\r\n", "<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,16 @@
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+		$("#btnAnswerUpdate").click(function() {
+			if($("#voc_answer").val()=="") {
+				alert("답변을 입력해주세요.");
+				$("#voc_answer").focus();
+				return false;
+			} else {
+				voc_update_form.submit();
+			}
+		});
+
 		$("#voc_image").click(function() {
 			var width = this.naturalWidth;
 			var height = this.naturalHeight;
@@ -27,40 +37,21 @@
 			var option = "width=" + this.naturalWidth + ", height=" + this.naturalHeight + ", top=200, left=" + left;
 			window.open($(this).attr("src"), "image", option);
 		});
-		
-		$("#btnVocDelete").click(function() {
-			var con = confirm("문의를 삭제하시겠습니까?");
-
-			if(con) {
-				$.ajax({
-					url: "vocDeleteProcess.jsp?vid=<%=vo.getVid()%>",
-					success: function(result) {
-  					 	if(result.trim() == "delete") {
-							alert("문의가 삭제 되었습니다.");
-							$(location).attr("href", "voc_list.jsp");
-						} else {
-							alert("삭제에 실패했습니다. 잠시 후 다시 진행해주세요.");
-						}
-					}
-				});
-			}
-		});
-				
 	});
 </script>
 </head>
 <body>
 	<!-- header -->
-	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="cs_header.jsp"></jsp:include>
+	<jsp:include page="../../admin_header.jsp"></jsp:include>
+	<jsp:include page="admin_cs_header.jsp"></jsp:include>
 	
-	<!-- content -->
 	<div class="cs_content">
 		<section class="voc_content">
-			<h3>고객센터 1:1 문의 내용</h3>
-			<div class="voc_content_detail">
+			<h3>고객 접수 문의</h3>
+			<form name="voc_update_form" action="adminVocWriteProcess.jsp" method="post">
+			<input type="hidden" name="vid" value="<%=vo.getVid() %>">
 				<div class="details">
-					<span>※ 문의는 수정이 불가능합니다. 수정이 필요하신 경우 삭제 후 재작성을 부탁드립니다.</span>
+					<span>※ 답변은 자세하고 정확하게 작성해주시기 바랍니다.</span>
 					<table>
 						<tr>
 							<th colspan=6>문   의   내   용</th>
@@ -81,7 +72,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td colspan=6><%= content %>
+							<td colspan=6><%= vo.getContent() %>
 							</td>
 						</tr>
 						<tr>
@@ -112,28 +103,25 @@
 							<th>문   의   답   변</th>
 						</tr>
 						<tr>
-							<% if(vo.getAnswer() != null) { %>
-								<td><%= vo.getAnswer().replace("\r\n", "<br>") %></td>
-							<% } else { %>
-								<td style="color:red"> ※ 답변 대기 중인 문의입니다. </td>
-							<% } %>
+							<td>
+								<textarea class="voc_answer" name="answer"><%= vo.getAnswer() %></textarea>
+							</td>
 						</tr>
 					</table>
 				</div>
 				<div class="btn_area">
 					<div class="area_left">
-						<a href="http://localhost:9000/br31/voc/voc_list.jsp"><button type="button">목록</button></a>
+						<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button">목록</button></a>
 					</div>
 					<div class="area_right">
-						<a href="http://localhost:9000/br31/voc/voc_update.jsp?vid=<%=vo.getVid()%>"><button type="button" id="btnVocUpdate">수정</button></a>
-						<a><button type="button" id="btnVocDelete">삭제</button></a>
+						<a><button type="button" id="btnAnswerUpdate">답변수정</button></a>
 					</div>
 				</div>
-			</div>
+			</form>
 		</section>	
 	</div>
 	<!-- footer -->
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 
 </body>
 </html>

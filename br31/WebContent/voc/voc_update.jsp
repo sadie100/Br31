@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%
+	String vid = request.getParameter("vid");
+
+	VocDAO dao = new VocDAO();
+	VocVO vo = dao.getContent(vid);
+	
+ 	String content = vo.getContent().replace("\r\n", "<br>");
+ 	String[] elist = vo.getEmail().split("@");
+	String[] hlist = {"","",""};
+ 	if(vo.getHp() != null) {
+ 		hlist = vo.getHp().split("-", 3);
+ 	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +24,7 @@
 <script>
 	$(document).ready(function() {
 		
-		$("#btnVocSave").click(function() {
+		$("#btnVocUpdate").click(function() {
 			
  			if($("input[name='agree1']:checked").length == 0 || $("input[id='agree1n']").is(":checked")) {
 				alert("개인정보 취급방침에 동의해주세요.");
@@ -49,7 +63,7 @@
 				$("#select_email").focus();
 				return false;
 			} else {
-				voc_write_form.submit();
+				voc_update_form.submit();
 			}			
 		});//click
 		
@@ -64,10 +78,28 @@
 			} 
 		});
 		
+		$("input[type=file]").change(function() {
+			$("#vfile_name").css("display","none");
+		});
+
+		$("input[type=radio]").each(function() {
+			if($(this).val() == "<%=vo.getQtype()%>" || $(this).val() == "<%=vo.getCtype()%>") {
+				$(this).attr("checked", true);
+			}
+		});
 
 	});//ready
 
 </script>
+<style>
+span#vfile_name {
+	margin-left: -175px;
+	padding-right: 500px;
+	background-color: white;
+	color: black;
+	font-weight: normal;
+}
+</style>
 </head>
 <body>
 	<!-- header -->
@@ -78,7 +110,9 @@
 	<div class="cs_content">
 		<section class="voc_write">
 			<h3>고객센터 1:1 문의</h3>
-			<form name="voc_write_form" action="vocWriteProcess.jsp" method="post" enctype="multipart/form-data">
+			<form name="voc_update_form" action="vocUpdateProcess.jsp" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="vid" value="<%= vo.getVid() %>">
+				<input type="hidden" name="vsfile_old" value="<%= vo.getVsfile() %>">
 				<div class="agreement">
 					<h5>1. 상담 접수를 위해 하단의 개인정보 취급방침을 읽고 동의 버튼에 확인해 주세요.</h5>
 					<div class="agree_info">
@@ -93,7 +127,7 @@
 					<div class="agree_check">
 						<h5>개인정보 취급 방침에 동의하십니까?</h5>
 						<div>
-							<input type="radio" name="agree1" id="agree1y" value="동의함">동의함
+							<input type="radio" name="agree1" id="agree1y" value="동의함" checked>동의함
 							<input type="radio" name="agree1" id="agree1n" value="동의안함">동의안함
 						</div>
 					</div>
@@ -133,7 +167,7 @@
 					<div class="agree_check">
 						<h5>개인정보 취급 위탁에 동의하십니까?</h5>
 						<div>
-							<input type="radio" name="agree2" id="agree2y" value="동의함">동의함
+							<input type="radio" name="agree2" id="agree2y" value="동의함" checked>동의함
 							<input type="radio" name="agree2" id="agree2n" value="동의안함">동의안함
 						</div>
 					</div>
@@ -174,31 +208,37 @@
 						</tr>
 						<tr>
 							<th>제목<span>*</span></th>
-							<td colspan=3><input type="text" name="title" id="voc_title"></td>
+							<td colspan=3><input type="text" name="title" id="voc_title" value="<%= vo.getTitle() %>"></td>
 						</tr>
 						<tr>
 							<th>내용<span>*</span></th>
-							<td colspan=3><textarea name="content" id="voc_content"></textarea></td>
+							<td colspan=3><textarea name="content" id="voc_content"><%= vo.getContent() %></textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td colspan=3><input type="file" name="vfile"></td>
+							<td colspan=3>
+							<% if(vo.getVfile() != null) { %>
+								<input type="file" name="vfile"><span id="vfile_name"><%= vo.getVfile() %></span>
+							<% } else { %>
+								<input type="file" name="vfile"><span id="vfile_name">파일 없음</span>
+							<% } %>
+							</td>
 						</tr>
 						<tr>
 							<th>이름<span>*</span></th>
-							<td><input type="text" name="name" id="voc_name"></td>
+							<td><input type="text" name="name" id="voc_name" value="<%= vo.getName() %>"></td>
 							<th>전화번호</th>
 							<td>
-								<input type="text" name="hp1" id="voc_hp1"> -
-								<input type="text" name="hp2" id="voc_hp2"> -
-								<input type="text" name="hp3" id="voc_hp3">
+								<input type="text" name="hp1" id="voc_hp1" value="<%= hlist[0] %>"> -
+								<input type="text" name="hp2" id="voc_hp2" value="<%= hlist[1] %>"> -
+								<input type="text" name="hp3" id="voc_hp3" value="<%= hlist[2] %>">
 							</td>
 						</tr>
 						<tr>
 							<th>이메일<span>*</span></th>
 							<td colspan=3 class="td_email">
-								<input type="text" name="emailId" id="voc_email_id"> @
-								<input type="text" name="emailAddr" id="voc_email_addr">
+								<input type="text" name="emailId" id="voc_email_id" value="<%= elist[0] %>"> @
+								<input type="text" name="emailAddr" id="voc_email_addr" value="<%= elist[1] %>">
 								<select id="select_email">
 									<option value="직접입력">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -215,7 +255,7 @@
 					<span>※ 전화번호를 입력해주시면 보다 원활한 상담이 가능합니다.</span>
 				</div>
 				<div>
-					<button type="button" id="btnVocSave">저장</button>
+					<button type="button" id="btnVocUpdate">저장</button>
 				</div>
 			</form>
 		</section>	

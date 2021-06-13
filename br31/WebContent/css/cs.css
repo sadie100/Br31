@@ -1,5 +1,5 @@
 /************** cs°øÅë **************/
-div.cs_content>section, section.cs_header, section.recruit  {
+div.cs_content>section, section.cs_header  {
 	width: 1400px;
 	margin: auto;
 	text-align: center;
@@ -80,7 +80,7 @@ section.cs_header .cs_menu button:hover {
 section.voc_content h3 {
 	margin: 40px 0 20px 0;
 }
-section.voc_content form {
+section.voc_content .voc_content_detail, section.voc_content form{
 	width: 1000px;
 	margin: auto;
 	margin-bottom: 50px;
@@ -131,13 +131,19 @@ section.voc_content button:hover {
 	cursor: pointer;
 	background-color: slategray;
 }
-
+section.voc_content img {
+	width: auto;
+	height: auto;
+	max-width: 300px;
+	max-height: 150px;
+	cursor: pointer;
+}
 
 /************** voc_list **************/
 section.voc_list h3 {
 	margin: 40px 0 20px 0;
 }
-section.voc_list form {
+section.voc_list .voc_list_content {
 	width: 1000px;
 	margin: auto;
 	margin-bottom: 50px;
@@ -184,6 +190,7 @@ section.voc_write form {
 	width: 1000px;
 	border: 1px solid #ff7c97;
 	border-radius: 10px;
+	font-family: "¸¼Àº °íµñ";
 }
 section.voc_write form div {
 	text-align: left;
@@ -283,9 +290,6 @@ div.details select {
 	width: 130px;
 	padding: 3px 0;
 	text-indent: 2px;
-}
-div.details textarea {
-	font-family: "¸¼Àº °íµñ";
 }
 div.details table #voc_title {
 	width: 777px;
@@ -443,12 +447,12 @@ section.faq .faq_list .on>a:after {
 
 /************** admin_faq_list **************/
 section.faq button, .faq_write_btns button {
-	padding: 7px 30px;
+	padding: 10px 35px;
 	color: white;
-	background-color: #a29791;
+	background-color: #ff9aaf;
 	margin-bottom: 15px;
-	border: 1px solid #a29791;
-	border-radius: 3px;
+	border: 1px solid #ff9aaf;
+	border-radius: 10px;
 	font-weight: bold;
 }
 section.faq .faq_list .btnFaqUpdate {
@@ -457,10 +461,52 @@ section.faq .faq_list .btnFaqUpdate {
 section.faq .btnFaqWrite {
 	margin: 0 0 0 800px;
 }
-section.faq button:hover {
-	background-color: #92867f;
+section.faq button:hover, .admin_faq_form button:hover {
+	background-color: #fb7b97;
+	border-color: #fb7b97;
 	cursor: pointer;
 }
+
+/************** admin_faq_write **************/
+.admin_faq_form h2 {
+	margin: 40px 0 20px 0;
+}
+.admin_faq_form {
+	margin: auto;
+	width: 700px;
+	text-align: center;
+	font-size: 13px;
+}
+.admin_faq_form table {
+	margin: 20px auto;
+}
+.admin_faq_form table, th, td {
+	height: 30px;
+	border: 1px solid darkgray;
+	border-collapse: collapse;
+	padding: 9px 0;
+}
+.admin_faq_form th {
+	width: 100px;
+}
+.admin_faq_form td {
+	width: 500px;
+}
+.admin_faq_form input[type=text], .admin_faq_form textarea {
+	border: none;
+	width: 93%;
+	padding: 7px;
+	background-color: #eeeeee;
+	font-family: "¸¼Àº °íµñ";
+}
+.admin_faq_form textarea {
+	height: 300px;
+	resize: none;
+}
+.admin_faq_form .faq_write_btns {
+	margin-top: 30px;
+}
+
 
 /************** admin_voc_list **************/
 div.voc_search_bar {
@@ -504,11 +550,3 @@ section.voc_content .voc_answer {
 	padding: 10px;
 }
 
-
-
-
-
-
-/************** voc_content **************/
-/************** voc_content **************/
-/************** voc_content **************/

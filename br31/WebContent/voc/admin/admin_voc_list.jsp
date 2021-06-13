@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%
+	VocDAO dao = new VocDAO();
+	ArrayList<VocVO> list = dao.getList();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,30 +14,14 @@
 </head>
 <body>
 	<!-- header -->
-	<jsp:include page="../admin_header.jsp"></jsp:include>
+	<jsp:include page="../../admin_header.jsp"></jsp:include>
+	<jsp:include page="admin_cs_header.jsp"></jsp:include>
 	
 	<!-- content -->
-	<section class="cs_header">
-		<div class="title">
-			<div class="title_left"></div>
-			<img src="http://localhost:9000/br31/images/h_customer_center.png">
-			<div class="title_right"></div>
-			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
-		</div>
-		<div class="cs_menu">
-			<a href="http://localhost:9000/br31/faq/admin_faq_list.jsp"><button type="button" class="btn_faq">
-				자주하는 질문</button></a>
-			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_voc">
-				답변 대기 문의</button></a>
-			<a href="http://localhost:9000/br31/voc/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
-				답변 완료 문의</button></a>
-		</div>
-	</section>
-	
 	<div class="cs_content">
 		<section class="voc_list">
 			<h3>[관리자] 고객센터 문의 목록</h3>
-			<form name="voc_list_form" action="#" method="get">
+			<div class="voc_list_content">
 				<div class="voc_search_bar">
 					<select>
 						<option value="상담유형">상담유형</option>
@@ -63,31 +52,29 @@
 							<th>내용유형</th>
 							<th>제목</th>
 							<th>접수일</th>
-							<th>답변</th>
+							<th>상태</th>
 						</tr>
+						<% int count=0; for(VocVO vo : list) { %>
 						<tr>
-							<td>1</td>
-							<td>칭찬</td>
-							<td>인적서비스</td>
-							<td><a href="#">배라 수원점 사장님을 칭찬합니다!</a></td>
-							<td>2021-05-22</td>
-							<td>완료</td>
+							<td><%= vo.getRno() %></td>
+							<td><%= vo.getQtype() %></td>
+							<td><%= vo.getCtype() %></td>
+							<% if(vo.getStatus().equals("답변대기")) { %>
+								<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_write.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<% } else { %>
+								<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<% } %>
+							<td><%= vo.getVdate() %></td>
+							<td><%= vo.getStatus() %></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>문의</td>
-							<td>제품</td>
-							<td><a href="http://localhost:9000/br31/voc/admin_voc_content.jsp">엄마는 외계인에 들어있는 초코볼을 사고 싶어요ㅠㅠ</a></td>
-							<td>2021-05-24</td>
-							<td>대기</td>
-						</tr>
+						<% } %>
 					</table>
 				</div>
-			</form>
+			</div>
 		</section>	
 	</div>
 	<!-- footer -->
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 
 </body>
 </html>
