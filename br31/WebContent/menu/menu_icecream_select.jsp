@@ -8,11 +8,12 @@
  	
  	int height;
  	if(vo.getRec_flavor()!=null){
- 		height = 2200;
- 	}else{
  		height = 1800;
+ 	}else{
+ 		height = 1400;
  	}
  	
+ 	String insta_code = pname.replace(" ","");
  %>
 <!DOCTYPE html>
 <html>
@@ -208,27 +209,7 @@
 		<h3 class="title">인스타그램에서 만나는</h3>
 		<label class="hashtag">#<%=vo.getPname() %></label>
 		<label class="hashtag">#배스킨라빈스</label>
-		<div class="pictures">
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_1.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_2.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_3.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_4.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_5.jpg"></div>
-			</div>
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_6.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_7.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_8.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_9.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_10.jpg"></div>
-			</div>
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_11.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_12.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_13.jpg"></div>
-			</div>
-		</div>
+		<div class="insta_icon"><a href="https://www.instagram.com/explore/tags/<%=insta_code %>/" target="_blank"><img src="http://localhost:9000/br31/images/sns_instagram.png"></a></div>
 	</section>
 	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button class="list">목록</button></a>
 </div>

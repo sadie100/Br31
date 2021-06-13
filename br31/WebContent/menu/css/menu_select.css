@@ -305,6 +305,14 @@ section.recommend_flavor a{
 section.instagram {
 	padding: 40px 0;
 }
+section.instagram div.insta_icon{
+	margin-top: 30px;
+	margin-bottom: 80px;
+	
+}
+section.instagram div.insta_icon img{
+	cursor: pointer;
+}
 section.instagram label.hashtag {
 	font-size: 13px;
 	color: rgb(255,117,172);

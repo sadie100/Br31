@@ -1,11 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<% 
+	MenuDAO dao = new MenuDAO();
+	String status="coffee";
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	
+	$(document).ready(function(){
+		$("#btn_search").click(function(){
+			$("#modal").show();
+			$("#overlay").css({"opacity":"1","pointer-events":"auto"});
+		});
+		$("#exit").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		});
+		$("#overlay").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		});
+	});
+	
+	
+</script>
 </head>
 <body>
 
@@ -33,22 +59,41 @@
 				<button class="btn_search" id="btn_search">검색</button>
 			</span>
 		</div>
-	<jsp:include page="menu_search_box.jsp"></jsp:include>
+	<jsp:include page="menu_search_box.jsp">
+		<jsp:param name="status" value="coffee" />
+	</jsp:include>
 		<div class="icecream_menu">
 		<table class="icecream_menu">
-			<tr>
+		<% 
+			int i=1;
+			for(MenuVO vo : list){ 
+				if(i%4==1){%>
+				<tr>
+				<% }%>
 				<td>
-					<a href="menu_coffee_select.jsp">
+					<a href="menu_coffee_select.jsp?pname=<%=vo.getPname()%>" class="outer">
 						<span class="depth1">
 							<span class="depth2_no_bg">
-								<label class="name">아메리카노</label>
-								<label class="hashtag">#아메리카노</label>
-								<label class="hashtag">#카페브리즈</label>
-								<img src="http://localhost:9000/br31/menu/images/cf_americano.png">					
+								<label class="name"><%=vo.getPname() %></label>
+								<%
+								if(vo.getHashtag()!=null){
+										for(String hash : vo.getHashtag()){%>
+										<!-- <a href="#" class="hashtag"><%=hash %></a>-->
+										<!-- <span class="depth3"><input type="submit" class="hashtag" onclick="location.href='menu_search_result.jsp?pname=<%=vo.getPname()%>'" value="<%=hash %>"></span>-->
+										<label class="hashtag"><%=hash %></label>
+										 <%}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">
 							</span>
 						</span>
 					</a>
-				</td>
+				<%i++;
+				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>
+					</tr>
+				<% }
+				}%>
+				<!-- 
 				<td>
 					<a href="#">
 						<span class="depth1">
@@ -245,6 +290,7 @@
 					</a>
 				</td>
 			</tr>
+				 -->
 			</table>
 		</div>
 	</section>

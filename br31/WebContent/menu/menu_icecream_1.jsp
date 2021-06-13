@@ -3,8 +3,8 @@
 <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
 <% 
 	MenuDAO dao = new MenuDAO();
-	ArrayList<MenuVO> list = dao.getMenuIcecreamList();
-	
+	String status="icecream";
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
 %>
 <!DOCTYPE html>
 <html>

@@ -4,6 +4,8 @@
 <% 
 	MenuDAO dao = new MenuDAO();
 	ArrayList<MenuVO> list = dao.getMonthlyIcecreamList();
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -189,6 +191,8 @@
 			<button class="btn_search" id="btn_search">검색</button>
 		</span>
 	</div>
-	<jsp:include page="menu_search_box.jsp"></jsp:include>
+	<jsp:include page="menu_search_box.jsp">
+		<jsp:param name="status" value="icecream" />
+	</jsp:include>
 </body>
 </html>

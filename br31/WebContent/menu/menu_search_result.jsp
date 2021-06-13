@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<% 
+	String pname=request.getParameter("pname");
+	String hashtag = request.getParameter("hashtag");
+	String status = request.getParameter("status");
+	String[] allergies = request.getParameterValues("allergy");
+	
+	MenuDAO dao = new MenuDAO();
+	//ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+	//dao 다듬고, 적용하면 끝!
+%>
 <!DOCTYPE html>
 <html>
 <head>
