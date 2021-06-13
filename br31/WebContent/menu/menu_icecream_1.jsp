@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<% 
+	MenuDAO dao = new MenuDAO();
+	String status="icecream";
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,23 +43,46 @@ div.pagination a:nth-child(2){
 	<section class="icecream_menu">
 		<div class="icecream_menu">
 		<table class="icecream_menu">
-			<tr>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">아이스 홈런볼</label>
-								<label class="hashtag">#아이스홈런볼</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_homerun.png">					
+			<% 
+				int i=1;
+				for(MenuVO vo : list){ 
+					if(i%4==1){%>
+					<tr>
+					<% }%>
+					<td>
+						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>" class="outer">
+							<span class="depth1">
+								<span class="depth2">
+									<label class="name"><%=vo.getPname() %></label>
+									<%
+									if(vo.getHashtag()!=null){
+										for(String hash : vo.getHashtag()){%>
+										<!-- <a href="#" class="hashtag"><%=hash %></a>-->
+										<!-- <span class="depth3"><input type="submit" class="hashtag" onclick="location.href='menu_search_result.jsp?pname=<%=vo.getPname()%>'" value="<%=hash %>"></span>-->
+										<label class="hashtag"><%=hash %></label>
+										 <%}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
+								</span>
 							</span>
-						</span>
-					</a>
-				</td>
+						</a>
+					</td>
+				<%i++;
+				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>
+					</tr>
+				<% }
+				}%>
+
+
+
+
+				<!--
 				<td>
 					<a href="#">
 						<span class="depth1">
 							<span class="depth2">
-								<label class="name">오레오 쿠키 앤 크림</label>
+								<span><a href="#" class="name">오레오 쿠키 앤 크림</a></span>
 								<label class="hashtag">#오레오쿠키앤크림</label>
 								<img src="http://localhost:9000/br31/menu/images/ice_oreo_cream.png">					
 							</span>
@@ -299,6 +328,7 @@ div.pagination a:nth-child(2){
 					</a>
 				</td>
 			</tr>
+			-->
 			</table>
 		</div>
 	</section>

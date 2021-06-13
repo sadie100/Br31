@@ -32,6 +32,8 @@ span.btn_index button{
 	background-color: white;
 	font-weight: lighter;
 	position: absolute;
+	cursor: pointer;
+	overflow: hidden;
 }
 span.btn_index button.left{
 	top: 300px;
@@ -40,6 +42,22 @@ span.btn_index button.left{
 span.btn_index button.right{
 	top: 300px;
 	left: 1100px;
+}
+img.btn_image{
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	padding-left: 10px;
+	padding-top: 10px;
+	border: 1px solid blue;
+	vertical-align: text-bottom;
+}
+label.btn_label{
+	font-size: 13px;
+	margin-left: 30px;
+	margin-bottom: 20px;
+	color: black;
+	border: 1px solid red;
 }
 
 
@@ -111,6 +129,40 @@ section.top_info div.icons a:first-child{
 	text-decoration: none;
 	overflow: hidden;
 }
+section.top_info div.arrowbox{
+	position: absolute;
+	display : none;
+	border: 1px solid rgb(187,187,187);
+	border-radius: 10px;
+	bottom: 55px;
+	right: 85px;
+	padding: 2px 10px;
+	font-size: 11px;
+}
+/*
+section.top_info div.arrowbox:after, section.top_info div.arrowbox:before{
+	content:'';
+	position: absolute;
+	display : inline-block;
+	width:0px;
+	height:0px;
+	border: solid transparent;
+	left: 50%;
+	bottom: -14px;
+}
+section.top_info div.arrowbox:after{
+	border-style: solid;
+	border-width: 20px;
+	margin-left: -20px;
+	border-color: rgb(187,187,187) transparent transparent transparent;
+	bottom: -14px;
+}
+section.top_info div.arrowbox:before{
+	border-style: solid;
+	border-width: 26px;
+	margin-left: -26px;
+	bottom: -14px;
+}*/
 section.top_info{
 	padding-bottom: 30px;
 	border-bottom: 1px solid rgb(226,216,212);
@@ -252,6 +304,14 @@ section.recommend_flavor a{
 
 section.instagram {
 	padding: 40px 0;
+}
+section.instagram div.insta_icon{
+	margin-top: 30px;
+	margin-bottom: 80px;
+	
+}
+section.instagram div.insta_icon img{
+	cursor: pointer;
 }
 section.instagram label.hashtag {
 	font-size: 13px;

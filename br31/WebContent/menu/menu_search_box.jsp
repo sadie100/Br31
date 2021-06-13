@@ -1,20 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String status = request.getParameter("status");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btn_search_result").click(function(){
+			search_form.submit();
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="modal" class="modal">
 	<button class="exit" id="exit">&times;</button>
-	<form name="search_form" action = "#" method="get" class="search_form">
+	<form name="search_form" action = "menu_search_result.jsp" method="get" class="search_form">
+		<input type="hidden" id="status" name="status" value=<%=status %>>
 		<ul class="depth1">
 			<li class="depth1">
 				<label class="title">제품명</label>
-				<input type="text" name="p_name" id="p_name">
+				<input type="text" name="pname" id="p_name">
 			</li>
 			<li class="depth1">
 				<label class="title">해시태그</label>
@@ -31,44 +43,44 @@
 				<div class="checkbox">
 					<div class="checkbox_inside">
 						<span class="check">
-							<input type="checkbox" id="allergy1" name="allergy1" value="계란">
+							<input type="checkbox" id="allergy1" name="allergy" value="계란">
 							<label for="allergy1">계란</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy2" name="allergy2" value="대두">
+							<input type="checkbox" id="allergy2" name="allergy" value="대두">
 							<label for="allergy2">대두</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy3" name="allergy3" value="돼지고기">
+							<input type="checkbox" id="allergy3" name="allergy" value="돼지고기">
 							<label for="allergy3">돼지고기</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy4" name="allergy4" value="땅콩">
+							<input type="checkbox" id="allergy4" name="allergy" value="땅콩">
 							<label for="allergy4">땅콩</label>&nbsp;
 						</span>
 					</div>
 					<div class="checkbox_inside"> 
 						<span class="check">
-							<input type="checkbox" id="allergy5" name="allergy5" value="밀">
+							<input type="checkbox" id="allergy5" name="allergy" value="밀">
 							<label for="allergy5">밀</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy6" name="allergy6" value="복숭아">
+							<input type="checkbox" id="allergy6" name="allergy" value="복숭아">
 							<label for="allergy6">복숭아</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy7" name="allergy7" value="우유">
+							<input type="checkbox" id="allergy7" name="allergy" value="우유">
 							<label for="allergy7">우유</label>&nbsp;
 						</span>
 						<span class="check">
-							<input type="checkbox" id="allergy11" name="allergy11" value="없음">
+							<input type="checkbox" id="allergy11" name="allergy" value="없음">
 							<label for="allergy11">없음</label>&nbsp;
 						</span>
 					</div>
 				</div>
 			</li>
 			<li class="depth1">
-				<a href="menu_search_result.jsp"><input type="button" id="btn_search" name="btn_search" value="검색"></a>
+				<input type="button" id="btn_search_result" name="btn_search" value="검색">
 		</ul>
 	</form>
 	</div>
