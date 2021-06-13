@@ -98,6 +98,32 @@
 			}
 		});
 		
+		//아이디 중복체크(또안된다... 넘어온 값을 if에서 제대로 처리하지 못한다 공백 없는 것도 확인함 .. 뭐가 문제인지 해결해보기..)
+		$("#btn_check").click(function(){
+			if($("#id").val() == ""){
+				alert("아이디를 입력해주세요");
+				return false;
+			}else{
+				//alert($("#id").val());
+				$.ajax({
+					url:"http://localhost:9000/br31/join/joinIdCheckProcess.jsp?id="+$("#id").val(),
+					success:function(result){
+						alert(result);
+						if(result==1){
+							alert("중복된 아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+							$("#id").val() = "";
+							$("#id").focus();
+							return false;
+						}else{
+							alert("아이디가 사용가능합니다.");
+							$("#pass").focus();
+						}
+					}	
+					
+				});
+			}
+		});
+		
 		
 	});//document ready
 	
@@ -122,7 +148,7 @@
 					<li>
 						<label>*아이디</label>
 						<input type = "text" name = "id" class = "li" id = "id">
-						<button type = "button" name = "check" class = "btn_check">중복확인</button>
+						<button type = "button" name = "check" class = "btn_check" id = "btn_check">중복확인</button>
 					</li>
 					<li>
 						<label>*비밀번호</label>

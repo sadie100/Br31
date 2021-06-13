@@ -18,7 +18,31 @@ public class MemberDAO extends DBConn{
 		M_FAVOR          VARCHAR2(200) 
 		MDATE   NOT NULL DATE          
 		CHOICE           NUMBER(1)     
-		ADMIN            VARCHAR2(1)	*/  
+		ADMIN            VARCHAR2(1)	*/ 
+	
+	//아이디 중복 확인 프로세스
+	public int idCheck(String id) {
+		int result = 0;
+		
+		String sql = "select count(*) from br31_member where id = ? ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				result = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return result;
+	}
 	
 	//Update -->마이페이지 회원정보 수정
 	public boolean mypageUpdateResult(MemberVO vo){
