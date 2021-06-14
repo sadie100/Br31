@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.br31.dao.*, com.br31.vo.*" %>   
+<%@ page import = "com.br31.dao.MemberDAO, com.br31.vo.MemberVO" %>   
+
+<jsp:useBean id = "vo" class = "com.br31.vo.MemberVO"	/>
+<jsp:setProperty  name = "vo" property = "*" />  
+
 <% 
-	MemberVO vo = new MemberVO();
+	/*MemberVO vo = new MemberVO();
 
 	vo.setId(request.getParameter("id"));
 	vo.setPass(request.getParameter("pass"));
@@ -15,13 +19,10 @@
 	vo.setAddr1(request.getParameter("addr_num"));
 	vo.setAddr2(request.getParameter("addr"));
 	vo.setEmail1(request.getParameter("email1"));
-	vo.setEmail2(request.getParameter("email2"));
-	
-	
+	vo.setEmail2(request.getParameter("email2"));*/
 	
 	MemberDAO dao = new MemberDAO();
 	boolean result = dao.getJoinResult(vo);
-	
 	
 	if(result == true){
 		response.sendRedirect("joinSuccess.jsp");

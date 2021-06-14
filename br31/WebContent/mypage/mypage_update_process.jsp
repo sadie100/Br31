@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.br31.vo.*, com.br31.dao.*" %> 
 <%
+	//자바 bean으로 수정하기!
+
 	MemberDAO dao = new MemberDAO();
 	MemberVO vo = new MemberVO();
 	

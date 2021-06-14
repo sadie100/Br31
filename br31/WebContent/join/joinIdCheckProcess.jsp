@@ -7,17 +7,8 @@
 	
 	MemberDAO dao = new MemberDAO();
 	int result = dao.idCheck(id);
-	System.out.print(result);
-	dao.close();
+	//System.out.print(result);
+	//dao.close();
 	
 	out.write(String.valueOf(result));
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-</body>
-</html>

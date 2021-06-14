@@ -98,7 +98,7 @@
 			}
 		});
 		
-		//아이디 중복체크(또안된다... 넘어온 값을 if에서 제대로 처리하지 못한다 공백 없는 것도 확인함 .. 뭐가 문제인지 해결해보기..)
+		//아이디 중복체크
 		$("#btn_check").click(function(){
 			if($("#id").val() == ""){
 				alert("아이디를 입력해주세요");
@@ -108,15 +108,15 @@
 				$.ajax({
 					url:"http://localhost:9000/br31/join/joinIdCheckProcess.jsp?id="+$("#id").val(),
 					success:function(result){
-						alert(result);
-						if(result==1){
+						if(result ==1){
 							alert("중복된 아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-							$("#id").val() = "";
+							$("#id").val(""); 
 							$("#id").focus();
 							return false;
 						}else{
 							alert("아이디가 사용가능합니다.");
 							$("#pass").focus();
+							return true;
 						}
 					}	
 					
@@ -171,25 +171,25 @@
 					</li>
 					<li>
 						<label>*생년원일</label>
-						<input type = "date" name = "birthday" class = "li" id = "birth">
+						<input type = "date" name = "birth" class = "li" id = "birth">
 					</li>
 					<li>
 						<label>*휴대폰</label>
-						<select name = "phone1" id = "phone1" class = "select_style">
+						<select name = "hp1" id = "phone1" class = "select_style">
 						<option value = "선택" id = "pnum">선택</option>
 						<option value = "010" id = "pnum1">010</option>
 						<option value = "011" id = "pnum2">011</option>
 						<option value = "017" id = "pnum3">017</option>
 						</select><span> - </span>
-						<input type = "text" name = "phone2" class = "li" id = "phone2"><span> - </span>
-						<input type = "text" name = "phone3" class = "li" id = "phone3">
+						<input type = "text" name = "hp2" class = "li" id = "phone2"><span> - </span>
+						<input type = "text" name = "hp3" class = "li" id = "phone3">
 						<!-- <button type = "button" name = "check" class = "btn_check">휴대폰 인증</button> -->
 					</li>
 					<li>
 						<label>주소</label>
-						<input type = "text" name = "addr_num" class = "li" id = "addr1">
-						<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check" id = "addr2">우편번호 검색</button></a>
-						<input type = "text" name = "addr" class = "li" id = "addr3">
+						<input type = "text" name = "addr1" class = "li" id = "addr1">
+						<a href = "#"><button type = "button" name = "btn_addr" class = "btn_check" id = "btn_addr">우편번호 검색</button></a>
+						<input type = "text" name = "addr2" class = "li" id = "addr2">
 					</li>
 					<li>
 						<label>*이메일</label>

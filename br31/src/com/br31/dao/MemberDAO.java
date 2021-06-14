@@ -3,6 +3,7 @@ package com.br31.dao;
 import java.util.ArrayList;
 
 import com.br31.vo.MemberVO;
+import com.br31.vo.SessionVO;
 
 public class MemberDAO extends DBConn{
 	/*		ID      NOT NULL VARCHAR2(30)  
@@ -201,9 +202,6 @@ public class MemberDAO extends DBConn{
 	
 	
 	
-	
-	
-	
 	//Select ---> 로그인
 	public boolean getLoginResult(String id, String pass) {
 		boolean result = false;
@@ -231,6 +229,34 @@ public class MemberDAO extends DBConn{
 		
 		close();
 		return result;
+	}
+	
+	
+	//Select ---> 로그인
+	public SessionVO getLoginResult(MemberVO vo) {
+		SessionVO svo = new SessionVO();
+		
+		String sql = "SELECT COUNT(*) FROM BR31_MEMBER " + 
+				" WHERE ID = ? AND PASS = ? ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPass());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				svo.setResult(rs.getInt(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return svo;
 	}
 	
 	

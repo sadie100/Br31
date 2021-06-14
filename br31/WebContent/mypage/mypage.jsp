@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.br31.vo.*, com.br31.dao.*" %>    
+<%@ page import = "com.br31.vo.*, com.br31.dao.*, com.br31.vo.SessionVO" %>    
 <%
 	MemberDAO dao = new MemberDAO();
 	String id = "test";
 	MemberVO vo = dao.getMypageData(id);
+	
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){	
 %>
 <!DOCTYPE html>
 <html>
@@ -123,3 +126,9 @@
 	
 </body>
 </html>
+<% }else{%>
+	<script>
+		window.alert("로그인후 사용이 가능합니다.");
+		location.href = "http://localhost:9000/mycgv/login/login.jsp";
+	</script>
+<% } %>
