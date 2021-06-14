@@ -3,8 +3,8 @@
     <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
 <% 
 	MenuDAO dao = new MenuDAO();
-	String status="coffee";
-	ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+	String category="coffee";
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category);
 %>
 <!DOCTYPE html>
 <html>
@@ -60,7 +60,7 @@
 			</span>
 		</div>
 	<jsp:include page="menu_search_box.jsp">
-		<jsp:param name="status" value="coffee" />
+		<jsp:param name="category" value="COFFEE" />
 	</jsp:include>
 		<div class="icecream_menu">
 		<table class="icecream_menu">
@@ -88,10 +88,12 @@
 							</span>
 						</span>
 					</a>
-				<%i++;
+				</td>
+				<% 
 				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>
-					</tr>
-				<% }
+				</tr>
+			 	 <%}
+				i++;
 				}%>
 				<!-- 
 				<td>

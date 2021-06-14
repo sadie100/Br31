@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String status = request.getParameter("status");
+	String category = request.getParameter("category");
 %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
 	<div id="modal" class="modal">
 	<button class="exit" id="exit">&times;</button>
 	<form name="search_form" action = "menu_search_result.jsp" method="get" class="search_form">
-		<input type="hidden" id="status" name="status" value=<%=status %>>
+		<input type="hidden" id="status" name="category" value=<%=category %>>
 		<ul class="depth1">
 			<li class="depth1">
 				<label class="title">제품명</label>

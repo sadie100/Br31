@@ -191,31 +191,30 @@ public class MenuDAO extends DBConn{
 		return list;
 	}
 	
-	
+	//select --> 영양성분 조회 - 검색결과 출력
 	public ArrayList<MenuVO> getNutrientSearchResult(String pname, String nutrient, String sorting, String[] allergies){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		String sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
 				" from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
 		if(!pname.equals("")) {
-			//sql += " where pname like '%'" +pname +"'%'";
-			sql+=" where kcal like '%'"+pname + "'%'";
+			sql += " where pname like '%" +pname +"%'";
 			w_check = 1;
-		}
+ 		}
 		if(allergies!=null) {
 			//String allergy = getString(allergies);
 			if(w_check==0) {	//where절이 안들어갔을 때
 				for(int i=0;i<allergies.length;i++) {
 					if(i==0) {
-						sql += " where allergy like '%'"+allergies[i]+"'%'";
+						sql += " where allergy like '%"+allergies[i]+"%'";
 					}else {
-						sql += " and allergy like '%'"+allergies[i]+"'%'";
+						sql += " and allergy like '%"+allergies[i]+"%'";
 					}
 				}
 				w_check=1;
 			}else {	//where절이 이미 있을 때
 				for(int i=0;i<allergies.length;i++) {
-						sql += " and allergy like '%'"+allergies[i]+"'%'";
+						sql += " and allergy like '%"+allergies[i]+"%'";
 				}
 			}
 		}
@@ -242,7 +241,6 @@ public class MenuDAO extends DBConn{
 				sql += " and set_check=0 order by to_number("+nutrient+")";
 			}
 		}
-		System.out.println(sql);
 		
 		try {
 			getStatement();
@@ -271,6 +269,46 @@ public class MenuDAO extends DBConn{
 				}
 				
 				vo.setSet_check(rs.getInt(10));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		close();
+		return list;
+	}
+	
+	//select ---> 메뉴 조회 부분의 검색 결과 출력
+	public ArrayList<MenuVO> getSearchResult(String category, String pname, String hashtag, String[] allergies){
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		String sql = " select pname, hashtag, psfile from br31_menu where category = '" + category + "'";
+		
+		if(!pname.equals("")) {
+			sql += " and pname like '%" +pname +"%'";
+		}
+		if(!hashtag.equals("")) {
+			if(hashtag.contains("#")) {
+				sql += " and hashtag like '%" + hashtag + "%'";
+			}else {
+				sql += " and hashtag like '%#" + hashtag + "%'";
+			}
+		}
+		if(allergies!=null) {
+			for(int i=0;i<allergies.length;i++) {
+				sql += " and allergy like '%"+allergies[i]+"%'";
+			}
+		}
+		
+		
+		try {
+			getStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				MenuVO vo = new MenuVO();
+				vo.setPname(rs.getString(1));
+				vo.setHashtag(getStringList(rs.getString(2)));
+				vo.setPsfile(rs.getString(3));
 				
 				list.add(vo);
 			}

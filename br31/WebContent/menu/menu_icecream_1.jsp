@@ -3,8 +3,8 @@
 <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
 <% 
 	MenuDAO dao = new MenuDAO();
-	String status="icecream";
-	ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+	String category="icecream";
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category);
 %>
 <!DOCTYPE html>
 <html>
@@ -68,38 +68,17 @@ div.pagination a:nth-child(2){
 							</span>
 						</a>
 					</td>
-				<%i++;
+				<% 
 				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>
 					</tr>
-				<% }
+			  <%}
+				i++;
 				}%>
 
 
 
 
 				<!--
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<span><a href="#" class="name">오레오 쿠키 앤 크림</a></span>
-								<label class="hashtag">#오레오쿠키앤크림</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_oreo_cream.png">					
-							</span>
-						</span>
-					</a>
-				</td>
-				<td>
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">메이플 월넛</label>
-								<label class="hashtag">#메이플월넛</label>
-								<img src="http://localhost:9000/br31/menu/images/ice_maple.png">					
-							</span>
-						</span>
-					</a>
-				</td>
 				<td>
 					<a href="#">
 						<span class="depth1">

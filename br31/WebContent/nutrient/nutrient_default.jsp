@@ -139,34 +139,42 @@ div.pagination a:nth-child(2){
 				<th>카페인(mg)</th>
 				<th>알레르기 성분</th>
 			</tr>
-			<% for(MenuVO vo:list){ %>
-				<tr>
-					<td><%= vo.getPname() %></td>
-					<td><%= vo.getOne_amount() %></td>
-					<td><%= vo.getKcal() %></td>
-					<td><%= vo.getNatrium() %></td>
-					<td><%= vo.getSugar() %></td>
-					<td><%= vo.getFat() %></td>
-					<td><%= vo.getProtein() %></td>
-					<td><%= vo.getCaffeine() %></td>
-					
-					<td>
-					<%
-					String allergy = "";
-					if(vo.getAllergy()!=null){
-						for(int i=0; i<vo.getAllergy().length; i++){ 
-							if(i==vo.getAllergy().length-1){ 
-							allergy += vo.getAllergy()[i];
-							}else{
-							allergy += vo.getAllergy()[i] + ", "; 
+			
+			<% 
+			if(list.size()!=0){
+				for(MenuVO vo:list){ %>
+					<tr>
+						<td><%= vo.getPname() %></td>
+						<td><%= vo.getOne_amount() %></td>
+						<td><%= vo.getKcal() %></td>
+						<td><%= vo.getNatrium() %></td>
+						<td><%= vo.getSugar() %></td>
+						<td><%= vo.getFat() %></td>
+						<td><%= vo.getProtein() %></td>
+						<td><%= vo.getCaffeine() %></td>
+						
+						<td>
+						<%
+						String allergy = "";
+						if(vo.getAllergy()!=null){
+							for(int i=0; i<vo.getAllergy().length; i++){ 
+								if(i==vo.getAllergy().length-1){ 
+								allergy += vo.getAllergy()[i];
+								}else{
+								allergy += vo.getAllergy()[i] + ", "; 
+								}
 							}
-						}
-					}else{
-						allergy = "없음";
-					}%>
-					<%=allergy %></td>
-				</tr>			
-			<% }%>
+						}else{
+							allergy = "없음";
+						}%>
+						<%=allergy %></td>
+					</tr>			
+				<% 
+				}
+			}else{
+				System.out.println("검색 결과 없음");
+			}
+			%>
 		</table>
 	</section>
 	<section class="pagination">

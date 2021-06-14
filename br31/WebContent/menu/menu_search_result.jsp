@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
  <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
 <% 
+	String category = request.getParameter("category");
 	String pname=request.getParameter("pname");
 	String hashtag = request.getParameter("hashtag");
-	String status = request.getParameter("status");
 	String[] allergies = request.getParameterValues("allergy");
 	
 	MenuDAO dao = new MenuDAO();
-	//ArrayList<MenuVO> list = dao.getMenuIcecreamList(status);
+	ArrayList<MenuVO> list = dao.getSearchResult(category, pname, hashtag, allergies);
 	//dao 다듬고, 적용하면 끝!
 %>
 <!DOCTYPE html>
@@ -17,6 +17,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	
+	$(document).ready(function(){
+		$("#btn_search").click(function(){
+			$("#modal").show();
+			$("#overlay").css({"opacity":"1","pointer-events":"auto"});
+		});
+		$("#exit").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		});
+		$("#overlay").click(function(){
+			$("#modal").hide();
+			$("#overlay").css({"opacity":"0","pointer-events":"none"});
+		});
+	});
+	
+	
+</script>
 </head>
 <body>
 <!-- header -->
@@ -33,39 +53,55 @@
 </div>
 <div class="search_result_label">
 	<label>검색결과 총</label>
-	<label id="search_count" class="search_count">1</label>
+	<label id="search_count" class="search_count"><%= list.size() %></label>
 	<label>건 검색되었습니다.</label>
 </div>
 <div class="search_result_button">
-	<button>다시 검색하기</button>
+	<button id="btn_search">다시 검색하기</button>
 </div>
+<jsp:include page="menu_search_box.jsp">
+		<jsp:param name="category" value="ICECREAM" />
+</jsp:include>
 
 <section class="icecream_menu">
 		<div class="icecream_menu">
 		<section class="search_result">
 		<table class="icecream_menu">
-			<tr class="src_one">
-				<td class="src_one">
-					<a href="#">
-						<span class="depth1">
-							<span class="depth2">
-								<label class="name">엄마는 외계인</label>
-								<label class="hashtag">#초콜릿</label>
-								<label class="hashtag">#초코볼</label>
-								<label class="hashtag"><button class="btn_hashtag">+</button></label>
-								<img src="http://localhost:9000/br31/menu/images/ice_mother.png">					
+			<% 
+				int i=1;
+				for(MenuVO vo : list){ 
+					if(i%4==1){%>
+					<tr class="src_one">
+					<% }%>
+					<td>
+						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>" class="outer">
+							<span class="depth1">
+								<span class="depth2">
+									<label class="name"><%=vo.getPname() %></label>
+									<%
+									if(vo.getHashtag()!=null){
+										for(String hash : vo.getHashtag()){%>
+										<!-- <a href="#" class="hashtag"><%=hash %></a>-->
+										<!-- <span class="depth3"><input type="submit" class="hashtag" onclick="location.href='menu_search_result.jsp?pname=<%=vo.getPname()%>'" value="<%=hash %>"></span>-->
+										<label class="hashtag"><%=hash %></label>
+										 <%}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
+								</span>
 							</span>
-						</span>
-					</a>
-				</td>
-				
-			</tr>
+						</a>
+					</td>
+				<% 
+				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>
+					</tr>
+			  <%}
+				i++;
+			}%>
 			</table>
 		</section>
 		</div>
 	</section>
-
-
 
 </section>
 

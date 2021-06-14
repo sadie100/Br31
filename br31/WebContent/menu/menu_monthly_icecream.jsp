@@ -192,7 +192,7 @@
 		</span>
 	</div>
 	<jsp:include page="menu_search_box.jsp">
-		<jsp:param name="status" value="icecream" />
+		<jsp:param name="category" value="ICECREAM" />
 	</jsp:include>
 </body>
 </html>
