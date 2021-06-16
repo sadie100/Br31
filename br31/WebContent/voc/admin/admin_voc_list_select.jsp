@@ -4,8 +4,31 @@
 <%
 	VocDAO dao = new VocDAO();
 	
-	String status = request.getParameter("status");
 	String rpage = request.getParameter("page");
+	
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 10;	
+	int reqPage = 1;	
+	int pageCount = 1;	
+	int dbCount = dao.execTotalCount();
+	
+	if(dbCount % pageSize == 0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize + 1;
+	}
+	
+	if(rpage != null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage - 1) * pageSize + 1;
+		endCount = reqPage *pageSize;
+	}else{
+		startCount = 1;
+		endCount = 10;
+	}
+	
+	/* ArrayList<VocVO> list = dao.getList(startCount, endCount); */
 %>
 <!DOCTYPE html>
 <html>
@@ -19,17 +42,37 @@
 <script>
 $(document).ready(function() {
 	
-	get_list("상담유형", "내용유형", "<%=status%>", "<%=rpage%>");
+	get_list("상담유형", "내용유형", <%=startCount%>, <%=endCount%>);
+
+	var pager = jQuery("#ampaginationsm").pagination({
+		
+	    maxSize: 10,	    		// max page size
+	    totals: <%=dbCount%>,	// total pages	
+	    page: <%=rpage%>,		/* // initial page	 */	
+	    pageSize: 10,			// max number items per page
 	
-	//유형 선택
- 	$("#sqtype, #sctype").on("change", function() {
-		get_list($("#sqtype").val(), $("#sctype").val(), "<%=status%>", "<%=rpage%>");
+	    // custom labels		
+	    lastText: "&raquo;&raquo;", 		
+	    firstText: "&laquo;&laquo;",		
+	    prevText: "&lt;",		
+	    nextText: "&gt;",
+			     
+	    btnSize:"sm"	
 	});
 	
-	//리스트  가져오기
-	function get_list(qtype, ctype, status, rpage) {
+	jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+		   jQuery(".showlabelsm").text("The selected page no: "+e.page);
+           $(location).attr("href", "http://localhost:9000/br31/voc/admin/admin_voc_list_select.jsp?page="+e.page);         
+    });
+
+	//유형 선택에 따라 리스트 가져오기
+ 	$("#sqtype, #sctype").on("change", function() {
+		get_list($("#sqtype").val(), $("#sctype").val(), <%=startCount%>, <%=endCount%>);
+	});
+	
+	function get_list(qtype, ctype, start, end) {
 		$.ajax({
-			url: "get_list.jsp?qtype="+ qtype + "&ctype=" + ctype + "&status=" + status + "&rpage=" + rpage,
+			url: "get_list.jsp?qtype="+ qtype + "&ctype=" + ctype + "&start=" + start + "&end=" + end,
 			success: function(result) {
 				var jdata = JSON.parse(result);
 				var data = "";
@@ -44,46 +87,14 @@ $(document).ready(function() {
 					data += "<td>" + jdata.jlist[i].status + "</td>";
 					data += "</tr>";
 				}
-				var dbCount = jdata.dbCount;
-				var rpage = jdata.rpage;
-				var pageSize = jdata.pageSize;
 				
 				$("#column_name").siblings("tr").remove();
 				$("#column_name").after(data);
-
-				paging(dbCount, rpage, pageSize, qtype, ctype, status);
-			}
-		});
-	}
-	
-	function paging(count, rpage, pSize, qtype, ctype, status) {
-		var pager = jQuery("#ampaginationsm").pagination({
-	
-		    maxSize: 10,	    		// max page size
-		    totals: count,	// total pages	
-		    page: rpage,		/* // initial page	 */	
-		    pageSize: pSize,			// max number items per page
+				
+			}//success
+		});//ajax
 		
-		    // custom labels		
-		    lastText: "&raquo;&raquo;", 		
-		    firstText: "&laquo;&laquo;",		
-		    prevText: "&lt;",		
-		    nextText: "&gt;",
-				     
-		    btnSize:"sm"	
-		});
-		
-		jQuery("#ampaginationsm").one("am.pagination.change",function(e){
-			jQuery(".showlabelsm").text("The selected page no: "+e.page);
-			get_list(qtype, ctype, status, e.page);
-	    });
-	}
-	
-	$("#btnVocSearch").click(function() {
-		var link = "http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?qtype="+ $("#sqtype").val()
-				+ "&ctype=" + $("#sctype").val() + "&status=" + status + "&keyworld=" + $("#voc_search").val();
-        $(location).attr("href", link);         
-	});
+	}//get_list
 	
 });//ready
 </script>
@@ -118,7 +129,7 @@ $(document).ready(function() {
 						<option value="기타">기타</option>
 					</select>
 					<input type="text" id="voc_search">
-					<button type="button" id="btnVocSearch">검색</button>
+					<button type="button">검색</button>
 				</div>
 				<div class="list">
 					<table>
@@ -130,6 +141,20 @@ $(document).ready(function() {
 							<th>접수일</th>
 							<th>상태</th>
 						</tr>
+<%-- 						<% for(VocVO vo : list) { %>
+						<tr>
+							<td><%= vo.getRno() %></td>
+							<td><%= vo.getQtype() %></td>
+							<td><%= vo.getCtype() %></td>
+							<% if(vo.getStatus().equals("답변대기")) { %>
+								<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_write.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<% } else { %>
+								<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<% } %>
+							<td><%= vo.getVdate() %></td>
+							<td><%= vo.getStatus() %></td>
+						</tr>
+						<% } %> --%>
 					</table>
 				</div>
 				<div id="ampaginationsm"></div>

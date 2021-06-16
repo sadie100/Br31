@@ -47,7 +47,7 @@
 .am-pagination-default > .active > a:hover,
 .am-pagination-default > .active > span:hover,
 .am-pagination-default > .active > a:focus,
-.am-pagination-default > .active > span:focus  {
+.am-pagination-default > .active > span:focus {
    z-index: 3;
    color: #fff;
    background-color: #f56f98;
@@ -61,7 +61,6 @@
 .am-pagination-default > .disabled > a,
 .am-pagination-default > .disabled > a:hover,
 .am-pagination-default > .disabled > a:focus  {
-   color: #777777;
    background-color: #fff;
    border-color: #ddd;
    cursor: not-allowed;
@@ -78,11 +77,18 @@
    font-size: 16px;
    line-height: 1.5;
 }
+.am-pagination-default > li:nth-child(2) > a,
+.am-pagination-default > li:nth-child(2) > span,
+.am-pagination-default > li:nth-last-child(2) > a,
+.am-pagination-default > li:nth-last-child(2) > span {
+	color: #ffa7b9;
+}
 .am-pagination-default > li:first-child > a,
 .am-pagination-default > li:first-child > span,
 .am-pagination-default > li:last-child > a,
 .am-pagination-default > li:last-child > span {
    display: none;
+   font-weight: bold;
 }
 
 /* 

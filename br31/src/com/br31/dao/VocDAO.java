@@ -1,9 +1,59 @@
 package com.br31.dao;
 
-import java.util.ArrayList;
+import java.util.*;
+
 import com.br31.vo.VocVO;
 
 public class VocDAO extends DBConn {
+	
+	//선택된 문의수
+	public int execTotalCount(String qtype, String ctype, String status){
+		int count = 0;
+		String str = "";
+		
+		if(!qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "' AND CTYPE = '" + ctype + "'";
+		} else if (qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND CTYPE = '" + ctype + "'";
+		} else if (!qtype.equals("상담유형") && ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "'";
+		} 
+		
+		String sql = " SELECT COUNT(*) "
+				+ " FROM (SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
+				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC " 
+				+ " WHERE STATUS = '" + status + "'" + str + " ORDER BY VDATE DESC))) ";
+		
+		getStatement();
+		
+		try {
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) count = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("카운트쪽"+sql);
+		System.out.println("개수"+count);
+		return count;
+	}
+	
+	//전체 문의 수
+	public int execTotalCount(){
+		int count = 0;
+		String sql = " SELECT COUNT(*) FROM BR31_VOC ";
+		getPreparedStatement(sql);
+		
+		try {
+			rs = pstmt.executeQuery();
+			if(rs.next()) count = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
 	
 	//관리자 ---> 문의 답변 삭제
 	public boolean getDeleteAnswerResult(String vid) {
@@ -166,17 +216,22 @@ public class VocDAO extends DBConn {
 		return vo;
 	}
 	
-	//고객 ---> voc_list : 로그인한 고객만 리스트 확인 가능.
-	public ArrayList<VocVO> getList() {
+	//고객 ---> voc_list : 페이지 ***************
+	public ArrayList<VocVO> getList(int start, int end) {
 		ArrayList<VocVO> list = new ArrayList<VocVO>();
 		
-		String sql = " SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD'), STATUS "
-				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC ORDER BY VDATE DESC) ";
-		 	/*	+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, VDATE, STATUS FROM BR31_VOC) WHERE ID = ? "; */
+		String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
+				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC ORDER BY VDATE DESC)) "
+				+ " WHERE RNO BETWEEN ? AND ? ";
+		 	/*	+ " WHERE ID = ? "; */
 		getPreparedStatement(sql);
 		
 		try {
-			/* pstmt.setString(1, id); */ //파라미터로 고객 아이디 받아올 것. 
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);		
+			/* pstmt.setString(3, id); */ //파라미터로 고객 아이디 받아올 것. 
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -200,6 +255,149 @@ public class VocDAO extends DBConn {
 		close();
 		return list;
 	}
+	
+	//고객 voc_list : 로그인한 고객만 리스트 확인 가능.
+	public ArrayList<VocVO> getList() {
+		ArrayList<VocVO> list = new ArrayList<VocVO>();
+		
+		String sql = " SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD'), STATUS "
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC ORDER BY VDATE DESC) ";
+			/*	+ " WHERE ID = ? "; */
+		getPreparedStatement(sql);
+		
+		try {
+			/* pstmt.setString(1, id); */ //파라미터로 고객 아이디 받아올 것. 
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				VocVO vo = new VocVO();
+				
+				vo.setRno(rs.getInt(1));
+				vo.setVid(rs.getString(2));
+				vo.setQtype(rs.getString(3));
+				vo.setCtype(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setVdate(rs.getString(6));
+				vo.setStatus(rs.getString(7));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return list;
+	}
+	
+	
+	//관리자 ---> 선택한 유형에 따라 리스트 가져오기
+/*
+	public ArrayList<VocVO> getList(String qtype, String ctype, int start, int end, String status) {
+		ArrayList<VocVO> list = new ArrayList<VocVO>();
+
+		String str = "";
+		
+		if(!qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "' AND CTYPE = '" + ctype + "'";
+		} else if (qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND CTYPE = '" + ctype + "'";
+		} else if (!qtype.equals("상담유형") && ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "'";
+		} 
+		
+		String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
+				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC " 
+				+ " WHERE STATUS = '" + status + "'" + str + " ORDER BY VDATE DESC)) "
+				+ " WHERE RNO BETWEEN " + start + " AND " + end;
+
+		System.out.println(sql);   //sql확인용 나중에 지우기!!
+		
+		getStatement();
+		
+		try {
+
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				VocVO vo = new VocVO();
+				
+				vo.setRno(rs.getInt(1));
+				vo.setVid(rs.getString(2));
+				vo.setQtype(rs.getString(3));
+				vo.setCtype(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setVdate(rs.getString(6));
+				vo.setStatus(rs.getString(7));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return list;
+	}
+*/
+	
+	public ArrayList<VocVO> getList(String qtype, String ctype, int start, int end, String status) {
+		//HashMap<String, Object> hm = new HashMap<String, Object>();
+		ArrayList<VocVO> list = new ArrayList<VocVO>();
+		String str = "";
+		//int count = 0;
+		
+		if(!qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "' AND CTYPE = '" + ctype + "'";
+		} else if (qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+			str = " AND CTYPE = '" + ctype + "'";
+		} else if (!qtype.equals("상담유형") && ctype.equals("내용유형")) {
+			str = " AND QTYPE = '" + qtype + "'";
+		} 
+		
+		String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
+				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC " 
+				+ " WHERE STATUS = '" + status + "'" + str + " ORDER BY VDATE DESC)) "
+				+ " WHERE RNO BETWEEN " + start + " AND " + end;
+
+		System.out.println(sql);  //sql 확인용 ******************
+		
+		//count = execTotalCount(sql);
+		getStatement();
+		
+		try {
+
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				VocVO vo = new VocVO();
+				
+				vo.setRno(rs.getInt(1));
+				vo.setVid(rs.getString(2));
+				vo.setQtype(rs.getString(3));
+				vo.setCtype(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setVdate(rs.getString(6));
+				vo.setStatus(rs.getString(7));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//hm.put("count", count);
+		//hm.put("list", list);
+		
+		close();
+		return list;
+	}
+	
 	
 	//고객 ---> voc_write : 문의 작성
 	public boolean getInsertResult(VocVO vo) {
@@ -233,3 +431,21 @@ public class VocDAO extends DBConn {
 	}
 	
 }
+
+
+
+
+/*
+String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
+		+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
+		+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC ORDER BY VDATE DESC)) "
+		+ " WHERE RNO BETWEEN " + start + " AND " + end";
+
+if(!qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+	sql += " AND QTYPE = '" + qtype + "' AND CTYPE = '" + ctype + "'";
+} else if (qtype.equals("상담유형") && !ctype.equals("내용유형")) {
+	sql += " AND CTYPE = '" + ctype + "'";
+} else if (!qtype.equals("상담유형") && ctype.equals("내용유형")) {
+	sql += " AND QTYPE = '" + qtype + "'";
+}
+*/

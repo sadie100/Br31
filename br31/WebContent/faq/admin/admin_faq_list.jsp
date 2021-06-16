@@ -1,12 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.FaqDAO, com.br31.vo.FaqVO, java.util.*" %>
+<%
+	String ftype = request.getParameter("ftype");
+	String rpage = request.getParameter("page");
+
+	if(ftype == null) {
+		ftype = "전체";
+	}
+	FaqDAO dao = new FaqDAO();
+
+
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 10;	
+	int reqPage = 1;	
+	int pageCount = 1;	
+	int dbCount = dao.execTotalCount(ftype);
+	
+	if(dbCount % pageSize == 0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize + 1;
+	}
+	
+	if(rpage != null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage - 1) * pageSize + 1;
+		endCount = reqPage *pageSize;
+	}else{
+		startCount = 1;
+		endCount = 10;
+	}
+	
+	ArrayList<FaqVO> list = dao.getList(ftype, startCount, endCount);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
 $(document).ready(function() {
 	$(document).on("click", ".faq_list li>a", function() {
@@ -22,8 +59,46 @@ $(document).ready(function() {
 		}
 		return false;
 	});
-});
 
+	$("#btnFaqDelete").click(function(){
+		var con = confirm("삭제하시겠습니까?");
+<%-- 		if(con) {
+			$.ajax({
+				url: "faqDeleteProcess.jsp?vid=<%=vo.getFid()%>",
+				success: function(result) {
+					 	if(result.trim() == "delete") {
+							alert("삭제 되었습니다.");
+							$(location).attr("href", "admin_faq_list.jsp");
+						} else {
+							alert("삭제에 실패했습니다. 잠시 후 다시 진행해주세요.");
+						}
+				}
+			});
+		} --%>
+	});
+	
+	var pager = jQuery("#ampaginationsm").pagination({
+		
+	    maxSize: 10,	    		// max page size
+	    totals: <%=dbCount%>,	// total pages	
+	    page: <%=rpage%>,		// initial page		
+	    pageSize: 10,			// max number items per page
+	
+	    // custom labels		
+	    lastText: "&raquo;&raquo;", 		
+	    firstText: "&laquo;&laquo;",		
+	    prevText: "&lt;",		
+	    nextText: "&gt;",
+			     
+	    btnSize:"sm"	
+	});
+	
+	jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+		   jQuery(".showlabelsm").text("The selected page no: "+e.page);
+           $(location).attr("href", "http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=<%=ftype%>&page="+e.page);         
+    });
+	
+});
 </script>
 <style>
 div.pagination a:nth-child(2){
@@ -42,28 +117,44 @@ div.pagination a:nth-child(2){
 		<section class="faq">
 			<div class="faq_board">
 				<h3>고객센터 FAQ</h3>
-				<a href="#"><button type="button" class="btnFaqWrite">등록</button></a>
+				<a href="admin_faq_write.jsp"><button type="button" class="btnFaqWrite" id="btnFaqWrite">등록</button></a>
 				<div class="faq_type">
 					<ul>
 						<li>
-							<a href="#">전체</a>
+							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=전체">전체</a>
 						</li>
 						<li>
-							<a href="#">제품</a>
+							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=제품">제품</a>
 						</li>
 						<li>
-							<a href="#">포인트</a>
+							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=포인트">포인트</a>
 						</li>
 						<li>
-							<a href="#">회원</a>
+							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=회원">회원</a>
 						</li>
 						<li>
-							<a href="#">기타</a>
+							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=기타">기타</a>
 						</li>
 					</ul>
 				</div>
 				<div class="faq_list">
 					<ul>
+					<% for(FaqVO vo : list) { %>
+						<li>
+							<a href="#"><%= vo.getTitle() %></a>
+							<div class="answer">
+								<div>
+									<%= vo.getContent().replace("\r\n", "<br>") %>
+									<% if(vo.getFsfile()!=null) { %>
+										<img src="http://localhost:9000/br31/upload/<%= vo.getFsfile() %>">
+									<% } %>
+								</div>
+								<a href="admin_faq_update.jsp?fid=<%= vo.getFid() %>"><button class="btnFaqUpdate" id="btnFaqUpdate">수정</button></a>
+								<a><button class="btnFaqDelete" id="btnFaqDelete">삭제</button></a>
+							</div>
+						</li>
+					<% } %>
+<!-- 				
 						<li>
 							<a href="#">아이스크림도 배달이 되나요?</a>
 							<div class="answer">
@@ -72,10 +163,10 @@ div.pagination a:nth-child(2){
 									<p>배달가능 지역(점포), 배달가능 제품의 제한이 있으므로 해피오더에서 확인 후 구매 부탁드립니다.</p>
 									<img src="http://localhost:9000/br31/images/r-flavor.png">
 								</div>
-								<a><button class="btnFaqUpdate">수정</button></a>
-								<a><button class="btnFaqDelete">삭제</button></a>
+								<a href="admin_faq_update.jsp"><button class="btnFaqUpdate" id="btnFaqUpdate">수정</button></a>
+								<a><button class="btnFaqDelete" id="btnFaqDelete">삭제</button></a>
 							</div>
-						</li>
+						</li>	
 						<li>
 							<a href="#">상품권 유효기간은 얼마 동안인가요?</a>
 							<div class="answer">
@@ -166,16 +257,17 @@ div.pagination a:nth-child(2){
 									- 카카오톡 : 1544-2431<br>- 해피마켓 : 1577-8450									
 								</div>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
-				<div class="pagination">
+				<div id="ampaginationsm"></div>
+<!-- 				<div class="pagination">
 					<a href="http://localhost:9000/br31/faq/faq_1.jsp">&lt;</a>
 					<a href="http://localhost:9000/br31/faq/faq_1.jsp">1</a>
 					<a href="http://localhost:9000/br31/faq/faq_2.jsp">2</a>
 					<a href="http://localhost:9000/br31/faq/faq_3.jsp">3</a>
 					<a href="http://localhost:9000/br31/faq/faq_2.jsp">&gt;</a>
-				</div>
+				</div> -->
 			</div>
 		</section>	
 	</div>

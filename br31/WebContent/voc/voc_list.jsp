@@ -3,7 +3,32 @@
 <%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
 <%
 	VocDAO dao = new VocDAO();
-	ArrayList<VocVO> list = dao.getList();
+	
+	String rpage = request.getParameter("page");
+	
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 10;	
+	int reqPage = 1;	
+	int pageCount = 1;	
+	int dbCount = dao.execTotalCount();
+	
+	if(dbCount % pageSize == 0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize + 1;
+	}
+	
+	if(rpage != null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage - 1) * pageSize + 1;
+		endCount = reqPage *pageSize;
+	}else{
+		startCount = 1;
+		endCount = 10;
+	}
+	
+	ArrayList<VocVO> list = dao.getList(startCount, endCount);
 %>
     
 <!DOCTYPE html>
@@ -12,6 +37,35 @@
 <meta charset="UTF-8">
 <title>내 문의함</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
+<script>
+	$(document).ready(function(){
+		
+		var pager = jQuery("#ampaginationsm").pagination({
+			
+		    maxSize: 10,	    		// max page size
+		    totals: <%=dbCount%>,	// total pages	
+		    page: <%=rpage%>,		// initial page		
+		    pageSize: 10,			// max number items per page
+		
+		    // custom labels		
+		    lastText: "&raquo;&raquo;", 		
+		    firstText: "&laquo;&laquo;",		
+		    prevText: "&lt;",		
+		    nextText: "&gt;",
+				     
+		    btnSize:"sm"	
+		});
+		
+		jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+			   jQuery(".showlabelsm").text("The selected page no: "+e.page);
+	           $(location).attr("href", "http://localhost:9000/br31/voc/voc_list.jsp?page="+e.page);         
+	    });
+		
+ 	});
+</script> 
 </head>
 <body>
 	<!-- header -->
@@ -45,6 +99,7 @@
 						<% } %>
 					</table>
 				</div>
+				<div id="ampaginationsm"></div>
 			</div>
 		</section>	
 	</div>

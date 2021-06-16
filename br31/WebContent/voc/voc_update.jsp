@@ -92,13 +92,13 @@
 
 </script>
 <style>
-span#vfile_name {
-	margin-left: -175px;
-	padding-right: 500px;
-	background-color: white;
-	color: black;
-	font-weight: normal;
-}
+	span#vfile_name {
+		margin-left: -175px;
+		padding-right: 500px;
+		background-color: white;
+		color: black;
+		font-weight: normal;
+	}
 </style>
 </head>
 <body>
@@ -217,10 +217,11 @@ span#vfile_name {
 						<tr>
 							<th>첨부파일</th>
 							<td colspan=3>
+							<input type="file" name="vfile">
 							<% if(vo.getVfile() != null) { %>
-								<input type="file" name="vfile"><span id="vfile_name"><%= vo.getVfile() %></span>
+								<span id="vfile_name"><%= vo.getVfile() %></span>
 							<% } else { %>
-								<input type="file" name="vfile"><span id="vfile_name">파일 없음</span>
+								<span id="vfile_name">파일 없음</span>
 							<% } %>
 							</td>
 						</tr>
