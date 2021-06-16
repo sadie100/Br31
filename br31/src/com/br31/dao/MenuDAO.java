@@ -229,10 +229,19 @@ public class MenuDAO extends DBConn{
 		return vo;
 	}
 	//Select ---> 영양정보 조회 - 기본화면(전체출력)
-	public ArrayList<MenuVO> getAllNutrientsList(){
+	public ArrayList<MenuVO> getAllNutrientsList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		String sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
 				" from br31_menu order by pname ";
+		
+		if(category.equals("icecream")) {
+			sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+					" from br31_menu where category = 'ICECREAM' order by pname ";
+		}else if(category.equals("coffee")) {
+			sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+					" from br31_menu where category = 'COFFEE' order by pname ";
+		}
+		
 		getPreparedStatement(sql);
 		
 		try {
@@ -273,14 +282,22 @@ public class MenuDAO extends DBConn{
 	}
 	
 	//select --> 영양성분 조회 - 검색결과 출력
-	public ArrayList<MenuVO> getNutrientSearchResult(String pname, String nutrient, String sorting, String[] allergies){
+	public ArrayList<MenuVO> getNutrientSearchResult(String category, String pname, String nutrient, String sorting, String[] allergies){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		String sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
 				" from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
-		if(!pname.equals("")) {
-			sql += " where pname like '%" +pname +"%'";
+		if(!category.equals("all")) {
+			sql += " where category = " + category.toUpperCase();
 			w_check = 1;
+		}
+		if(!pname.equals("")) {
+			if(w_check==0) {
+				sql += " where pname like '%" +pname +"%'";
+				w_check = 1;
+			}else {
+				sql += " and pname like '%" +pname +"%'";
+			}
  		}
 		if(allergies!=null) {
 			//String allergy = getString(allergies);

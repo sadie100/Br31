@@ -2,21 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*"%>
 <% 
+	String category = request.getParameter("category");
+	if(category==null){
+		category = "all";
+	}
 	MenuDAO dao = new MenuDAO();
 	ArrayList<MenuVO> list;	
 	if(request.getParameter("pname")==null &&request.getParameter("nutrient")==null
-		&&request.getParameter("sorting")==null && request.getParameter("allergy")==null){
-		list = dao.getAllNutrientsList();	
-		
+		&&request.getParameter("sorting")==null && request.getParameter("allergy")==null){		//header에서 갓 넘어갔을때
+		list = dao.getAllNutrientsList(category);	
 	}else{
 		String pname = request.getParameter("pname");
 		String nutrient = request.getParameter("nutrient");
 		String sorting = request.getParameter("sorting");
 		String[] allergies = request.getParameterValues("allergy");
 		if(pname.equals("")&&nutrient.equals("전체")&&sorting.equals("전체")&&allergies==null){
-			list = dao.getAllNutrientsList();
+			list = dao.getAllNutrientsList(category);
 		}else{
-			list = dao.getNutrientSearchResult(pname,nutrient,sorting,allergies);
+			list = dao.getNutrientSearchResult(category,pname,nutrient,sorting,allergies);
 		}
 	}
 %>
@@ -64,6 +67,7 @@ div.pagination a:nth-child(2){
 	</section>
 	<section class="search_form">
 	<form name="nutrient_search" action="nutrient_default.jsp" method="get" class="nutrient_search">
+	<input type="hidden" name="category" value="<%=category%>">
 		<ul>
 			<li>
 				<label class="title">제품명</label>
@@ -171,8 +175,6 @@ div.pagination a:nth-child(2){
 					</tr>			
 				<% 
 				}
-			}else{
-				System.out.println("검색 결과 없음");
 			}
 			%>
 		</table>

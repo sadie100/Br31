@@ -226,8 +226,8 @@ header .menu:hover .submenu {
 					<a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp">영양성분 및 알레르기</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">아이스크림</a></li>
-								<li><a href="#">커피</a></li>
+								<li><a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp?category=icecream">아이스크림</a></li>
+								<li><a href="http://localhost:9000/br31/nutrient/nutrient_default.jsp?category=coffee">커피</a></li>
 							</ul>
 						</div>
 					</li>
