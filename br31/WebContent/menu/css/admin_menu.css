@@ -195,6 +195,7 @@ div.content_update{
 form.menu_update {
 	text-align: center;
 }
+
 table.menu_update_table{
 	margin: auto;
 	display: inline-block;
@@ -298,7 +299,7 @@ div.exit_div{
 }
 div.modal{
 	border: 2px solid black;
-	width: 300px;
+	width: 350px;
 	height: 355px;
 	overflow: hidden;
 	margin: auto;

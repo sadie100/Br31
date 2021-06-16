@@ -66,12 +66,13 @@ public class MenuDAO extends DBConn{
 		
 	//Select --> admin의 아이스크림 메뉴 리스트
 	
-	public ArrayList<MenuVO> getAdminIcecreamList(){
+	public ArrayList<MenuVO> getAdminList(String status){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
-		String sql = " SELECT * FROM BR31_MENU WHERE CATEGORY='ICECREAM' ";
+		String sql = " SELECT * FROM BR31_MENU WHERE CATEGORY=? ";
 		
 		getPreparedStatement(sql);
 		try {
+			pstmt.setString(1, status.toUpperCase());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MenuVO vo = new MenuVO();
@@ -107,6 +108,48 @@ public class MenuDAO extends DBConn{
 		}
 		close();
 		return list;
+	}
+	
+	//select ---> 수정 시 불러오는 특정 content
+	public MenuVO getAdminContent(String pname){
+		MenuVO vo = new MenuVO();
+		String sql = " SELECT * FROM BR31_MENU WHERE PNAME = ? ";
+		
+		getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, pname);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo.setCategory(rs.getString(1));
+				vo.setOrder_num(rs.getInt(2));
+				vo.setPname(rs.getString(3));
+				vo.setEng_pname(rs.getString(4));
+				vo.setIntro(rs.getString(5));
+				if(rs.getString(6)!=null){
+					vo.setRec_flavor(getStringList(rs.getString(6)));
+				}
+				vo.setMonthly_rank(rs.getInt(7));
+				if(rs.getString(8)!=null) {
+					vo.setHashtag(getStringList(rs.getString(8)));
+				}
+				vo.setPfile(rs.getString(9));
+				vo.setPsfile(rs.getString(10));
+				vo.setOne_amount(rs.getString(11));
+				vo.setKcal(rs.getString(12));
+				vo.setNatrium(rs.getInt(13));
+				vo.setSugar(rs.getInt(14));
+				vo.setFat(rs.getInt(15));
+				vo.setProtein(rs.getInt(16));
+				vo.setCaffeine(rs.getInt(17));
+				if(rs.getString(18)!=null) {
+					vo.setAllergy(getStringList(rs.getString(18)));
+				}
+				vo.setSet_check(rs.getInt(19));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
 	}
 	
 	//Select --> admin의 특정 아이스크림 nutrient 조회
