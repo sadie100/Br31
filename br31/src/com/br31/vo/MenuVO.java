@@ -4,10 +4,16 @@ public class MenuVO {
 	String category, pname, eng_pname, intro,
 	pfile, psfile, one_amount,	kcal;
 	int monthly_rank, natrium, sugar, fat, protein, caffeine,
-	set_check;
+	set_check, order_num;
 	String[] hashtag, allergy, rec_flavor;
 	
 	
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
+	}
 	public String[] getRec_flavor() {
 		return rec_flavor;
 	}

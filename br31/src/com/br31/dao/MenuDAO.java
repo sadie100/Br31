@@ -65,7 +65,7 @@ public class MenuDAO extends DBConn{
 	}
 		
 	//Select --> admin의 아이스크림 메뉴 리스트
-	/*
+	
 	public ArrayList<MenuVO> getAdminIcecreamList(){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		String sql = " SELECT * FROM BR31_MENU WHERE CATEGORY='ICECREAM' ";
@@ -76,23 +76,30 @@ public class MenuDAO extends DBConn{
 			while(rs.next()) {
 				MenuVO vo = new MenuVO();
 				vo.setCategory(rs.getString(1));
-				vo.setPname(rs.getString(2));
-				vo.setEng_pname(rs.getString(3));
-				vo.setIntro(rs.getString(4));
-				vo.setRec_flavor(rs.getString(5));
-				vo.setMonthly_rank(rs.getInt(6));
-				vo.setHashtag(rs.getString(7));
-				vo.setPfile(rs.getString(8));
-				vo.setPsfile(rs.getString(9));
-				vo.setOne_amount(rs.getString(10));
-				vo.setKcal(rs.getString(11));
-				vo.setNatrium(rs.getInt(12));
-				vo.setSugar(rs.getInt(13));
-				vo.setFat(rs.getInt(14));
-				vo.setProtein(rs.getInt(15));
-				vo.setCaffeine(rs.getInt(16));
-				vo.setAllergy(rs.getString(17));
-				vo.setSet_check(rs.getInt(18));
+				vo.setOrder_num(rs.getInt(2));
+				vo.setPname(rs.getString(3));
+				vo.setEng_pname(rs.getString(4));
+				vo.setIntro(rs.getString(5));
+				if(rs.getString(6)!=null){
+					vo.setRec_flavor(getStringList(rs.getString(6)));
+				}
+				vo.setMonthly_rank(rs.getInt(7));
+				if(rs.getString(8)!=null) {
+					vo.setHashtag(getStringList(rs.getString(8)));
+				}
+				vo.setPfile(rs.getString(9));
+				vo.setPsfile(rs.getString(10));
+				vo.setOne_amount(rs.getString(11));
+				vo.setKcal(rs.getString(12));
+				vo.setNatrium(rs.getInt(13));
+				vo.setSugar(rs.getInt(14));
+				vo.setFat(rs.getInt(15));
+				vo.setProtein(rs.getInt(16));
+				vo.setCaffeine(rs.getInt(17));
+				if(rs.getString(18)!=null) {
+					vo.setAllergy(getStringList(rs.getString(18)));
+				}
+				vo.setSet_check(rs.getInt(19));
 				list.add(vo);
 			}
 		} catch (Exception e) {
@@ -101,7 +108,38 @@ public class MenuDAO extends DBConn{
 		close();
 		return list;
 	}
-	*/
+	
+	//Select --> admin의 특정 아이스크림 nutrient 조회
+	public MenuVO getAdminNutrientContent(String pname) {
+		MenuVO vo = new MenuVO();
+		String sql = " select pname, one_amount, kcal, natrium, sugar, "
+				+ "fat, protein, caffeine, allergy, set_check from br31_menu "
+				+ " where pname = ?";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, pname);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo.setPname(rs.getString(1));
+				vo.setOne_amount(rs.getString(2));
+				vo.setKcal(rs.getString(3));
+				vo.setNatrium(rs.getInt(4));
+				vo.setSugar(rs.getInt(5));
+				vo.setFat(rs.getInt(6));
+				vo.setProtein(rs.getInt(7));
+				vo.setCaffeine(rs.getInt(8));
+				if(rs.getString(9)!=null) {
+					vo.setAllergy(getStringList(rs.getString(9)));
+				}
+				vo.setSet_check(rs.getInt(10));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+		
+	}
+	
 	//Select --> monthly best flavor
 	public ArrayList<MenuVO> getMonthlyIcecreamList() {
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();

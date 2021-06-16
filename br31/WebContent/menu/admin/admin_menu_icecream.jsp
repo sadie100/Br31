@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.dao.*,com.br31.vo.*,java.util.*" %>
+<%
+	MenuDAO dao = new MenuDAO();
+	ArrayList<MenuVO> list = dao.getAdminIcecreamList();
+	
+	MenuVO thisvo = new MenuVO();
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +34,21 @@ function nutrientPop(){
 	window.open("admin_menu_nutrient.jsp","","width = 1000, height = 500, top = 200, left = 50");
 }
 */
-
+function ajax_list(pname){
+	$.ajax({
+		url:"admin_menu_nutrient_ajax.jsp?pname="+pname,
+		success:function(result){
+			//실행결과에 따른 처리.
+			var jdata = JSON.parse(result);
+			var output = ""
+		}
+	});
+}
 $(document).ready(function(){
 	$("#nutrients").click(function(){
+		var pname = $("#pname").text();
+		ajax_list(pname);
+		
 		$("#modal").show();
 		$("#overlay").css({"pointer-events":"auto"});
 	});
@@ -41,6 +62,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 </script>
 <body>
 
@@ -78,28 +100,41 @@ $(document).ready(function(){
 					<th>메뉴 사진</th>
 					<th>영양정보</th>
 				</tr>
+				<% for(MenuVO vo:list){ 
+					thisvo = vo;
+				%>
 				<tr>
 					<td><input type="checkbox" id="icecream1" name="엄마는 외계인" value="엄마는 외계인"></td>
-					<td>엄마는 외계인</td>
-					<td>밀크 초콜릿, 다크 초콜릿, 화이트 무스 세 가지 아이스크림에 달콤 바삭한 초코볼이 더해진 아이스크림</td>
+					<td id="pname"><%=vo.getPname() %></td>
+					<td><%=vo.getIntro() %></td>
 					<td>
 						<ul>
-							<li>자모카 아몬드 훠지</li>
-							<li>베리베리 스트로베리</li>
-							<li>이상한 나라의 솜사탕</li>
-							<li>바람과 함께 사라지다</li>
+						<% if(vo.getRec_flavor()==null){ %>
+							<li>-</li>
+						<% }else{
+							for(String flavor:vo.getRec_flavor()){
+							%>
+							<li><%=flavor %></li>
+							<%} 
+							}%>
 						</ul>
 					</td>
 					<td>
 						<ul>
-							<li>#초콜릿</li>
-							<li>#초코볼</li>
-							<li>#엄마는 외계인</li>
+						<% if(vo.getHashtag()==null){ %>
+							<li>-</li>
+						<% }else{
+							for(String hash:vo.getHashtag()){
+							%>
+							<li><%= hash %></li>
+							<%} 
+							}%>
 						</ul>
 					</td>
-					<td><img class="p_image" src="http://localhost:9000/br31/menu/images/ice_mother.png"></td>
+					<td><img class="p_image" src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>"></td>
 					<td><button type="button" class="nutrients_more" id="nutrients">보기</button></td>
 				</tr>
+				<%} %>
 			</table>
 		</li>
 	</ul>
@@ -110,39 +145,50 @@ $(document).ready(function(){
 <table class="nutrient_info">
 			<tr>
 				<th>제품명</th>
-				<td>엄마는 외계인</td>
+				<td><%=thisvo.getPname() %></td>
 			</tr>
 			<tr>
 				<th>1회 제공량(g)</th>
-				<td>115</td>
+				<td><%=thisvo.getOne_amount() %></td>
 			</tr>
 			<tr>
 				<th>열량(kcal)</th>
-				<td>296</td>
+				<td><%=thisvo.getKcal() %></td>
 			</tr>
 			<tr>				
 				<th>나트륨(mg)</th>
-				<td>114</td>
+				<td><%=thisvo.getNatrium() %></td>
 			</tr>
 			<tr>
 				<th>당류(g)</th>
-				<td>23</td>
+				<td><%=thisvo.getSugar() %></td>
 			</tr>
 			<tr>
 				<th>포화지방(g)</th>
-				<td>11</td>
+				<td><%=thisvo.getFat() %></td>
 			</tr>
 			<tr>
 				<th>단백질(g)</th>
-				<td>5</td>
+				<td><%=thisvo.getProtein() %></td>
 			</tr>
 			<tr>
 				<th>카페인(mg)</th>
-				<td>0</td>
+				<td><%=thisvo.getCaffeine() %></td>
 			</tr>
 			<tr>
 				<th>알레르기 성분</th>
-				<td>대두, 밀, 우유</td>
+				<td><%
+					String text = "";
+					for(int i=0;i<thisvo.getAllergy().length;i++) {
+						if(i==thisvo.getAllergy().length-1) {
+							text += thisvo.getAllergy()[i];
+						}else {
+							text += thisvo.getAllergy()[i]+",";
+						}
+					}
+				%>
+				<%= text %>
+				</td>
 			</tr>			
 	</table>
 </div>
