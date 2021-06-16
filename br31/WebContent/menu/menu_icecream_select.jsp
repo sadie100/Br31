@@ -14,6 +14,7 @@
  	}
  	
  	String insta_code = pname.replace(" ","");
+ 	SessionVO svo = (SessionVO)session.getAttribute("svo");
  %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,40 @@
 				$("#btn_right").animate({top : pageYOffset+100+'px'}, 110);
 			}
 		});
+		
+		//클릭이벤트 추가
+		$("img[name=btn_star]").click(function(){
+			<% if(svo != null){ %>
+			var btn_s = $("img[name=btn_star]").attr("id");
+				if(btn_s == "star_button"){
+					$.ajax({
+						url:"http://localhost:9000/br31/mypage/mfUpdateProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
+						success:function(result){
+							if(result==1){
+								$("#star_button").attr("src","http://localhost:9000/br31/images/star_button_onclick.PNG");
+								$("#star_button").attr("id","star_button_onclick");
+							}
+						}
+					});
+				}else{
+					$.ajax({
+						url:"http://localhost:9000/br31/mypage/mfDeleteProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
+						success:function(result){
+						alert("일로 넘어옴");
+							if(result==1){
+								$("#star_button_onclick").attr("src","http://localhost:9000/br31/images/star_button.PNG");
+								$("#star_button_onclick").attr("id","star_button");
+							}
+						}
+					});
+				}
+			<%}else{%>
+				alert("로그인후 이용가능합니다.");
+				return false;
+			<%}%>
+			
+		});
+		
 		/*
 		$("#btn_left").hover(function(){
 			$("#btn_left").css({"border" : "1px solid rgb(243,125,160)", "width" : "230px",
@@ -57,7 +92,7 @@
 			$("#btn_label").remove();
 			
 		});
-		*/		
+		*/
 		
 	});
 </script>
@@ -94,7 +129,8 @@
 			</div>
 				<div class="arrowbox" id="arrowbox"><span>좋아하는 플레이버 등록</span></div>
 			<div class="icons">
-				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" id="star_button"></a>
+				<!-- DB에서 데이터를 가져와서 해당 데이터가 선택 되어 있으면 아이디를 star_button_onclick으로 바꾸기 -->
+				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" name = "btn_star" id="star_button"></a>
 				<a href="#"><img src="images/icon_facebook.png"></a>
 				<a href="#"><img src="images/icon_twitter.png"></a>
 				<a href="#"><img src="images/icon_copy.png"></a>

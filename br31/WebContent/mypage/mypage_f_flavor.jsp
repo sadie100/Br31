@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.br31.vo.SessionVO" %>
+<%@ page import = "com.br31.vo.*, com.br31.dao.*, java.util.*" %>
 <%
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){	
+		//즐겨찾기한 메뉴 리스트 받아오기 br31_f_flavor에서 아이디에 따른 pname 받아오기, menuVO, menuDAO를 이용해서 정보 가져오기
+		
 %>    
 <!DOCTYPE html>
 <html>
@@ -20,14 +22,17 @@
 			var btn_f = $(this).attr("id");
 			
 			if(btn_f == "btn_favor"){
+				//버튼 모양 체크
 				$(this).removeClass("btn_favor");
 				$(this).addClass("btn_favor_click");
 				$(this).attr("id","btn_favor_click");
 			}else{
+				//별 모양 체크 해제
 				$(this).removeClass("btn_favor_click");
 				$(this).addClass("btn_favor");
 				$(this).attr("id","btn_favor");
-			}
+				
+			}//if
 		});
 		
 		
@@ -127,6 +132,6 @@
 <% }else{%>
 	<script>
 		window.alert("로그인후 사용이 가능합니다.");
-		location.href = "http://localhost:9000/mycgv/login/login.jsp";
+		location.href = "http://localhost:9000/br31/login/login.jsp";
 	</script>
 <% } %>
