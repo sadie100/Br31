@@ -8,7 +8,6 @@
 	MenuVO vo = dao.getAdminNutrientContent(pname);
 	
 	JsonObject jdata = new JsonObject();
-	JsonArray jlist = new JsonArray();
 	Gson gson = new Gson();
 	
 	jdata.addProperty("pname", vo.getPname());

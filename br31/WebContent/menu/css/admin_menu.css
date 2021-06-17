@@ -92,7 +92,7 @@ div.table table{
 	border: none;
 }
 div.table table td{
-	padding: 0;
+	padding: 0 10px;
 	border-bottom: 1px solid rgb(216,209,204);
 	font-size: 14px;
 }
@@ -130,25 +130,22 @@ div.table button.nutrients_more{
 
 /** 아이스크림 **/
 div.table table.menu_ice th:first-child {
-	width: 40px;
+	width: 200px;
 }
 div.table table.menu_ice th:nth-child(2) {
-	width: 200px;
+	width: 450px;
 }
 div.table table.menu_ice th:nth-child(3) {
-	width: 400px;
+	width: 200px;
 }
 div.table table.menu_ice th:nth-child(4) {
-	width: 200px;
+	width: 150px;
 }
 div.table table.menu_ice th:nth-child(5) {
 	width: 150px;
 } 
 div.table table.menu_ice th:nth-child(6) {
 	width: 150px;
-}
-div.table table.menu_ice th:nth-child(7) {
-	width: 70px;
 }
 
 /** 커피 **/
@@ -179,7 +176,14 @@ div.table table.menu_coffee th:nth-child(6){
 /******메뉴관리 수정 ********/
 /******메뉴관리 수정 ********/
 /******메뉴관리 수정 ********/
-
+span#frame {
+	width: 500px;
+	display : inline-block;
+	font-size: 13px;
+	margin-left: -175px;
+	background-color: white;
+	padding: 2px 0 2px 2px;
+}
 section.page_update{
 	margin: 30px 0;
 	text-align: center;

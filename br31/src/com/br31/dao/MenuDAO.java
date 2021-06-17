@@ -66,13 +66,13 @@ public class MenuDAO extends DBConn{
 		
 	//Select --> admin의 아이스크림 메뉴 리스트
 	
-	public ArrayList<MenuVO> getAdminList(String status){
+	public ArrayList<MenuVO> getAdminList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		String sql = " SELECT * FROM BR31_MENU WHERE CATEGORY=? ";
 		
 		getPreparedStatement(sql);
 		try {
-			pstmt.setString(1, status.toUpperCase());
+			pstmt.setString(1, category.toUpperCase());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MenuVO vo = new MenuVO();
@@ -109,8 +109,67 @@ public class MenuDAO extends DBConn{
 		close();
 		return list;
 	}
+	//update ---> 수정 처리(새로운 파일 선택)
+	public boolean getUpdateResult(MenuVO vo) {
+		boolean result = false;
+		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
+				+ " hashtag = ?, pfile = ?, psfile = ?, one_amount = ?, "
+				+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+				+ " caffeine = ?, allergy = ? ";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, vo.getIntro());
+			pstmt.setString(2, getString(vo.getRec_flavor()));
+			pstmt.setString(3, getString(vo.getHashtag()));
+			pstmt.setString(4, vo.getPfile());
+			pstmt.setString(5, vo.getPsfile());
+			pstmt.setString(6, vo.getOne_amount());
+			pstmt.setString(7, vo.getKcal());
+			pstmt.setInt(8, vo.getNatrium());
+			pstmt.setInt(9, vo.getSugar());
+			pstmt.setInt(10, vo.getFat());
+			pstmt.setInt(11, vo.getProtein());
+			pstmt.setInt(12, vo.getCaffeine());
+			pstmt.setString(13, getString(vo.getAllergy()));
+			
+			int a = pstmt.executeUpdate();
+			if(a!=0) result=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;		
+	}
+	//update ---> 수정 처리(기존 파일)
+	public boolean getUpdateResultNofile(MenuVO vo) {
+		boolean result = false;
+		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
+				+ " hashtag = ?, one_amount = ?, "
+				+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+				+ " caffeine = ?, allergy = ? ";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, vo.getIntro());
+			pstmt.setString(2, getString(vo.getRec_flavor()));
+			pstmt.setString(3, getString(vo.getHashtag()));
+			pstmt.setString(4, vo.getOne_amount());
+			pstmt.setString(5, vo.getKcal());
+			pstmt.setInt(6, vo.getNatrium());
+			pstmt.setInt(7, vo.getSugar());
+			pstmt.setInt(8, vo.getFat());
+			pstmt.setInt(9, vo.getProtein());
+			pstmt.setInt(10, vo.getCaffeine());
+			pstmt.setString(11, getString(vo.getAllergy()));
+			
+			int a = pstmt.executeUpdate();
+			if(a!=0) result=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;		
+	}
 	
-	//select ---> 수정 시 불러오는 특정 content
+	
+	//select ---> admin에서 수정버튼을 눌렀을 시 불러오는 특정 content
 	public MenuVO getAdminContent(String pname){
 		MenuVO vo = new MenuVO();
 		String sql = " SELECT * FROM BR31_MENU WHERE PNAME = ? ";
@@ -149,6 +208,7 @@ public class MenuDAO extends DBConn{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		close();
 		return vo;
 	}
 	

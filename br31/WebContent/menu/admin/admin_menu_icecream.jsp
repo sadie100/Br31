@@ -25,7 +25,7 @@
 *****/
 
 function updatePop(){
-	window.open("admin_menu_update.jsp","","width = 800, height = 850, top = 50, left = 800");
+	window.open("admin_menu_update.jsp?category=icecream","","width = 800, height = 850, top = 50, left = 800");
 }
 function writePop(){
 	window.open("admin_menu_write.jsp","","width = 800, height = 850, top = 50, left = 800");
@@ -88,16 +88,7 @@ $(document).ready(function(){
 		$("#overlay").css({"pointer-events":"none"});
 	});
 	$("#btn_update").click(function(){
-		if($("input[type='checkbox']:checked").length==0){
-			alert("수정할 메뉴를 선택해 주세요.");
-			return false;
-		}else if($("input[type='checkbox']:checked").length>1){
-			alert("수정은 한 번에 하나씩만 진행할 수 있습니다.");
-			return false;
-		}else{
-			$("#hidden_tag").val("update");
-			menu_form.submit();
-		}
+		updatePop();
 	});
 	
 	
@@ -133,7 +124,6 @@ $(document).ready(function(){
 		<li>
 			<table class="menu_ice" id="menu_table">
 				<tr>
-					<th>선택</th>
 					<th>메뉴 이름</th>
 					<th>메뉴 설명</th>
 					<th>추천 플레이버</th>
@@ -145,7 +135,6 @@ $(document).ready(function(){
 					thisvo = vo;
 				%>
 				<tr>
-					<td><input type="checkbox" id="menu_check" name="menu_check" value="<%=vo.getPname()%>"></td>
 					<td id="pname"><span><%=vo.getPname() %></span></td>
 					<td><%=vo.getIntro() %></td>
 					<td>

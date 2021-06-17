@@ -238,7 +238,7 @@ header .admin_msg {
 							</ul>
 						</div>
 					</li>
-					<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_icecream.jsp">메뉴 관리</a>
+					<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_icecream.jsp">메뉴·영양성분 관리</a>
 						<div class="submenu">
 							<ul>
 								<li><a href="http://localhost:9000/br31/menu/admin/admin_menu_icecream.jsp">아이스크림</a></li>
@@ -246,6 +246,7 @@ header .admin_msg {
 							</ul>
 						</div>
 					</li>
+					<!-- 
 					<li><a href="#">영양성분 관리</a>
 						<div class="submenu">
 							<ul>
@@ -254,6 +255,7 @@ header .admin_msg {
 							</ul>
 						</div>
 					</li>
+					 -->
 					<li><a href="#">이벤트 관리</a>
 						<div class="submenu">
 							<ul>

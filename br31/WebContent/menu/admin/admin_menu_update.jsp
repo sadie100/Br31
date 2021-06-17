@@ -2,14 +2,10 @@
     pageEncoding="UTF-8"%>
  <%@ page import = "com.br31.dao.*,com.br31.vo.*,java.util.*,java.net.URLEncoder" %>
  <%
- 	String pname = request.getParameter("pname");
-	System.out.println(pname);
- 
- 	String status = request.getParameter("status");
+ 	String category = request.getParameter("category");
  	MenuDAO dao = new MenuDAO();
-	MenuVO vo = dao.getAdminContent(pname);
-	System.out.println(vo.getPname());
-	ArrayList<MenuVO> list = dao.getAdminList(status);
+	//MenuVO vo = dao.getAdminContent(pname);
+	ArrayList<MenuVO> list = dao.getAdminList(category);
  %>
 <!DOCTYPE html>
 <html>
@@ -17,66 +13,225 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/admin_menu.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script>
+	
+	function form_empty(){						//리셋버튼 누를때 함수
+		$("#intro").val("");	//설명
+		$("#selected_rec_flavor").empty();
+		$("#hashtag").val("");	//해쉬태그
+		$("#selected_hashtag").empty();
+		$("#frame").remove();
+		var output = "<span id='frame'>선택된 파일 없음</span>";
+		$("#p_image").after(output);
+		$("#n_amount").val("");
+		$("#n_kcal").val("");
+		$("#n_natrium").val("");
+		$("#n_sugar").val("");
+		$("#n_fat").val("");
+		$("#n_protein").val("");
+		$("#n_caffeine").val("");
+		$("input[type=checkbox]").removeAttr("checked");
+	}
+
+	function ajax_content(pname){						//ajax
+		$.ajax({
+			url:"admin_menu_update_ajax.jsp?pname="+pname,
+			success:function(result){
+				//실행결과에 따른 처리.
+				var jdata = JSON.parse(result);
+				$("#intro").val(jdata.intro);	//설명
+				$("#selected_rec_flavor").empty();	//추천플레이버
+				var output = "";
+				if(jdata.rec_flavor!=""){
+					var list_r = jdata.rec_flavor.split(",");
+					for(var i=0;i<list_r.length;i++){
+						output += "<span>" + list_r[i] + "<button type='button' class='delete'>&times;</button></span>";
+					}
+				}
+				$("#selected_rec_flavor").append(output);
+				
+				$("#hashtag").val();	//해쉬태그
+				$("#selected_hashtag").empty();
+				output = "";
+				if(jdata.hashtag!=null){
+					var list_h = jdata.hashtag.split(",");
+					for(var i=0;i<list_h.length;i++){
+						output += "<span><label class='hashtag' name='hashtag'>" + list_h[i] + "<button type='button' class='delete'>&times;</button><label></span>";
+					}
+				}
+				$("#selected_hashtag").append(output);
+				
+				$("#frame").remove();
+				output="";	//메뉴 사진
+				if(jdata.pfile!=null){
+					output += "<span id='frame'>"+jdata.pfile+"</span>";
+				}else{
+					output += "<span id='frame'>선택된 파일 없음</span>";
+				}
+				$("#p_image").after(output);
+				
+				$("#bsfile_old").val(jdata.psfile)
+				$("#n_amount").val(jdata.one_amount);
+				$("#n_kcal").val(jdata.kcal);
+				$("#n_natrium").val(jdata.natrium);
+				$("#n_sugar").val(jdata.sugar);
+				$("#n_fat").val(jdata.fat);
+				$("#n_protein").val(jdata.protein);
+				$("#n_caffeine").val(jdata.caffeine);
+				
+				$("input[type=checkbox]").removeAttr("checked");
+				if(jdata.allergy!=null){
+					var list_a = jdata.allergy.split(",");
+					for(var i=0;i<list_a.length;i++){
+						$("input[value="+list_a[i]+"]").attr("checked","checked");
+					}
+				}
+				
+			}//success
+		});//ajax
+	}//ajax_list function
+	
+	$(document).ready(function(){							//document ready
+		
+		$("#pname").change(function(){
+			var pname = $("#pname").val();
+			if(pname!="choice"){
+				ajax_content(pname);
+			}else{
+				form_empty(num);
+			}
+		});
+		
+		$("#rec_flavor_list").change(function(){		//추천 플레이버 선택시
+			var flavor = $("#rec_flavor_list").val();
+			if(flavor!="선택"){
+				if(flavor==$("#pname").val()){
+					alert("추천 플레이버는 다른 맛만 선택할 수 있습니다.")
+				}else{
+					var output = "<span><button type='button' class='delete' id='delete_rec'>&times;</button></span>";
+					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+flavor+">";
+					$("#selected_rec_flavor").append(output);
+					$("#selected_rec_flavor").find("button").click(function(){
+						var p = $(this).parent().attr('id');
+						console.log(p);
+						$("input[name='rec_flavor'][value="+p+"]").remove();
+						$(this).parent().remove();
+						console.log("됨");
+					});
+				}
+			}
+		});
+		
+		$("#selected_rec_flavor").find("button").click(function(){
+			console.log("되긴됨?");
+			this.parent().remove();
+			$("input[name='rec_flavor' && value="+this.val()+"])").remove();
+		});
+		
+		$("#btn_hash_add").click(function(){
+			
+		});
+		
+		
+		$("input[type=file]").on('change',function(){				//파일 선택시
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+				$("#frame").text("").text(filename);
+			}
+		});
+		
+		$("#btn_reset").click(function(){						//리셋버튼누를때
+			var pname = $("#pname").val();
+			if(pname!="choice"){
+				ajax_content(pname);
+			}else{
+				form_empty(num);
+			}
+		});
+		
+		$("#btn_update").click(function(){						//수정버튼누를때
+			if($("#pname option:selected").val()=="선택"){
+				alert("수정할 제품을 선택해 주세요");
+				$("#pname").focus();
+				return false;
+			}else if($("#intro").val()==""){
+				alert("제품 설명을 입력해 주세요");
+				$("#intro").focus();
+				return false;
+			}else if($("#frame").text()=="선택된 파일 없음"){
+				alert("제품 사진을 등록해 주세요");
+				return false;
+			}else{
+				var check = confirm("제품을 등록하시겠습니까?");
+				if(check==true){
+					menu_update.submit();
+				}else{
+					return false;
+				}
+			}
+		});
+	});//document.ready
+	
+</script>
 </head>
 <body>
 <!-- content -->
 <section class="page_update">
 <h3 class="title">메뉴 수정</h3>
 <div class="content_update">
-	<form name="menu_update" action="#" method="get" class="menu_update">
+	<form name="menu_update" action="admin_menu_update_process.jsp" method="post" class="menu_update" enctype="multipart/form-data">
+	<input type="hidden" name="psfile_old" id="psfile_old">
 		<table class="menu_update_table">
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="p_name" id="p_name" value="<%=vo.getPname()%>"></td>
-			</tr>
-			<tr>
-				<th>설명</th>
-				<td><input type="text" name="p_text" id="p_text" value="<%=vo.getIntro()%>"></td>
-			</tr>
-			<tr>
-				<th>추천 플레이버</th>
 				<td>
-					<select id="p_flavor" name="p_flavor">
-						<option value="choice">선택</option>
+					<select id="pname" name="pname">
+						<option value="선택">선택</option>
 						<%for(MenuVO a_vo : list){ %>
 						<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
 						<%} %>
 					</select>
-							
+				</td>
+			</tr>
+			<tr>
+				<th>설명</th>
+				<td><input type="text" name="intro" id="intro" value=""></td>
+			</tr>
+			<tr>
+				<th>추천 플레이버</th>
+				<td>
+					<select id="rec_flavor_list" name="rec_flavor_list">
+						<option value="선택">선택</option>
+						<%for(MenuVO a_vo : list){ %>
+						<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
+						<%} %>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<th></th>
 				<td>
-					<div class="selected_div">
-					<%
-					if(vo.getRec_flavor()!=null){
-					for(String r_flavor:vo.getRec_flavor()){ %>
-						<span><%= r_flavor%><button class="delete">&times;</button></span>
-						<%}
-					}%>
+					<div class="selected_div" id="selected_rec_flavor">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>해쉬태그</th>
-				<td><input type="text" name="p_hashtag" id="p_hashtag" value="">
-				<input type="button" name = "btn_flavor" id="btn_add" value="등록">
+				<td><input type="text" name="hashtag" id="hashtag" value="">
+				<input type="button" name = "btn_hash_add" id="btn_hash_add" value="등록">
 				</td>
 			</tr>
 			<tr>
 				<th></th>
 				<td>
-					<div class="selected_div">
-						<span>#초콜릿<button class="delete">&times;</button></span>
-						<span>#초코볼<button class="delete">&times;</button></span>
-						<span>#엄마는외계인<button class="delete">&times;</button></span>
+					<div class="selected_div" id="selected_hashtag">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>메뉴 사진</th>
-				<td><input type="file" name="p_image" id="p_image"></td>
+				<td><input type="file" name="pfile" id="p_image"></td>
 			</tr>
 			<tr>
 				<th class="th_nutrient">영양정보</th>
@@ -84,48 +239,48 @@
 					<table class="update_nutrient">
 						<tr>
 							<th>1회 제공량(g)</th>
-							<td><input type="text" name="n_amount" id="n_amount" value="115"></td>
+							<td><input type="text" name="one_amount" id="n_amount"></td>
 							<th>열량(kcal)</th>
-							<td><input type="text" name="n_kcal" id="n_kcal" value="296"></td>
+							<td><input type="text" name="kcal" id="n_kcal"></td>
 						</tr>
 						<tr>
 							<th>나트륨(mg)</th>
-							<td><input type="text" name="n_natrium" id="n_natrium" value="114"></td>
+							<td><input type="text" name="natrium" id="n_natrium"></td>
 							<th>당류(g)</th>
-							<td><input type="text" name="n_sugar" id="n_sugar" value="23"></td>
+							<td><input type="text" name="sugar" id="n_sugar"></td>
 						</tr>
 						<tr>
 							<th>포화지방(g)</th>
-							<td><input type="text" name="n_fat" id="n_fat" value="11"></td>
+							<td><input type="text" name="fat" id="n_fat"></td>
 							<th>단백질(g)</th>
-							<td><input type="text" name="n_protein" id="n_protein" value="5"></td>
+							<td><input type="text" name="protein" id="n_protein"></td>
 						</tr>
 						<tr>
 							<th>카페인(mg)</th>
-							<td colspan=2><input type="text" name="n_caffeine" id="n_caffeine" value="0"></td>
+							<td colspan=2><input type="text" name="caffeine" id="n_caffeine"></td>
 						</tr>
 						<tr>
 							<th>알레르기 성분</th>
 							<td class="td_allergy" colspan=3>
-								<input type="checkbox" id="allergy" name="allergy1" value="계란">
+								<input type="checkbox" id="allergy" name="allergy" value="계란">
 								<label for="allergy">계란</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy2" value="대두" checked="checked">
+								<input type="checkbox" id="allergy" name="allergy" value="대두">
 								<label for="allergy">대두</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy3" value="돼지고기">
+								<input type="checkbox" id="allergy" name="allergy" value="돼지고기">
 								<label for="allergy">돼지고기</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy4" value="땅콩">
+								<input type="checkbox" id="allergy" name="allergy" value="땅콩">
 								<label for="allergy">땅콩</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy5" value="밀" checked="checked">
+								<input type="checkbox" id="allergy" name="allergy" value="밀">
 								<label for="allergy">밀</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy6" value="복숭아">
+								<input type="checkbox" id="allergy" name="allergy" value="복숭아">
 								<label for="allergy">복숭아</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy7" value="우유" checked="checked">
+								<input type="checkbox" id="allergy" name="allergy" value="우유">
 								<label for="allergy">우유</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy8" value="호두">
+								<input type="checkbox" id="allergy" name="allergy" value="호두">
 								<label for="allergy">호두</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy9" value="쇠고기">
+								<input type="checkbox" id="allergy" name="allergy" value="쇠고기">
 								<label for="allergy">쇠고기</label>&nbsp;
-								<input type="checkbox" id="allergy" name="allergy10" value="오징어">
+								<input type="checkbox" id="allergy" name="allergy" value="오징어">
 								<label for="allergy">오징어</label><br>
 							</td>
 						</tr>
@@ -134,8 +289,8 @@
 			</tr>
 		</table>
 		<div class="update_buttons">
-			<button type="button" id="btn_final" name="btn_submit">수정</button>
-			<button type="reset" id="btn_final">초기화</button>
+			<button type="button" id="btn_update" name="btn_submit">수정</button>
+			<button type="reset" id="btn_reset">초기화</button>
 		</div>
 		
 	</form>

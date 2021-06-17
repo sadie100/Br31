@@ -8,6 +8,31 @@ public class MenuVO {
 	String[] hashtag, allergy, rec_flavor;
 	
 	
+	//hashtag, 추천플레이버 등 String을 배열로 합하는 메소드
+	public String[] getStringList(String text) {
+		if(text.contains(",")) {
+			String[] list = text.split(",");
+			return list;
+		}else {
+			String[] list = {text};
+			return list;
+		}
+	}
+	
+	//배열을 String으로 분리하는 메소드
+	public String getString(String[] list) {
+		String text = "";
+		for(int i=0;i<list.length;i++) {
+			if(i==list.length-1) {
+				text += list[i];
+			}else {
+				text += list[i]+",";
+			}
+		}
+		return text;
+	}
+	
+	
 	public int getOrder_num() {
 		return order_num;
 	}
@@ -20,6 +45,9 @@ public class MenuVO {
 	public void setRec_flavor(String[] rec_flavor) {
 		this.rec_flavor = rec_flavor;
 	}
+	public void setRec_flavor(String rec_flavor) {
+		this.rec_flavor = getStringList(rec_flavor);
+	}
 	public String[] getHashtag() {
 		return hashtag;
 	}
@@ -29,8 +57,14 @@ public class MenuVO {
 	public void setHashtag(String[] hashtag) {
 		this.hashtag = hashtag;
 	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = getStringList(hashtag);
+	}
 	public void setAllergy(String[] allergy) {
 		this.allergy = allergy;
+	}
+	public void setAllergy(String allergy) {
+		this.allergy = getStringList(allergy);
 	}
 	public int getMonthly_rank() {
 		return monthly_rank;
