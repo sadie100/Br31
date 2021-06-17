@@ -195,7 +195,7 @@ header .menu:hover .submenu {
 						<% }else{ %>
 						<a href="http://localhost:9000/br31/login/logout.jsp">LOGOUT</a>
 						<% if(svo.getId().equals("admin")){ %>
-						<a href="http://localhost:9000/br31/mypage/mypage.jsp">ADMIN</a>
+						<a href="http://localhost:9000/br31/adminIndex.jsp">ADMIN</a>
 						<%}else{ %>
 						<a href="http://localhost:9000/br31/mypage/mypage.jsp">MY PAGE</a>
 						<%} %>

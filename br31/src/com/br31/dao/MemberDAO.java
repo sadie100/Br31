@@ -74,6 +74,29 @@ public class MemberDAO extends DBConn{
 		return result;
 	}
 	
+	//Delete -->회원탈퇴
+	public boolean getDeleteResult(String id) {
+		boolean result = false;
+		
+		String sql = "delete from br31_member where id = ? ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, id);
+			
+			int dresult = pstmt.executeUpdate();
+			
+			if(dresult != 0) {
+				result = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	//Select -->회원 마이페이지 정보
 	public MemberVO getMypageData(String id) {
@@ -81,11 +104,13 @@ public class MemberDAO extends DBConn{
 		
 		//카드번호, 이름, 포인트
 		String sql = "SELECT CARD, NAME, POINT " + 
-					" FROM BR31_MEMBER";
+					" FROM BR31_MEMBER WHERE ID = ? ";
 		
 		getPreparedStatement(sql);
 		
 		try {
+			pstmt.setString(1, id);
+			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
@@ -266,7 +291,7 @@ public class MemberDAO extends DBConn{
 		boolean result = false;
 		
 		String sql = "INSERT INTO BR31_MEMBER " + 
-				 	" VALUES(?, ?, ?, ?, ?, ?, ?, ?,'00000-00000', 0, 'null', SYSDATE, 0, 'N')";
+				 	" VALUES(?, ?, ?, ?, ?, ?, ?, ?,'00000-00000', 0, SYSDATE, 0, 'N')";
 		//나중에 가능하면 카드번호를 랜덤으로 부여할 수 있도록 구현하기!
 		
 		

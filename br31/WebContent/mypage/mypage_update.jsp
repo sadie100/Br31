@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.br31.vo.*, com.br31.dao.*, com.br31.vo.SessionVO" %>    
 <%
-	String id = "test";
-	MemberDAO dao = new MemberDAO();
-	MemberVO vo = dao.getMemberContent(id);
-	
-	dao.close();
 	
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){	
+		MemberDAO dao = new MemberDAO();
+		String id = svo.getId();
+		MemberVO vo = dao.getMemberContent(id);
+		
+		dao.close();
 %>
 <!DOCTYPE html>
 <html>
@@ -135,27 +135,28 @@
 					<ul>
 						<li>
 							<label>이름</label>
-							<input type = "text" name = "name" class = "li" value =<%=vo.getName() %> disabled>
+							<input type = "text" name = "name" class = "li" value =<%=vo.getName()%> disabled>
 						</li>
 						<li>
 							<label>성별</label>
-							<input type = "text" name = "gender" class = "li" value =<%=vo.getGender() %> disabled>
+							<input type = "text" name = "gender" class = "li" value =<%=vo.getGender()%> disabled>
 						</li>
 						<li>
 							<label>생년월일</label>
-							<input type = "date" name = "birthday" value = <%=vo.getBirth() %> class = "li">
+							<input type = "date" name = "birth" value = <%=vo
+							.getBirth()%> class = "li">
 						</li>
 						<li>
 							<label>휴대폰</label>
-							<select id = "phone1" name = "phone1" class = "select_style">
+							<select id = "phone1" name = "hp1" class = "select_style">
 								<option value = "<%=vo.getHp1()%>" hidden><%= vo.getHp1() %></option>
 								<option value = "선택" >선택</option>
 								<option value = "010" id = "pnum1">010</option>
 								<option value = "011" id = "pnum2">011</option>
 								<option value = "017" id = "pnum3">017</option>
 							</select><span> - </span>
-							<input type = "text" name = "phone2" class = "li" id = "phone2" value = "<%=vo.getHp2()%>"><span> - </span>
-							<input type = "text" name = "phone3" class = "li" id = "phone3" value = "<%=vo.getHp3()%>">
+							<input type = "text" name = "hp2" class = "li" id = "phone2" value = "<%=vo.getHp2()%>"><span> - </span>
+							<input type = "text" name = "hp3" class = "li" id = "phone3" value = "<%=vo.getHp3()%>">
 						</li>
 						<li>
 							<label>아이디</label>
@@ -171,9 +172,9 @@
 						</li>
 						<li>
 							<label>주소</label>
-							<input type = "text" name = "address_number" class = "li" value="<%=vo.getAddr1()%>">
+							<input type = "text" name = "addr1" class = "li" value="<%=vo.getAddr1()%>">
 							<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check">우편번호 검색</button></a>
-							<input type = "text" name = "address" class = "li" value = "<%=vo.getAddr2()%>">
+							<input type = "text" name = "adde2" class = "li" value = "<%=vo.getAddr2()%>">
 						</li>
 						<li>
 							<label>이메일</label>

@@ -211,7 +211,7 @@ header .admin_msg {
 				</nav>
 			</div>
 			<div>
-				<a href="#"><img src="http://localhost:9000/br31/images/admin_header.png"></a>
+				<a href="http://localhost:9000/br31/adminIndex.jsp"><img src="http://localhost:9000/br31/images/admin_header.png"></a>
 			</div>
 			<div>
 				<a href="http://localhost:9000/br31/index.jsp" target="_blank">홈페이지</a>
@@ -231,7 +231,7 @@ header .admin_msg {
 							</ul>
 						</div>
 					</li>
-					<li class="main_menu2"><a href="#">회원정보 관리</a>
+					<li class="main_menu2"><a href="http://localhost:9000/br31/admin_member.jsp">회원정보 관리</a>
 						<div class="submenu">
 							<ul>
 								<li><img src="http://localhost:9000/br31/images/monthly_menu.png"></li>

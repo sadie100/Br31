@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.br31.vo.*, com.br31.dao.*, com.br31.vo.SessionVO" %>    
 <%
-	MemberDAO dao = new MemberDAO();
-	String id = "test";
-	MemberVO vo = dao.getMypageData(id);
-	
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
+
 	if(svo != null){	
+		MemberDAO dao = new MemberDAO();
+		String id = svo.getId();
+		MemberVO vo = dao.getMypageData(id);
+		dao.close();
+		
 %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +60,7 @@
 						</div>
 						<div class = "hello">
 							<span>안녕하세요</span>
-							<span><%=vo.getName() %>님!</span>
+							<span><%=vo.getName()%>님!</span>
 						</div>
 					</div>
 				</div>	

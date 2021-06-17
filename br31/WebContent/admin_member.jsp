@@ -7,7 +7,8 @@
 	ArrayList<MemberVO> list = dao.getMemberList(); 
 	
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
-	if(svo.getId() == "admin"){
+	if(svo != null){
+	if(svo.getId().equals("admin")){
 %>   
 <!DOCTYPE html>
 <html>
@@ -78,6 +79,12 @@
 	</div>
 </body>
 </html>
+<% }else{%>
+	<script>
+		window.alert("접근권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<% } %>
 <% }else{%>
 	<script>
 		window.alert("로그인후 사용이 가능합니다.");

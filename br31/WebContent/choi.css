@@ -1270,14 +1270,47 @@ div.loginF div{
 	font-size:13px;
 }
 
+/**********
+	adminIndex.css
+**************/
 
+.adIndex_content{
+	width:1000px;
+	text-align:center;
+	font-family:"¸¼Àº°íµñ";
+	margin:auto;
+	margin-top:145px;
+}
 
+.adIndex_content button{
+	width:550px;
+	display:block;
+	margin:auto;
+	margin-top:30px;
+	font-size:20px;
+	background-color:indianred;
+	color:white;
+	border:1px solid indianred;
+	padding:10px;
+	border-radius:50px;
+}
 
+.adIndex_content a{
+	text-decoration:none;
+}
 
+.adIndex_footer{
+	width:1000px;
+	text-align:center;
+	margin:auto;
+	margin-top:180px;
+	font-family:"¸¼Àº°íµñ";
+}
 
-
-
-
+.adIndex_footer span{
+	color:gray;
+	font-size:10px;
+}
 
 
 

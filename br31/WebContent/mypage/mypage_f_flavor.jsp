@@ -4,7 +4,13 @@
 <%
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){	
+		
+		MypageDAO dao = new MypageDAO();
+		
 		//즐겨찾기한 메뉴 리스트 받아오기 br31_f_flavor에서 아이디에 따른 pname 받아오기, menuVO, menuDAO를 이용해서 정보 가져오기
+		ArrayList<MenuVO> dlist = dao.getFlavorList(svo.getId());//pname, id 정보를 가져오기(해당아이디의 즐겨찾기 목록)
+		
+		dao.close();
 		
 %>    
 <!DOCTYPE html>
@@ -18,7 +24,36 @@
 	//클릭하면 별모양 버튼 색이 바뀌도록 구현
 	$(document).ready(function(){
 		
+		//클릭이벤트 추가
 		$("button[name=btn_f]").click(function(){
+			var btn_s = $(this).attr("id");
+				if(btn_s == "btn_favor"){
+					$.ajax({
+						url:"http://localhost:9000/br31/mypage/mfUpdateProcess.jsp?id=<%=svo.getId()%>&pname="+$(this).attr('value'),
+						success:function(result){
+							if(result==1){
+								$(this).removeClass("btn_favor");
+								$(this).addClass("btn_favor_click");
+								$(this).attr("id","btn_favor_onclick");
+							}
+						}
+					});
+				}else{
+					$.ajax({
+						url:"http://localhost:9000/br31/mypage/mfDeleteProcess.jsp?id=<%=svo.getId()%>&pname="+$(this).attr('value'),
+						success:function(result){
+							if(result==1){
+								$(this).removeClass("btn_favor_click");
+								$(this).addClass("btn_favor");
+								$(this).attr("id","btn_favor");
+								location.reload();
+							}
+						}
+					});
+				}
+		});
+		
+		/* $("button[name=btn_f]").click(function(){
 			var btn_f = $(this).attr("id");
 			
 			if(btn_f == "btn_favor"){
@@ -33,7 +68,7 @@
 				$(this).attr("id","btn_favor");
 				
 			}//if
-		});
+		}); */
 		
 		
 	});
@@ -78,28 +113,28 @@
 								<span>베리베리 스트로베리</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor4.png">
 							</a>
-							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value = "베리베리 스트로베리"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>뉴욕 치즈케이크</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor2.png">
 							</a>
-							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value = "뉴욕 치즈케이크"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>바람과 함께 사라지다</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor3.png">
 							</a>
-							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value = "바람과 함께 사라지다"></button>
 						</li>
 						<li>
 							<a href = "#">
 								<span>민트 초콜릿 칩</span>
 								<img src = "http://localhost:9000/br31/images/r-flavor.png">
 							</a>
-							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f"></button>
+							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value = "민트 초콜릿 칩"></button>
 						</li>
 					</ul>	
 				</div>
@@ -109,11 +144,15 @@
 			<span class = "m_title">내가 좋아하는 플레이버</span>
 				<div class = "r_flavor">
 					<ul>
+						<%for(MenuVO vo : dlist){ %>
 						<li>
-							<span>사랑에 빠진 딸기</span>
-							<a href = "#"><img src = "http://localhost:9000/br31/images/my_f_flavor.png"></a>
-							<button type = "button" class = "btn_favor_click" id = "btn_favor_click" name = "btn_f"></button>
-						</li>	
+							<a href = "http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=vo.getPname()%>">
+								<span><%= vo.getPname() %></span>
+								<img src = "http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">
+							</a>
+							<button type = "button" class = "btn_favor_click" id = "btn_favor_onclick" name = "btn_f" value = "<%=vo.getPname()%>"></button>
+						</li>
+						<%} %>	
 					</ul>	
 				</div>
 		</section>
