@@ -6,6 +6,24 @@ import com.br31.vo.VocVO;
 
 public class VocDAO extends DBConn {
 	
+	//삭제 파일 선택
+	public String getVsfile(String vid) {
+		String vsfile = null;
+		String sql = " SELECT VSFILE FROM BR31_VOC WHERE VID = ?";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, vid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) vsfile = rs.getString(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vsfile;
+	}
+	
 	//선택된 문의수
 	public int execTotalCount(String qtype, String ctype, String status){
 		int count = 0;
@@ -30,12 +48,11 @@ public class VocDAO extends DBConn {
 		try {
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) count = rs.getInt(1);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("카운트쪽"+sql);
-		System.out.println("개수"+count);
 		return count;
 	}
 	
@@ -48,6 +65,7 @@ public class VocDAO extends DBConn {
 		try {
 			rs = pstmt.executeQuery();
 			if(rs.next()) count = rs.getInt(1);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,7 +108,6 @@ public class VocDAO extends DBConn {
 		
 			int value = pstmt.executeUpdate();
 			if(value != 0) result = true;
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

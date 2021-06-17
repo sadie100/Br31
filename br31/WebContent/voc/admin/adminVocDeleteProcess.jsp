@@ -8,15 +8,9 @@
 	boolean result = dao.getDeleteAnswerResult(vid);
 	
 	if(result) {
-		out.write("delete");
-	} else {
-		out.write("fail");
-	}
-	
-	/* if(result) {
 		response.sendRedirect("admin_voc_write.jsp?vid="+vid);
 	} else {
 		response.sendRedirect("../errorPage.jsp");
-	} */
+	}
 %>
 

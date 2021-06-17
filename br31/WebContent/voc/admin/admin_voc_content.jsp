@@ -21,26 +21,9 @@
 $(document).ready(function() {
 	$("#btnAnswerDelete").click(function() {
 		var con = confirm("답변을 삭제하시겠습니까?");
-		
 		if(con) {
-			$.ajax({
-				url: "adminVocDeleteProcess.jsp?vid=<%=vo.getVid()%>",
-				dataType: "text",
-				success: function(result) {
-					 	if(result.trim() == "delete") {
-						alert("답변이 삭제 되었습니다.");
-						$(location).attr("href", "admin_voc_list.jsp");
-					} else {
-						alert("삭제에 실패했습니다. 잠시 후 다시 진행해주세요.");
-					}
-				}
-			});
-		}
-		
-<%-- 		if(con) {
-			//alert("답변이 삭제 되었습니다.");
 			$(location).attr("href", "adminVocDeleteProcess.jsp?vid=<%=vo.getVid()%>");
-		} --%>
+		}
 	});
 	
 	$("#voc_image").click(function() {

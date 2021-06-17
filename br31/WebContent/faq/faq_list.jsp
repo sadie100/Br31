@@ -80,14 +80,6 @@ $(document).ready(function() {
 		}
 		return false;
 	});
-
-	
-	$(".btnFaqDelete").click(function(){
-		var con = confirm("삭제하시겠습니까?");
- 		if(con) {
-			$(location).attr("href", "adminFaqDeleteProcess.jsp?fid="+$(".btnFaqDelete").val());
-		}
-	});
 	
 	var pager = jQuery("#ampaginationsm").pagination({
 		
@@ -107,39 +99,44 @@ $(document).ready(function() {
 	
 	jQuery("#ampaginationsm").on("am.pagination.change",function(e){
 		   jQuery(".showlabelsm").text("The selected page no: "+e.page);
-           $(location).attr("href", "http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=<%=ftype%>&page="+e.page);         
+           $(location).attr("href", "http://localhost:9000/br31/faq/faq_list.jsp?ftype=<%=ftype%>&page="+e.page);         
     });
 
 });
 </script>
+<style>
+div.pagination a:nth-child(2){
+	background-color: rgb(245,111,152);
+	color: white;
+}
+</style>
 </head>
 <body>
 	<!-- header -->
-	<jsp:include page="../../admin_header.jsp"></jsp:include>
-	<jsp:include page="admin_cs_header.jsp"></jsp:include>
-		
+	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="cs_header.jsp"></jsp:include>
+	
 	<!-- content -->
 	<div class="cs_content">
 		<section class="faq">
 			<div class="faq_board">
 				<h3>고객센터 FAQ</h3>
-				<a href="admin_faq_write.jsp" class="btnFaqWrite"><button type="button" id="btnFaqWrite">등록</button></a>
-				<div class="faq_type" id="faq_type">
+				<div class="faq_type">
 					<ul>
 						<li class="all">
-							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=all">전체</a>
+							<a href="http://localhost:9000/br31/faq/faq_list.jsp?ftype=all">전체</a>
 						</li>
 						<li class="ftype1">
-							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=ftype1">제품</a>
+							<a href="http://localhost:9000/br31/faq/faq_list.jsp?ftype=ftype1">제품</a>
 						</li>
 						<li class="ftype2">
-							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=ftype2">포인트</a>
+							<a href="http://localhost:9000/br31/faq/faq_list.jsp?ftype=ftype2">포인트</a>
 						</li>
 						<li class="ftype3">
-							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=ftype3">회원</a>
+							<a href="http://localhost:9000/br31/faq/faq_list.jsp?ftype=ftype3">회원</a>
 						</li>
 						<li class="ftype4">
-							<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?ftype=ftype4">기타</a>
+							<a href="http://localhost:9000/br31/faq/faq_list.jsp?ftype=ftype4">기타</a>
 						</li>
 					</ul>
 				</div>
@@ -155,8 +152,6 @@ $(document).ready(function() {
 										<img src="http://localhost:9000/br31/upload/<%=vo.getFsfile()%>">
 									<% } %>
 								</div>
-								<a href="admin_faq_update.jsp?fid=<%= vo.getFid() %>" class="btnFaqUpdate"><button type="button">수정</button></a>
-								<button type="button" class="btnFaqDelete" id="btnFaqDelete" value="<%=vo.getFid()%>">삭제</button>
 							</div>
 						</li>
 					<% } %>
@@ -168,7 +163,7 @@ $(document).ready(function() {
 	</div>
 	
 	<!-- footer -->
-	<jsp:include page="../../footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

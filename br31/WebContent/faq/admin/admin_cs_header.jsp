@@ -16,7 +16,7 @@
 			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
 		</div>
 		<div class="cs_menu">
-			<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp?"><button type="button" class="btn_faq">
+			<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp"><button type="button" class="btn_faq">
 				자주하는 질문</button></a>
 			<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button" class="btn_voc">
 				답변 대기 문의</button></a>

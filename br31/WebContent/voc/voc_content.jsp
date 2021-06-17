@@ -30,19 +30,8 @@
 		
 		$("#btnVocDelete").click(function() {
 			var con = confirm("문의를 삭제하시겠습니까?");
-
 			if(con) {
-				$.ajax({
-					url: "vocDeleteProcess.jsp?vid=<%=vo.getVid()%>",
-					success: function(result) {
-  					 	if(result.trim() == "delete") {
-							alert("문의가 삭제 되었습니다.");
-							$(location).attr("href", "voc_list.jsp");
-						} else {
-							alert("삭제에 실패했습니다. 잠시 후 다시 진행해주세요.");
-						}
-					}
-				});
+				$(location).attr("href", "vocDeleteProcess.jsp?vid=<%=vo.getVid()%>");
 			}
 		});
 				

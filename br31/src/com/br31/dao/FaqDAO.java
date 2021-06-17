@@ -20,6 +20,95 @@ public class FaqDAO extends DBConn {
 		return result;
 	}
 	
+	public String getFsfile(String fid) {
+		String fsfile = null;
+		
+		String sql = " SELECT FSFILE FROM BR31_FAQ WHERE FID = ?";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, fid);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) fsfile = rs.getString(1);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return fsfile;
+	}
+	
+	public boolean getDeleteResult(String fid) {
+		boolean result = false;
+		
+		String sql = " DELETE FROM BR31_FAQ WHERE FID = ? ";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, fid);
+			
+			int value = pstmt.executeUpdate();
+			if(value != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
+
+	public boolean getUpdateResultNoFile(FaqVO vo) {
+		boolean result = false;
+		
+		String sql = " UPDATE BR31_FAQ SET TITLE = ?, CONTENT = ?, FTYPE = ? WHERE FID = ? ";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getFtype());
+			pstmt.setString(4, vo.getFid());
+			
+			int value = pstmt.executeUpdate();
+			if(value != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
+	
+	public boolean getUpdateResult(FaqVO vo) {
+		boolean result = false;
+		
+		String sql = " UPDATE BR31_FAQ SET TITLE = ?, CONTENT = ?, FFILE = ?, FSFILE = ?, FTYPE = ? WHERE FID = ? ";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getFfile());
+			pstmt.setString(4, vo.getFsfile());
+			pstmt.setString(5, vo.getFtype());
+			pstmt.setString(6, vo.getFid());
+			
+			int value = pstmt.executeUpdate();
+			if(value != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
+	
 	//콘텐츠 가져오기
 	public FaqVO getContent(String fid) {
 		FaqVO vo = new FaqVO();
@@ -53,14 +142,12 @@ public class FaqDAO extends DBConn {
 		int count = 0;
 		
 		String str = "";
-		if(!ftype.equals("전체")) str = " WHERE FTYPE = '" + ftype + "' ";
+		if(!ftype.equals("all")) str = " WHERE FTYPE = '" + ftype + "' ";
 		
 		String sql = " SELECT COUNT(*) FROM (SELECT FID, TITLE, CONTENT, FSFILE FROM BR31_FAQ " + str + " ORDER BY FDATE DESC) ";
 		
 		getPreparedStatement(sql);
 		getStatement();
-		
-		System.out.println(sql);
 		
 		try {
 			rs = stmt.executeQuery(sql);
@@ -72,7 +159,7 @@ public class FaqDAO extends DBConn {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return count;
 	}
 	
@@ -82,7 +169,7 @@ public class FaqDAO extends DBConn {
 		ArrayList<FaqVO> list = new ArrayList<FaqVO>();
 		
 		String str = "";
-		if(!ftype.equals("전체")) str = " WHERE FTYPE = '" + ftype + "' ";
+		if(!ftype.equals("all")) str = " WHERE FTYPE = '" + ftype + "' ";
 		
 		String sql = " SELECT RNO, FID, TITLE, CONTENT, FSFILE "
 		+	" FROM (SELECT ROWNUM RNO, FID, TITLE, CONTENT, FSFILE " 
@@ -163,7 +250,6 @@ public class FaqDAO extends DBConn {
 			pstmt.setString(5, vo.getFtype());
 			
 			int value = pstmt.executeUpdate();
-			
 			if(value != 0) result = true;
 			
 		} catch (Exception e) {

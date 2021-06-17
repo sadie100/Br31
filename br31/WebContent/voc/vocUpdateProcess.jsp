@@ -30,7 +30,7 @@
 		result = dao.getUpdateResult(vo);
 		
 		if(result) {
-			File old_file = new File(savePath+"/"+multi.getParameter("vsfile_old"));
+			File old_file = new File(savePath+ "/" +multi.getParameter("vsfile_old"));
 			if(old_file.exists()) old_file.delete();
 		}
 		

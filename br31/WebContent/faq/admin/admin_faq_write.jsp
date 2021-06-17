@@ -26,6 +26,10 @@
 				faq_write_form.submit();
 			}
 		});
+		
+		$("#btnFaqCancel").click(function() {
+			window.history.back();
+		});
 	});
 </script>
 </head>
@@ -43,10 +47,10 @@
 						<label>유형</label>
 					</th>
 					<td>
-						<input type="radio" name="ftype" value="제품">제품
-						<input type="radio" name="ftype" value="포인트">포인트
-						<input type="radio" name="ftype" value="회원">회원
-						<input type="radio" name="ftype" value="기타">기타
+						<input type="radio" name="ftype" value="ftype1">제품
+						<input type="radio" name="ftype" value="ftype2">포인트
+						<input type="radio" name="ftype" value="ftype3">회원
+						<input type="radio" name="ftype" value="ftype4">기타
 					</td>
 				</tr>
 				<tr>
@@ -75,8 +79,8 @@
 				</tr>
 			</table>
 			<div class="faq_write_btns">
-				<a href="#"><button type="button" id="btnFaqSave">등록</button></a>
-				<a href="#"><button type="button">취소</button></a>
+				<button type="button" id="btnFaqSave">등록</button>
+				<button type="button" id="btnFaqCancel">취소</button>
 			</div>
 		</form>
 	</div>
