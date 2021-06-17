@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import = "com.br31.dao.*,com.br31.vo.*,java.util.*,java.net.URLEncoder" %>
+ <%
+ 	String pname = request.getParameter("pname");
+	System.out.println(pname);
+ 
+ 	String status = request.getParameter("status");
+ 	MenuDAO dao = new MenuDAO();
+	MenuVO vo = dao.getAdminContent(pname);
+	System.out.println(vo.getPname());
+	ArrayList<MenuVO> list = dao.getAdminList(status);
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,25 +27,20 @@
 		<table class="menu_update_table">
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="p_name" id="p_name" value="엄마는 외계인"></td>
+				<td><input type="text" name="p_name" id="p_name" value="<%=vo.getPname()%>"></td>
 			</tr>
 			<tr>
 				<th>설명</th>
-				<td><input type="text" name="p_text" id="p_text" value="밀크 초콜릿, 다크 초콜릿, 화이트 무스 세 가지 아이스크림에 달콤 바삭한 초코볼이 더해진 아이스크림"></td>
+				<td><input type="text" name="p_text" id="p_text" value="<%=vo.getIntro()%>"></td>
 			</tr>
 			<tr>
 				<th>추천 플레이버</th>
 				<td>
 					<select id="p_flavor" name="p_flavor">
 						<option value="choice">선택</option>
-						<option value="자모카 아몬드 훠지">자모카 아몬드 훠지</option>
-						<option value="베리베리 스트로베리">베리베리 스트로베리</option>
-						<option value="이상한 나라의 솜사탕">이상한 나라의 솜사탕</option>
-						<option value="바람과 함께 사라지다">바람과 함께 사라지다</option>
-						<option value="아몬드 봉봉">아몬드 봉봉</option>
-						<option value="체리쥬빌레">체리쥬빌레</option>
-						<option value="아이스 홈런볼">아이스 홈런볼</option>
-						<option value="초코나무 숲">초코나무 숲</option>
+						<%for(MenuVO a_vo : list){ %>
+						<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
+						<%} %>
 					</select>
 							
 				</td>
@@ -43,10 +49,12 @@
 				<th></th>
 				<td>
 					<div class="selected_div">
-						<span>자모카 아몬드 훠지<button class="delete">&times;</button></span>
-						<span>베리베리 스트로베리<button class="delete">&times;</button></span>
-						<span>이상한 나라의 솜사탕<button class="delete">&times;</button></span>
-						<span>바람과 함께 사라지다<button class="delete">&times;</button></span>
+					<%
+					if(vo.getRec_flavor()!=null){
+					for(String r_flavor:vo.getRec_flavor()){ %>
+						<span><%= r_flavor%><button class="delete">&times;</button></span>
+						<%}
+					}%>
 					</div>
 				</td>
 			</tr>

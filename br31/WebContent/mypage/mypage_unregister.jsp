@@ -57,6 +57,6 @@
 <% }else{%>
 	<script>
 		window.alert("로그인후 사용이 가능합니다.");
-		location.href = "http://localhost:9000/mycgv/login/login.jsp";
+		location.href = "http://localhost:9000/br31/login/login.jsp";
 	</script>
 <% } %>

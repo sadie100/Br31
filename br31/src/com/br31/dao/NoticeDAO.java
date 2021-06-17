@@ -7,13 +7,13 @@ import com.br31.vo.NoticeVO;
 public class NoticeDAO extends DBConn {
 
 	// ?Ç≠?†ú?ï† Í≤åÏãúÍ∏??ùò ?åå?ùºÎ™? Í∞??†∏?ò§Í∏?
-	public String getNsfile(String nid) {
+	public String getNsfile(int articleno) {
 		String result = "";
 		try {
 			String sql = "SELECT NSFILE FROM BR31_NOTICE WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, nid);
+			pstmt.setInt(1, articleno);
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -34,7 +34,7 @@ public class NoticeDAO extends DBConn {
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getNcontent());
-			pstmt.setString(3, vo.getArticleno());
+			pstmt.setInt(3, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -57,7 +57,7 @@ public class NoticeDAO extends DBConn {
 			pstmt.setString(2, vo.getNcontent());
 			pstmt.setString(3, vo.getNfile());
 			pstmt.setString(4, vo.getNsfile());
-			pstmt.setString(5, vo.getArticleno());
+			pstmt.setInt(5, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -69,13 +69,13 @@ public class NoticeDAO extends DBConn {
 		return result;
 	}
 
-	public boolean getDeleteResult(String nid) {
+	public boolean getDeleteResult(String articleno) {
 		boolean result = false;
 		try {
-			String sql = "DELETE FROM BR31_NOTICE WHERE NID = ?";
+			String sql = "DELETE FROM BR31_NOTICE WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, nid);
+			pstmt.setString(1, articleno);
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -87,13 +87,13 @@ public class NoticeDAO extends DBConn {
 		return result;
 	}
 
-	public boolean getUpdateHit(String nid) {
+	public boolean getUpdateHit(String articleno) {
 		boolean result = false;
 		try {
-			String sql = "UPDATE BR31_NOTICE SET NHIT = NHIT + 1 WHERE NID = ?";
+			String sql = "UPDATE BR31_NOTICE SET NHIT = NHIT + 1 WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, nid);
+			pstmt.setString(1, articleno);
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
 				result = true;
@@ -105,24 +105,23 @@ public class NoticeDAO extends DBConn {
 		return result;
 	}
 
-	public NoticeVO getContent(String nid) {
+	public NoticeVO getContent(String articleno) {
 		NoticeVO vo = null;
 		try {
-			String sql = "SELECT NID, TITLE, NCONTENT, NFILE, NSFILE, NHIT, TO_CHAR(MDATE, 'YYYY-MM-DD') MDATE FROM BR31_NOTICE WHERE NID = ?";
+			String sql = "SELECT ARTICLENO, TITLE, NCONTENT, NFILE, NSFILE, TO_CHAR(MDATE, 'YYYY-MM-DD') MDATE FROM BR31_NOTICE WHERE articleno = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setString(1, nid);
+			pstmt.setString(1, articleno);
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				vo = new NoticeVO();
-				vo.setNid(rs.getString(1));
+				vo.setArticleno(rs.getInt(1));
 				vo.setTitle(rs.getString(2));
 				vo.setNcontent(rs.getString(3));
 				vo.setNfile(rs.getString(4));
 				vo.setNsfile(rs.getString(5));
-				vo.setNhit(rs.getInt(6));
-				vo.setMDate(rs.getString(7));
+				vo.setMdate(rs.getString(6));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,18 +132,17 @@ public class NoticeDAO extends DBConn {
 	public ArrayList<NoticeVO> getList() {
 		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
 		try {
-			String sql = "SELECT ROWNUM AS RNO, NID, TITLE, NHIT, TO_CHAR(MDATE, 'YYYY-MM-DD') AS MDATE ";
-			sql += "	  FROM (SELECT NID, TITLE, NHIT, MDATE FROM BR31_NOTICE ORDER BY MDATE DESC)";
+			String sql = "SELECT ROWNUM AS RNO, ARTICLENO, TITLE, TO_CHAR(MDATE, 'YYYY-MM-DD') AS MDATE ";
+			sql += "	  FROM (SELECT ARTICLENO, TITLE, MDATE FROM BR31_NOTICE ORDER BY MDATE DESC)";
 			getPreparedStatement(sql);
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				NoticeVO vo = new NoticeVO();
 				vo.setRno(rs.getInt(1));
-				vo.setNid(rs.getString(2));
+				vo.setArticleno(rs.getInt(2));
 				vo.setTitle(rs.getString(3));
-				vo.setNhit(rs.getInt(4));
-				vo.setMdate(rs.getString(5));
+				vo.setMdate(rs.getString(4));
 				list.add(vo);
 			}
 		} catch (Exception e) {

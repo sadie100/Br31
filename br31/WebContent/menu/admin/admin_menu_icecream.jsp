@@ -3,7 +3,8 @@
 <%@ page import="com.br31.dao.*,com.br31.vo.*,java.util.*" %>
 <%
 	MenuDAO dao = new MenuDAO();
-	ArrayList<MenuVO> list = dao.getAdminIcecreamList();
+	String status= "icecream";
+	ArrayList<MenuVO> list = dao.getAdminList(status);
 	
 	MenuVO thisvo = new MenuVO();
 	
@@ -29,30 +30,56 @@ function updatePop(){
 function writePop(){
 	window.open("admin_menu_write.jsp","","width = 800, height = 850, top = 50, left = 800");
 }
-/*
-function nutrientPop(){
-	window.open("admin_menu_nutrient.jsp","","width = 1000, height = 500, top = 200, left = 50");
+
+function getPname(){
+	if($("input[type='checkbox']:checked").length==0){
+		alert("하나 이상 선택해 주세요.")
+	}else{
+		
+	}
+	//var checks = [];
+	//var index = $("input[type='checkbox']:checked").parents("tr").index();
+	//checks.push("input[type='checkbox']:checked");
+	//var index = x.parents("tr").index();
+	//console.log(index);
+	//var pname = $("#menu_table").find("tr").eq(index).find("span").text();
 }
-*/
+
 function ajax_list(pname){
 	$.ajax({
 		url:"admin_menu_nutrient_ajax.jsp?pname="+pname,
 		success:function(result){
 			//실행결과에 따른 처리.
 			var jdata = JSON.parse(result);
-			var output = ""
-		}
-	});
-}
+			//var output = "<button class='exit' id='exit'>&times;</button>";
+			var output = "<table class='nutrient_info'>";
+			output += "<tr><th>제품명</th><td>"+jdata.pname+"</td></tr>";
+			output += "<tr><th>1회 제공량(g)</th><td>"+jdata.one_amount+"</td></tr>";
+			output += "<tr><th>열량(kcal)</th><td>" + jdata.kcal + "</td></tr>";
+			output += "<tr><th>나트륨(mg)</th><td>"+jdata.natrium+"</td></tr>";
+			output += "<tr><th>당류(g)</th><td>"+jdata.sugar+"</td></tr>";
+			output += "<tr><th>포화지방(g)</th><td>"+jdata.fat+"</td></tr>";
+			output += "<tr><th>단백질(g)</th><td>"+jdata.protein+"</td></tr>";
+			output += "<tr><th>카페인(mg)</th><td>"+jdata.caffeine+"</td></tr>";
+			output += "<tr><th>알레르기 성분</th><td>"+jdata.allergy+"</td></tr></table>";
+			
+			$("#modal_content").append(output);
+		}//success
+	});//ajax
+}//ajax_list function
+
 $(document).ready(function(){
-	$("#nutrients").click(function(){
-		var pname = $("#pname").text();
+	$("td").find("button").click(function(){
+		$("#modal_content").empty();
+		var x = document.activeElement;
+		var index = $(x).parents("tr").index();
+		var pname = $("#menu_table").find("tr").eq(index).find("span").text();
 		ajax_list(pname);
 		
 		$("#modal").show();
 		$("#overlay").css({"pointer-events":"auto"});
-	});
-	$("#exit").click(function(){
+	}); 
+	$("#modal").find("button").click(function(){
 		$("#modal").hide();
 		$("#overlay").css({"pointer-events":"none"});
 	});
@@ -60,8 +87,21 @@ $(document).ready(function(){
 		$("#modal").hide();
 		$("#overlay").css({"pointer-events":"none"});
 	});
+	$("#btn_update").click(function(){
+		if($("input[type='checkbox']:checked").length==0){
+			alert("수정할 메뉴를 선택해 주세요.");
+			return false;
+		}else if($("input[type='checkbox']:checked").length>1){
+			alert("수정은 한 번에 하나씩만 진행할 수 있습니다.");
+			return false;
+		}else{
+			$("#hidden_tag").val("update");
+			menu_form.submit();
+		}
+	});
 	
-});
+	
+});//document.ready
 
 </script>
 <body>
@@ -73,7 +113,8 @@ $(document).ready(function(){
 <section class="page">
 <div class="content">
 <h3 class="title">메뉴 관리</h3>
-<form name="menu_view" action="#" method="get" class="menu_form">
+<form name="menu_form" action="admin_menu_icecream_process.jsp" method="get" class="menu_form" id="menu_form">
+		<input type="hidden" id="hidden_tag" name="status">
 	<div class="category">
 		<ul class="category">
 			<li class="selected"><a href="admin_menu_icecream.jsp">아이스크림</a></li>
@@ -82,15 +123,15 @@ $(document).ready(function(){
 	</div>
 	<div class="buttons">
 		<ul class="buttons">
-			<li><button class="update" onclick = "updatePop()">수정</button></li>
-			<li><button class="update">삭제</button></li>
-			<li><button class="update" onclick = "writePop()">등록</button></li>
+			<li><button type="button" class="update" id="btn_update">수정</button></li>
+			<li><button type="button" class="update" id="btn_delete">삭제</button></li>
+			<li><button type="button" class="update" id="btn_write">등록</button></li>
 		</ul>
 	</div>
 <div class="table">
 	<ul>
 		<li>
-			<table class="menu_ice">
+			<table class="menu_ice" id="menu_table">
 				<tr>
 					<th>선택</th>
 					<th>메뉴 이름</th>
@@ -104,8 +145,8 @@ $(document).ready(function(){
 					thisvo = vo;
 				%>
 				<tr>
-					<td><input type="checkbox" id="icecream1" name="엄마는 외계인" value="엄마는 외계인"></td>
-					<td id="pname"><%=vo.getPname() %></td>
+					<td><input type="checkbox" id="menu_check" name="menu_check" value="<%=vo.getPname()%>"></td>
+					<td id="pname"><span><%=vo.getPname() %></span></td>
 					<td><%=vo.getIntro() %></td>
 					<td>
 						<ul>
@@ -118,7 +159,7 @@ $(document).ready(function(){
 							<%} 
 							}%>
 						</ul>
-					</td>
+					</td> 
 					<td>
 						<ul>
 						<% if(vo.getHashtag()==null){ %>
@@ -132,7 +173,8 @@ $(document).ready(function(){
 						</ul>
 					</td>
 					<td><img class="p_image" src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>"></td>
-					<td><button type="button" class="nutrients_more" id="nutrients">보기</button></td>
+					<td><button type="button" class="nutrients_more" id="nutrients">보기</button>
+					</td>
 				</tr>
 				<%} %>
 			</table>
@@ -141,58 +183,11 @@ $(document).ready(function(){
 </div>
 </form>
 <div class="modal" id="modal">
-	<button class="exit" id="exit">&times;</button>
-<table class="nutrient_info">
-			<tr>
-				<th>제품명</th>
-				<td><%=thisvo.getPname() %></td>
-			</tr>
-			<tr>
-				<th>1회 제공량(g)</th>
-				<td><%=thisvo.getOne_amount() %></td>
-			</tr>
-			<tr>
-				<th>열량(kcal)</th>
-				<td><%=thisvo.getKcal() %></td>
-			</tr>
-			<tr>				
-				<th>나트륨(mg)</th>
-				<td><%=thisvo.getNatrium() %></td>
-			</tr>
-			<tr>
-				<th>당류(g)</th>
-				<td><%=thisvo.getSugar() %></td>
-			</tr>
-			<tr>
-				<th>포화지방(g)</th>
-				<td><%=thisvo.getFat() %></td>
-			</tr>
-			<tr>
-				<th>단백질(g)</th>
-				<td><%=thisvo.getProtein() %></td>
-			</tr>
-			<tr>
-				<th>카페인(mg)</th>
-				<td><%=thisvo.getCaffeine() %></td>
-			</tr>
-			<tr>
-				<th>알레르기 성분</th>
-				<td><%
-					String text = "";
-					for(int i=0;i<thisvo.getAllergy().length;i++) {
-						if(i==thisvo.getAllergy().length-1) {
-							text += thisvo.getAllergy()[i];
-						}else {
-							text += thisvo.getAllergy()[i]+",";
-						}
-					}
-				%>
-				<%= text %>
-				</td>
-			</tr>			
-	</table>
+<button class='exit' id='exit'>&times;</button>
+<div class="modal_content" id="modal_content">
 </div>
-	<div class="overlay" id="overlay"></div>
+</div>
+<div class="overlay" id="overlay"></div>
 </div>
 </section>
 <!-- footer -->
