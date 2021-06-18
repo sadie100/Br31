@@ -259,8 +259,8 @@ header .admin_msg {
 					<li><a href="#">이벤트 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">진행이벤트</a></li>
-								<li><a href="#">당첨자발표</a></li>
+								<li><a href="http://localhost:9000/br31/event/admin_event_list.jsp">진행이벤트</a></li>
+								<li><a href="http://localhost:9000/br31/event/admin_event_list.jsp">당첨자발표</a></li>
 							</ul>
 						</div>
 					</li>
@@ -275,7 +275,7 @@ header .admin_msg {
 					<li><a href="#">정보 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="#">공지사항</a></li>
+								<li><a href="http://localhost:9000/br31/notice/admin_notice_list.jsp">공지사항</a></li>
 								<li><a href="#">채용정보</a></li>
 							</ul>
 						</div>
