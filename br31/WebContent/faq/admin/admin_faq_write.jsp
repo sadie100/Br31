@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
-<script>
+<script>	
 	$(document).ready(function() {
 		$("#btnFaqSave").click(function() {
 			if($("input[name='ftype']:checked").length == 0) {

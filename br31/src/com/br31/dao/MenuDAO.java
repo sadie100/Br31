@@ -109,7 +109,7 @@ public class MenuDAO extends DBConn{
 		close();
 		return list;
 	}
-	//update ---> 수정 처리(새로운 파일 선택)
+	// admin update ---> 수정 처리(새로운 파일 선택)
 	public boolean getUpdateResult(MenuVO vo) {
 		boolean result = false;
 		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
@@ -139,7 +139,7 @@ public class MenuDAO extends DBConn{
 		}
 		return result;		
 	}
-	//update ---> 수정 처리(기존 파일)
+	// admin update ---> 수정 처리(기존 파일)
 	public boolean getUpdateResultNofile(MenuVO vo) {
 		boolean result = false;
 		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
@@ -167,7 +167,24 @@ public class MenuDAO extends DBConn{
 		}
 		return result;		
 	}
-	
+	//admin delete ---> admin 삭제
+	public boolean getDeleteResult(String pname) {
+		boolean result = false;
+		String sql = " delete from br31_menu where pname = ? ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+		pstmt.setString(1, pname);
+		int a = pstmt.executeUpdate();
+		if(a!=0) {
+			result = true;
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	//select ---> admin에서 수정버튼을 눌렀을 시 불러오는 특정 content
 	public MenuVO getAdminContent(String pname){

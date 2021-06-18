@@ -45,6 +45,7 @@
 	JsonObject jobj = new JsonObject();
 	Gson gson = new Gson();
 	jobj.addProperty("pname",vo.getPname());
+	jobj.addProperty("eng_pname",vo.getEng_pname());
 	jobj.addProperty("intro",vo.getIntro());
 	jobj.addProperty("rec_flavor", rec_text);
 	jobj.addProperty("hashtag", hash_text);

@@ -200,40 +200,6 @@ public class FaqDAO extends DBConn {
 		return list;
 	}
 
-	//리스트
-	/*
-	public ArrayList<FaqVO> getList(String ftype) {
-		ArrayList<FaqVO> list = new ArrayList<FaqVO>();
-		
-		String str = "";
-		if(!ftype.equals("전체")) str = " WHERE FTYPE = '" + ftype + "' ";
-		
-		String sql = " SELECT FID, TITLE, CONTENT, FSFILE FROM BR31_FAQ " + str + " ORDER BY FDATE DESC ";
-		
-		getStatement();
-		
-		try {
-			rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
-				FaqVO vo = new FaqVO();
-				
-				vo.setFid(rs.getString(1));
-				vo.setTitle(rs.getString(2));
-				vo.setContent(rs.getString(3));
-				vo.setFsfile(rs.getString(4));
-				
-				list.add(vo);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		close();
-		return list;
-	}
-	*/
 	
 	//admin_faq_write
 	public boolean getInsertResult(FaqVO vo) {
