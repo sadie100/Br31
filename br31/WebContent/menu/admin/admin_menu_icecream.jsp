@@ -25,12 +25,14 @@
 *****/
 
 function updatePop(){
-	window.open("admin_menu_update.jsp?category=icecream","","width = 800, height = 850, top = 50, left = 800");
+	window.open("admin_menu_update.jsp?category=icecream","","width = 800, height = 900, top = 50, left = 800");
 }
 function writePop(){
-	window.open("admin_menu_write.jsp","","width = 800, height = 850, top = 50, left = 800");
+	window.open("admin_menu_write.jsp","","width = 800, height = 900, top = 50, left = 800");
 }
-
+function deletePop(){
+	window.open("admin_menu_delete.jsp?category=icecream","","width = 800, height = 400, top = 50, left = 800");
+}
 function getPname(){
 	if($("input[type='checkbox']:checked").length==0){
 		alert("하나 이상 선택해 주세요.")
@@ -89,6 +91,9 @@ $(document).ready(function(){
 	});
 	$("#btn_update").click(function(){
 		updatePop();
+	});
+	$("#btn_delete").click(function(){
+		deletePop();
 	});
 	
 	

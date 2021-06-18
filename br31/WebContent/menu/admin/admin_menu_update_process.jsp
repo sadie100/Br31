@@ -7,7 +7,7 @@
 
 <%
 	//파일 관련 코드
-	String savePath = request.getServletContext().getRealPath("/images");
+	String savePath = request.getServletContext().getRealPath("/menu/images");
 
 	int sizeLimit=1024*1024*15;
 	

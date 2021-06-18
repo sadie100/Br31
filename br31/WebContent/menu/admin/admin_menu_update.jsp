@@ -20,7 +20,7 @@
 		$("#intro").val("");	//설명
 		$("#selected_rec_flavor").empty();
 		$("#hashtag").val("");	//해쉬태그
-		$("#selected_hashtag").empty();
+		$("#selected_hashtag").rmove();
 		$("#frame").remove();
 		var output = "<span id='frame'>선택된 파일 없음</span>";
 		$("#p_image").after(output);
@@ -40,6 +40,7 @@
 			success:function(result){
 				//실행결과에 따른 처리.
 				var jdata = JSON.parse(result);
+				$("#eng_pname").val(jdata.eng_pname);	//설명
 				$("#intro").val(jdata.intro);	//설명
 				$("#selected_rec_flavor").empty();	//추천플레이버
 				var output = "";
@@ -51,7 +52,7 @@
 				}
 				$("#selected_rec_flavor").append(output);
 				
-				$("#hashtag").val();	//해쉬태그
+				$("#hashtag").val("");	//해쉬태그
 				$("#selected_hashtag").empty();
 				output = "";
 				if(jdata.hashtag!=null){
@@ -92,46 +93,78 @@
 		});//ajax
 	}//ajax_list function
 	
+	var flavor_list = [];
+	
 	$(document).ready(function(){							//document ready
-		
 		$("#pname").change(function(){
 			var pname = $("#pname").val();
-			if(pname!="choice"){
+			if(pname!="선택"){		//원래 데이터로 돌려놓음
 				ajax_content(pname);
-			}else{
+			}else{		//'선택'일 경우 다 지움
 				form_empty(num);
 			}
 		});
+		var btnlist_rec = [];
+		var inputlist_rec = [];
 		
 		$("#rec_flavor_list").change(function(){		//추천 플레이버 선택시
 			var flavor = $("#rec_flavor_list").val();
+			flavor_list.push(flavor);
 			if(flavor!="선택"){
 				if(flavor==$("#pname").val()){
 					alert("추천 플레이버는 다른 맛만 선택할 수 있습니다.")
 				}else{
-					var output = "<span><button type='button' class='delete' id='delete_rec'>&times;</button></span>";
+					var output = "<span>"+flavor+"<button type='button' class='delete' id='delete_rec' name='delete_rec'>&times;</button></span>";
 					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+flavor+">";
+					
 					$("#selected_rec_flavor").append(output);
+					
+						/*
 					$("#selected_rec_flavor").find("button").click(function(){
-						var p = $(this).parent().attr('id');
+						
+						p = p.replace('&times;',"");
 						console.log(p);
 						$("input[name='rec_flavor'][value="+p+"]").remove();
 						$(this).parent().remove();
 						console.log("됨");
 					});
+						*/
+				$("button[name=delete_rec]").click(function(){
+					var btns_rec = document.getElementsByName("delete_rec");
+					var inputs_rec = document.getElementsByName("rec_flavor");
+					var txlist_rec = [];
+					//var p = $(btns_rec).eq(0).parent().text();
+					//console.log(p);
+					for(var i=0;i<btns_rec.length;i++){
+						txlist_rec.push($(btns_rec).eq(i).parent().text());
+					}
+					 
+					var now = $(this).parent().text()
+					var ind = txlist_rec.indexOf(now);
+					$(btns_rec).eq(ind).parent().remove();
+					/*for(var i=ind;i<btns_rec.length;i++){
+						if(i<btns_rec.length-1){
+							$(btns_rec).eq(i).parent() =  $(btns_rec).eq(i+1).parent();
+						}else{
+							$(btns_rec).eq(btns_rec.length-1).parent().remove();
+						}
+					}
+					*/
+					$(inputs_rec).eq(ind).remove();
+					/*for(var i=ind;i<inputs_rec.length;i++){
+						if(i<inputs_rec.length-1){
+							$(inputs_rec).eq(i).parent() =  $(inputs_rec).eq(i+1).parent();
+						}else{
+							$(inputs_rec).eq(inputs_rec.length-1).parent().remove();
+						}
+					}
+					*/
+				});
 				}
 			}
 		});
 		
-		$("#selected_rec_flavor").find("button").click(function(){
-			console.log("되긴됨?");
-			this.parent().remove();
-			$("input[name='rec_flavor' && value="+this.val()+"])").remove();
-		});
 		
-		$("#btn_hash_add").click(function(){
-			
-		});
 		
 		
 		$("input[type=file]").on('change',function(){				//파일 선택시
@@ -142,28 +175,28 @@
 		});
 		
 		$("#btn_reset").click(function(){						//리셋버튼누를때
-			var pname = $("#pname").val();
-			if(pname!="choice"){
+			var pname = $("#pname option:selected").val();
+			if(pname!="선택"){
 				ajax_content(pname);
 			}else{
-				form_empty(num);
+				form_empty();
 			}
 		});
 		
 		$("#btn_update").click(function(){						//수정버튼누를때
 			if($("#pname option:selected").val()=="선택"){
-				alert("수정할 제품을 선택해 주세요");
+				alert("수정할 메뉴를 선택해 주세요");
 				$("#pname").focus();
 				return false;
 			}else if($("#intro").val()==""){
-				alert("제품 설명을 입력해 주세요");
+				alert("메뉴 설명을 입력해 주세요");
 				$("#intro").focus();
 				return false;
 			}else if($("#frame").text()=="선택된 파일 없음"){
-				alert("제품 사진을 등록해 주세요");
+				alert("메뉴 사진을 등록해 주세요");
 				return false;
 			}else{
-				var check = confirm("제품을 등록하시겠습니까?");
+				var check = confirm("메뉴를 등록하시겠습니까?");
 				if(check==true){
 					menu_update.submit();
 				}else{
@@ -193,6 +226,10 @@
 						<%} %>
 					</select>
 				</td>
+			</tr>
+			<tr>
+				<th>영어 표기</th>
+				<td><input type="text" name="eng_pname" id="eng_pname" value=""></td>
 			</tr>
 			<tr>
 				<th>설명</th>
@@ -290,7 +327,7 @@
 		</table>
 		<div class="update_buttons">
 			<button type="button" id="btn_update" name="btn_submit">수정</button>
-			<button type="reset" id="btn_reset">초기화</button>
+			<button type="button" id="btn_reset">초기화</button>
 		</div>
 		
 	</form>
