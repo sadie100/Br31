@@ -151,6 +151,38 @@ public class NoticeDAO extends DBConn {
 		close();
 		return list;
 	}
+	public ArrayList<NoticeVO> getList(int start, int end) {
+		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
+		String sql = "select rno, articleno, title, mdate ";
+		sql += "from (select rownum rno, articleno, title, to_char(mdate, 'yyyy-mm-dd') mdate ";
+		sql += "        from (select articleno, title, mdate ";
+		sql += "                from br31_notice ";
+		sql += "                order by mdate desc)) ";
+		sql += "where rno between ? and ?";
+
+		getPreparedStatement(sql);
+
+		try {
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				NoticeVO vo = new NoticeVO();
+				vo.setRno(rs.getInt(1));
+				vo.setArticleno(rs.getInt(2));
+				vo.setTitle(rs.getString(3));
+				vo.setMdate(rs.getString(4));
+
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		close();
+
+		return list;
+	}
 
 	public boolean getInsertResult(NoticeVO vo) {
 		boolean result = false;

@@ -48,5 +48,8 @@ public class DBConn {
 			e.printStackTrace();
 		}
 	}
+	public int execTotalCount() {
+		return -1;
+	}
 	
 }

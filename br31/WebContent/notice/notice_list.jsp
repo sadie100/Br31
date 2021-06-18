@@ -2,7 +2,48 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.br31.vo.NoticeVO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.comms.Commons"%>
+<%
+	//
+String rpage = request.getParameter("page");
+NoticeDAO dao = new NoticeDAO();
+Commons commons = new Commons();
+HashMap<String, Integer> map = commons.getPage(rpage, dao);
+//System.out.println(map.get("start"));
+//System.out.println(map.get("end"));
+ArrayList<NoticeVO> list = dao.getList(map.get("start"), map.get("end"));
+
+//페이징 처리 - startCount, endCount 구하기
+/* int startCount = 0;
+int endCount = 0;
+int pageSize = 5;	//한페이지당 게시물 수
+int reqPage = 1;	//요청페이지	
+int pageCount = 1;	//전체 페이지 수
+int dbCount = dao.execTotalCount();	//DB에서 가져온 전체 행수
+
+//총 페이지 수 계산
+if(dbCount % pageSize == 0){
+	pageCount = dbCount/pageSize;
+}else{
+	pageCount = dbCount/pageSize+1;
+}
+
+//요청 페이지 계산
+if(rpage != null){
+	reqPage = Integer.parseInt(rpage);
+	startCount = (reqPage-1) * pageSize+1;
+	endCount = reqPage *pageSize;
+}else{
+	startCount = 1;
+	endCount = 5;
+} 
+*/
+
+//NoticeDAO dao = new NoticeDAO();
+//ArrayList<BoardVO> list = dao.getList();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +93,7 @@
 						<col width="10%">
 					</colgroup>
 					<tbody>
+
 					<%
 					// 공지사항 목록 생성
 				StringBuffer tbody = new StringBuffer("");
@@ -59,10 +101,8 @@
 					tbody.append("<tr>");
 					tbody.append("<td class=\"num\">" + vo.getRno() + "</td>");
 					tbody.append("<td class=\"title\">");
-					tbody.append("	<a href='notice_content.jsp?nid=" + vo.getNid() + "&rno=" + vo.getRno() + "'>" + vo.getNtitle() + "</a>");
+					tbody.append("	<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'>class=\"tit\"</a>");
 					tbody.append("</td>");
-					tbody.append("<td class=\"period\">" + vo.getNhit() + "</td>");
-					tbody.append("<td>" + vo.getNdate() + "</td>");
 					tbody.append("</tr>");
 				}
 				out.write(tbody.toString());
@@ -70,7 +110,7 @@
 																<tr>
 							<td class="num">51</td>
 							<td class="title">
-								<a href="../notice_content.jsp" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있어진 팥빙수 블라스트 출시!</a>
+								<a href="notice_content.jsp" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있어진 팥빙수 블라스트 출시!</a>
 								
 								
 															</td>
@@ -79,7 +119,7 @@
 											<tr>
 							<td class="num">50</td>
 							<td class="title">
-								<a href="notice_view.php?seq=6581&amp;strPageParam=Page=1|find=|searchword=" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있는 배라 빙수를 즐겨보세요!</a>
+								<a href="notice_content.jsp" class="tit">[신제품 출시] 밀탑의 시그니처 국내산 팥으로 더욱 맛있는 배라 빙수를 즐겨보세요!</a>
 								
 								
 															</td>
@@ -88,7 +128,7 @@
 											<tr>
 							<td class="num">49</td>
 							<td class="title">
-								<a href="notice_view.php?seq=6542&amp;strPageParam=Page=1|find=|searchword=" class="tit">[신제품 출시] 워터프로세스 방식으로 풍미는 보존, 카페인은 제거한 디카페인 커피 출시!</a>
+								<a href="notice_content.jsp" class="tit">[신제품 출시] 워터프로세스 방식으로 풍미는 보존, 카페인은 제거한 디카페인 커피 출시!</a>
 								
 								
 															</td>
