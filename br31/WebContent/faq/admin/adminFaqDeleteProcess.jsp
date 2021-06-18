@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.br31.dao.FaqDAO, com.br31.vo.FaqVO, java.io.*" %>
 
-<%	
+<%
 	String fid = request.getParameter("fid");
 
 	FaqDAO dao = new FaqDAO();

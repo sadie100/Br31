@@ -8,7 +8,7 @@
 	String savePath = request.getServletContext().getRealPath("/upload");
 	int sizeLimit = 1024*1024*15;
 	MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
-	
+
 	FaqVO vo = new FaqVO();
 	FaqDAO dao = new FaqDAO();
 	

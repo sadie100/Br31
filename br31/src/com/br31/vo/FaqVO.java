@@ -56,7 +56,7 @@ public class FaqVO {
 	}
 
 	public void setFdate(String fdate) {
-		this.fdate = fdate;
+		this.fdate = fdate;	
 	}
 
 }
