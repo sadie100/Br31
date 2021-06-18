@@ -180,7 +180,7 @@ header .menu:hover .submenu {
 				<a href="http://localhost:9000/br31/index.jsp"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
 			</div>
 			<div>
-				<a href="http://localhost:9000/br31/faq/faq_1.jsp">고객센터</a>
+				<a href="http://localhost:9000/br31/faq/faq_list.jsp">고객센터</a>
 			</div>
 		</div>
 
@@ -245,7 +245,7 @@ header .menu:hover .submenu {
 						<div class="submenu">
 							<ul>
 								<li><a href="http://localhost:9000/br31/map/map.jsp">매장정보</a></li>
-								<li><a href="http://localhost:9000/br31/faq/faq_1.jsp">고객센터</a></li>
+								<li><a href="http://localhost:9000/br31/faq/faq_list.jsp">고객센터</a></li>
 							</ul>
 						</div>
 					</li>

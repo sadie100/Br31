@@ -38,6 +38,10 @@
 			window.open($(this).attr("src"), "image", option);
 		});
 		
+		$("#btnGoBack").click(function() {
+			window.history.back();
+		});
+		
 	});
 </script>
 </head>
@@ -113,7 +117,7 @@
 				</div>
 				<div class="btn_area">
 					<div class="area_left">
-						<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button">목록</button></a>
+						<a><button type="button" id="btnGoBack">목록</button></a>
 					</div>
 					<div class="area_right">
 						<a><button type="button" id="btnAnswerSave">답변등록</button></a>

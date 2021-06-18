@@ -8,7 +8,7 @@
 	boolean result = dao.getDeleteAnswerResult(vid);
 	
 	if(result) {
-		response.sendRedirect("admin_voc_write.jsp?vid="+vid);
+		response.sendRedirect("admin_voc_list.jsp?status=NO");
 	} else {
 		response.sendRedirect("../errorPage.jsp");
 	}

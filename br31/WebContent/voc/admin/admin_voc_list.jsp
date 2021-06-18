@@ -6,6 +6,36 @@
 	
 	String status = request.getParameter("status");
 	String rpage = request.getParameter("page");
+	String qtype = request.getParameter("qtype");
+	String ctype = request.getParameter("ctype");
+	String keyword = request.getParameter("keyword");
+	
+	if(qtype==null) qtype = "상담유형";
+	if(ctype==null) ctype = "내용유형";
+	
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 10;	
+	int reqPage = 1;	
+	int pageCount = 1;	
+	int dbCount = dao.execTotalCount(qtype, ctype, status, keyword);
+	
+	if(dbCount % pageSize == 0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize + 1;
+	}
+	
+	if(rpage != null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage - 1) * pageSize + 1;
+		endCount = reqPage *pageSize;
+	}else{
+		startCount = 1;
+		endCount = 10;
+	}
+	
+	ArrayList<VocVO> list = dao.getList(qtype, ctype, startCount, endCount, status, keyword);
 %>
 <!DOCTYPE html>
 <html>
@@ -18,73 +48,67 @@
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
 $(document).ready(function() {
+ 	
+	if("<%=qtype%>" != "상담유형") $("#sqtype").val("<%=qtype%>").prop("selected",true);
+	if("<%=ctype%>" != "내용유형") $("#sctype").val("<%=ctype%>").prop("selected",true);
 	
-	get_list("상담유형", "내용유형", "<%=status%>", "<%=rpage%>");
-	
-	//유형 선택
- 	$("#sqtype, #sctype").on("change", function() {
-		get_list($("#sqtype").val(), $("#sctype").val(), "<%=status%>", "<%=rpage%>");
+ 	$("#sqtype, #sctype").change(function() {
+ 		var params = "";
+ 		var $sqtype = $("#sqtype");
+ 		var $sctype = $("#sctype");
+ 		
+		if($sqtype.val() != "상담유형") params += "&qtype="+$sqtype.val();
+		if($sctype.val() != "내용유형") params += "&ctype="+$sctype.val();
+		if("<%=keyword%>" != "null") params += "&keyword=<%=keyword%>";
+		
+		$(location).attr("href", "http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=<%=status%>"+ params);         
 	});
-	
-	//리스트  가져오기
-	function get_list(qtype, ctype, status, rpage) {
-		$.ajax({
-			url: "get_list.jsp?qtype="+ qtype + "&ctype=" + ctype + "&status=" + status + "&rpage=" + rpage,
-			success: function(result) {
-				var jdata = JSON.parse(result);
-				var data = "";
-				
-				for(var i in jdata.jlist) {
-					data += "<tr>";
-					data += "<td>" + jdata.jlist[i].rno + "</td>";
-					data += "<td>" + jdata.jlist[i].qtype + "</td>";
-					data += "<td>" + jdata.jlist[i].ctype + "</td>";
-					data += "<td><a href='" + jdata.jlist[i].link + "'>" + jdata.jlist[i].title + "</a></td>";
-					data += "<td>" + jdata.jlist[i].vdate + "</td>";
-					data += "<td>" + jdata.jlist[i].status + "</td>";
-					data += "</tr>";
-				}
-				var dbCount = jdata.dbCount;
-				var rpage = jdata.rpage;
-				var pageSize = jdata.pageSize;
-				
-				$("#column_name").siblings("tr").remove();
-				$("#column_name").after(data);
 
-				paging(dbCount, rpage, pageSize, qtype, ctype, status);
-			}
-		});
-	}
+	var pager = jQuery("#ampaginationsm").pagination({
+	    maxSize: 10,	  
+	    totals: <%=dbCount%>,	
+	    page: <%=rpage%>,	
+	    pageSize: 10,
 	
-	function paging(count, rpage, pSize, qtype, ctype, status) {
-		var pager = jQuery("#ampaginationsm").pagination({
-	
-		    maxSize: 10,	    		// max page size
-		    totals: count,	// total pages	
-		    page: rpage,		/* // initial page	 */	
-		    pageSize: pSize,			// max number items per page
-		
-		    // custom labels		
-		    lastText: "&raquo;&raquo;", 		
-		    firstText: "&laquo;&laquo;",		
-		    prevText: "&lt;",		
-		    nextText: "&gt;",
-				     
-		    btnSize:"sm"	
-		});
-		
-		jQuery("#ampaginationsm").one("am.pagination.change",function(e){
-			jQuery(".showlabelsm").text("The selected page no: "+e.page);
-			get_list(qtype, ctype, status, e.page);
-	    });
-	}
-	
-	$("#btnVocSearch").click(function() {
-		var link = "http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?qtype="+ $("#sqtype").val()
-				+ "&ctype=" + $("#sctype").val() + "&status=" + status + "&keyworld=" + $("#voc_search").val();
-        $(location).attr("href", link);         
+	    // custom labels		
+	    lastText: "&raquo;&raquo;", 		
+	    firstText: "&laquo;&laquo;",		
+	    prevText: "&lt;",		
+	    nextText: "&gt;",
+			     
+	    btnSize:"sm"	
 	});
 	
+	jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+		jQuery(".showlabelsm").text("The selected page no: "+e.page);
+		var params = "";
+		
+		if("<%=qtype%>" != "상담유형") params += "&qtype=<%=qtype%>";
+		if("<%=ctype%>" != "내용유형") params += "&ctype=<%=ctype%>";
+		if("<%=keyword%>" != "null") params += "&keyword=<%=keyword%>";
+		
+		$(location).attr("href", "http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=<%=status%>"+ params +"&page="+e.page);         
+    });
+
+	$("#btnVocSearch").click(function() {
+		if($("#voc_search").val() == "") {
+			alert("검색어를 입력해주세요.");
+			$("#voc_search").focus();
+			return false;
+		} else {
+			var params = "";
+			
+			if("<%=qtype%>" != "상담유형") params += "&qtype=<%=qtype%>";
+			if("<%=ctype%>" != "내용유형") params += "&ctype=<%=ctype%>";
+			params += "&keyword=" + $("#voc_search").val();
+			
+			console.log(params);
+			$(location).attr("href", "http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=<%=status%>"+ params);
+		}
+		
+	});
+	
+
 });//ready
 </script>
 </head>
@@ -122,7 +146,7 @@ $(document).ready(function() {
 				</div>
 				<div class="list">
 					<table>
-						<tr id="column_name">
+						<tr>
 							<th>번호</th>
 							<th>상담유형</th>
 							<th>내용유형</th>
@@ -130,6 +154,24 @@ $(document).ready(function() {
 							<th>접수일</th>
 							<th>상태</th>
 						</tr>
+						<% if(list.size()!=0) { %>
+							<% for(VocVO vo : list) { %>
+							<tr>
+								<td><%= vo.getRno() %></td>
+								<td><%= vo.getQtype() %></td>
+								<td><%= vo.getCtype() %></td>
+								<% if(vo.getStatus().equals("답변대기")) { %>
+									<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_write.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+								<% } else { %>
+									<td><a href="http://localhost:9000/br31/voc/admin/admin_voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+								<% } %>
+								<td><%= vo.getVdate() %></td>
+								<td><%= vo.getStatus() %></td>
+							</tr>
+							<% } %>
+						<% } else { %>
+							<tr><td colspan=6>일치하는 글이 없습니다.</td></tr>
+						<% } %>
 					</table>
 				</div>
 				<div id="ampaginationsm"></div>

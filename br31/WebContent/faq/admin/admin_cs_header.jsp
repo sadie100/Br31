@@ -18,9 +18,9 @@
 		<div class="cs_menu">
 			<a href="http://localhost:9000/br31/faq/admin/admin_faq_list.jsp"><button type="button" class="btn_faq">
 				자주하는 질문</button></a>
-			<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button" class="btn_voc">
+			<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=NO"><button type="button" class="btn_voc">
 				답변 대기 문의</button></a>
-			<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button" class="btn_myvoc">
+			<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=YES"><button type="button" class="btn_myvoc">
 				답변 완료 문의</button></a>
 		</div>
 	</section>

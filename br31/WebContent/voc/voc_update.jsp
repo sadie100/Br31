@@ -84,7 +84,7 @@
 
 		$("input[type=radio]").each(function() {
 			if($(this).val() == "<%=vo.getQtype()%>" || $(this).val() == "<%=vo.getCtype()%>") {
-				$(this).attr("checked", true);
+				$(this).prop("checked", true);
 			}
 		});
 

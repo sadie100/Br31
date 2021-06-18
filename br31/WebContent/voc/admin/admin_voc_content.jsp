@@ -106,7 +106,7 @@ $(document).ready(function() {
 				</div>
 				<div class="btn_area">
 					<div class="area_left">
-						<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp"><button type="button">목록</button></a>
+						<a href="http://localhost:9000/br31/voc/admin/admin_voc_list.jsp?status=NO"><button type="button">목록</button></a>
 					</div>
 					<div class="area_right">
 						<a href="http://localhost:9000/br31/voc/admin/admin_voc_update.jsp?vid=<%=vo.getVid()%>"><button type="button">답변수정</button></a>
