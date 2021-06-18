@@ -44,7 +44,7 @@
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
 $(document).ready(function() {
-
+	
 	$(".faq_type li").each(function() {
 		if( $(this).attr("class") == getUrlFtype() ) {
 			$(this).children("a").css({	"background-color":"#92867f", "color":"white"});

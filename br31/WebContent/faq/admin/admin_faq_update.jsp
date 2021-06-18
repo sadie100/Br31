@@ -16,7 +16,7 @@
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+			
 		$("#btnFaqUpdate").click(function() {
 			if($("input[name='ftype']:checked").length == 0) {
 				alert("유형을 선택해주세요.");
