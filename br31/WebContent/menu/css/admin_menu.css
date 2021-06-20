@@ -130,22 +130,22 @@ div.table button.nutrients_more{
 
 /** 아이스크림 **/
 div.table table.menu_ice th:first-child {
-	width: 200px;
+	width: 180px;
 }
 div.table table.menu_ice th:nth-child(2) {
-	width: 450px;
+	width: 180px;
 }
 div.table table.menu_ice th:nth-child(3) {
-	width: 200px;
+	width: 330px;
 }
 div.table table.menu_ice th:nth-child(4) {
-	width: 150px;
+	width: 140px;
 }
 div.table table.menu_ice th:nth-child(5) {
-	width: 150px;
+	width: 120px;
 } 
 div.table table.menu_ice th:nth-child(6) {
-	width: 150px;
+	width: 120px;
 }
 
 /** 커피 **/
@@ -234,8 +234,9 @@ table.menu_update_table td div.selected_div span{
 	font-size: 12px;
 	color: rgb(255,124,152);
 	font-weight: bold;
+	margin-right: 10px;
 }
-table.menu_update_table div.selected_div span button.delete{
+table.menu_update_table div.selected_div button.delete{
 	background-color: white;
 	border: none;
 	cursor: pointer;
@@ -252,6 +253,10 @@ table.update_nutrient th{
 table.update_nutrient td input[type="text"]{
 	width: 40px;
 	height: 10px;
+}
+table.update_nutrient td input[type="number"]{
+	width: 50px;
+	height: 20px;
 }
 table.update_nutrient th{
 	width: 100px;

@@ -29,6 +29,9 @@
 	vo.setEng_pname(multi.getParameter("eng_pname"));
 	if(multi.getParameterValues("rec_flavor")!=null){
 		vo.setRec_flavor(multi.getParameterValues("rec_flavor"));
+		for(int i=0;i<multi.getParameterValues("rec_flavor").length;i++){
+			System.out.println(vo.getRec_flavor()[i]);
+		}
 	}else{
 		vo.setRec_flavor("");
 	}
@@ -51,29 +54,16 @@
 	}else{
 		vo.setAllergy("");
 	}
-	if(multi.getOriginalFileName("pfile")!=null){	//파일바꿨을때
-		vo.setPfile(multi.getOriginalFileName("pfile"));
-		vo.setPsfile(multi.getFilesystemName("pfile"));
-		result = dao.getUpdateResult(vo);
+	vo.setPfile(multi.getOriginalFileName("pfile"));
+	vo.setPsfile(multi.getFilesystemName("pfile"));
+
+	result = dao.getInsertResult(vo);
 			
-		if(result){
-		 	String old_file_path = savePath + "/" + multi.getParameter("psfile_old");
-		 	File old_file = new File(old_file_path); 
-		 	if(old_file.exists()){	
-		 		if(old_file.delete()){	
-		 		}
-		 	}
-		}
-		
-	 }else{
-		result = dao.getUpdateResultNofile(vo);
-	 }
-	
 	 if(result){
-		status="after";
-		response.sendRedirect("admin_menu_update.jsp?category="+category+"&status="+status);
+	 	status="after";
+		response.sendRedirect("admin_menu_write.jsp?category="+category+"&status="+status);
 	 }else if(result==false){
-		 
+		 System.out.print("오류가.");
 	 }
 	
 	

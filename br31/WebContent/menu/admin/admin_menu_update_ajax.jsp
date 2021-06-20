@@ -5,6 +5,7 @@
 	String pname = request.getParameter("pname");
 	MenuDAO dao = new MenuDAO();
 	MenuVO vo = dao.getAdminContent(pname);
+	dao.close();
 	
 	String rec_text = "";
 	String hash_text = "";
@@ -47,6 +48,7 @@
 	jobj.addProperty("pname",vo.getPname());
 	jobj.addProperty("eng_pname",vo.getEng_pname());
 	jobj.addProperty("intro",vo.getIntro());
+	jobj.addProperty("order_type",vo.getOrder_type());
 	jobj.addProperty("rec_flavor", rec_text);
 	jobj.addProperty("hashtag", hash_text);
 	jobj.addProperty("pfile", vo.getPfile());

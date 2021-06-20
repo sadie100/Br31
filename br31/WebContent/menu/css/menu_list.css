@@ -80,6 +80,7 @@ button.btn_more {
 	padding: 5px 18px;
 	color: rgb(164,142,116);
 	font-size: 11px;
+	cursor: pointer;
 }
 
 
