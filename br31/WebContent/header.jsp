@@ -13,7 +13,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
 header ul {
 	list-style-type: none;
@@ -74,12 +73,13 @@ header .menu_bar {
 }
 header .menu>ul {
 	margin: auto;
+	padding-left: 30px;
 	width: 1400px;
 	text-align: center;
 }
 header .menu>ul>li {
 	width: 180px;
-	/* float: left; */
+	float: left;
 	text-align: center;
 	background-color: white;
 }
@@ -135,30 +135,43 @@ header .submenu a:hover {
 	color: #ff7c97;
 }
 header .submenu {
-	display: none;
-	height: 270px;
+	visibility: hidden;
+	height: 0;
 	margin: 0;
  	position: absolute;
 	background-color: white;
+	transition: height 0.5s; 
 }
 header .menu_bg {
-	display: none;
+	visibility: hidden;
 	width: 100%;
-	height: 280px;
+	height: 0;
 	margin: -10px;
 	left: 5px;
 	position: absolute;
 	background-color: white;
 	border-bottom: 1px solid darkgray;
+	transition: height 0.4s; 
 }
 header .menu:hover div.menu_bg {
-	display: block;
+	visibility: visible;
+	height: 280px;
 	z-index: 90;
 	overflow: hidden;
 }
 header .menu:hover .submenu {
-	display: block;
+	height: 270px;
+	visibility: visible;
 	z-index: 100;
+}
+header .menu_img {
+	visibility: hidden;
+	opacity: 0;
+}
+header .menu:hover .menu_img {
+	visibility: visible;
+	opacity: 1;
+	transition: 0.7s;
 }
 </style>
 </head>
@@ -202,14 +215,14 @@ header .menu:hover .submenu {
 						<% } %>
 						<div class="submenu">
 							<ul>
-								<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
+								<li class="menu_img"><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
 							</ul>
 						</div>
 					</li>
 					<li><a href="#">FLAVOR OF THE MONTH</a>
 						<div class="submenu">
 							<ul>
-								<li><img src="http://localhost:9000/br31/images/monthly_menu.png"></li>
+								<li class="menu_img"><img src="http://localhost:9000/br31/images/monthly_menu.png"></li>
 							</ul>
 						</div>
 					</li>

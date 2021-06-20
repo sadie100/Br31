@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO" %>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.*" %>
 <%
-	String vid = request.getParameter("vid");
-
-	VocDAO dao = new VocDAO();
-	VocVO vo = dao.getContent(vid);
-	
-	String content = vo.getContent().replace("\r\n", "<br>");
+	SessionVO svo = (SessionVO) session.getAttribute("svo");
+	if(svo != null && svo.getId().equals("admin")) {
+		String vid = request.getParameter("vid");	
+		VocDAO dao = new VocDAO();
+		VocVO vo = dao.getContent(vid);
+		
+		String content = vo.getContent().replace("\r\n", "<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
 <title>내 문의</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <script>
 	$(document).ready(function() {
 		
@@ -41,7 +43,7 @@
 		$("#btnGoBack").click(function() {
 			window.history.back();
 		});
-		
+
 	});
 </script>
 </head>
@@ -54,7 +56,7 @@
 	<div class="cs_content">
 		<section class="voc_content">
 			<h3>[관리자] 고객 1:1 문의</h3>
-			<form name="voc_answer_form" action="adminVocWriteProcess.jsp" method="post">
+			<form name="voc_answer_form" action="adminVocWriteProcess.jsp" method="post" id="voc_answer_form">
 				<input type="hidden" name="vid" value="<%=vid%>">
 				<div class="details">
 					<span>※ 답변은 자세하고 정확하게 작성해주시기 바랍니다.</span>
@@ -131,3 +133,9 @@
 
 </body>
 </html>
+<%	} else {%>
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<%	} %>

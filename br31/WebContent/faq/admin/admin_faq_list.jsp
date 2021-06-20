@@ -1,37 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.FaqDAO, com.br31.vo.FaqVO, java.util.*" %>
+<%@ page import="com.br31.dao.FaqDAO, com.br31.vo.*, java.util.*" %>
 <%
-	String ftype = request.getParameter("ftype");
-	String rpage = request.getParameter("page");
-
-	if(ftype == null) { ftype = "all"; }
+	SessionVO svo = (SessionVO) session.getAttribute("svo");
+	if(svo != null && svo.getId().equals("admin")) {
 	
-	FaqDAO dao = new FaqDAO();
-
-	int startCount = 0;
-	int endCount = 0;
-	int pageSize = 10;	
-	int reqPage = 1;	
-	int pageCount = 1;	
-	int dbCount = dao.execTotalCount(ftype);
+		String ftype = request.getParameter("ftype");
+		String rpage = request.getParameter("page");
 	
-	if(dbCount % pageSize == 0){
-		pageCount = dbCount/pageSize;
-	}else{
-		pageCount = dbCount/pageSize + 1;
-	}
+		if(ftype == null) { ftype = "all"; }
+		
+		FaqDAO dao = new FaqDAO();
 	
-	if(rpage != null){
-		reqPage = Integer.parseInt(rpage);
-		startCount = (reqPage - 1) * pageSize + 1;
-		endCount = reqPage *pageSize;
-	}else{
-		startCount = 1;
-		endCount = 10;
-	}
-	
-	ArrayList<FaqVO> list = dao.getList(ftype, startCount, endCount);
+		int startCount = 0;
+		int endCount = 0;
+		int pageSize = 10;	
+		int reqPage = 1;	
+		int pageCount = 1;	
+		int dbCount = dao.execTotalCount(ftype);
+		
+		if(dbCount % pageSize == 0){
+			pageCount = dbCount/pageSize;
+		}else{
+			pageCount = dbCount/pageSize + 1;
+		}
+		
+		if(rpage != null){
+			reqPage = Integer.parseInt(rpage);
+			startCount = (reqPage - 1) * pageSize + 1;
+			endCount = reqPage *pageSize;
+		}else{
+			startCount = 1;
+			endCount = 10;
+		}
+		
+		ArrayList<FaqVO> list = dao.getList(ftype, startCount, endCount);
 %>
 <!DOCTYPE html>
 <html>
@@ -172,3 +175,9 @@ $(document).ready(function() {
 
 </body>
 </html>
+<%	} else { %>
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<%	}%>

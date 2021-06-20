@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.*, java.util.*" %>
 <%
-	String vid = request.getParameter("vid");
-
-	VocDAO dao = new VocDAO();
-	VocVO vo = dao.getContent(vid);
-	
-	String content = vo.getContent().replace("\r\n", "<br>");
-	String answer = vo.getAnswer().replace("\r\n", "<br>");
+	SessionVO svo = (SessionVO) session.getAttribute("svo");
+	if(svo != null && svo.getId().equals("admin")) {
+		String vid = request.getParameter("vid");	
+		VocDAO dao = new VocDAO();
+		VocVO vo = dao.getContent(vid);
+		
+		String content = vo.getContent().replace("\r\n", "<br>");
+		String answer = vo.getAnswer().replace("\r\n", "<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -121,3 +122,9 @@ $(document).ready(function() {
 
 </body>
 </html>
+<%	} else {%>
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<%	} %>

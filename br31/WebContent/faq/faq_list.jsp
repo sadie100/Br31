@@ -50,7 +50,7 @@ $(document).ready(function() {
 			$(this).children("a").css({	"background-color":"#92867f", "color":"white"});
 		}
 	})
-	
+
 	function getUrlFtype() {
 		var search = window.location.search;
 		var params = search.substring(1).split("&");
@@ -66,6 +66,7 @@ $(document).ready(function() {
 			return "all";
 		}
 	}
+	
 	
 	$(document).on("click", ".faq_list li>a", function() {
 		
@@ -104,12 +105,6 @@ $(document).ready(function() {
 
 });
 </script>
-<style>
-div.pagination a:nth-child(2){
-	background-color: rgb(245,111,152);
-	color: white;
-}
-</style>
 </head>
 <body>
 	<!-- header -->
@@ -120,7 +115,7 @@ div.pagination a:nth-child(2){
 	<div class="cs_content">
 		<section class="faq">
 			<div class="faq_board">
-				<h3>고객센터 FAQ</h3>
+				<h3>자주하는 질문</h3>
 				<div class="faq_type">
 					<ul>
 						<li class="all">
