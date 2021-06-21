@@ -13,167 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-header ul {
-	list-style-type: none;
-	padding: 0;
-	display: inline-block;
-}
-header {
-	background-image: url("http://localhost:9000/br31/images/bg_header.png");
-}
-header>div {
-	width: 1400px;
-	height: 40px;
-	margin: auto;
-}
-header .main_bar {
-	height: 150px;
-	text-align: center;
-}
-header .main_bar div {
-	height: 150px;
-	line-height: 150px;
-	display: inline-block;
-}
-header li {
-	display: inline-block;
-}
-header .main_bar li img {
-	width: 35px;
-	height: 35px;
-}
-header .main_bar div:nth-child(2) img {
-	width: 100px;
-	height: 100px;
-	padding: 25px;
-}
-header .main_bar a {
-	text-decoration: none;
-	font-size: 13px;
-	color: black;
-}
-header .main_bar div, .main_bar img {
-	display: inline-block;
-}
-header .main_bar div:first-child {
-	float: left;
-	padding-left: 100px;
-}
-header .main_bar div:last-child {
-	float: right;
-	padding: 0 150px 0 80px;
-}
-/****** 메뉴바 *******/
-header .menu_bar {
-	clear: right;
-	text-align: center;
-	width: 100%;
-	border-bottom: 1px solid darkgray;
-}
-header .menu>ul {
-	margin: auto;
-	padding-left: 30px;
-	width: 1400px;
-	text-align: center;
-}
-header .menu>ul>li {
-	width: 180px;
-	float: left;
-	text-align: center;
-	background-color: white;
-}
-header .menu>ul>li:nth-child(1), header .menu>ul>li:nth-child(1) ul {
-	width: 200px;
-}
-header .menu>ul>li:nth-child(1) a {
-	display: inline-block;
-	width: 40%;
-}
-header .submenu ul {
-	padding-top: 10px;
-	min-width: 180px;
-	display: block;
-}
-header .submenu li {
-	display: block;
-}
-header .menu>ul>li:nth-child(1) a{
-	font-size: 12px;
-}
-header .menu>ul>li:nth-child(1) a:first-child{
-	color: #ff7c97;
-}
-header .menu>ul>li:nth-child(1) a:nth-child(2){
-	color: gray;
-}
-header .menu>ul>li:nth-child(2) {
-	width: 200px;
-	text-align:	center;
-}
-header .menu>ul>li:nth-child(2) ul li img {
-	margin-top: -15px;
-}
-header .menu>ul>li ul li a {
-	display: inline-block;
-	margin: 10px 0;
-}
-header .menu>ul>li>a {
-	display: inline-block;
-	padding: 10px 0;
-	width: 100%;
-	font-size: 14px;
-	font-weight: bold;
-	font-family: 맑은고딕;
-}
-header .menu a {
-	text-decoration: none;
-	color: black;
-	font-size: 14px;
-}
-header .submenu a:hover {
-	color: #ff7c97;
-}
-header .submenu {
-	visibility: hidden;
-	height: 0;
-	margin: 0;
- 	position: absolute;
-	background-color: white;
-	transition: height 0.5s; 
-}
-header .menu_bg {
-	visibility: hidden;
-	width: 100%;
-	height: 0;
-	margin: -10px;
-	left: 5px;
-	position: absolute;
-	background-color: white;
-	border-bottom: 1px solid darkgray;
-	transition: height 0.4s; 
-}
-header .menu:hover div.menu_bg {
-	visibility: visible;
-	height: 280px;
-	z-index: 90;
-	overflow: hidden;
-}
-header .menu:hover .submenu {
-	height: 270px;
-	visibility: visible;
-	z-index: 100;
-}
-header .menu_img {
-	visibility: hidden;
-	opacity: 0;
-}
-header .menu:hover .menu_img {
-	visibility: visible;
-	opacity: 1;
-	transition: 0.7s;
-}
-</style>
+<link rel="stylesheet" href="http://localhost:9000/br31/css/commons.css">
 </head>
 <body>
 	<header>
@@ -190,7 +30,7 @@ header .menu:hover .menu_img {
 				</nav>
 			</div>
 			<div>
-				<a href="http://localhost:9000/br31/index.jsp"><img src="http://localhost:9000/br31/images/br_logo.png"></a>
+				<a href="http://localhost:9000/br31/index.jsp"><img src="http://localhost:9000/br31/images/br_logo.png" class="main_logo"></a>
 			</div>
 			<div>
 				<a href="http://localhost:9000/br31/faq/faq_list.jsp">고객센터</a>
@@ -215,7 +55,7 @@ header .menu:hover .menu_img {
 						<% } %>
 						<div class="submenu">
 							<ul>
-								<li class="menu_img"><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
+								<li class="menu_img"><img src="http://localhost:9000/br31/images/happypoint_app.png"></li>
 							</ul>
 						</div>
 					</li>

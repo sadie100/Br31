@@ -67,19 +67,23 @@ $(document).ready(function() {
 		}
 	}
 	
-	
-	$(document).on("click", ".faq_list li>a", function() {
-		
-		$(".faq_list li>a").next(".answer").slideUp();
-		$(this).parent("li").siblings().removeClass("on"); 
-		$(this).parent("li").toggleClass("on"); 
+	$(".faq_list li").click(function() {
+		$(".faq_list li").children(".answer").slideUp();
+		$(this).siblings().removeClass("on"); 
+		$(this).siblings().removeClass("on_last"); 
 
-		if($(this).parent("li").hasClass("on")) {
-			$(this).next(".answer").slideDown();
+
+		if($(this).is(':last-child')) {
+			$(this).toggleClass("on_last"); 
 		} else {
-			$(this).next(".answer").slideUp();
+			$(this).toggleClass("on"); 
 		}
-		return false;
+		
+		if($(this).hasClass("on") || $(this).hasClass("on_last")) {
+			$(this).children(".answer").slideDown();
+		} else {
+			$(this).children(".answer").slideUp();
+		}
 	});
 	
 	var pager = jQuery("#ampaginationsm").pagination({
