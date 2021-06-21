@@ -20,12 +20,16 @@
 	jdata.addProperty("caffeine", vo.getCaffeine());
 	
 	String al_text = "";
-	for(int i=0;i<vo.getAllergy().length;i++) {
-		if(i==vo.getAllergy().length-1) {
-			al_text += vo.getAllergy()[i];
-		}else {
-			al_text += vo.getAllergy()[i]+",";
+	if(vo.getAllergy()!=null){
+		for(int i=0;i<vo.getAllergy().length;i++) {
+			if(i==vo.getAllergy().length-1) {
+				al_text += vo.getAllergy()[i];
+			}else {
+				al_text += vo.getAllergy()[i]+",";
+			}
 		}
+	}else{
+		al_text = "없음";
 	}
 	
 	jdata.addProperty("allergy", al_text);

@@ -1,10 +1,10 @@
 package com.br31.vo;
 
 public class MenuVO {
-	String category, pname, eng_pname, intro,
-	pfile, psfile, one_amount,	kcal;
+	String category, pname, eng_pname, intro, order_num,
+	pfile, psfile, one_amount,	kcal, order_type;
 	int monthly_rank, natrium, sugar, fat, protein, caffeine,
-	set_check, order_num;
+	set_check;
 	String[] hashtag, allergy, rec_flavor;
 	
 	
@@ -33,10 +33,18 @@ public class MenuVO {
 	}
 	
 	
-	public int getOrder_num() {
+	public String getOrder_type() {
+		return order_type;
+	}
+
+	public void setOrder_type(String order_type) {
+		this.order_type = order_type;
+	}
+
+	public String getOrder_num() {
 		return order_num;
 	}
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
 	public String[] getRec_flavor() {
