@@ -114,7 +114,6 @@ $(document).ready(function() {
 		}
 		
 	});
-	
 
 });//ready
 </script>
