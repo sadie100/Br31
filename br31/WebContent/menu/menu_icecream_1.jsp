@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+<%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*, com.br31.comms.*" %>
 <% 
+	String rpage = request.getParameter("page");
 	MenuDAO dao = new MenuDAO();
+	
 	String category="icecream";
 	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category);
+	
+	
+	
+	
 %>
 <!DOCTYPE html>
 <html>

@@ -4,6 +4,7 @@
 
 
 <%
+
 String category = request.getParameter("category");
 String status = request.getParameter("status");
 String pname = request.getParameter("pname");

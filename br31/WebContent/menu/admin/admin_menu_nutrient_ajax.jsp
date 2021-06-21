@@ -9,10 +9,17 @@
 	
 	JsonObject jdata = new JsonObject();
 	Gson gson = new Gson();
-	
 	jdata.addProperty("pname", vo.getPname());
-	jdata.addProperty("one_amount", vo.getOne_amount());
-	jdata.addProperty("kcal", vo.getKcal());
+	if(vo.getOne_amount()!=null){
+		jdata.addProperty("one_amount", vo.getOne_amount());
+	}else{
+		jdata.addProperty("one_amount", "-");
+	}
+	if(vo.getKcal()!=null){
+		jdata.addProperty("kcal", vo.getKcal());
+	}else{
+		jdata.addProperty("kcal", "-");
+	}
 	jdata.addProperty("natrium",vo.getNatrium());
 	jdata.addProperty("sugar", vo.getSugar());
 	jdata.addProperty("fat", vo.getFat());

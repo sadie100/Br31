@@ -2,15 +2,9 @@
     pageEncoding="UTF-8"%>
  <%@ page import = "com.br31.dao.*,com.br31.vo.*,java.util.*,java.net.URLEncoder" %>
  <%
- SessionVO svo = (SessionVO)session.getAttribute("svo");
-	if(svo != null){
-	if(svo.getId().equals("admin")){
-		
  	String category = request.getParameter("category");
- 	String status = request.getParameter("status");
- 	if(status.equals("before")){
- 		
  	MenuDAO dao = new MenuDAO();
+	//MenuVO vo = dao.getAdminContent(pname);
 	ArrayList<MenuVO> list = dao.getAdminList(category);
  %>
 <!DOCTYPE html>
@@ -21,9 +15,14 @@
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/admin_menu.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
+var flavor_list = [];
+var hash_list = [];
 
-	function form_empty(){						//'선택'에 둔 상태로 리셋버튼 누를때 함수
+	function form_empty(){						//리셋버튼 누를때 함수
 		$("#intro").val("");	//설명
+		$("#selected_rec_flavor").empty();
+		$("#hashtag").val("");	//해쉬태그
+		$("#selected_hashtag").empty();
 		$("#frame").remove();
 		var output = "<span id='frame'>선택된 파일 없음</span>";
 		$("#p_image").after(output);
@@ -37,44 +36,49 @@
 		$("input[type=checkbox]").removeAttr("checked");
 	}
 
-	function ajax_content(pname){						//ajax. 맛 고를때마다 실행
+	function ajax_content(pname){						//ajax
 		$.ajax({
 			url:"admin_menu_update_ajax.jsp?pname="+pname,
 			success:function(result){
 				//실행결과에 따른 처리.
 				var jdata = JSON.parse(result);
-				$("#eng_pname").val(jdata.eng_pname);	//영문명
+				$("#eng_pname").val(jdata.eng_pname);	//설명
 				$("#intro").val(jdata.intro);	//설명
-				$("input[type=radio]").removeAttr("checked");	//정렬방식
-				$("input[value="+jdata.order_type+"]").attr("checked","checked");
-				
 				$("#selected_rec_flavor").empty();	//추천플레이버
 				var output = "";
 				if(jdata.rec_flavor!=""){
 					var list_r = jdata.rec_flavor.split(",");
 					for(var i=0;i<list_r.length;i++){
-						output += "<span>" + list_r[i] + "</span>";
+						if(i==0){
+							output += "<span><button type='button' class='delete' id='delete_rec' name='delete_rec'>&times;</button>" + list_r[i] + "</span>";
+						}else{
+							output += "<span>" + list_r[i] + "</span>";
+						}
+						flavor_list.push(list_r[i]);
 						output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+list_r[i]+">";
 					}
 				}
 				$("#selected_rec_flavor").append(output);
 				
-				$("#p_hashtag").val("");	//해쉬태그
+				$("#hashtag").val("");	//해쉬태그
+				$("#selected_hashtag").empty();
 				output = "";
 				if(jdata.hashtag!=null){
 					var list_h = jdata.hashtag.split(",");
 					for(var i=0;i<list_h.length;i++){
-						if(i==list_h.length-1) {
-							output += list_h[i];
-						}else {
-							output += list_h[i]+",";
+						if(i==0){
+							output += "<span><label class='hashtag' name='hashtag'><button type='button' class='delete' id='delete_hash' name='delete_hash'>&times;</button>" + list_h[i] + "<label></span>";
+						}else{
+							output += "<span><label class='hashtag' name='hashtag'>" + list_h[i] + "<label></span>";
 						}
+						output += "<input type='hidden' name='hashtag_data' id='hashtag_data' value="+hashtag+">";
+						hash_list.push(list_h[i]);
 					}
-					$("#p_hashtag").val(output);
 				}
+				$("#selected_hashtag").append(output);
 				
-				$("#frame").remove();	//메뉴 사진
-				output="";
+				$("#frame").remove();
+				output="";	//메뉴 사진
 				if(jdata.pfile!=null){
 					output += "<span id='frame'>"+jdata.pfile+"</span>";
 				}else{
@@ -82,8 +86,8 @@
 				}
 				$("#p_image").after(output);
 				
-				$("#psfile_old").val(jdata.psfile)	//기존사진
-				$("#n_amount").val(jdata.one_amount);	//영양성분
+				$("#psfile_old").val(jdata.psfile)
+				$("#n_amount").val(jdata.one_amount);
 				$("#n_kcal").val(jdata.kcal);
 				$("#n_natrium").val(jdata.natrium);
 				$("#n_sugar").val(jdata.sugar);
@@ -91,7 +95,7 @@
 				$("#n_protein").val(jdata.protein);
 				$("#n_caffeine").val(jdata.caffeine);
 				
-				$("input[type=checkbox]").removeAttr("checked");	//알러지
+				$("input[type=checkbox]").removeAttr("checked");
 				if(jdata.allergy!=null){
 					var list_a = jdata.allergy.split(",");
 					for(var i=0;i<list_a.length;i++){
@@ -106,8 +110,10 @@
 	
 	
 	$(document).ready(function(){							//document ready
-		$("#pname").change(function(){		//이름 select 할 때마다
+		$("#pname").change(function(){
 			var pname = $("#pname").val();
+			flavor_list = [];
+			hash_list = [];
 			if(pname!="선택"){		//원래 데이터로 돌려놓음
 				ajax_content(pname);
 			}else{		//'선택'일 경우 다 지움
@@ -115,26 +121,77 @@
 			}
 		});
 		
-	
 		$("#rec_flavor_list").change(function(){		//추천 플레이버 선택시
 			var flavor = $("#rec_flavor_list").val();
+			flavor_list.push(flavor);
 			if(flavor!="선택"){
 				if(flavor==$("#pname").val()){
 					alert("추천 플레이버는 다른 맛만 선택할 수 있습니다.")
 				}else{
 					var output = "";
+					if(flavor_list.length==1){
+						output += "<button type='button' class='delete' id='delete_rec' name='delete_rec'>&times;</button>";
+					}
 					output += "<span>"+flavor+"</span>";
 					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+flavor+">";
 					$("#selected_rec_flavor").append(output);
 					
+					/*
+					$("button[name=delete_rec]").click(function(){
+						$("#selected_rec_flavor").empty();
+						flavor_list = [];
+					});
+					*/
+					
 				}
 			}
 		});
-		$("#btn_flavor").click(function(){
-			$("#selected_rec_flavor").empty();
+		
+		window.onclick = function(){	//추천맛, 해쉬태그 삭제버튼 누를때
+			var btns_rec_delete = document.getElementsByName("delete_rec");
+			var btns_hash_delete = document.getElementsByName("delete_hash");
+			
+			for(var i=0;i<btns_rec_delete.length;i++){
+				btns_rec_delete[i].onclick = function(){
+					$("#selected_rec_flavor").empty();
+					flavor_list = [];
+				}
+			}
+			for(var i=0;i<btns_hash_delete.length;i++){
+				btns_hash_delete[i].onclick = function(){
+					$("#selected_hashtag").empty();
+					hash_list = [];
+				}
+			}
+			
+		
+		}
+		
+		$("#btn_hash_add").click(function(){		//해쉬태그 등록시
+			var hashtag = "#"+$("#hashtag").val();
+			if(hashtag.trim() == "#"){
+				alert("해쉬태그를 입력해 주세요.");
+				$("#hashtag").focus();
+			}else{
+				hash_list.push(hashtag);
+				$("#hashtag").val("");
+				var output = "";
+				if(hash_list.length==1){
+					output += "<button type='button' class='delete' id='delete_hash' name='delete_hash'>&times;</button>";
+				}
+				output += "<span>"+hashtag+"</span>";
+				output += "<input type='hidden' name='hashtag_data' id='hashtag_data' value="+hashtag+">";
+				$("#selected_hashtag").append(output);
+				
+				/*
+				$("button[name=delete_hash]").click(function(){
+					$("#selected_hashtag").empty();
+					hash_list = [];
+				});
+				
+				*/
+			}
 		});
-	
-	
 		$("#n_amount").blur(function(){
 			if($("#n_amount").val()==""){
 				$("#n_amount").val(0);
@@ -217,7 +274,8 @@
 <section class="page_update">
 <h3 class="title">메뉴 수정</h3>
 <div class="content_update">
-	<form name="menu_update" action="admin_menu_update_process.jsp?category=<%=category %>&status=<%=status %>" method="post" class="menu_update" enctype="multipart/form-data">
+	<form name="menu_update" action="admin_menu_update_process.jsp" method="post" class="menu_update" enctype="multipart/form-data">
+	<input type="hidden" name="psfile_old" id="psfile_old">
 		<table class="menu_update_table">
 			<tr>
 				<th>이름</th>
@@ -239,18 +297,6 @@
 				<td><input type="text" name="intro" id="intro" value=""></td>
 			</tr>
 			<tr>
-				<th>배치 방식</th>
-				<td>
-				<input type="radio" id="promotion" name="order_type" value="promotion">
-				<label for="promotion">프로모션(최상단)</label>
-				<input type="radio" id="common" name="order_type" value="common">
-				<label for="promotion">일반 메뉴</label>
-				<input type="radio" id="pack" name="order_type" value="pack">
-				<label for="promotion">팩 메뉴(하단 배치)</label>
-				</td>
-			</tr>
-			<%if(category.equals("icecream")){ %>
-			<tr>
 				<th>추천 플레이버</th>
 				<td>
 					<select id="rec_flavor_list" name="rec_flavor_list">
@@ -259,7 +305,6 @@
 						<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
 						<%} %>
 					</select>
-					<input type="button" name = "btn_flavor" id="btn_flavor" value="지우기">
 				</td>
 			</tr>
 			<tr>
@@ -269,11 +314,17 @@
 					</div>
 				</td>
 			</tr>
-			<%} %>
 			<tr>
 				<th>해쉬태그</th>
-				<td><input type="text" name="hashtag" id="p_hashtag" value="" placeholder="각 해쉬태그는 첫머리에 '#'을 붙이고 공백 없이 쉼표(,)로 구분하여 넣어 주세요.">
-				<!-- <input type="button" name = "btn_hash" id="btn_hash" value="등록">-->
+				<td><input type="text" name="hashtag" id="hashtag" value="">
+				<input type="button" name = "btn_hash_add" id="btn_hash_add" value="등록">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<div class="selected_div" id="selected_hashtag">
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -345,21 +396,3 @@
 </section>
 </body>
 </html>
-<% }else if(status.equals("after")){ %>
-	<script>
-		window.alert("수정 완료되었습니다.");
-		window.close();
-	</script>
-<% } %>
-<% }else{%>
-	<script>
-		window.alert("접근권한이 없습니다.");
-		location.href = "http://localhost:9000/br31/index.jsp";
-	</script>
-<% } %>
-<% }else{%>
-	<script>
-		window.alert("로그인후 사용이 가능합니다.");
-		location.href = "http://localhost:9000/br31/login/login.jsp";
-	</script>
-<% } %>

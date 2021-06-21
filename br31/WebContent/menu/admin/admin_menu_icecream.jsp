@@ -2,12 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.br31.dao.*,com.br31.vo.*,java.util.*, com.br31.vo.SessionVO" %>
 <%
-	MenuDAO dao = new MenuDAO();
-	String status= "icecream";
-	ArrayList<MenuVO> list = dao.getAdminList(status);
-	
-	MenuVO thisvo = new MenuVO();
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){
+		if(svo.getId().equals("admin")){
 
+		MenuDAO dao = new MenuDAO();
+		String status= "icecream";
+		ArrayList<MenuVO> list = dao.getAdminList(status);
+		
+		MenuVO thisvo = new MenuVO();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -111,7 +115,7 @@ $(document).ready(function(){
 <section class="page">
 <div class="content">
 <h3 class="title">메뉴 관리</h3>
-<form name="menu_form" action="admin_menu_icecream_process.jsp" method="get" class="menu_form" id="menu_form">
+<form name="menu_form" action="admin_menu_icecream.jsp" method="get" class="menu_form" id="menu_form">
 		<input type="hidden" id="hidden_tag" name="status">
 	<div class="category">
 		<ul class="category">
@@ -192,3 +196,15 @@ $(document).ready(function(){
 	<jsp:include page = "../../footer.jsp"></jsp:include>
 </body>
 </html>
+<% }else{%>
+	<script>
+		window.alert("접근권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("로그인후 사용이 가능합니다.");
+		location.href = "http://localhost:9000/br31/login/login.jsp";
+	</script>
+<% } %>

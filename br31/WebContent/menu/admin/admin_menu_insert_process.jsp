@@ -27,18 +27,22 @@
 	vo.setCategory(category);
 	vo.setPname(multi.getParameter("pname"));
 	vo.setEng_pname(multi.getParameter("eng_pname"));
-	if(multi.getParameterValues("rec_flavor")!=null){
-		vo.setRec_flavor(multi.getParameterValues("rec_flavor"));
-		for(int i=0;i<multi.getParameterValues("rec_flavor").length;i++){
-			System.out.println(vo.getRec_flavor()[i]);
+	if(category.equals("icecream")){
+		if(multi.getParameterValues("rec_flavor")!=null){
+			//vo.setRec_flavor(multi.getParameterValues("rec_flavor"));
+			String[] flavors = new String[multi.getParameterValues("rec_flavor").length];
+			for(int i=0;i<multi.getParameterValues("rec_flavor").length;i++){
+				String one = multi.getParameterValues("rec_flavor")[i];
+				if(one.contains("^")){
+					one = one.replace("^", " ");
+				}
+				flavors[i] = one;
+			}
+			vo.setRec_flavor(flavors);
 		}
-	}else{
-		vo.setRec_flavor("");
 	}
 	if(multi.getParameterValues("hashtag")!=null){
 		vo.setHashtag(multi.getParameterValues("hashtag"));
-	}else{
-		vo.setHashtag("");
 	}
 	vo.setOrder_type(multi.getParameter("order_type"));
 	vo.setIntro(multi.getParameter("intro"));
@@ -51,8 +55,6 @@
 	vo.setCaffeine(Integer.parseInt(multi.getParameter("caffeine")));
 	if(multi.getParameterValues("allergy")!=null){
 		vo.setAllergy(multi.getParameterValues("allergy"));
-	}else{
-		vo.setAllergy("");
 	}
 	vo.setPfile(multi.getOriginalFileName("pfile"));
 	vo.setPsfile(multi.getFilesystemName("pfile"));
@@ -63,7 +65,8 @@
 	 	status="after";
 		response.sendRedirect("admin_menu_write.jsp?category="+category+"&status="+status);
 	 }else if(result==false){
-		 System.out.print("오류가.");
+		status="after";
+		response.sendRedirect("admin_menu_write.jsp?category="+category+"&status="+status);
 	 }
 	
 	

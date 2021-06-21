@@ -73,7 +73,8 @@
 		status="after";
 		response.sendRedirect("admin_menu_update.jsp?category="+category+"&status="+status);
 	 }else if(result==false){
-		 
+		status="after";
+		response.sendRedirect("admin_menu_update.jsp?category="+category+"&status="+status); 
 	 }
 	
 	

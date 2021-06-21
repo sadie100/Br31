@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
  <%@ page import = "com.br31.dao.*,com.br31.vo.*,java.util.*,java.net.URLEncoder" %>
  <%
+ SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){
+	if(svo.getId().equals("admin")){
+			
  	String category = request.getParameter("category");
  	String status = request.getParameter("status");
 	if(status.equals("before")){
@@ -65,5 +69,17 @@
 	<script>
 		window.alert("삭제 완료되었습니다.");
 		window.close();
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("접근권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("로그인후 사용이 가능합니다.");
+		location.href = "http://localhost:9000/br31/login/login.jsp";
 	</script>
 <% } %>

@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.br31.dao.*,com.br31.vo.*,java.util.*,java.net.URLEncoder" %>
  <%
+ SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){
+	if(svo.getId().equals("admin")){
+		
  	String category = request.getParameter("category");
  	String status = request.getParameter("status");
  	if(status.equals("before")){
@@ -40,6 +44,16 @@
 					if($("#n_caffeine").val()==""){
 						$("#n_caffeine").val(0);
 					}
+					/*
+					if($("input[name='rec_flavor']").length==0){
+						var list = [];
+						for(var j=0;j<$("input[name='rec_flavor']").length;j++){
+							var one = encodeURIComponent($("input[name='rec_flavor']").get(j).val());
+							alert(one);
+							list[j] = one;
+						}
+					}
+					*/
 					menu_update.submit();
 				}else{
 					alert("이미 있는 제품 이름입니다. 이름을 변경해 주세요.");
@@ -51,13 +65,17 @@
 	$(document).ready(function(){
 		$("#rec_flavor_list").change(function(){		//추천 플레이버 선택시
 			var flavor = $("#rec_flavor_list").val();
+			if(flavor.search(/(\s)/)!=-1){
+				var re_flavor = flavor.replace(/(\s)/g,'^')
+				console.log(re_flavor);
+			}
 			if(flavor!="선택"){
 				if(flavor==$("#pname").val()){
 					alert("추천 플레이버는 다른 맛만 선택할 수 있습니다.")
 				}else{
 					var output = "";
 					output += "<span>"+flavor+"</span>";
-					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+flavor+">";
+					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+re_flavor+">";
 					$("#selected_rec_flavor").append(output);
 					
 				}
@@ -168,6 +186,7 @@
 				<label for="promotion">팩 메뉴(하단 배치)</label>
 				</td>
 			</tr>
+			<%if(category.equals("icecream")){ %>
 			<tr>
 				<th>추천 플레이버</th>
 				<td>
@@ -187,6 +206,7 @@
 					</div>
 				</td>
 			</tr>
+			<%} %>
 			<tr>
 				<th>해쉬태그</th>
 				<td><input type="text" name="hashtag" id="p_hashtag" value="" placeholder="각 해쉬태그는 첫머리에 '#'을 붙이고 공백 없이 쉼표(,)로 구분하여 넣어 주세요.">
@@ -266,5 +286,17 @@
 	<script>
 		window.alert("등록 완료되었습니다.");
 		window.close();
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("접근권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("로그인후 사용이 가능합니다.");
+		location.href = "http://localhost:9000/br31/login/login.jsp";
 	</script>
 <% } %>

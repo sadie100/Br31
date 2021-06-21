@@ -119,9 +119,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(5, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(6, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(6, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(7, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(7, null);
 				}
 				pstmt.setString(8, vo.getPfile());
 				pstmt.setString(9, vo.getPsfile());
@@ -134,6 +138,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(16, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(17, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(17, null);
 				}
 				pstmt.setInt(18, 0);
 				break;
@@ -148,9 +154,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(5, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(6, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(6, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(7, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(7, null);
 				}
 				pstmt.setString(8, vo.getPfile());
 				pstmt.setString(9, vo.getPsfile());
@@ -163,11 +173,12 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(16, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(17, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(17, null);
 				}
 				pstmt.setInt(18, 1);
 				break;
 			}
-			
 			
 			int r=pstmt.executeUpdate();
 			if(r!=0) {
@@ -274,9 +285,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getPfile());
 				pstmt.setString(7, vo.getPsfile());
@@ -289,6 +304,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(14, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
 				}
 				pstmt.setInt(16, 0);
 				pstmt.setString(17, vo.getPname());
@@ -305,9 +322,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getPfile());
 				pstmt.setString(7, vo.getPsfile());
@@ -320,6 +341,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(14, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
 				}
 				pstmt.setInt(16, 0);
 				pstmt.setString(17, vo.getPname());
@@ -335,9 +358,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getPfile());
 				pstmt.setString(7, vo.getPsfile());
@@ -350,6 +377,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(14, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
 				}
 				pstmt.setInt(16, 0);
 				pstmt.setString(17, vo.getPname());
@@ -384,9 +413,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getOne_amount());
 				pstmt.setString(7, vo.getKcal());
@@ -397,6 +430,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(12, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
 				}
 				pstmt.setInt(14, 0);
 				pstmt.setString(15, vo.getPname());
@@ -413,9 +448,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getOne_amount());
 				pstmt.setString(7, vo.getKcal());
@@ -426,6 +465,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(12, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
 				}
 				pstmt.setInt(14, 0);
 				pstmt.setString(15, vo.getPname());
@@ -442,9 +483,13 @@ public class MenuDAO extends DBConn{
 				pstmt.setString(3, vo.getIntro());
 				if(vo.getRec_flavor()!=null) {
 					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
 				}
 				if(vo.getHashtag()!=null) {
 					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
 				}
 				pstmt.setString(6, vo.getOne_amount());
 				pstmt.setString(7, vo.getKcal());
@@ -455,6 +500,8 @@ public class MenuDAO extends DBConn{
 				pstmt.setInt(12, vo.getCaffeine());
 				if(vo.getAllergy()!=null) {
 					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
 				}
 				pstmt.setInt(14, 0);
 				pstmt.setString(15, vo.getPname());
