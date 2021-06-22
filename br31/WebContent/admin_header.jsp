@@ -106,7 +106,7 @@
 					<li><a href="#">정보 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="http://localhost:9000/br31/notice/admin_notice_list.jsp">공지사항</a></li>
+								<li><a href="http://localhost:9000/br31/notice/admin/notice_list.jsp">공지사항</a></li>
 								<!-- <li><a href="#">채용정보</a></li> -->
 							</ul>
 						</div>

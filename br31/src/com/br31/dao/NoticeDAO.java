@@ -7,13 +7,30 @@ import com.br31.vo.NoticeVO;
 public class NoticeDAO extends DBConn {
 
 	// ?Ç≠?†ú?ï† Í≤åÏãúÍ∏??ùò ?åå?ùºÎ™? Í∞??†∏?ò§Í∏?
-	public String getNsfile(int articleno) {
+	// execTotalCount()
+	public int execTotalCount() {
+		int count = 0;
+		String sql = " select count(*) from br31_notice";
+		getPreparedStatement(sql);
+
+		try {
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				count = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+
+	public String getNsfile(String articleno) {
 		String result = "";
 		try {
 			String sql = "SELECT NSFILE FROM BR31_NOTICE WHERE ARTICLENO = ?";
 			getPreparedStatement(sql);
 
-			pstmt.setInt(1, articleno);
+			pstmt.setString(1, articleno);
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -34,7 +51,7 @@ public class NoticeDAO extends DBConn {
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getNcontent());
-			pstmt.setInt(3, vo.getArticleno());
+			pstmt.setString(3, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -57,7 +74,7 @@ public class NoticeDAO extends DBConn {
 			pstmt.setString(2, vo.getNcontent());
 			pstmt.setString(3, vo.getNfile());
 			pstmt.setString(4, vo.getNsfile());
-			pstmt.setInt(5, vo.getArticleno());
+			pstmt.setString(5, vo.getArticleno());
 
 			int val = pstmt.executeUpdate();
 			if (val == 1) {
@@ -87,24 +104,6 @@ public class NoticeDAO extends DBConn {
 		return result;
 	}
 
-	public boolean getUpdateHit(String articleno) {
-		boolean result = false;
-		try {
-			String sql = "UPDATE BR31_NOTICE SET NHIT = NHIT + 1 WHERE ARTICLENO = ?";
-			getPreparedStatement(sql);
-
-			pstmt.setString(1, articleno);
-			int val = pstmt.executeUpdate();
-			if (val == 1) {
-				result = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close();
-		return result;
-	}
-
 	public NoticeVO getContent(String articleno) {
 		NoticeVO vo = null;
 		try {
@@ -116,7 +115,7 @@ public class NoticeDAO extends DBConn {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				vo = new NoticeVO();
-				vo.setArticleno(rs.getInt(1));
+				vo.setArticleno(rs.getString(1));
 				vo.setTitle(rs.getString(2));
 				vo.setNcontent(rs.getString(3));
 				vo.setNfile(rs.getString(4));
@@ -140,7 +139,7 @@ public class NoticeDAO extends DBConn {
 			while (rs.next()) {
 				NoticeVO vo = new NoticeVO();
 				vo.setRno(rs.getInt(1));
-				vo.setArticleno(rs.getInt(2));
+				vo.setArticleno(rs.getString(2));
 				vo.setTitle(rs.getString(3));
 				vo.setMdate(rs.getString(4));
 				list.add(vo);
@@ -170,7 +169,7 @@ public class NoticeDAO extends DBConn {
 			while (rs.next()) {
 				NoticeVO vo = new NoticeVO();
 				vo.setRno(rs.getInt(1));
-				vo.setArticleno(rs.getInt(2));
+				vo.setArticleno(rs.getString(2));
 				vo.setTitle(rs.getString(3));
 				vo.setMdate(rs.getString(4));
 
