@@ -5,7 +5,6 @@
  SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){
 	if(svo.getId().equals("admin")){
-			
  	String category = request.getParameter("category");
  	String status = request.getParameter("status");
 	if(status.equals("before")){

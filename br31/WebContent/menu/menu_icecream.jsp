@@ -5,10 +5,30 @@
 	String rpage = request.getParameter("page");
 	MenuDAO dao = new MenuDAO();
 	
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 20;	//한 페이지당 게시물 수
+	int reqPage = 1;	//요청페이지
+	int pageCount = 1;	//전체페이지 수
+	int dbCount = dao.execTotalCount();	//DB에서 가져온 전체 행수
+	
+	if(dbCount % pageSize ==0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize+1;
+	}
+	
+	if(rpage!=null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage-1)*pageSize+1;
+		endCount = reqPage * pageSize;
+	}else{
+		startCount = 1;
+		endCount = pageSize;
+	}
+	
 	String category="icecream";
-	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category);
-	
-	
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category, startCount, endCount);
 	
 	
 %>
@@ -18,12 +38,41 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/menu/css/menu_list.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
+<script>
+	$(document).ready(function(){
+	
+	var pager = jQuery("#ampaginationsm").pagination({
+		
+	    maxSize: 10,	    		// max page size
+	    totals: <%=dbCount%>,	// total pages	
+	    page: <%=rpage%>,		// initial page		
+	    pageSize: <%=pageSize %>,			// max number items per page
+	
+	    // custom labels		
+	    prevText: "&lt;",		
+	    nextText: "&gt;",
+			     
+	    btnSize:"sm"	
+	});
+	
+	jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+		   jQuery(".showlabelsm").text("The selected page no: "+e.page);
+           $(location).attr("href", "http://localhost:9000/br31/menu/menu_icecream.jsp?page="+e.page);         
+    });
+	
+	});
+</script>
+<!-- 
 <style>
 div.pagination a:nth-child(2){
 	background-color: rgb(245,111,152);
 	color: white;
 }
 </style>
+ -->
 </head>
 <body>
 
@@ -56,7 +105,7 @@ div.pagination a:nth-child(2){
 					<tr>
 					<% }%>
 					<td>
-						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>" class="outer">
+						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>&category=<%=category %>" class="outer">
 							<span class="depth1">
 								<span class="depth2">
 									<label class="name"><%=vo.getPname() %></label>
@@ -326,14 +375,16 @@ div.pagination a:nth-child(2){
 	<!-- **************page********* -->
 	<!-- **************page********* -->
 	
-	
 		<div class="pagination">
+			<div id="ampaginationsm"></div>
+		</div>
+	<!-- 
 			<a href="menu_icecream_1.jsp">&lt;</a>
 			<a href="menu_icecream_1.jsp">1</a>
 			<a href="menu_icecream_2.jsp">2</a>
 			<a href="menu_icecream_3.jsp">3</a>
 			<a href="menu_icecream_2.jsp">&gt;</a>
-		</div>
+	 -->
 	</section>	
 </div>
 

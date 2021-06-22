@@ -6,6 +6,7 @@
 	
 	MenuDAO dao = new MenuDAO();
 	MenuVO vo = dao.getAdminNutrientContent(pname);
+	dao.close();
 	
 	JsonObject jdata = new JsonObject();
 	Gson gson = new Gson();

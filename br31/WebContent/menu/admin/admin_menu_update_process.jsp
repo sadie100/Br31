@@ -68,7 +68,7 @@
 	 }else{
 		result = dao.getUpdateResultNofile(vo);
 	 }
-	
+	dao.close();
 	 if(result){
 		status="after";
 		response.sendRedirect("admin_menu_update.jsp?category="+category+"&status="+status);

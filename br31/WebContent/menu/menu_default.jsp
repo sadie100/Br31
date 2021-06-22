@@ -39,7 +39,7 @@
 				<img src="http://localhost:9000/br31/menu/images/h_title_icecream.png">
 			<div class="title_right"></div>
 		</div>
-		<div class="btn_more"><a href="menu_icecream_1.jsp"><button class="btn_more">MORE</button></a></div>
+		<div class="btn_more"><a href="menu_icecream.jsp"><button class="btn_more">MORE</button></a></div>
 		
 	<section class="icecream_menu">
 		<div class="icecream_menu">

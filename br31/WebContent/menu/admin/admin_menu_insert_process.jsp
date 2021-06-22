@@ -60,6 +60,7 @@
 	vo.setPsfile(multi.getFilesystemName("pfile"));
 
 	result = dao.getInsertResult(vo);
+	dao.close();
 			
 	 if(result){
 	 	status="after";

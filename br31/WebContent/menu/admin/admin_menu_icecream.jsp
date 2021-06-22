@@ -5,7 +5,6 @@
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){
 		if(svo.getId().equals("admin")){
-
 		MenuDAO dao = new MenuDAO();
 		String status= "icecream";
 		ArrayList<MenuVO> list = dao.getAdminList(status);

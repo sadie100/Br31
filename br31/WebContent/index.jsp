@@ -418,7 +418,7 @@ section.main .instagram div img:hover {
 					<img src="http://localhost:9000/br31/images/h_menu.png">
 				</div>
 				<div>
-					<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp">
+					<a href="http://localhost:9000/br31/menu/menu_icecream.jsp">
 						<img src="http://localhost:9000/br31/images/img_icecream.png">
 					</a>
 					<a href="http://localhost:9000/br31/menu/menu_coffee.jsp">

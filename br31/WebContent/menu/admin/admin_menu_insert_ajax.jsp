@@ -5,7 +5,7 @@
 	String pname = request.getParameter("pname");
 	MenuDAO dao = new MenuDAO();
 	boolean p_check = dao.getPnameCheck(pname);
-	
+	dao.close();
 	JsonObject jdata = new JsonObject();
 	Gson gson = new Gson();
 	jdata.addProperty("p_check",p_check);

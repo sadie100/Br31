@@ -70,7 +70,7 @@
 					<a href="http://localhost:9000/br31/menu/menu_default.jsp">MENU</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp">아이스크림</a></li> 
+								<li><a href="http://localhost:9000/br31/menu/menu_icecream.jsp">아이스크림</a></li> 
 								<li><a href="http://localhost:9000/br31/menu/menu_coffee.jsp">커피</a></li>
 							</ul>
 						</div>

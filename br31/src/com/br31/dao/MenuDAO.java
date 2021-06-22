@@ -30,6 +30,48 @@ public class MenuDAO extends DBConn{
 			}
 			return text;
 		}
+		//Select --> 아이스크림 메뉴 리스트(페이징 처리)
+		public ArrayList<MenuVO> getMenuIcecreamList(String status, int start, int end) {
+			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+			String sql = "";
+			
+			if(status.equals("icecream")) {
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' " + 
+						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
+			}else {
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' " + 
+						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
+			}
+			
+			getPreparedStatement(sql);
+			try {
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				rs= pstmt.executeQuery();
+				while(rs.next()) {
+					MenuVO vo = new MenuVO();
+					vo.setPname(rs.getString(1));
+					if(rs.getString(2)!=null) {
+						if(rs.getString(2).contains(",")) {
+							String[] hashlist = rs.getString(2).split(",");
+							vo.setHashtag(hashlist);
+						}else {
+							String[] hashlist = {rs.getString(2)};
+							vo.setHashtag(hashlist);
+						}
+					}
+					vo.setPsfile(rs.getString(3));
+					list.add(vo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			close();
+			return list;
+		}
 	//Select --> 아이스크림 메뉴 리스트
 		public ArrayList<MenuVO> getMenuIcecreamList(String status) {
 			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
@@ -191,10 +233,12 @@ public class MenuDAO extends DBConn{
 		return result;
 	}
 	
+	
+	
 	//select --> admin의 pname 중복체크
 	public boolean getPnameCheck(String pname) {
 		boolean result = false;
-		String sql = " select rownum rno from ( select pname from br31_menu where pname=? ) ";
+		String sql = " select count(*) from br31_menu where pname=? ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -657,6 +701,38 @@ public class MenuDAO extends DBConn{
 		}
 		return vo;
 	}
+	
+	//Select--> menu 조회 - 이전/다음 메뉴
+	public String getNextMenuPname(String pname, String category, String status) {
+		String result = "";
+		String sql = "";
+		if(status.equals("previous")) {
+			sql = " select pname from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) " + 
+					" where rno = (select rno from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) where pname=?)-1 ";
+		}else if(status.equals("next")) {
+			sql = " select pname from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) " + 
+					" where rno = (select rno from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) where pname=?)+1 ";
+		}
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, category.toUpperCase());
+			pstmt.setString(2, category.toUpperCase());
+			pstmt.setString(3, pname);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString(1);
+			}else {
+				result = "null";
+			}
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	//Select ---> 영양정보 조회 - 기본화면(전체출력)
 	public ArrayList<MenuVO> getAllNutrientsList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();

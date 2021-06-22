@@ -12,7 +12,7 @@ MenuDAO dao = new MenuDAO();
 MenuVO vo = dao.getAdminContent(pname);
 String psfile = vo.getPsfile();
 boolean result = dao.getDeleteResult(pname);
-
+dao.close();
 if(result){
 	if(psfile!=null){
 		
