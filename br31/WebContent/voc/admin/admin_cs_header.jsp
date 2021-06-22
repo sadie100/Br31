@@ -20,9 +20,7 @@
 <body>
 	<section class="cs_header">
 		<div class="title">
-			<div class="title_left"></div>
-			<img src="http://localhost:9000/br31/images/h_customer_center.png">
-			<div class="title_right"></div>
+			<p><img src="http://localhost:9000/br31/images/h_customer_center.png"></p>
 			<span>고객의 소리를 적극 경청하고 고객만족향상 활동을 지속적으로 실천합니다.</span>
 		</div>
 		<div class="cs_menu">

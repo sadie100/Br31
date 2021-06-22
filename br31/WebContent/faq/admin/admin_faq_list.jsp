@@ -129,7 +129,7 @@ $(document).ready(function() {
 	<div class="cs_content">
 		<section class="faq">
 			<div class="faq_board">
-				<h3>고객센터 FAQ</h3>
+				<h3>[관리자] 고객센터 FAQ</h3>
 				<a href="admin_faq_write.jsp" class="btnFaqWrite"><button type="button" id="btnFaqWrite">등록</button></a>
 				<div class="faq_type" id="faq_type">
 					<ul>

@@ -1,14 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@font-face {
+    font-family: 'BBTreeGB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /********************
 	header
 ********************/
+
+header {
+	background-image: url("http://localhost:9000/br31/images/bg_header.png");
+}
+
 header ul {
 	list-style-type: none;
 	padding: 0;
 	display: inline-block;
-}
-
-header {
-	background-image: url("http://localhost:9000/br31/images/bg_header.png");
 }
 
 header>div {
@@ -71,6 +79,11 @@ header .menu_bar {
 	border-bottom: 1px solid darkgray;
 }
 
+header .menu {
+	width: 1400px;
+	margin: auto;
+}
+
 header .menu>ul {
 	margin: auto;
 	padding-left: 30px;
@@ -81,7 +94,6 @@ header .menu>ul {
 header .menu>ul>li {
 	width: 180px;
 	text-align: center;
-	background-color: white;
 }
 
 header .menu>ul>li:nth-child(1), header .menu>ul>li:nth-child(1) ul {
@@ -124,28 +136,36 @@ header .menu>ul>li:nth-child(2) ul li img {
 	margin-top: -15px;
 }
 
-header .menu>ul>li ul li a {
-	display: inline-block;
-	margin: 10px 0;
-}
-
 header .menu>ul>li>a {
 	display: inline-block;
 	padding: 10px 0;
 	width: 100%;
+	color: #454545;
+	font-family: 'BBTreeGB';
 	font-size: 14px;
 	font-weight: bold;
-	font-family: ¸¼Àº°íµñ;
 }
 
 header .menu a {
 	text-decoration: none;
-	color: black;
+	color: #3c3c3c;
 	font-size: 14px;
+}
+
+header .submenu a {
+	display: inline-block;
+	margin: 10px 0;
+	font-size: 13px;
+}
+
+header .submenu li {
+	visibility: hidden;
+	opacity: 0;
 }
 
 header .submenu a:hover {
 	color: #ff7c97;
+	visibility: visible;
 }
 
 header .submenu {
@@ -153,7 +173,6 @@ header .submenu {
 	height: 0;
 	margin: 0;
 	position: absolute;
-	background-color: white;
 	transition: height 0.5s;
 }
 
@@ -164,7 +183,8 @@ header .menu_bg {
 	margin: -10px;
 	left: 5px;
 	position: absolute;
-	background-color: white;
+	/* background: white url("http://localhost:9000/br31/images/menu_bg_img.png") no-repeat 100% 100% /30%; */
+	background: white url("http://localhost:9000/br31/images/bg_image.jpg") no-repeat 70% 10%/100%;
 	border-bottom: 1px solid darkgray;
 	transition: height 0.4s;
 }
@@ -176,7 +196,7 @@ header .menu:hover div.menu_bg {
 	overflow: hidden;
 }
 
-header .menu:hover .submenu {
+header .menu:hover .submenu, header .menu:hover .submenu>ul {
 	height: 270px;
 	visibility: visible;
 	z-index: 100;
@@ -187,10 +207,10 @@ header .menu_img {
 	opacity: 0;
 }
 
-header .menu:hover .menu_img {
+header .menu:hover .menu_img, header .menu:hover .submenu li {
 	visibility: visible;
 	opacity: 1;
-	transition: 0.7s;
+	transition: 1s;
 }
 
 /** header - °ü¸®ÀÚ **/

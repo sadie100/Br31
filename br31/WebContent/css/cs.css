@@ -12,7 +12,7 @@ div.cs_content {
 }
 
 .title {
-	margin: 70px 0;
+	margin: 50px 0;
 }
 .title p {
 	margin-bottom: 5px;
@@ -165,15 +165,16 @@ section.voc_list table {
 }
 section.voc_list table, section.voc_list th, section.voc_list td {
 	border-style: solid none; 
-	border-color: darkgray;
+	border-color: #dfdfdf;
 	border-width: 1px;
 	border-collapse: collapse;
 }
 section.voc_list th {
-	background-color: #ededf0;
+	background-color: #f6f6f6;
+	border-top-color: #ff7c97;
 }
 section.voc_list th, section.voc_list td {
-	padding: 10px 15px;
+	padding: 11px 15px;
 }
 section.voc_list table a {
 	text-decoration: none;
@@ -533,16 +534,17 @@ div.voc_search_bar {
 div.voc_search_bar select {
 	width: 120px;
 	padding: 5px;
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
 }
 div.voc_search_bar input[type="text"] {
-	padding: 7px 6px;
+	padding: 6px;
 	margin-left: 400px;
 	border: 0;
-	background: #efefef;
+	background: #eeeeee;
+	box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
 }
 div.voc_search_bar button {
-	padding: 2px 20px;
+	padding: 1px 20px;
 	width: 105px;
 	height: 30px;
 	color: #fff;
@@ -550,6 +552,7 @@ div.voc_search_bar button {
 	border: 0;
 	border-radius: 3px;
 	background: #d3c1ab;
+	box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.6);
 }
 div.voc_search_bar button:hover {
 	cursor: pointer;
