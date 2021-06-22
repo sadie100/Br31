@@ -6,7 +6,7 @@
  	String category = request.getParameter("category");
  	MenuDAO dao = new MenuDAO();
  	MenuVO vo = dao.getMenuIcecreamContent(pname);
- 	String pre_pname = dao.getNextMenuPname(pname, category, "previous");
+ 	String pre_pname = dao.getNextMenuPname(pname, category, "previous"); 
  	String next_pname = dao.getNextMenuPname(pname, category, "next");
  	
  	int height;
