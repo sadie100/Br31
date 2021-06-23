@@ -70,22 +70,25 @@ $(document).ready(function() {
 		}
 	}
 	
-	$(".faq_list li").click(function() {
-		$(".faq_list li").children(".answer").slideUp();
-		$(this).siblings().removeClass("on"); 
-		$(this).siblings().removeClass("on_last"); 
+	$(".faq_title").click(function() {
+		
+		var $parent = $(this).parent("li");
+		
+		$(".faq_title").next(".answer").slideUp();
+		$parent.siblings().removeClass("on"); 
+		$parent.siblings().removeClass("on_last"); 
 
 
-		if($(this).is(':last-child')) {
-			$(this).toggleClass("on_last"); 
+		if($parent.is(':last-child')) {
+			$parent.toggleClass("on_last"); 
 		} else {
-			$(this).toggleClass("on"); 
+			$parent.toggleClass("on"); 
 		}
 		
-		if($(this).hasClass("on") || $(this).hasClass("on_last")) {
-			$(this).children(".answer").slideDown();
+		if($parent.hasClass("on") || $parent.hasClass("on_last")) {
+			$(this).next(".answer").slideDown();
 		} else {
-			$(this).children(".answer").slideUp();
+			$(this).next(".answer").slideUp();
 		}
 	});
 	
@@ -154,7 +157,7 @@ $(document).ready(function() {
 					<ul>
 					<% for(FaqVO vo : list) { %>
 						<li>
-							<a><%= vo.getTitle() %></a>
+							<a class="faq_title"><%= vo.getTitle() %></a>
 							<div class="answer">
 								<div>
 									<%= vo.getContent().replace("\r\n", "<br>") %>

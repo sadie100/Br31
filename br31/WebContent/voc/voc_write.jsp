@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.vo.SessionVO" %>
+<%@ page import="com.br31.vo.*, com.br31.dao.MemberDAO" %>
 <%
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){
+		MemberDAO dao = new MemberDAO();
+		MemberVO vo = dao.getMemberContent(svo.getId());
+		
+		if(svo.getId().equals(vo.getId())) {
+		 	String[] elist = vo.getEmail().split("@");
+			String[] hlist = vo.getHp().split("-");
+
+		 	
 %>
 <!DOCTYPE html>
 <html>
@@ -190,19 +198,19 @@
 						</tr>
 						<tr>
 							<th>이름<span>*</span></th>
-							<td><input type="text" name="name" id="voc_name"></td>
+							<td><input type="text" name="name" id="voc_name" value="<%= vo.getName() %>"></td>
 							<th>전화번호</th>
 							<td>
-								<input type="text" name="hp1" id="voc_hp1"> -
-								<input type="text" name="hp2" id="voc_hp2"> -
-								<input type="text" name="hp3" id="voc_hp3">
+								<input type="text" name="hp1" id="voc_hp1" value="<%= hlist[0] %>"> -
+								<input type="text" name="hp2" id="voc_hp2" value="<%= hlist[1] %>"> -
+								<input type="text" name="hp3" id="voc_hp3" value="<%= hlist[2] %>">
 							</td>
 						</tr>
 						<tr>
 							<th>이메일<span>*</span></th>
 							<td colspan=3 class="td_email">
-								<input type="text" name="emailId" id="voc_email_id"> @
-								<input type="text" name="emailAddr" id="voc_email_addr">
+								<input type="text" name="emailId" id="voc_email_id" value="<%= elist[0] %>"> @
+								<input type="text" name="emailAddr" id="voc_email_addr" value="<%= elist[1] %>">
 								<select id="select_email">
 									<option value="직접입력">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -229,9 +237,15 @@
 
 </body>
 </html>
-<% }else{%>
-	<script>
-		window.alert("로그인 후 사용 가능합니다.");
-		location.href = "http://localhost:9000/br31/login/login.jsp";
-	</script>
-<% } %>
+<%		} else { %>
+			<script>
+				window.alert("접근 권한이 없습니다.");
+				location.href = "http://localhost:9000/br31/index.jsp";	
+			</script>
+<% 		}
+	} else { %>
+		<script>
+			window.alert("로그인 후 사용 가능합니다.");
+			location.href = "http://localhost:9000/br31/login/login.jsp";
+		</script>
+<%	} %>

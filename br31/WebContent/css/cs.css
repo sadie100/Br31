@@ -8,6 +8,9 @@
 /************** 
 	cs°øÅë 
 **************/
+div.cs_content textarea {
+	font-family: "¸¼Àº °íµñ";
+}
 div.cs_content>section, section.cs_header  {
 	width: 1400px;
 	margin: auto;

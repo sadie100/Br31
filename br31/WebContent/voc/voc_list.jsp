@@ -92,19 +92,23 @@
 						<th>접수일</th>
 						<th>상태</th>
 					</tr>
-					<% for(VocVO vo : list) { %>
-					<tr>
-						<td><%= vo.getRno() %></td>
-						<td><%= vo.getQtype() %></td>
-						<td><%= vo.getCtype() %></td>
-						<td><a href="http://localhost:9000/br31/voc/voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
-						<td><%= vo.getVdate() %></td>
-						<% if(vo.getStatus()=="답변완료") { %>
-						<td style="color:#ff7c97"><%= vo.getStatus() %></td>
-						<% } else { %>
-						<td style="color:darkgray"><%= vo.getStatus() %></td>
+					<% if(list.size()!=0) { %>
+						<% for(VocVO vo : list) { %>
+						<tr>
+							<td><%= vo.getRno() %></td>
+							<td><%= vo.getQtype() %></td>
+							<td><%= vo.getCtype() %></td>
+							<td><a href="http://localhost:9000/br31/voc/voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+							<td><%= vo.getVdate() %></td>
+							<% if(vo.getStatus()=="답변완료") { %>
+							<td style="color:#ff7c97"><%= vo.getStatus() %></td>
+							<% } else { %>
+							<td style="color:darkgray"><%= vo.getStatus() %></td>
+							<% } %>
+						</tr>
 						<% } %>
-					</tr>
+					<% } else { %>
+						<tr><td colspan=6>문의 내역이 없습니다.</td></tr>
 					<% } %>
 				</table>
 				<div id="ampaginationsm"></div>

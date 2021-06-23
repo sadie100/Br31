@@ -9,11 +9,9 @@
 		VocDAO dao = new VocDAO();
 		VocVO vo = dao.getContent(vid);
 		
-		System.out.println(vo.getId());
-		
 		if(svo.getId().equals(vo.getId())) {
 		
-			String content = vo.getContent().replace("\r\n", "<br>");
+		String content = vo.getContent().replace("\r\n", "<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -59,7 +57,6 @@
 			<h3>1:1 문의 내용</h3>
 			<div class="voc_content_detail">
 				<div class="details">
-					<span>※ 문의는 수정이 불가능합니다. 수정이 필요하신 경우 삭제 후 재작성을 부탁드립니다.</span>
 					<table>
 						<tr>
 							<th colspan=6>문   의   내   용</th>
