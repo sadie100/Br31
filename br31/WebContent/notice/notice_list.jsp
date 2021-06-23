@@ -136,7 +136,7 @@ if(rpage != null){
 					tbody.append("<tr>");
 					tbody.append("<td class=\"num\">" + vo.getRno() + "</td>");
 					tbody.append("<td class=\"title\">");
-					tbody.append("	<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'>class=\"tit\"</a>");
+					tbody.append("<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'class=\"tit\">"+vo.getTitle()+"</a>");
 					tbody.append("</td>");
 					tbody.append("<td class=\"period\">" + vo.getMdate() + "</td>");
 					tbody.append("</tr>");
