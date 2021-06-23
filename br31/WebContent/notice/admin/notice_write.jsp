@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
-<!-- <script type="text/javascript" src="http://localhost:9000/br31/js/br31.js"></script> -->
+<script type="text/javascript" src="http://localhost:9000/br31/js/br31.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -39,7 +39,7 @@
 						<td colspan="2">
 							<button type="button" class="btn_style2" onclick="noticeFormCheck()">저장</button>
 							<button type="reset" class="btn_style2">취소</button>
-							<a href="notice_list.jsp"><button type="button" class="btn_style2">목록</button></a> <a href="http://localhost:9000/br31/adminindex.jsp"><button type="button" class="btn_style2">홈으로</button></a>
+							<a href="notice_list.jsp"><button type="button" class="btn_style2">목록</button></a> <a href="http://localhost:9000/br31/adminIndex.jsp"><button type="button" class="btn_style2">홈으로</button></a>
 						</td>
 					</tr>
 				</table>

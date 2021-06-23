@@ -1,8 +1,8 @@
 package com.br31.vo;
 
 public class NoticeVO {
-	private int rno;
-	private String title, ncontent, nfile, nsfile, mdate, articleno ;
+	private int rno, articleno;
+	private String title, ncontent, nfile, nsfile, mdate ;
 
 	public int getRno() {
 		return rno;
@@ -12,11 +12,11 @@ public class NoticeVO {
 		this.rno = rno;
 	}
 
-	public String getArticleno() {
+	public int getArticleno() {
 		return articleno;
 	}
 
-	public void setArticleno(String articleno) {
+	public void setArticleno(int articleno) {
 		this.articleno = articleno;
 	}
 
