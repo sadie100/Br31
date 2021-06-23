@@ -30,6 +30,30 @@ public class MenuDAO extends DBConn{
 			}
 			return text;
 		}
+		//Select---> 메뉴 default에서 프로모션 메뉴 리스트
+		public ArrayList<MenuVO> getMenuPromotionList(String category){
+			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+			String sql= " select pname, hashtag, psfile from br31_menu where category=? and order_type='promotion' " + 
+					" order by order_num desc ";
+			getPreparedStatement(sql);
+			
+			try {
+				pstmt.setString(1, category.toUpperCase());
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					MenuVO vo = new MenuVO();
+					vo.setPname(rs.getString(1));
+					vo.setHashtag(rs.getString(2));
+					vo.setPsfile(rs.getString(3));
+					list.add(vo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		
 		//Select --> 아이스크림 메뉴 리스트(페이징 처리)
 		public ArrayList<MenuVO> getMenuIcecreamList(String status, int start, int end) {
 			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
@@ -39,7 +63,7 @@ public class MenuDAO extends DBConn{
 				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
 						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' " + 
 						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
-			}else {
+			}else if(status.equals("coffee")){
 				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
 						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' " + 
 						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";

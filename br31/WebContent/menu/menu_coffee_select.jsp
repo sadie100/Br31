@@ -8,6 +8,7 @@
  	MenuVO vo = dao.getMenuIcecreamContent(pname);
  	String pre_pname = dao.getNextMenuPname(pname, category, "previous"); 
  	String next_pname = dao.getNextMenuPname(pname, category, "next");
+ 	dao.close();
  	
  	int height;
 	height = 1700;
