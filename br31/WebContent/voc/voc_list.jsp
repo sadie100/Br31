@@ -83,32 +83,30 @@
 		<section class="voc_list">
 			<h3>내 문의함</h3>
 			<div class="voc_list_content">
-				<div class="list">
-					<table>
-						<tr>
-							<th>번호</th>
-							<th>상담유형</th>
-							<th>내용유형</th>
-							<th>제목</th>
-							<th>접수일</th>
-							<th>상태</th>
-						</tr>
-						<% for(VocVO vo : list) { %>
-						<tr>
-							<td><%= vo.getRno() %></td>
-							<td><%= vo.getQtype() %></td>
-							<td><%= vo.getCtype() %></td>
-							<td><a href="http://localhost:9000/br31/voc/voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
-							<td><%= vo.getVdate() %></td>
-							<% if(vo.getStatus()=="답변완료") { %>
-							<td style="color:#ff7c97"><%= vo.getStatus() %></td>
-							<% } else { %>
-							<td style="color:darkgray"><%= vo.getStatus() %></td>
-							<% } %>
-						</tr>
+				<table>
+					<tr>
+						<th>번호</th>
+						<th>상담유형</th>
+						<th>내용유형</th>
+						<th>제목</th>
+						<th>접수일</th>
+						<th>상태</th>
+					</tr>
+					<% for(VocVO vo : list) { %>
+					<tr>
+						<td><%= vo.getRno() %></td>
+						<td><%= vo.getQtype() %></td>
+						<td><%= vo.getCtype() %></td>
+						<td><a href="http://localhost:9000/br31/voc/voc_content.jsp?vid=<%=vo.getVid()%>"><%= vo.getTitle() %></a></td>
+						<td><%= vo.getVdate() %></td>
+						<% if(vo.getStatus()=="답변완료") { %>
+						<td style="color:#ff7c97"><%= vo.getStatus() %></td>
+						<% } else { %>
+						<td style="color:darkgray"><%= vo.getStatus() %></td>
 						<% } %>
-					</table>
-				</div>
+					</tr>
+					<% } %>
+				</table>
 				<div id="ampaginationsm"></div>
 			</div>
 		</section>	

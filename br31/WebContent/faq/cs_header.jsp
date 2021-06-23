@@ -7,8 +7,19 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/cs.css">
 <script>
-
+	$(document).ready(function() {
+	
+		$("button").click(function() {
+			$(this).css("border-color", "red");
+		});
+		
+	});
 </script>
+<style>
+	.voc_on {
+		border-color: pink;
+	}
+</style>
 </head>
 <body>
 	<section class="cs_header">

@@ -183,8 +183,7 @@ header .menu_bg {
 	margin: -10px;
 	left: 5px;
 	position: absolute;
-	/* background: white url("http://localhost:9000/br31/images/menu_bg_img.png") no-repeat 100% 100% /30%; */
-	background: white url("http://localhost:9000/br31/images/bg_image.jpg") no-repeat 70% 10%/100%;
+	background: white url("http://localhost:9000/br31/images/bg_image.jpg") no-repeat 100% 100%/100%;
 	border-bottom: 1px solid darkgray;
 	transition: height 0.4s;
 }
