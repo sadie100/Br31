@@ -89,7 +89,7 @@ section.top_info div.bg{
 	background-image: url("../images/img_con.png");
 	background-repeat: no-repeat; 
 	background-position: center bottom;
-	background-size: 70px;
+	background-size: 80px;
 	height: 500px;
 }
 section.top_info div.no_bg{
@@ -437,6 +437,13 @@ div.coffee_bg{
 	position: relative;
 	padding: 0;
 	text-align: left;
+}
+div.coffee_border{
+	width: 950px;
+	height: 220px;
+	padding: 0;
+	position: absolute;
+	z-index: 888;
 }
 div.coffee_list{	/*움직이는 div */
 	margin: 20px 0 50px 0;

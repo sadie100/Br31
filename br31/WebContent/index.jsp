@@ -19,7 +19,7 @@ section.main .banner a {
 	margin-bottom: 0;
 	height: 150px;
 	display: block;
-	background: #c3d600 url("http://localhost:9000/br31/images/main_banner.jpg") no-repeat center;
+	background: #ef9dc1 url("http://localhost:9000/br31/images/main_banner.jpg") no-repeat center;
 }
 section.main .br_event {
 	width: 1400px;
@@ -135,7 +135,7 @@ section.main .instagram div img:hover {
 }
 
 .carousel-inner div:nth-child(1) {
-	background-color: #c3d600;
+	background-color: #ef9dc1;
 }
 .carousel-inner div:nth-child(2) {
 	background-color: #76e1e7;
@@ -418,7 +418,7 @@ section.main .instagram div img:hover {
 					<img src="http://localhost:9000/br31/images/h_menu.png">
 				</div>
 				<div>
-					<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp">
+					<a href="http://localhost:9000/br31/menu/menu_icecream.jsp">
 						<img src="http://localhost:9000/br31/images/img_icecream.png">
 					</a>
 					<a href="http://localhost:9000/br31/menu/menu_coffee.jsp">

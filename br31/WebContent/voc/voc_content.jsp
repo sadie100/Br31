@@ -1,13 +1,19 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.*, java.util.*" %>
 <%
-	String vid = request.getParameter("vid");
-
-	VocDAO dao = new VocDAO();
-	VocVO vo = dao.getContent(vid);
-	
-	String content = vo.getContent().replace("\r\n", "<br>");
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null) {
+		
+		String vid = request.getParameter("vid");
+		VocDAO dao = new VocDAO();
+		VocVO vo = dao.getContent(vid);
+		
+		System.out.println(vo.getId());
+		
+		if(svo.getId().equals(vo.getId())) {
+		
+			String content = vo.getContent().replace("\r\n", "<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -50,7 +56,7 @@
 	<!-- content -->
 	<div class="cs_content">
 		<section class="voc_content">
-			<h3>고객센터 1:1 문의 내용</h3>
+			<h3>1:1 문의 내용</h3>
 			<div class="voc_content_detail">
 				<div class="details">
 					<span>※ 문의는 수정이 불가능합니다. 수정이 필요하신 경우 삭제 후 재작성을 부탁드립니다.</span>
@@ -130,3 +136,15 @@
 
 </body>
 </html>
+<%		} else { %>
+			<script>
+				window.alert("접근 권한이 없습니다.");
+				location.href = "http://localhost:9000/br31/index.jsp";	
+			</script>
+<% 		}
+	}else{ %>
+		<script>
+			window.alert("로그인 후 사용 가능합니다.");
+			location.href = "http://localhost:9000/br31/login/login.jsp";
+		</script>
+<%	} %>

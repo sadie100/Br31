@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.vo.*" %>
+<%
+	SessionVO svo = (SessionVO) session.getAttribute("svo");
+	if(svo != null && svo.getId().equals("admin")) {
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,3 +95,9 @@
 	
 </body>
 </html>
+<%	} else {%>
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<%	} %>

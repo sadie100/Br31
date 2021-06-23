@@ -4,12 +4,15 @@
 
 
 <%
+
+String category = request.getParameter("category");
+String status = request.getParameter("status");
 String pname = request.getParameter("pname");
 MenuDAO dao = new MenuDAO();
 MenuVO vo = dao.getAdminContent(pname);
 String psfile = vo.getPsfile();
 boolean result = dao.getDeleteResult(pname);
-
+dao.close();
 if(result){
 	if(psfile!=null){
 		
@@ -24,7 +27,10 @@ if(result){
 
 
 if(result){
-	response.sendRedirect("admin_menu_icecream.jsp");
-}
-
+	status="after";
+	response.sendRedirect("admin_menu_delete.jsp?category="+category+"&status="+status);
+ }else if(result==false){
+	 
+ }
+ 
 %>

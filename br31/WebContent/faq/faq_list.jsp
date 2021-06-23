@@ -50,7 +50,7 @@ $(document).ready(function() {
 			$(this).children("a").css({	"background-color":"#92867f", "color":"white"});
 		}
 	})
-	
+
 	function getUrlFtype() {
 		var search = window.location.search;
 		var params = search.substring(1).split("&");
@@ -67,18 +67,23 @@ $(document).ready(function() {
 		}
 	}
 	
-	$(document).on("click", ".faq_list li>a", function() {
-		
-		$(".faq_list li>a").next(".answer").slideUp();
-		$(this).parent("li").siblings().removeClass("on"); 
-		$(this).parent("li").toggleClass("on"); 
+	$(".faq_list li").click(function() {
+		$(".faq_list li").children(".answer").slideUp();
+		$(this).siblings().removeClass("on"); 
+		$(this).siblings().removeClass("on_last"); 
 
-		if($(this).parent("li").hasClass("on")) {
-			$(this).next(".answer").slideDown();
+
+		if($(this).is(':last-child')) {
+			$(this).toggleClass("on_last"); 
 		} else {
-			$(this).next(".answer").slideUp();
+			$(this).toggleClass("on"); 
 		}
-		return false;
+		
+		if($(this).hasClass("on") || $(this).hasClass("on_last")) {
+			$(this).children(".answer").slideDown();
+		} else {
+			$(this).children(".answer").slideUp();
+		}
 	});
 	
 	var pager = jQuery("#ampaginationsm").pagination({
@@ -104,12 +109,6 @@ $(document).ready(function() {
 
 });
 </script>
-<style>
-div.pagination a:nth-child(2){
-	background-color: rgb(245,111,152);
-	color: white;
-}
-</style>
 </head>
 <body>
 	<!-- header -->
@@ -120,7 +119,7 @@ div.pagination a:nth-child(2){
 	<div class="cs_content">
 		<section class="faq">
 			<div class="faq_board">
-				<h3>고객센터 FAQ</h3>
+				<h3>자주하는 질문</h3>
 				<div class="faq_type">
 					<ul>
 						<li class="all">

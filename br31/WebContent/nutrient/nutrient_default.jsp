@@ -146,7 +146,14 @@ div.pagination a:nth-child(2){
 			
 			<% 
 			if(list.size()!=0){
-				for(MenuVO vo:list){ %>
+				for(MenuVO vo:list){
+					if(vo.getOne_amount()==null){
+						vo.setOne_amount("-");
+					}
+					if(vo.getKcal()==null){
+						vo.setKcal("-");
+					}
+				%>
 					<tr>
 						<td><%= vo.getPname() %></td>
 						<td><%= vo.getOne_amount() %></td>

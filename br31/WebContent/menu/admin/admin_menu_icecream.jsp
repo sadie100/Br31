@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.*,com.br31.vo.*,java.util.*" %>
+<%@ page import="com.br31.dao.*,com.br31.vo.*,java.util.*, com.br31.vo.SessionVO" %>
 <%
-	MenuDAO dao = new MenuDAO();
-	String status= "icecream";
-	ArrayList<MenuVO> list = dao.getAdminList(status);
-	
-	MenuVO thisvo = new MenuVO();
-	
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){
+		if(svo.getId().equals("admin")){
+		MenuDAO dao = new MenuDAO();
+		String status= "icecream";
+		ArrayList<MenuVO> list = dao.getAdminList(status);
+		
+		MenuVO thisvo = new MenuVO();
 	
 %>
 <!DOCTYPE html>
@@ -25,13 +27,13 @@
 *****/
 
 function updatePop(){
-	window.open("admin_menu_update.jsp?category=icecream","","width = 800, height = 900, top = 50, left = 800");
+	window.open("admin_menu_update.jsp?category=icecream&status=before","","width = 800, height = 950, top = 25, left = 800");
 }
 function writePop(){
-	window.open("admin_menu_write.jsp","","width = 800, height = 900, top = 50, left = 800");
+	window.open("admin_menu_write.jsp?category=icecream&status=before","","width = 800, height = 900, top = 50, left = 800");
 }
 function deletePop(){
-	window.open("admin_menu_delete.jsp?category=icecream","","width = 800, height = 400, top = 50, left = 800");
+	window.open("admin_menu_delete.jsp?category=icecream&status=before","","width = 800, height = 400, top = 50, left = 800");
 }
 function getPname(){
 	if($("input[type='checkbox']:checked").length==0){
@@ -95,6 +97,9 @@ $(document).ready(function(){
 	$("#btn_delete").click(function(){
 		deletePop();
 	});
+	$("#btn_write").click(function(){
+		writePop();
+	});
 	
 	
 });//document.ready
@@ -109,7 +114,7 @@ $(document).ready(function(){
 <section class="page">
 <div class="content">
 <h3 class="title">메뉴 관리</h3>
-<form name="menu_form" action="admin_menu_icecream_process.jsp" method="get" class="menu_form" id="menu_form">
+<form name="menu_form" action="admin_menu_icecream.jsp" method="get" class="menu_form" id="menu_form">
 		<input type="hidden" id="hidden_tag" name="status">
 	<div class="category">
 		<ul class="category">
@@ -130,6 +135,7 @@ $(document).ready(function(){
 			<table class="menu_ice" id="menu_table">
 				<tr>
 					<th>메뉴 이름</th>
+					<th>영어 이름</th>
 					<th>메뉴 설명</th>
 					<th>추천 플레이버</th>
 					<th>해쉬태그</th>
@@ -141,6 +147,7 @@ $(document).ready(function(){
 				%>
 				<tr>
 					<td id="pname"><span><%=vo.getPname() %></span></td>
+					<td><%=vo.getEng_pname() %></td>
 					<td><%=vo.getIntro() %></td>
 					<td>
 						<ul>
@@ -188,3 +195,15 @@ $(document).ready(function(){
 	<jsp:include page = "../../footer.jsp"></jsp:include>
 </body>
 </html>
+<% }else{%>
+	<script>
+		window.alert("접근권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<% } %>
+<% }else{%>
+	<script>
+		window.alert("로그인후 사용이 가능합니다.");
+		location.href = "http://localhost:9000/br31/login/login.jsp";
+	</script>
+<% } %>

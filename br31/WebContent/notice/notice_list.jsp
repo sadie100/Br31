@@ -50,7 +50,42 @@ if(rpage != null){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
+<script>
+	$(document).ready(
+			function() {
 
+				var pager = jQuery('#ampaginationsm').pagination({
+
+					maxSize : 7, // max page size
+					totals :<%=map.get("dbCount")%>, // total pages	
+					page :<%=map.get("rpage")%>, // initial page		
+					pageSize : <%=map.get("pageSize")%>, // max number items per page
+
+					// custom labels		
+					lastText : '&raquo;&raquo;',
+					firstText : '&laquo;&laquo;',
+					prevText : '&laquo;',
+					nextText : '&raquo;',
+
+					btnSize : 'sm' // 'sm'  or 'lg'		
+				});
+
+				jQuery('#ampaginationsm').on(
+						'am.pagination.change',
+						function(e) {
+							jQuery('.showlabelsm').text(
+									'The selected page no: ' + e.page);
+							$(location).attr(
+									'href',
+									"http://localhost:9000/br31/notice/notice_list.jsp?page="
+											+ e.page);
+						});
+
+			});
+</script>
 </head>
 <body id="br_about">
 	<!-- header -->
@@ -81,7 +116,7 @@ if(rpage != null){
 					</fieldset>
 				</form>
 			</div>
-			<p class="result_num">총 <span>51</span> 건이 검색되었습니다.</p>
+			<p class="result_num">총 <span><%=dao.execTotalCount() %></span> 건이 검색되었습니다.</p>
 
 			<div class="list_wrap">				
 
@@ -103,10 +138,12 @@ if(rpage != null){
 					tbody.append("<td class=\"title\">");
 					tbody.append("	<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'>class=\"tit\"</a>");
 					tbody.append("</td>");
+					tbody.append("<td class=\"period\">" + vo.getMdate() + "</td>");
 					tbody.append("</tr>");
 				}
 				out.write(tbody.toString());
 				%>
+				<!-- 
 																<tr>
 							<td class="num">51</td>
 							<td class="title">
@@ -243,6 +280,7 @@ if(rpage != null){
 															</td>
 							<td class="period">2019-05-13</td>
 						</tr>
+						 -->
 										</tbody>
 				</table> 
 				

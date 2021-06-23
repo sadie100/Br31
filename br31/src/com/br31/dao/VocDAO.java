@@ -94,12 +94,14 @@ public class VocDAO extends DBConn {
 	}
 	
 	//전체 문의 수
-	public int execTotalCount(){
+	public int execTotalCount(String id){
 		int count = 0;
-		String sql = " SELECT COUNT(*) FROM BR31_VOC ";
+		String sql = " SELECT COUNT(*) FROM BR31_VOC WHERE ID = ?";
 		getPreparedStatement(sql);
 		
 		try {
+			pstmt.setString(1, id);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) count = rs.getInt(1);
 			
@@ -240,7 +242,7 @@ public class VocDAO extends DBConn {
 	public VocVO getContent(String vid) {
 		VocVO vo = new VocVO();
 		
-		String sql = " SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VFILE, VSFILE, NAME, HP, EMAIL, TO_CHAR(VDATE, 'YYYY-MM-DD'), ANSWER "
+		String sql = " SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VFILE, VSFILE, NAME, HP, EMAIL, TO_CHAR(VDATE, 'YYYY-MM-DD'), ANSWER, ID "
 					+ " FROM BR31_VOC WHERE VID = ? "; 
 		getPreparedStatement(sql);
 		
@@ -261,6 +263,7 @@ public class VocDAO extends DBConn {
 				vo.setEmail(rs.getString(10));
 				vo.setVdate(rs.getString(11));
 				vo.setAnswer(rs.getString(12));
+				vo.setId(rs.getString(13));
 			}
 			
 		} catch (Exception e) {
@@ -271,19 +274,19 @@ public class VocDAO extends DBConn {
 	}
 	
 	//고객 ---> voc_list : 페이지 ***************
-	public ArrayList<VocVO> getList(int start, int end) {
+	public ArrayList<VocVO> getList(String id, int start, int end) {
 		ArrayList<VocVO> list = new ArrayList<VocVO>();
 		
 		String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
 				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
-				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC ORDER BY VDATE DESC)) "
-				+ " WHERE RNO BETWEEN ? AND ? ";
-		 	/*	+ " WHERE ID = ? "; */
+				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC WHERE ID = ? ORDER BY VDATE)) "
+				+ " WHERE RNO BETWEEN ? AND ? ORDER BY RNO DESC";
 		getPreparedStatement(sql);
 		
 		try {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);		
+			pstmt.setString(1, id);
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, start);		
 			/* pstmt.setString(3, id); */ //파라미터로 고객 아이디 받아올 것. 
 			
 			rs = pstmt.executeQuery();
@@ -362,10 +365,9 @@ public class VocDAO extends DBConn {
 		String sql = " SELECT RNO, VID, QTYPE, CTYPE, TITLE, VDATE, STATUS "
 				+ " FROM (SELECT ROWNUM RNO, VID, QTYPE, CTYPE, TITLE, TO_CHAR(VDATE, 'YYYY-MM-DD') VDATE, STATUS "
 				+ " FROM (SELECT VID, QTYPE, CTYPE, TITLE, CONTENT, VDATE, STATUS FROM BR31_VOC " 
-				+ " WHERE STATUS = '" + status + "'" + wqtype + wctype + wkeyword +" ORDER BY VDATE DESC)) "
-				+ " WHERE RNO BETWEEN " + start + " AND " + end;
+				+ " WHERE STATUS = '" + status + "'" + wqtype + wctype + wkeyword +" ORDER BY VDATE)) "
+				+ " WHERE RNO BETWEEN " + end + " AND " + start + " ORDER BY RNO DESC ";
 
-		System.out.println(sql);  //sql 확인용 ******************
 		getStatement();
 		
 		try {
@@ -450,7 +452,7 @@ public class VocDAO extends DBConn {
 	public boolean getInsertResult(VocVO vo) {
 		boolean result = false;
 		
-		String sql = " INSERT INTO BR31_VOC VALUES('v_'||SEQU_BR31_VOC.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, NULL, 'NO', NULL ) ";
+		String sql = " INSERT INTO BR31_VOC VALUES('v_'||SEQU_BR31_VOC.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, NULL, 'NO', ?) ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -463,7 +465,7 @@ public class VocDAO extends DBConn {
 			pstmt.setString(7, vo.getName());
 			pstmt.setString(8, vo.getHp());
 			pstmt.setString(9, vo.getEmail());
-			/* pstmt.setString(10, vo.getId()); */
+			pstmt.setString(10, vo.getId());
 		
 			int value = pstmt.executeUpdate();
 			if(value != 0) result = true;

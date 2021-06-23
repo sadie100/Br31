@@ -5,196 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-header ul {
-	list-style-type: none;
-	padding: 0;
-	display: inline-block;
-}
+<link rel="stylesheet" href="http://localhost:9000/br31/css/commons.css">
+<script>
+	$(document).ready(function() {
+		
+		
+		$(window).scroll(function () {
+			var header_height = $(".main_bar").offset().top + $(".menu_bar").offset().top;
+			var scroll = $(document).scrollTop();
+			
+			if(scroll > 200) {
+				$(".admin_msg").addClass("fixed");
+			} else {
+				$(".admin_msg").removeClass("fixed");
+			}
+			
+		}); 
+		
 
-header {
-	background-image: url("http://localhost:9000/br31/images/bg_header.png");
-}
-
-header>div {
-	width: 1400px;
-	height: 40px;
-	margin: auto;
-}
-
-header .main_bar {
-	height: 150px;
-	text-align: center;
-}
-
-header .main_bar>div {
-	height: 150px;
-	line-height: 150px;
-	display: inline-block;
-}
-
-header li {
-	display: inline-block;
-}
-
-header .main_bar li img {
-	width: 35px;
-	height: 35px;
-}
-
-header .main_bar div:nth-child(2) img {
-	width: 400px;
-	height: 70px;
-	padding-top: 40px;
-}
-
-header .main_bar a {
-	text-decoration: none;
-	font-size: 13px;
-	color: black;
-}
-
-header .main_bar img {
-	display: inline-block;
-}
-
-header .main_bar div:first-child {
-	float: left;
-	padding-left: 100px;
-}
-
-header .main_bar div:last-child {
-	float: right;
-	padding: 0 150px 0 80px;
-}
-
-/****** 메뉴바 *******/
-header .menu_bar {
-	clear: right;
-	text-align: center;
-	width: 100%;
-	border-bottom: 1px solid darkgray;
-}
-
-header .menu>ul {
-	margin: auto;
-	width: 1400px;
-	text-align: center;
-}
-
-header .menu>ul>li {
-	width: 180px;
-	/* float: left; */
-	text-align: center;
-	background-color: white;
-}
-
-header .menu>ul>li:nth-child(1), header .menu>ul>li:nth-child(1) ul {
-	width: 200px;
-}
-
-header .menu>ul>li:nth-child(1) a {
-	display: inline-block;
-	width: 40%;
-}
-
-header .submenu ul {
-	padding-top: 10px;
-	min-width: 180px;
-	display: block;
-}
-
-header .submenu li {
-	display: block;
-}
-
-header .menu>ul>li:nth-child(1) a {
-	font-size: 12px;
-}
-
-header .menu>ul>li:nth-child(1) a:first-child {
-	color: #ff7c97;
-}
-
-header .menu>ul>li:nth-child(1) a:nth-child(2) {
-	color: gray;
-}
-
-header .menu>ul>li:nth-child(2) {
-	width: 200px;
-	text-align: center;
-}
-
-header .menu>ul>li:nth-child(2) ul li img {
-	margin-top: -15px;
-}
-
-header .menu>ul>li ul li a {
-	display: inline-block;
-	margin: 10px 0;
-}
-
-header .menu>ul>li>a {
-	display: inline-block;
-	padding: 10px 0;
-	width: 100%;
-	font-size: 14px;
-	font-weight: bold;
-	font-family: 맑은고딕;
-}
-
-header .menu a {
-	text-decoration: none;
-	color: black;
-	font-size: 14px;
-}
-
-header .submenu a:hover {
-	color: #ff7c97;
-}
-
-header .submenu {
-	display: none;
-	height: 270px;
-	margin: 0;
-	position: absolute;
-	background-color: white;
-}
-
-header .menu_bg {
-	display: none;
-	width: 100%;
-	height: 280px;
-	margin: -10px;
-	left: 5px;
-	position: absolute;
-	background-color: white;
-	border-bottom: 1px solid darkgray;
-}
-
-header .menu:hover div.menu_bg {
-	display: block;
-	z-index: 90;
-	overflow: hidden;
-}
-
-header .menu:hover .submenu {
-	display: block;
-	z-index: 100;
-}
-
-header .admin_msg {
-	width: 100%;
-	height: 25px;
-	text-align: center;
-	color: white;
-	background-color: indianred;
-	font-weight: bold;
-	text-decoration: blink;
-	margin: auto;
-}
-
-</style>
+		
+	});
+</script>
 </head>
 <body>
 	<header>
@@ -211,7 +42,7 @@ header .admin_msg {
 				</nav>
 			</div>
 			<div>
-				<a href="http://localhost:9000/br31/adminIndex.jsp"><img src="http://localhost:9000/br31/images/admin_header.png"></a>
+				<a href="http://localhost:9000/br31/adminIndex.jsp"><img src="http://localhost:9000/br31/images/admin_header.png" class="admin_logo"></a>
 			</div>
 			<div>
 				<a href="http://localhost:9000/br31/index.jsp" target="_blank">홈페이지</a>
@@ -227,7 +58,7 @@ header .admin_msg {
 						<!-- <a href="#"></a> -->
 						<div class="submenu">
 							<ul>
-								<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
+								<li><img src="http://localhost:9000/br31/images/happypoint_app.png"></li>
 							</ul>
 						</div>
 					</li>
@@ -275,16 +106,16 @@ header .admin_msg {
 					<li><a href="#">정보 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="http://localhost:9000/br31/notice/admin_notice_list.jsp">공지사항</a></li>
-								<li><a href="#">채용정보</a></li>
+								<li><a href="http://localhost:9000/br31/notice/admin/notice_list.jsp">공지사항</a></li>
+								<!-- <li><a href="#">채용정보</a></li> -->
 							</ul>
 						</div>
 					</li>
 				</ul>
 				<div class="menu_bg"></div>
-				<div class="admin_msg">※ 관리자 계정으로 접속 중입니다.</div>
 			</nav>
 		</div>
+		<div class="admin_msg">※ 관리자 계정으로 접속 중입니다.</div>
 	</header>
 
 

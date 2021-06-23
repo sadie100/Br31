@@ -19,9 +19,8 @@
 	vo.setName(multi.getParameter("name"));
 	vo.setEmail(multi.getParameter("emailId")+"@"+multi.getParameter("emailAddr"));
 	vo.setHp(multi.getParameter("hp1")+"-"+multi.getParameter("hp2")+"-"+multi.getParameter("hp3"));
+	vo.setId(multi.getParameter("id"));
 
-	/* vo.setId(multi.getParameter("id")); 로그인한 유저 아이디*/
-	
 	VocDAO dao = new VocDAO();
 	boolean result = dao.getInsertResult(vo);
 	if(result) response.sendRedirect("voc_list.jsp");

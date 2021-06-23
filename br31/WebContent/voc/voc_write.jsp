@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.br31.vo.SessionVO" %>
+<%
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+	if(svo != null){
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,8 +82,9 @@
 	<!-- content -->
 	<div class="cs_content">
 		<section class="voc_write">
-			<h3>고객센터 1:1 문의</h3>
+			<h3>1:1 문의 등록</h3>
 			<form name="voc_write_form" action="vocWriteProcess.jsp" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="<%=svo.getId()%>">
 				<div class="agreement">
 					<h5>1. 상담 접수를 위해 하단의 개인정보 취급방침을 읽고 동의 버튼에 확인해 주세요.</h5>
 					<div class="agree_info">
@@ -139,12 +145,10 @@
 					</div>
 					<h5>2. 상담 유형 및 내용 유형 선택 후, 의견을 작성해 주세요.</h5>
 					<div class="agree_member">
-						<h5>[회원]</h5>
-						<p>- 답변은 고객센터 회신일로부터 15일 이내에만 My VOC메뉴에서 확인 가능하며, 15일 이후에는 확인이 불가능합니다</p>
-						<h5>[비회원]</h5> 
-						<p>- 비회원으로 접수하시는 경우 접수 내용 및 답변은 홈페이지에서 확인이 불가능하며 메일 회신을 통해서만 확인 가능합니다.</p>
-						<!-- <h5>※ 제출된 문의는 수정이 불가능합니다. 수정이 필요한 경우 삭제 후 재작성을 부탁드립니다.</h5> -->
-						<h5>※ 보다 자세한 내용은 고객센터(080-555-3131)로 문의 부탁드립니다.</h5>
+						<h5>[ 답변 ]</h5>
+						<p>- 작성하신 문의는 '배스킨라빈스 홈페이지 - 고객센터 - 내 문의함'에서 확인하실 수 있습니다.</p>
+						<p>- 문의 내용에 따라 답변 회신에 수일이 소요될 수 있습니다.</p>
+						<h5>※ 긴급한 문의이거나 자세한 상담이 필요하신 경우 고객센터(080-555-3131)로 전화문의를 해주시기 바랍니다.</h5>
 					</div>
 				</div>
 				<div class="details">
@@ -225,3 +229,9 @@
 
 </body>
 </html>
+<% }else{%>
+	<script>
+		window.alert("로그인 후 사용 가능합니다.");
+		location.href = "http://localhost:9000/br31/login/login.jsp";
+	</script>
+<% } %>

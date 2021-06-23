@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
+ <%
+ 	String pname = request.getParameter("pname");
+ 	String category = request.getParameter("category");
+ 	MenuDAO dao = new MenuDAO();
+ 	MenuVO vo = dao.getMenuIcecreamContent(pname);
+ 	String pre_pname = dao.getNextMenuPname(pname, category, "previous"); 
+ 	String next_pname = dao.getNextMenuPname(pname, category, "next");
+ 	
+ 	int height;
+	height = 1700;
+ 	
+ 	String insta_code = "배스킨라빈스"; 
+ 	insta_code += pname.replace(" ","");
+ 	
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +26,16 @@
 <script>
 	
 	$(document).ready(function(){
+		
+		$(window).scroll(function(){
+			if(pageYOffset<=300){
+				$("#btn_left").animate({top : 300+'px'}, 110);
+				$("#btn_right").animate({top : 300+'px'}, 110); 
+			}else if(pageYOffset>500 && pageYOffset< <%=height%> ){
+				$("#btn_left").animate({top : pageYOffset+100+'px'}, 110);
+				$("#btn_right").animate({top : pageYOffset+100+'px'}, 110);
+			}
+		});
 		/*
 		var tracks = document.getElementsByName("coffee_list");
 		var contentsize = document.getElementById("content").offsetWidth; 
@@ -32,45 +58,41 @@
 		}
 		*/
 		//var contentsize = document.getElementById("content").offsetWidth; 
-		//var tracksize = document.getElementById("coffee_list_1").offsetWidth; 
-		var contentsize = document.getElementById("content").clientWidth; 
+		//var tracksize = document.getElementById("coffee_list_1").offsetWidth;
+		$("#copy_link").click(function(){
+			prompt("주소를 복사해서 사용해주세요.",window.location.href);
+		});
+		
+		var rect = document.getElementById("coffee_border_1").getBoundingClientRect();
+		var contentsize = document.getElementById("coffee_border_1").clientWidth; 
 		var tracksize = document.getElementById("coffee_list_1").clientWidth; 
-		console.log(-(window.innerWidth-contentsize)/2);
-		console.log(-(window.innerWidth-contentsize)/2+contentsize);
-			$("#coffee_list_1").mousemove(function(){
-				var start = (window.innerWidth-contentsize)/2;
-				var x = event.clientX;
-				
-				if(x>=window.innerWidth/2){
-					x= start;	
-				}else if(x<window.innerWidth/2){
-					x = start+contentsize-tracksize;
-				}
-				/*var start = -(window.innerWidth-contentsize)/2+420;*/
-				//var x = start-(event.clientX);
-	
-				/*if(x<= (start+window.innerWidth-tracksize+930)){
-					x = (start+window.innerWidth-tracksize+930);*/
-				var left = x +"px";
-				$("#coffee_list_1").css({"transform":"translateX("+left+")"});
-				$("#coffee_list_1").css({"transition":"transform 0.2s"});
-				
-			});
-			
-			$("#coffee_list_2").mousemove(function(){
-				var start = -(window.innerWidth-contentsize)/2+420;
-				var x = start-(event.clientX);
-	
-				if(x<= (start+window.innerWidth-tracksize+930)){
-					x = (start+window.innerWidth-tracksize+930);
-				}else if(x>=start){
-					x = start;
-				}
-				var left = x +"px";
-				$("#coffee_list_2").css({"transform":"translateX("+left+")"});
-				$("#coffee_list_2").css({"transition":"transform 0.2s"});
-				
-			});
+		var start = rect.left;
+		var end = start+contentsize;
+		$("#coffee_border_1").mousemove(function(){
+			var x = event.offsetX;
+			var y = 0;
+			if(x>=contentsize/2){
+				y = start-contentsize;
+			}else if(x<contentsize/2){
+				y= 0;	
+			}
+			var left = y +"px";
+			$("#coffee_list_1").css({"transform":"translateX("+left+")"});
+			$("#coffee_list_1").css({"transition":"transform 0.5s"});
+		});
+		
+		$("#coffee_border_2").mousemove(function(){
+			var x = event.offsetX;
+			var y = 0;
+			if(x>=contentsize/2){
+				y = start-contentsize;
+			}else if(x<contentsize/2){
+				y= 0;	
+			}
+			var left = y +"px";
+			$("#coffee_list_2").css({"transform":"translateX("+left+")"});
+			$("#coffee_list_2").css({"transition":"transform 0.5s"});
+		});
 	});
 	
 	
@@ -87,84 +109,76 @@
 
 <!-- button -->
 	<span class="btn_index">
-		<button class="left">&lt;</button>
+		<%if(!pre_pname.equals("null")){ %>
+		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=pre_pname%>&category=<%=category%>"><button class="left" id="btn_left">&lt;</button></a>
+		<%} %>
 	</span>
 	<span class="btn_index">
-		<button class="right">&gt;</button>
+		<%if(!next_pname.equals("null")){ %>
+		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=next_pname%>&category=<%=category%>"><button class="right" id="btn_right">&gt;</button></a>
+		<%} %>
 	</span>
 
 <div class="content" id="content">
 	<section class="top_info">
-		<label class="eng_name">AMERICANO</label>
-		<h1 class="kor_name">아메리카노</h1>
-		<label class="p_explain">카페브리즈 커피를 가장 부드럽게 즐길 수 있는 따뜻한 아메리카노</label>
+		<label class="eng_name">
+		<%if(vo.getEng_pname()!=null){ %>
+		 	<%=vo.getEng_pname()%>
+		<%}%>
+		</label>
+		<h1 class="kor_name"><%=vo.getPname() %></h1>
+		<label class="p_explain"><%=vo.getIntro() %></label>
 		<div class="no_bg">
 			<div class="icecream_img">
-				<img src="images/cf_americano.png">
+				<img src="images/<%=vo.getPsfile()%>">
 			</div>
-			<button class="btn_store_check">판매 매장 확인</button>
+			<a href="http://localhost:9000/br31/map/map.jsp"><button class="btn_store_check">판매 매장 확인</button></a>
 			<div class="icons_cf">
-				<a href="#"><img src="images/icon_facebook.png"></a>
-				<a href="#"><img src="images/icon_twitter.png"></a>
-				<a href="#"><img src="images/icon_copy.png"></a>
+				<a href="https://www.facebook.com/search/posts/?q=배스킨라빈스<%=pname%>" target="_blank"><img src="images/icon_facebook.png"></a>
+				<a href="https://twitter.com/search?q=배스킨라빈스 <%=pname %>&src=typed_query" target="_blank"><img src="images/icon_twitter.png"></a>
+				<a href="#" id="copy_link"><img src="images/icon_copy.png"></a>
 			</div>
 		</div>
 	</section>
 	<section class="coffee_info">
 		<h3 class="coffee_info_title">배스킨라빈스 커피는 어떻게 만들어졌을까요?</h3>
 		<img src="images/h_hot_coffee.jpg">
-		<div class="coffee_bg">
-			<div class="coffee_list" id="coffee_list_1">
-				<img src="images/img_hot_coffee_list_1.jpg">
-				<img src="images/img_hot_coffee_list_2.jpg">
-				<img src="images/img_hot_coffee_list_3.jpg">
-				<img src="images/img_hot_coffee_list_4.jpg">
-				<img src="images/img_hot_coffee_list_5.jpg">
-				<img src="images/img_hot_coffee_list_6.jpg">
-				<img src="images/img_hot_coffee_list_7.jpg">
+		<div class="coffee_bg" id="coffee_bg">
+			<div class="coffee_border" id="coffee_border_1">
 			</div>
+				<div class="coffee_list" id="coffee_list_1">
+					<img src="images/img_hot_coffee_list_1.jpg">
+					<img src="images/img_hot_coffee_list_2.jpg">
+					<img src="images/img_hot_coffee_list_3.jpg">
+					<img src="images/img_hot_coffee_list_4.jpg">
+					<img src="images/img_hot_coffee_list_5.jpg">
+					<img src="images/img_hot_coffee_list_6.jpg">
+					<img src="images/img_hot_coffee_list_7.jpg">
+				</div>
 		</div>
 		<img src="images/h_ice_coffee.jpg">
 		<div class="coffee_bg">
-			<div class="coffee_list" id="coffee_list_2">
-				<img src="images/img_ice_coffee_list_1.jpg">
-				<img src="images/img_ice_coffee_list_2.jpg">
-				<img src="images/img_ice_coffee_list_3.jpg">
-				<img src="images/img_ice_coffee_list_4.jpg">
-				<img src="images/img_ice_coffee_list_5.jpg">
-				<img src="images/img_ice_coffee_list_6.jpg">
-				<img src="images/img_ice_coffee_list_7.jpg">
+			<div class="coffee_border" id="coffee_border_2">
 			</div>
+				<div class="coffee_list" id="coffee_list_2">
+					<img src="images/img_ice_coffee_list_1.jpg">
+					<img src="images/img_ice_coffee_list_2.jpg">
+					<img src="images/img_ice_coffee_list_3.jpg">
+					<img src="images/img_ice_coffee_list_4.jpg">
+					<img src="images/img_ice_coffee_list_5.jpg">
+					<img src="images/img_ice_coffee_list_6.jpg">
+					<img src="images/img_ice_coffee_list_7.jpg">
+				</div>
 		</div>
 		
 	</section>
 	<section class="instagram">
 		<h3 class="title">인스타그램에서 만나는</h3>
-		<label class="hashtag">#아메리카노</label>
+		<label class="hashtag">#<%=vo.getPname() %></label>
 		<label class="hashtag">#배스킨라빈스</label>
-		<div class="pictures">
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_1.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_2.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_3.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_4.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_5.jpg"></div>
-			</div>
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_6.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_7.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_8.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_9.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_10.jpg"></div>
-			</div>
-			<div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_11.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_12.jpg"></div>
-				<div><img src="http://localhost:9000/br31/menu/images/instagram/ice_mother_13.jpg"></div>
-			</div>
-		</div>
+		<div class="insta_icon"><a href="https://www.instagram.com/explore/tags/<%=insta_code %>/" target="_blank"><img src="http://localhost:9000/br31/images/sns_instagram.png"></a></div>
 	</section>
-	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button class="list">목록</button></a>
+	<a href="http://localhost:9000/br31/menu/menu_coffee.jsp"><button class="list">목록</button></a>
 </div>
 
 </section>

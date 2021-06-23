@@ -80,6 +80,7 @@ button.btn_more {
 	padding: 5px 18px;
 	color: rgb(164,142,116);
 	font-size: 11px;
+	cursor: pointer;
 }
 
 
@@ -487,12 +488,14 @@ section.page{
 	margin-top: 30px;
 	margin-bottom: 300px;
 }
+
 div.pagination {
 	display: block;
 	width: 100%;
 	margin: auto;
 	text-align: center;
 }
+/*
 div.pagination a{
 	border: 1px solid rgb(228,219,215);
 	display: inline-block;
@@ -512,3 +515,4 @@ div.pagination a:first-child, div.pagination a:last-child{
 	font-size: 20px;  
 	line-height: 40px; 
 }
+*/

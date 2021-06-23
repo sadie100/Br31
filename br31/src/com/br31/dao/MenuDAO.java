@@ -19,14 +19,58 @@ public class MenuDAO extends DBConn{
 	//배열을 String으로 분리하는 메소드
 		public String getString(String[] list) {
 			String text = "";
-			for(int i=0;i<list.length;i++) {
-				if(i==list.length-1) {
-					text += list[i];
-				}else {
-					text += list[i]+",";
+			if(list!=null) {
+				for(int i=0;i<list.length;i++) {
+					if(i==list.length-1) {
+						text += list[i];
+					}else {
+						text += list[i]+",";
+					}
 				}
 			}
 			return text;
+		}
+		//Select --> 아이스크림 메뉴 리스트(페이징 처리)
+		public ArrayList<MenuVO> getMenuIcecreamList(String status, int start, int end) {
+			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+			String sql = "";
+			
+			if(status.equals("icecream")) {
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' " + 
+						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
+			}else {
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' " + 
+						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
+			}
+			
+			getPreparedStatement(sql);
+			try {
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				rs= pstmt.executeQuery();
+				while(rs.next()) {
+					MenuVO vo = new MenuVO();
+					vo.setPname(rs.getString(1));
+					if(rs.getString(2)!=null) {
+						if(rs.getString(2).contains(",")) {
+							String[] hashlist = rs.getString(2).split(",");
+							vo.setHashtag(hashlist);
+						}else {
+							String[] hashlist = {rs.getString(2)};
+							vo.setHashtag(hashlist);
+						}
+					}
+					vo.setPsfile(rs.getString(3));
+					list.add(vo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			close();
+			return list;
 		}
 	//Select --> 아이스크림 메뉴 리스트
 		public ArrayList<MenuVO> getMenuIcecreamList(String status) {
@@ -34,9 +78,9 @@ public class MenuDAO extends DBConn{
 			String sql = "";
 			
 			if(status.equals("icecream")) {
-				sql = " SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' ORDER BY ORDER_NUM ";
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' ORDER BY ORDER_NUM desc ";
 			}else {
-				sql = " SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' ORDER BY ORDER_NUM ";
+				sql = " SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' ORDER BY ORDER_NUM desc ";
 			}
 			
 			getPreparedStatement(sql);
@@ -64,11 +108,169 @@ public class MenuDAO extends DBConn{
 			return list;
 	}
 		
+	//insert --> admin의 데이터 넣기
+	public boolean getInsertResult(MenuVO vo) {
+		boolean result = false;
+		String sql = "";
+		try {
+			switch(vo.getOrder_type()) {
+			case "common":			//시퀀스에 b로 넣는다.
+				sql = " insert into br31_menu values(?, ?, 'b'||seq_menu.nextval, ?, ?, "
+						+ " ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getCategory().toUpperCase());
+				pstmt.setString(2, vo.getOrder_type());
+				pstmt.setString(3, vo.getPname());
+				pstmt.setString(4, vo.getEng_pname());
+				pstmt.setString(5, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(6, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(6, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(7, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(7, null);
+				}
+				pstmt.setString(8, vo.getPfile());
+				pstmt.setString(9, vo.getPsfile());
+				pstmt.setString(10, vo.getOne_amount());
+				pstmt.setString(11, vo.getKcal());
+				pstmt.setInt(12, vo.getNatrium());
+				pstmt.setInt(13, vo.getSugar());
+				pstmt.setInt(14, vo.getFat());
+				pstmt.setInt(15, vo.getProtein());
+				pstmt.setInt(16, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(17, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(17, null);
+				}
+				pstmt.setInt(18, 0);
+				
+				break;
+			case "promotion":			//시퀀스에 c로 넣는다.
+				sql = " insert into br31_menu values(?, ?, 'c'||seq_menu.nextval, ?, ?, "
+						+ " ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getCategory().toUpperCase());
+				pstmt.setString(2, vo.getOrder_type());
+				pstmt.setString(3, vo.getPname());
+				pstmt.setString(4, vo.getEng_pname());
+				pstmt.setString(5, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(6, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(6, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(7, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(7, null);
+				}
+				pstmt.setString(8, vo.getPfile());
+				pstmt.setString(9, vo.getPsfile());
+				pstmt.setString(10, vo.getOne_amount());
+				pstmt.setString(11, vo.getKcal());
+				pstmt.setInt(12, vo.getNatrium());
+				pstmt.setInt(13, vo.getSugar());
+				pstmt.setInt(14, vo.getFat());
+				pstmt.setInt(15, vo.getProtein());
+				pstmt.setInt(16, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(17, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(17, null);
+				}
+				pstmt.setInt(18, 0);
+				break;
+			case "pack":				//시퀀스에 a로 넣는다.
+				sql = " insert into br31_menu values(?, ?, 'a'||seq_menu.nextval, ?, ?, "
+						+ " ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getCategory().toUpperCase());
+				pstmt.setString(2, vo.getOrder_type());
+				pstmt.setString(3, vo.getPname());
+				pstmt.setString(4, vo.getEng_pname());
+				pstmt.setString(5, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(6, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(6, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(7, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(7, null);
+				}
+				pstmt.setString(8, vo.getPfile());
+				pstmt.setString(9, vo.getPsfile());
+				pstmt.setString(10, vo.getOne_amount());
+				pstmt.setString(11, vo.getKcal());
+				pstmt.setInt(12, vo.getNatrium());
+				pstmt.setInt(13, vo.getSugar());
+				pstmt.setInt(14, vo.getFat());
+				pstmt.setInt(15, vo.getProtein());
+				pstmt.setInt(16, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(17, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(17, null);
+				}
+				pstmt.setInt(18, 1);
+				break;
+			}
+			
+			int r=pstmt.executeUpdate();
+			if(r!=0) {
+				result=true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	//select --> admin의 pname 중복체크
+	public boolean getPnameCheck(String pname) {
+		boolean result = false;
+		String sql = " select count(*) from br31_menu where pname=? ";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, pname);
+			rs = pstmt.executeQuery();
+			int rownum = 0;
+			while(rs.next()) {
+				rownum = rs.getInt(1);
+			}
+			if(rownum<1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
 	//Select --> admin의 아이스크림 메뉴 리스트
 	
 	public ArrayList<MenuVO> getAdminList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
-		String sql = " SELECT * FROM BR31_MENU WHERE CATEGORY=? ";
+		String sql = " SELECT CATEGORY, ORDER_TYPE, ORDER_NUM, PNAME, " + 
+				" NVL(ENG_PNAME,'-'), INTRO, NVL(REC_FLAVOR,'-'), " + 
+				" MONTHLY_RANK, NVL(HASHTAG, '-'), PFILE, PSFILE, " + 
+				" NVL(ONE_AMOUNT,'-'), NVL(KCAL,'-'), NVL(NATRIUM,0), NVL(SUGAR,0), " + 
+				" NVL(FAT,0), NVL(PROTEIN,0), NVL(CAFFEINE,0), " + 
+				" NVL(ALLERGY,'-'), SET_CHECK FROM BR31_MENU WHERE CATEGORY=? "
+				+ " ORDER BY ORDER_NUM DESC ";
 		
 		getPreparedStatement(sql);
 		try {
@@ -77,30 +279,31 @@ public class MenuDAO extends DBConn{
 			while(rs.next()) {
 				MenuVO vo = new MenuVO();
 				vo.setCategory(rs.getString(1));
-				vo.setOrder_num(rs.getInt(2));
-				vo.setPname(rs.getString(3));
-				vo.setEng_pname(rs.getString(4));
-				vo.setIntro(rs.getString(5));
-				if(rs.getString(6)!=null){
-					vo.setRec_flavor(getStringList(rs.getString(6)));
+				vo.setOrder_type(rs.getString(2));
+				vo.setOrder_num(rs.getString(3));
+				vo.setPname(rs.getString(4));
+				vo.setEng_pname(rs.getString(5));
+				vo.setIntro(rs.getString(6));
+				if(rs.getString(7)!=null){
+					vo.setRec_flavor(getStringList(rs.getString(7)));
 				}
-				vo.setMonthly_rank(rs.getInt(7));
-				if(rs.getString(8)!=null) {
-					vo.setHashtag(getStringList(rs.getString(8)));
+				vo.setMonthly_rank(rs.getInt(8));
+				if(rs.getString(9)!=null) {
+					vo.setHashtag(getStringList(rs.getString(9)));
 				}
-				vo.setPfile(rs.getString(9));
-				vo.setPsfile(rs.getString(10));
-				vo.setOne_amount(rs.getString(11));
-				vo.setKcal(rs.getString(12));
-				vo.setNatrium(rs.getInt(13));
-				vo.setSugar(rs.getInt(14));
-				vo.setFat(rs.getInt(15));
-				vo.setProtein(rs.getInt(16));
-				vo.setCaffeine(rs.getInt(17));
-				if(rs.getString(18)!=null) {
-					vo.setAllergy(getStringList(rs.getString(18)));
+				vo.setPfile(rs.getString(10));
+				vo.setPsfile(rs.getString(11));
+				vo.setOne_amount(rs.getString(12));
+				vo.setKcal(rs.getString(13));
+				vo.setNatrium(rs.getInt(14));
+				vo.setSugar(rs.getInt(15));
+				vo.setFat(rs.getInt(16));
+				vo.setProtein(rs.getInt(17));
+				vo.setCaffeine(rs.getInt(18));
+				if(rs.getString(19)!=null) {
+					vo.setAllergy(getStringList(rs.getString(19)));
 				}
-				vo.setSet_check(rs.getInt(19));
+				vo.setSet_check(rs.getInt(20));
 				list.add(vo);
 			}
 		} catch (Exception e) {
@@ -112,60 +315,252 @@ public class MenuDAO extends DBConn{
 	// admin update ---> 수정 처리(새로운 파일 선택)
 	public boolean getUpdateResult(MenuVO vo) {
 		boolean result = false;
-		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
-				+ " hashtag = ?, pfile = ?, psfile = ?, one_amount = ?, "
-				+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
-				+ " caffeine = ?, allergy = ? ";
-		getPreparedStatement(sql);
+		String sql = "";
 		try {
-			pstmt.setString(1, vo.getIntro());
-			pstmt.setString(2, getString(vo.getRec_flavor()));
-			pstmt.setString(3, getString(vo.getHashtag()));
-			pstmt.setString(4, vo.getPfile());
-			pstmt.setString(5, vo.getPsfile());
-			pstmt.setString(6, vo.getOne_amount());
-			pstmt.setString(7, vo.getKcal());
-			pstmt.setInt(8, vo.getNatrium());
-			pstmt.setInt(9, vo.getSugar());
-			pstmt.setInt(10, vo.getFat());
-			pstmt.setInt(11, vo.getProtein());
-			pstmt.setInt(12, vo.getCaffeine());
-			pstmt.setString(13, getString(vo.getAllergy()));
+			switch(vo.getOrder_type()) {
+			case "common":			//시퀀스에 b로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'b'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, pfile = ?, psfile = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getPfile());
+				pstmt.setString(7, vo.getPsfile());
+				pstmt.setString(8, vo.getOne_amount());
+				pstmt.setString(9, vo.getKcal());
+				pstmt.setInt(10, vo.getNatrium());
+				pstmt.setInt(11, vo.getSugar());
+				pstmt.setInt(12, vo.getFat());
+				pstmt.setInt(13, vo.getProtein());
+				pstmt.setInt(14, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
+				}
+				pstmt.setInt(16, 0);
+				pstmt.setString(17, vo.getPname());
+				
+				break;
+			case "promotion":			//시퀀스에 c로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'c'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, pfile = ?, psfile = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getPfile());
+				pstmt.setString(7, vo.getPsfile());
+				pstmt.setString(8, vo.getOne_amount());
+				pstmt.setString(9, vo.getKcal());
+				pstmt.setInt(10, vo.getNatrium());
+				pstmt.setInt(11, vo.getSugar());
+				pstmt.setInt(12, vo.getFat());
+				pstmt.setInt(13, vo.getProtein());
+				pstmt.setInt(14, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
+				}
+				pstmt.setInt(16, 0);
+				pstmt.setString(17, vo.getPname());
+				break;
+			case "pack":				//시퀀스에 a로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'a'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, pfile = ?, psfile = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getPfile());
+				pstmt.setString(7, vo.getPsfile());
+				pstmt.setString(8, vo.getOne_amount());
+				pstmt.setString(9, vo.getKcal());
+				pstmt.setInt(10, vo.getNatrium());
+				pstmt.setInt(11, vo.getSugar());
+				pstmt.setInt(12, vo.getFat());
+				pstmt.setInt(13, vo.getProtein());
+				pstmt.setInt(14, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(15, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(15, null);
+				}
+				pstmt.setInt(16, 0);
+				pstmt.setString(17, vo.getPname());
+				break;
+			}
 			
-			int a = pstmt.executeUpdate();
-			if(a!=0) result=true;
+			int r=pstmt.executeUpdate();
+			if(r!=0) {
+				result=true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;		
+		
+		return result;
 	}
+			
 	// admin update ---> 수정 처리(기존 파일)
 	public boolean getUpdateResultNofile(MenuVO vo) {
 		boolean result = false;
-		String sql = " update br31_menu set intro = ?, rec_flavor = ?, "
-				+ " hashtag = ?, one_amount = ?, "
-				+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
-				+ " caffeine = ?, allergy = ? ";
-		getPreparedStatement(sql);
+		String sql = "";
 		try {
-			pstmt.setString(1, vo.getIntro());
-			pstmt.setString(2, getString(vo.getRec_flavor()));
-			pstmt.setString(3, getString(vo.getHashtag()));
-			pstmt.setString(4, vo.getOne_amount());
-			pstmt.setString(5, vo.getKcal());
-			pstmt.setInt(6, vo.getNatrium());
-			pstmt.setInt(7, vo.getSugar());
-			pstmt.setInt(8, vo.getFat());
-			pstmt.setInt(9, vo.getProtein());
-			pstmt.setInt(10, vo.getCaffeine());
-			pstmt.setString(11, getString(vo.getAllergy()));
+			switch(vo.getOrder_type()) {
+			case "common":			//시퀀스에 b로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'b'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getOne_amount());
+				pstmt.setString(7, vo.getKcal());
+				pstmt.setInt(8, vo.getNatrium());
+				pstmt.setInt(9, vo.getSugar());
+				pstmt.setInt(10, vo.getFat());
+				pstmt.setInt(11, vo.getProtein());
+				pstmt.setInt(12, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
+				}
+				pstmt.setInt(14, 0);
+				pstmt.setString(15, vo.getPname());
+				
+				break;
+			case "promotion":			//시퀀스에 c로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'c'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getOne_amount());
+				pstmt.setString(7, vo.getKcal());
+				pstmt.setInt(8, vo.getNatrium());
+				pstmt.setInt(9, vo.getSugar());
+				pstmt.setInt(10, vo.getFat());
+				pstmt.setInt(11, vo.getProtein());
+				pstmt.setInt(12, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
+				}
+				pstmt.setInt(14, 0);
+				pstmt.setString(15, vo.getPname());
+				
+				break;
+			case "pack":				//시퀀스에 a로 넣는다.
+				sql = " update br31_menu set order_type = ?, order_num = 'a'||seq_menu.nextval, eng_pname = ?, intro = ?, "
+						+ " rec_flavor = ?, hashtag = ?, one_amount = ?, "
+						+ " kcal = ?, natrium = ?, sugar = ?, fat = ?, protein = ?, "
+						+ " caffeine = ?, allergy = ?, set_check = ? where pname = ? ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, vo.getOrder_type());
+				pstmt.setString(2, vo.getEng_pname());
+				pstmt.setString(3, vo.getIntro());
+				if(vo.getRec_flavor()!=null) {
+					pstmt.setString(4, getString(vo.getRec_flavor()));
+				}else {
+					pstmt.setString(4, null);
+				}
+				if(vo.getHashtag()!=null) {
+					pstmt.setString(5, getString(vo.getHashtag()));
+				}else {
+					pstmt.setString(5, null);
+				}
+				pstmt.setString(6, vo.getOne_amount());
+				pstmt.setString(7, vo.getKcal());
+				pstmt.setInt(8, vo.getNatrium());
+				pstmt.setInt(9, vo.getSugar());
+				pstmt.setInt(10, vo.getFat());
+				pstmt.setInt(11, vo.getProtein());
+				pstmt.setInt(12, vo.getCaffeine());
+				if(vo.getAllergy()!=null) {
+					pstmt.setString(13, getString(vo.getAllergy()));
+				}else {
+					pstmt.setString(13, null);
+				}
+				pstmt.setInt(14, 0);
+				pstmt.setString(15, vo.getPname());
+				break;
+			}
 			
-			int a = pstmt.executeUpdate();
-			if(a!=0) result=true;
+			int r=pstmt.executeUpdate();
+			if(r!=0) {
+				result=true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;		
+		
+		return result;
 	}
 	//admin delete ---> admin 삭제
 	public boolean getDeleteResult(String pname) {
@@ -196,36 +591,37 @@ public class MenuDAO extends DBConn{
 			pstmt.setString(1, pname);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				
 				vo.setCategory(rs.getString(1));
-				vo.setOrder_num(rs.getInt(2));
-				vo.setPname(rs.getString(3));
-				vo.setEng_pname(rs.getString(4));
-				vo.setIntro(rs.getString(5));
-				if(rs.getString(6)!=null){
-					vo.setRec_flavor(getStringList(rs.getString(6)));
+				vo.setOrder_type(rs.getString(2));
+				vo.setOrder_num(rs.getString(3));
+				vo.setPname(rs.getString(4));
+				vo.setEng_pname(rs.getString(5));
+				vo.setIntro(rs.getString(6));
+				if(rs.getString(7)!=null){
+					vo.setRec_flavor(getStringList(rs.getString(7)));
 				}
-				vo.setMonthly_rank(rs.getInt(7));
-				if(rs.getString(8)!=null) {
-					vo.setHashtag(getStringList(rs.getString(8)));
+				vo.setMonthly_rank(rs.getInt(8));
+				if(rs.getString(9)!=null) {
+					vo.setHashtag(getStringList(rs.getString(9)));
 				}
-				vo.setPfile(rs.getString(9));
-				vo.setPsfile(rs.getString(10));
-				vo.setOne_amount(rs.getString(11));
-				vo.setKcal(rs.getString(12));
-				vo.setNatrium(rs.getInt(13));
-				vo.setSugar(rs.getInt(14));
-				vo.setFat(rs.getInt(15));
-				vo.setProtein(rs.getInt(16));
-				vo.setCaffeine(rs.getInt(17));
-				if(rs.getString(18)!=null) {
-					vo.setAllergy(getStringList(rs.getString(18)));
+				vo.setPfile(rs.getString(10));
+				vo.setPsfile(rs.getString(11));
+				vo.setOne_amount(rs.getString(12));
+				vo.setKcal(rs.getString(13));
+				vo.setNatrium(rs.getInt(14));
+				vo.setSugar(rs.getInt(15));
+				vo.setFat(rs.getInt(16));
+				vo.setProtein(rs.getInt(17));
+				vo.setCaffeine(rs.getInt(18));
+				if(rs.getString(19)!=null) {
+					vo.setAllergy(getStringList(rs.getString(19)));
 				}
-				vo.setSet_check(rs.getInt(19));
+				vo.setSet_check(rs.getInt(20));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		close();
 		return vo;
 	}
 	
@@ -305,6 +701,38 @@ public class MenuDAO extends DBConn{
 		}
 		return vo;
 	}
+	
+	//Select--> menu 조회 - 이전/다음 메뉴
+	public String getNextMenuPname(String pname, String category, String status) {
+		String result = "";
+		String sql = "";
+		if(status.equals("previous")) {
+			sql = " select pname from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) " + 
+					" where rno = (select rno from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) where pname=?)-1 ";
+		}else if(status.equals("next")) {
+			sql = " select pname from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) " + 
+					" where rno = (select rno from (select rownum rno, pname from (select pname from br31_menu where category = ? order by order_num desc)) where pname=?)+1 ";
+		}
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, category.toUpperCase());
+			pstmt.setString(2, category.toUpperCase());
+			pstmt.setString(3, pname);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString(1);
+			}else {
+				result = "null";
+			}
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	//Select ---> 영양정보 조회 - 기본화면(전체출력)
 	public ArrayList<MenuVO> getAllNutrientsList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();

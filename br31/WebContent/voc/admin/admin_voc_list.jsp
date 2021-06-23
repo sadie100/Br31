@@ -1,41 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.br31.dao.VocDAO, com.br31.vo.VocVO, java.util.*" %>
+<%@ page import="com.br31.dao.VocDAO, com.br31.vo.*, java.util.*" %>
 <%
-	VocDAO dao = new VocDAO();
-	
-	String status = request.getParameter("status");
-	String rpage = request.getParameter("page");
-	String qtype = request.getParameter("qtype");
-	String ctype = request.getParameter("ctype");
-	String keyword = request.getParameter("keyword");
-	
-	if(qtype==null) qtype = "상담유형";
-	if(ctype==null) ctype = "내용유형";
-	
-	int startCount = 0;
-	int endCount = 0;
-	int pageSize = 10;	
-	int reqPage = 1;	
-	int pageCount = 1;	
-	int dbCount = dao.execTotalCount(qtype, ctype, status, keyword);
-	
-	if(dbCount % pageSize == 0){
-		pageCount = dbCount/pageSize;
-	}else{
-		pageCount = dbCount/pageSize + 1;
-	}
-	
-	if(rpage != null){
-		reqPage = Integer.parseInt(rpage);
-		startCount = (reqPage - 1) * pageSize + 1;
-		endCount = reqPage *pageSize;
-	}else{
-		startCount = 1;
-		endCount = 10;
-	}
-	
-	ArrayList<VocVO> list = dao.getList(qtype, ctype, startCount, endCount, status, keyword);
+	SessionVO svo = (SessionVO) session.getAttribute("svo");
+	if(svo != null && svo.getId().equals("admin")) {
+		VocDAO dao = new VocDAO();
+		
+		String status = request.getParameter("status");
+		String rpage = request.getParameter("page");
+		String qtype = request.getParameter("qtype");
+		String ctype = request.getParameter("ctype");
+		String keyword = request.getParameter("keyword");
+		
+		if(qtype==null) qtype = "상담유형";
+		if(ctype==null) ctype = "내용유형";
+		
+		int startCount = 0;
+		int endCount = 0;
+		int pageSize = 10;	
+		int reqPage = 1;	
+		int pageCount = 1;	
+		int dbCount = dao.execTotalCount(qtype, ctype, status, keyword);
+		
+		if(dbCount % pageSize == 0){
+			pageCount = dbCount/pageSize;
+		}else{
+			pageCount = dbCount/pageSize + 1;
+		}
+		
+		if(rpage != null){
+			reqPage = Integer.parseInt(rpage);
+			startCount = dbCount - (reqPage - 1) * pageSize;
+			if(startCount > pageSize) {
+				endCount = startCount - pageSize + 1;
+			} else {
+				endCount = 1;
+			}
+			
+		}else{
+			startCount = dbCount;
+			endCount = dbCount - pageSize + 1;
+		}
+		
+		ArrayList<VocVO> list = dao.getList(qtype, ctype, startCount, endCount, status, keyword);
 %>
 <!DOCTYPE html>
 <html>
@@ -107,7 +114,6 @@ $(document).ready(function() {
 		}
 		
 	});
-	
 
 });//ready
 </script>
@@ -183,3 +189,9 @@ $(document).ready(function() {
 
 </body>
 </html>
+<%	} else {%>
+	<script>
+		alert("접근 권한이 없습니다.");
+		location.href = "http://localhost:9000/br31/index.jsp";
+	</script>
+<%	} %>

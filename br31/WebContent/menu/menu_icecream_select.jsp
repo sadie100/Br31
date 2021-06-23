@@ -3,14 +3,17 @@
  <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
  <%
  	String pname = request.getParameter("pname");
+ 	String category = request.getParameter("category");
  	MenuDAO dao = new MenuDAO();
  	MenuVO vo = dao.getMenuIcecreamContent(pname);
+ 	String pre_pname = dao.getNextMenuPname(pname, category, "previous"); 
+ 	String next_pname = dao.getNextMenuPname(pname, category, "next");
  	
  	int height;
  	if(vo.getRec_flavor()!=null){
- 		height = 1800;
+ 		height = 1700;
  	}else{
- 		height = 1400;
+ 		height = 1300;
  	}
  	
  	String insta_code = pname.replace(" ","");
@@ -20,7 +23,7 @@
  	if(svo != null){
  		MypageDAO mdao = new MypageDAO();
  		result = mdao.getStarCount(svo.getId(), pname);
- 		dao.close();
+ 		mdao.close();
  	}
  %>
 <!DOCTYPE html>
@@ -49,6 +52,9 @@
 				$("#btn_left").animate({top : pageYOffset+100+'px'}, 110);
 				$("#btn_right").animate({top : pageYOffset+100+'px'}, 110);
 			}
+		});
+		$("#copy_link").click(function(){
+			prompt("주소를 복사해서 사용해주세요.",window.location.href);
 		});
 		
 		//클릭이벤트 추가
@@ -84,14 +90,10 @@
 			<%}%>
 			
 		});
-		
 		/*
 		$("#btn_left").hover(function(){
 			$("#btn_left").css({"border" : "1px solid rgb(243,125,160)", "width" : "230px",
 				"border-radius" : "40px", "text-align" : "left", "padding-left" : "30px", "transition":"width 300ms"});
-		*/
-	<%--	$(this).append("<img src='images/<%=vo.getPsfile()%>' class='btn_image' id='btn_image'><label class='btn_label' id='btn_label'><%=vo.getPname()%></label>"); --%>
-		/*
 		},
 		function(){
 			$("#btn_left").css({"border" : "1px solid rgb(187,187,187)", "width" : "80px",
@@ -116,10 +118,14 @@
 
 <!-- button -->
 	<span class="btn_index" id="btn_index">
-		<button class="left" id="btn_left">&lt;</button>
+		<%if(!pre_pname.equals("null")){ %>
+		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=pre_pname%>&category=<%=category%>"><button class="left" id="btn_left">&lt;</button></a>
+		<%} %>
 	</span>
 	<span class="btn_index" id="btn_index">
-		<button class="right" id="btn_right">&gt;</button>
+		<%if(!next_pname.equals("null")){ %>
+		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=next_pname%>&category=<%=category%>"><button class="right" id="btn_right">&gt;</button></a>
+		<%} %>
 	</span>
 
 <div class="content">
@@ -129,7 +135,7 @@
 		 	<%=vo.getEng_pname()%>
 		<%}%>
 	 	</label>
-		<h1 class="kor_name"><%=vo.getPname() %></h1>
+		<h1 class="kor_name" id="kor_name"><%=vo.getPname() %></h1>
 		<label class="p_explain"><%=vo.getIntro() %></label>
 		<div class="bg">
 			<div class="icecream_img">
@@ -143,9 +149,9 @@
 				<% }else{ %>
 				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" name = "btn_star" id="star_button"></a>
 				<% } %>
-				<a href="#"><img src="images/icon_facebook.png"></a>
-				<a href="#"><img src="images/icon_twitter.png"></a>
-				<a href="#"><img src="images/icon_copy.png"></a>
+				<a href="https://www.facebook.com/search/posts/?q=<%=pname%>" target="_blank"><img src="images/icon_facebook.png"></a>
+				<a href="https://twitter.com/search?q=<%=pname %>&src=typed_query" target="_blank"><img src="images/icon_twitter.png"></a>
+				<a href="#" id="copy_link"><img src="images/icon_copy.png"></a>
 			</div>
 		</div>
 	</section>
@@ -259,7 +265,7 @@
 		<label class="hashtag">#배스킨라빈스</label>
 		<div class="insta_icon"><a href="https://www.instagram.com/explore/tags/<%=insta_code %>/" target="_blank"><img src="http://localhost:9000/br31/images/sns_instagram.png"></a></div>
 	</section>
-	<a href="http://localhost:9000/br31/menu/menu_icecream_1.jsp"><button class="list">목록</button></a>
+	<a href="http://localhost:9000/br31/menu/menu_icecream.jsp"><button class="list">목록</button></a>
 </div>
 
 </section>
@@ -272,3 +278,4 @@
 	
 </body>
 </html>
+<% dao.close();%>
