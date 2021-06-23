@@ -17,6 +17,7 @@
 	boolean result = dao.getIdSearchResult(vo);
 	
 	String sid = "";
+	String pid = "";
 	
 	if(result){
 		sid = dao.getIdSearch(vo);
@@ -31,6 +32,8 @@
 		
 	} 
 	
+	pid = sid.replaceAll("[0-9]", "*");
+			
 	dao.close(); 
 %>
 <!DOCTYPE html>
@@ -57,7 +60,7 @@
 	<div class = "sresult">
 		<div>
 			<span>고객님이 가입하신 아이디는</span>
-			<span><%= sid %></span>
+			<span><%= pid %></span>
 			<span>입니다.</span>
 		</div>
 		<button type = "button" id = "btn_cancle" class = "btn_cancle" onclick = "gologin()">로그인</button>
