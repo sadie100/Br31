@@ -18,7 +18,6 @@
 <link rel = "stylesheet" href = "http://localhost:9000/br31/choi.css">
 <link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
-<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
 	$(document).ready(function(){
 		
@@ -43,7 +42,7 @@
 					for(var i in jdata.jlist){
 							output += "<tr>";
 							output += "<td>" + jdata.jlist[i].rno + "</td>";
-							output += "<td>" + jdata.jlist[i].id + "</td>";
+							output += "<td><a href = 'http://localhost:9000/br31/member_admin/admin_member_content.jsp?id="+jdata.jlist[i].id+"&rno="+jdata.jlist[i].rno+"'>" + jdata.jlist[i].id + "</a></td>";
 							output += "<td>" + jdata.jlist[i].name + "</td>";
 							output += "<td>" + jdata.jlist[i].birth + "</td>";
 							output += "<td>" + jdata.jlist[i].hp + "</td>";
@@ -53,7 +52,7 @@
 							output += "<td>" + jdata.jlist[i].mdate + "</td>";
 							if(jdata.jlist[i].choice==1){
 								/* output+="<td><button type = 'button' class = 'btn_unregister'>회원삭제</button></td>" */
-								output += "<td><a href = 'http://localhost:9000/br31/mypage/userDeleteProcess.jsp?id="+jdata.jlist[i].id+"'><button button type = 'button' class = 'btn_unregister'>회원삭제</button></a></td>"; 
+								output+="<td><a href = 'http://localhost:9000/br31/mypage/userDeleteProcess.jsp?id="+jdata.jlist[i].id+"'><button button type = 'button' class = 'btn_unregister'>회원삭제</button></a></td>"; 
 							}else{
 								output+="<td><button type = 'button' class = 'btn_unregister' disabled>회원삭제</button></td>"
 							} 

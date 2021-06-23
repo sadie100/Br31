@@ -19,7 +19,7 @@ div.title{
 	padding-bottom:35px;
 }
 
-.btn_cancle, .btn_confrim{
+.btn_cancle, .btn_confrim, .btn_confrim2{
 	padding:5px 20px;
 	margin: 0 5px;
 	background-color:white;
@@ -31,6 +31,10 @@ div.title{
 .btn_confrim{
 	background-color:gray;
 	color:white;
+}
+.btn_confrim2{
+	background-color:lightgray;
+	color:gray;
 }
 
 /*************

@@ -26,7 +26,7 @@
 <body>
 	<div class = "member_content">
 		<!-- header -->
-		<jsp:include page = "admin_header.jsp"></jsp:include>
+		<jsp:include page = "../admin_header.jsp"></jsp:include>
 		
 		<section class = "ad_m_header">
 			<div class = "member_title">
@@ -71,7 +71,7 @@
 						<% if(vo.getChoice() == 1){ %>
 						<button type = 'button' class = 'btn_confrim' >회원탈퇴</button>
 						<% }else{ %> 
-						<button type = 'button' class = 'btn_confrim' disabled>회원탈퇴</button>
+						<button type = 'button' class = 'btn_confrim2' disabled>회원탈퇴</button>
 						<% } %>
 						<a href = "http://localhost:9000/br31/member_admin/admin_member.jsp"><button type = "button" class = "btn_cancle">이전으로</button></a>
 					</td>
