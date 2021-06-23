@@ -6,7 +6,24 @@
 	if(category==null){
 		category = "all";
 	}
+	String rpage = request.getParameter("page");
 	MenuDAO dao = new MenuDAO();
+	
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 20;	//한 페이지당 게시물 수
+	int reqPage = 1;	//요청페이지
+	int pageCount = 1;	//전체페이지 수
+	
+	if(rpage!=null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage-1)*pageSize+1;
+		endCount = reqPage * pageSize;
+	}else{
+		startCount = 1;
+		endCount = pageSize;
+	}
+	
 	ArrayList<MenuVO> list;	
 	if(request.getParameter("pname")==null &&request.getParameter("nutrient")==null
 		&&request.getParameter("sorting")==null && request.getParameter("allergy")==null){		//header에서 갓 넘어갔을때
@@ -22,6 +39,14 @@
 			list = dao.getNutrientSearchResult(category,pname,nutrient,sorting,allergies);
 		}
 	}
+	
+	int dbCount = list.size();	//DB에서 가져온 전체 행수
+	
+	if(dbCount % pageSize ==0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize+1;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -29,13 +54,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/nutrient/nutrient.css">
-<style>
-div.pagination a:nth-child(2){
-	background-color: rgb(245,111,152);
-	color: white;
-}
-</style>
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#btn_search").click(function(){
@@ -46,6 +66,28 @@ div.pagination a:nth-child(2){
 				nutrient_search.submit();
 			}
 		});
+		
+		var pager = jQuery("#ampaginationsm").pagination({
+			
+		    maxSize: 10,	    		// max page size
+		    totals: <%=dbCount%>,	// total pages	
+		    page: <%=rpage%>,		// initial page		
+		    pageSize: <%=pageSize %>,			// max number items per page
+		
+		    // custom labels		
+		    prevText: "&lt;",		
+		    nextText: "&gt;",
+				     
+		    btnSize:"sm"	
+		});
+		
+		jQuery("#ampaginationsm").on("am.pagination.change",function(e){
+			   jQuery(".showlabelsm").text("The selected page no: "+e.page);
+	           $(location).attr("href", "http://localhost:9000/br31/menu/menu_icecream.jsp?page="+e.page);         
+	    });
+		<%if(list.size()<pageSize){%>
+			$("#pagination").hide();
+		<%}%>
 	});
 </script>
 </head>
@@ -187,12 +229,8 @@ div.pagination a:nth-child(2){
 		</table>
 	</section>
 	<section class="pagination">
-	<div class="pagination">
-			<a href="#">&lt;</a>
-			<a href="#">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">&gt;</a>
+	<div class="pagination" id="pagination">
+		<div id="ampaginationsm"></div>
 	</div>
 	</section>
 	</section>
