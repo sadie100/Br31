@@ -44,7 +44,7 @@
 			<span>정말로 탈퇴하시겠습니까?</span>
 			<div>
 				<a href = "http://localhost:9000/br31/mypage/mypage.jsp"><button type = "button" name = "unregister" class = "btn_cancle">취소</button></a>
-				<a href = "http://localhost:9000/br31/mypage/userDeleteProcess.jsp?id=<%=svo.getId()%>"><button type = "button" name = "unregister" class = "btn_confrim">탈퇴하기</button></a>
+				<a href = "http://localhost:9000/br31/mypage/userDeleteUpdateProcess.jsp?id=<%=svo.getId()%>"><button type = "button" name = "unregister" class = "btn_confrim">탈퇴하기</button></a>
 			</div>
 		</section>
 		

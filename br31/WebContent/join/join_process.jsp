@@ -21,7 +21,12 @@
 	vo.setEmail1(request.getParameter("email1"));
 	vo.setEmail2(request.getParameter("email2"));*/
 	
+	
 	MemberDAO dao = new MemberDAO();
+	String card = dao.getNewCard(10);
+	System.out.println(card);
+	vo.setCard(card);
+	System.out.println(vo.getCard());
 	boolean result = dao.getJoinResult(vo);
 	
 	if(result == true){

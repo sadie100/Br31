@@ -174,7 +174,7 @@
 							<label>주소</label>
 							<input type = "text" name = "addr1" class = "li" value="<%=vo.getAddr1()%>">
 							<a href = "#"><button type = "button" name = "btn_adress" class = "btn_check">우편번호 검색</button></a>
-							<input type = "text" name = "adde2" class = "li" value = "<%=vo.getAddr2()%>">
+							<input type = "text" name = "addr2" class = "li" value ="<%=vo.getAddr2()%>">
 						</li>
 						<li>
 							<label>이메일</label>

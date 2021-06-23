@@ -431,10 +431,10 @@ li.email_style select{
 /***
 	이메일
 ****/
-div.pop_content li:nth-child(2) input{
+div.pop_content li:nth-child(3) input{
 	width:80px;
 }
-div.pop_content li:nth-child(2) span:last-child{
+div.pop_content li:nth-child(3) span:last-child{
 	font-size:13px;
 	display:block;
 	margin:10px 0;
@@ -456,7 +456,7 @@ div.pop_content li:last-child{
 /***
 	아이핀
 ****/
-li.ipin_style input{
+li.ipin_style input, div.pop_content li:first-child input{
 	width:310px;
 	padding: 3px 0;
 }
@@ -1112,12 +1112,33 @@ div.member_title img.spoon_img{
 	display:inline-block;
 }
 
+/******
+	admin 검색
+*****/
+div.member_search input{
+	width:500px;
+	height:18px;
+}
+
+.mselect{
+	font-size:12px;
+	padding:4px;
+}
+
+div.member_search button, div.filter_section button{
+	font-size:12px;
+}
+
+div.filter_section, div.member_search{
+	display:inline-block;
+	padding-bottom:15px;
+}
+
 /*********
 	회원관리 페이지-회원목록 표
 ********/	
 section.ad_m_content{
 	width:90%;
-	height:750px;
 	margin:auto;
 	text-align:center;
 	border:1px solid rgb(148, 135, 128);
@@ -1312,5 +1333,37 @@ div.loginF div{
 	font-size:10px;
 }
 
+/***********
+	idSearchResult
+***********/
+div.sresult, div.spresult{
+	width:550px;
+	text-align:center;
+	margin:auto
+}
 
+div.sresult span, div.spresult div span{
+	color:rgb(128, 128, 161);
+	font-size:20px;
+}
 
+div.sresult div span:nth-child(2), div.spresult div span:nth-child(2){
+	color:blue;
+}
+
+div.sresult div, div.spresult div{
+	padding:40px 0 25px 0;
+}
+
+/***********
+	passSearchResult
+***********/
+div.spresult div span{
+	display:block;
+}
+
+div.spresult div span:nth-child(2){
+	background-color:lightgray;
+	padding:5px;
+	margin:10px 0;
+}
