@@ -73,7 +73,7 @@
 						<% }else{ %> 
 						<button type = 'button' class = 'btn_confrim' disabled>회원탈퇴</button>
 						<% } %>
-						<a href = "http://localhost:9000/br31/admin_member.jsp"><button type = "button" class = "btn_cancle">이전으로</button></a>
+						<a href = "http://localhost:9000/br31/member_admin/admin_member.jsp"><button type = "button" class = "btn_cancle">이전으로</button></a>
 					</td>
 				</tr>
 			</table>		

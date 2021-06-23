@@ -11,13 +11,14 @@ public class MypageDAO extends DBConn{
 		int result = 0;
 		
 		String sql = "insert into br31_f_flavor values "
-				+ " ( seq_br31_f_flavor_num.nextval, ?, ? ) ";
+				+ " ( seq_br31_f_flavor_num.nextval, ?, ? , (SELECT REC_FLAVOR FROM BR31_MENU WHERE PNAME = ? )) ";
 		
 		getPreparedStatement(sql);
 		
 		try {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pname);
+			pstmt.setString(3, pname);
 			
 			result = pstmt.executeUpdate();
 			
@@ -54,7 +55,7 @@ public class MypageDAO extends DBConn{
 	public ArrayList<MenuVO> getFlavorList(String id){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		
-		String sql = "SELECT PNAME, PSFILE FROM BR31_MENU WHERE " + 
+		String sql = "SELECT PNAME, PSFILE, REC_FLAVOR FROM BR31_MENU WHERE " + 
 				" PNAME IN (SELECT PNAME FROM BR31_F_FLAVOR WHERE ID = ?) ";
 		
 		getPreparedStatement(sql);
@@ -69,6 +70,7 @@ public class MypageDAO extends DBConn{
 				
 				vo.setPname(rs.getString(1));
 				vo.setPsfile(rs.getString(2));
+				vo.setRec_flavor(rs.getString(3));
 				
 				list.add(vo);
 			}
@@ -79,6 +81,36 @@ public class MypageDAO extends DBConn{
 		
 		return list;
 	}
+	
+	public MenuVO getRecomandMenu(String pname){
+		MenuVO vo = new MenuVO();
+		
+		String sql = "SELECT PNAME, PSFILE FROM BR31_MENU WHERE " + 
+				" PNAME = ? ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, pname);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				vo.setPname(rs.getString(1));
+				vo.setPsfile(rs.getString(2));
+				
+				System.out.println(vo.getPsfile());
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
 	
 	public int getStarCount(String id, String pname) {
 		int result = 0;

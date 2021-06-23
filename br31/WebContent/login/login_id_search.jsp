@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href = "http://localhost:9000/br31/choi.css">
 <script>
 
@@ -12,13 +13,13 @@
 	팝업창 띄우기
 *****/
 
-function showPop1(){
-	window.open("login_phone.html","휴대폰 인증","width = 350, height = 270");
-}
+$(document).on('click', '#button_phone',function(){
+	window.open('login_phone.jsp','window','width = 550,height = 300,scrollbars=no, resizable=no');
+});
 
-function showPop2(){
-	window.open("login_ipin.html","아이핀 인증","width = 350, height = 270");
-}
+$(document).on('click', '#button_ipin',function(){
+	window.open('login_ipin.jsp','window','width = 550,height = 300, scrollbars=no, resizable=no');
+});
 
 </script>
 
@@ -43,10 +44,10 @@ function showPop2(){
 		 		</div>
 		 		<div>
 		 			<div>
-		 				<button type = "button" onclick = "showPop1()"></button>
+		 				<button type = "button" id =  "button_phone"></button>
 		 			</div>
 		 			<div>
-		 				<button type = "button" onclick = "showPop2()"></button>
+		 				<button type = "button" id = "button_ipin"></button>
 		 			</div>
 		 		</div>
 		 	</div>

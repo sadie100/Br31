@@ -223,15 +223,15 @@ header .admin_msg {
 			<nav class="menu">
 				<ul>
 					<li class="main_menu1">
-						<a href="#">LOGIN</a>
-						<a href="#">JOIN</a>
+						<a href="http://localhost:9000/br31/login/logout.jsp">LOGOUT</a>
+						<!-- <a href="#"></a> -->
 						<div class="submenu">
 							<ul>
 								<li><img src="http://localhost:9000/br31/images/happypoint_app.jpg"></li>
 							</ul>
 						</div>
 					</li>
-					<li class="main_menu2"><a href="http://localhost:9000/br31/admin_member.jsp">회원정보 관리</a>
+					<li class="main_menu2"><a href="http://localhost:9000/br31/member_admin/admin_member.jsp">회원정보 관리</a>
 						<div class="submenu">
 							<ul>
 								<li><img src="http://localhost:9000/br31/images/monthly_menu.png"></li>
