@@ -1,11 +1,11 @@
 <%@page import="java.io.File"%>
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
 String articleno = request.getParameter("articleno");
 
-NoticeDAO dao = new NoticeDAO();
+EventDAO dao = new EventDAO();
 String nsfile = dao.getNsfile(Integer.parseInt(articleno));
 
 boolean result = dao.getDeleteResult(Integer.parseInt(articleno));
@@ -24,6 +24,6 @@ if (result) {
 }
 
 if (result) {
-	response.sendRedirect("notice_list.jsp");
+	response.sendRedirect("event_list.jsp");
 }
 %>

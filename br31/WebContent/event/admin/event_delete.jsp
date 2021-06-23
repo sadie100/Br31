@@ -1,4 +1,4 @@
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
@@ -6,7 +6,7 @@
 String articleno = request.getParameter("articleno");
 String rno = request.getParameter("rno");
 
-NoticeDAO dao = new NoticeDAO();
+EventDAO dao = new EventDAO();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,18 +21,18 @@ NoticeDAO dao = new NoticeDAO();
 
 	<!-- content -->
 	<div class="content">
-		<section class="notice_delete">
+		<section class="event_delete">
 			<h1 class="title">관리자 - 공지사항</h1>
 			<div class="content_layout">
 				<h3>정말로 삭제하시겠습니까?</h3> <img src="../../images/img1.jpg">
 				<div>
-					<a href="notice_delete_process.jsp?articleno=<%=articleno%>">
+					<a href="event_delete_process.jsp?articleno=<%=articleno%>">
 						<button type="button" class="btn_style2">삭제완료</button>
 					</a>
-					<a href="notice_content.jsp?articleno<%=articleno%>&rno=<%=rno%>">
+					<a href="event_content.jsp?articleno<%=articleno%>&rno=<%=rno%>">
 						<button type="button" class="btn_style2">이전 페이지</button>
 					</a>
-					<a href="notice_list.jsp">
+					<a href="event_list.jsp">
 						<button type="button" class="btn_style2">목록</button>
 					</a>
 				</div>

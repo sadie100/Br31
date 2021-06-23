@@ -1,13 +1,13 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="com.br31.vo.NoticeVO"%>
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.vo.EventVO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
+
 //파일이 저장될 서버의 경로. 되도록이면 getRealPath를 이용하자.
 String savePath = request.getServletContext().getRealPath("/upload");
-// System.out.println(savePath);
 
 //파일 크기 15MB로 제한
 int sizeLimit = 1024 * 1024 * 15;
@@ -21,31 +21,16 @@ MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "UTF
 System.out.println("화면UI이름=" + multi.getOriginalFileName("nfile"));
 System.out.println("폴더저장이름=" + multi.getFilesystemName("nfile"));
 
-//기존 파일 그대로 유지 ---> nfile: null
-//새로운 파일 선택 & 파일 수정 ---> nfile: 선택된 파일 명
+EventVO vo = new EventVO();
+vo.setTitle(multi.getParameter("title"));
+vo.setNcontent(multi.getParameter("ncontent"));
+vo.setNfile(multi.getOriginalFileName("nfile"));
+vo.setNsfile(multi.getFilesystemName("nfile"));
 
-NoticeVO vo = new NoticeVO();
-NoticeDAO dao = new NoticeDAO();
-String articleno = multi.getParameter("articleno");
-System.out.println(articleno);
-boolean result = false;
-
-if (multi.getOriginalFileName("nfile") != null) {
-	vo.setArticleno(Integer.parseInt(articleno));
-	vo.setTitle(multi.getParameter("title"));
-	vo.setNcontent(multi.getParameter("ncontent"));
-	vo.setNfile(multi.getOriginalFileName("nfile"));
-	vo.setNsfile(multi.getFilesystemName("nfile"));
-	result = dao.getUpdateResult(vo);
-} else {
-	vo.setArticleno(Integer.parseInt(articleno));
-	vo.setTitle(multi.getParameter("title"));
-	vo.setNcontent(multi.getParameter("ncontent"));
-	
-	result = dao.getUpdateResultNofile(vo);
-}
+EventDAO dao = new EventDAO();
+boolean result = dao.getInsertResult(vo);
 
 if (result) {
-	response.sendRedirect("notice_list.jsp");
+	response.sendRedirect("event_list.jsp");
 }
 %>

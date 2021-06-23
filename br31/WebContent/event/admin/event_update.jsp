@@ -1,5 +1,5 @@
-<%@page import="com.br31.vo.NoticeVO"%>
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.vo.EventVO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
@@ -7,9 +7,9 @@
 String articleno = request.getParameter("articleno");
 String rno = request.getParameter("rno");
 
-NoticeDAO dao = new NoticeDAO();
+EventDAO dao = new EventDAO();
 
-NoticeVO vo = dao.getContent(Integer.parseInt(articleno));
+EventVO vo = dao.getContent(Integer.parseInt(articleno));
 dao.close();
 %>
 
@@ -59,7 +59,7 @@ span#fname {
 	<div class="content">
 		<section class="board_write">
 			<h1 class="title">관리자 - 공지사항</h1>
-			<form name="notice_update" action="notice_update_process.jsp" method="post" enctype="multipart/form-data">
+			<form name="event_update" action="event_update_process.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="<%=vo.getArticleno()%>" name="articleno" id="articleno">
 				<table class="content_layout">
 					<tr>
@@ -90,10 +90,10 @@ span#fname {
 						<td colspan="2">
 							<button type="submit" class="btn_style2">수정완료</button>
 							<button type="reset" class="btn_style2">취소</button>
-							<a href="notice_content.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
+							<a href="Event_content.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
 								<button type="button" class="btn_style2">이전 페이지</button>
 							</a>
-							<a href="notice_list.jsp">
+							<a href="event_list.jsp">
 								<button type="button" class="btn_style2">목록</button>
 							</a>
 						</td>

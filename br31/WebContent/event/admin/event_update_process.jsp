@@ -1,7 +1,7 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="com.br31.vo.NoticeVO"%>
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.vo.EventVO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
@@ -24,8 +24,8 @@ System.out.println("폴더저장이름=" + multi.getFilesystemName("nfile"));
 //기존 파일 그대로 유지 ---> nfile: null
 //새로운 파일 선택 & 파일 수정 ---> nfile: 선택된 파일 명
 
-NoticeVO vo = new NoticeVO();
-NoticeDAO dao = new NoticeDAO();
+EventVO vo = new EventVO();
+EventDAO dao = new EventDAO();
 String articleno = multi.getParameter("articleno");
 System.out.println(articleno);
 boolean result = false;
@@ -46,6 +46,6 @@ if (multi.getOriginalFileName("nfile") != null) {
 }
 
 if (result) {
-	response.sendRedirect("notice_list.jsp");
+	response.sendRedirect("event_list.jsp");
 }
 %>

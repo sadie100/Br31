@@ -10,7 +10,7 @@ String rno = request.getParameter("rno");
 
 NoticeDAO dao = new NoticeDAO();
 
-NoticeVO vo = dao.getContent(articleno);
+NoticeVO vo = dao.getContent(Integer.parseInt(articleno));
 String content = null;
 if (vo != null) {
 	content = vo.getNcontent().replaceAll("\n", "<br>");
@@ -66,7 +66,7 @@ if (vo != null) {
 			<div class="borad_file">
 							</div>
 			<div class="board_view_content" style="">
-				<p style="text-align: left;" align="left"><img src="../images/notice_<%=vo.getArticleno()%>.jpg" ></p><%=content %>
+				<p style="text-align: left;" align="left"><img src="http://localhost:9000/br31/upload/<%=vo.getNfile() %>" ></p><%=content %>
                             </div>
 
             			<div class="board_view_btn">

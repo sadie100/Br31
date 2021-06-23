@@ -1,5 +1,5 @@
-<%@page import="com.br31.vo.NoticeVO"%>
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.vo.EventVO"%>
+<%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
@@ -7,9 +7,9 @@
 String articleno = request.getParameter("articleno");
 String rno = request.getParameter("rno");
 
-NoticeDAO dao = new NoticeDAO();
+EventDAO dao = new EventDAO();
 
-NoticeVO vo = dao.getContent(Integer.parseInt(articleno));
+EventVO vo = dao.getContent(Integer.parseInt(articleno));
 String content = vo.getNcontent().replaceAll("\n", "<br>");
 %>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 
 	<!-- content -->
 	<div class="content">
-		<section class="notice_content">
+		<section class="event_content">
 			<h1 class="title">관리자 - 공지사항</h1>
 			<table class="content_layout">
 				<tr>
@@ -52,13 +52,13 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 				</tr>
 				<tr>
 					<td colspan="6">
-						<a href="notice_update.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
+						<a href="Event_update.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
 							<button type="button" class="btn_style2">수정</button>
 						</a>
-						<a href="notice_delete.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
+						<a href="Event_delete.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
 							<button type="button" class="btn_style2">삭제</button>
 						</a>
-						<a href="notice_list.jsp">
+						<a href="Event_list.jsp">
 							<button type="button" class="btn_style2">목록</button>
 						</a>
 						<a href="http://localhost:9000/br31/adminindex.jsp">
