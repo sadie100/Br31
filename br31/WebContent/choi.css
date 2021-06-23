@@ -391,7 +391,10 @@ div.sp_show a:first-child span{
 
 div.pop_content{
 	width:350px;
-	height:270px;
+	height:300px;
+	margin:auto;
+	margin-top:45px;
+	margin-left:65px;
 }
 
 div.pop_content ul{
@@ -476,6 +479,7 @@ li.ipin_style select{
 
 section.join div{
 	text-align:center;
+	margin-bottom:30px;
 	
 }
 
@@ -549,6 +553,7 @@ section.join>span{
 form.join_form li:last-child{
 	text-align:center;
 	margin:50px 0 ;
+	margin-bottom:200px;
 }
 .btn_check, .select_style{
 	padding:3px 8px;

@@ -14,11 +14,27 @@
 *****/
 
 $(document).on('click', '#button_phone',function(){
-window.open('login_pass_phone.jsp','window','width = 550,height = 300,scrollbars=no, resizable=no');
+
+var popupHeight = 400;
+var popupWidth = 500;
+
+var popupX = (window.screen.width/2) - (popupWidth / 2);
+var popupY= (window.screen.height/2) - (popupHeight / 2);	
+
+window.open('login_pass_phone.jsp', 'window', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY + ', scrolbars = no ');
+
 });
 
 $(document).on('click', '#button_ipin',function(){
-window.open('login_pass_ipin.jsp','window','width = 550,height = 300, scrollbars=no, resizable=no');
+	
+	var popupHeight = 400;
+	var popupWidth = 500;
+
+	var popupX = (window.screen.width/2) - (popupWidth / 2);
+	var popupY= (window.screen.height/2) - (popupHeight / 2);	
+
+	window.open('login_pass_ipin.jsp', 'window', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY + ', scrolbars = no ');
+
 });
 
 </script>
