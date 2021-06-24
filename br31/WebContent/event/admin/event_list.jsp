@@ -80,7 +80,7 @@
 	<!-- content -->
 	<div class="content">
 		<section class="board_list">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<table class="content_layout">
 				<tr>
 					<td colspan="3">
@@ -95,7 +95,7 @@
 					<th>등록일</th>
 				</tr>
 				<%
-					// 공지사항 목록 생성
+					// 이벤트 목록 생성
 				StringBuffer tbody = new StringBuffer("");
 				for (EventVO vo : list) {
 					tbody.append("<tr>");
