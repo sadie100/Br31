@@ -39,7 +39,7 @@
 				</ul>
 			</nav>
 		</section>
-		<section class = "m3_page">
+		<section class = "m4_page">
 			<img src = "">
 			<span>정말로 탈퇴하시겠습니까?</span>
 			<div>

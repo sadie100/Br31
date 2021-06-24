@@ -12,11 +12,11 @@
 	<jsp:include page = "../header.jsp"></jsp:include>
 	
 	<div class = "content">
-		<div class = "error">
+		<div class = "unregister">
 			<div>
 				<img src = "http://localhost:9000/br31/images/baskin_logo_admin.png">
 			</div>
-			<div class = "error_content">
+			<div class = "unregister_content">
 				<span>회원탈퇴가 완료되었습니다.</span><br>
 				<p>그동안 배스킨라빈스 서비스를 이용해 주셔서 감사합니다.<br>
 				보다 더 나은 서비스로 다시 찾아 뵙겠습니다.</p>
