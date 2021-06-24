@@ -112,9 +112,9 @@
 		jQuery("#ampaginationsm").on("am.pagination.change",function(e){
 			   jQuery(".showlabelsm").text("The selected page no: "+e.page);
 			  <% if(search==false){ %>
-	          		$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?page="+e.page);
+	          		$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?category=<%=category%>&page="+e.page);
 	          	<%}else{%>
-	          	 	$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?pname=<%=pname%>&nutrient=<%=nutrient%>&sorting=<%=sorting%>&<%=all_line%>&page="+e.page);
+	          	 	$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?category=<%=category%>&pname=<%=pname%>&nutrient=<%=nutrient%>&sorting=<%=sorting%>&<%=all_line%>&page="+e.page);
 	           <%}%>
 	    });
 		<%if(dbCount<pageSize){%>
