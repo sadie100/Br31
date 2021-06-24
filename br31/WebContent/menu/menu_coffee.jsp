@@ -21,9 +21,9 @@
 	}
 
 	String category="coffee";
-	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category);
+	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category, startCount, endCount);
 	
-	int dbCount = list.size();	//DB에서 가져온 전체 행수
+	int dbCount = dao.getDbCount(category);	//DB에서 가져온 전체 행수
 	
 	if(dbCount % pageSize ==0){
 		pageCount = dbCount/pageSize;
@@ -51,7 +51,7 @@
 		    totals: <%=dbCount%>,	// total pages	
 		    page: <%=rpage%>,		// initial page		
 		    pageSize: <%=pageSize %>,			// max number items per page
-		
+			
 		    // custom labels		
 		    prevText: "&lt;",		
 		    nextText: "&gt;",
@@ -64,7 +64,7 @@
 	           $(location).attr("href", "http://localhost:9000/br31/menu/menu_icecream.jsp?page="+e.page);         
 	    });
 		
-		<%if(list.size()<pageSize){%>
+		<%if(dbCount<pageSize){%>
 		$("#pagination").hide();
 		<%}%>
 		

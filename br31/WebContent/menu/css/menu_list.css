@@ -206,6 +206,7 @@ span.search button.btn_search{
 	border: none;
 	color: white;
 	font-size: 15px;
+	cursor: pointer;
 }
 
 /******search form ********/
@@ -349,6 +350,7 @@ form.search_form input[type="button"]{
 	border: none;
 	color: white;
 	font-size: 18px;
+	cursor : pointer;
 }
 
 /**********검색결과*************/
@@ -380,6 +382,7 @@ div.search_result_button button{
 	border: none;
 	color: white;
 	font-size: 18px;
+	cursor: pointer;
 }
 section.search_result {
 	border-top: 3px solid rgb(255,124,152);

@@ -23,14 +23,13 @@
 	String category="icecream";
 	ArrayList<MenuVO> list = dao.getMenuIcecreamList(category, startCount, endCount);
 	
-	int dbCount = list.size();	//DB에서 가져온 전체 행수
-	
+	int dbCount = dao.getDbCount(category);	//DB에서 가져온 전체 행수
+
 	if(dbCount % pageSize ==0){
 		pageCount = dbCount/pageSize;
 	}else{
 		pageCount = dbCount/pageSize+1;
 	}
-	
 	
 	
 	
@@ -65,19 +64,11 @@
 			   jQuery(".showlabelsm").text("The selected page no: "+e.page);
 	           $(location).attr("href", "http://localhost:9000/br31/menu/menu_icecream.jsp?page="+e.page);         
 	    });
-		<%if(list.size()<pageSize){%>
+		<%if(dbCount<pageSize){%>
 			$("#pagination").hide();
 		<%}%>
 	});
 </script>
-<!-- 
-<style>
-div.pagination a:nth-child(2){
-	background-color: rgb(245,111,152);
-	color: white;
-}
-</style>
- -->
 </head>
 <body>
 
@@ -112,8 +103,9 @@ div.pagination a:nth-child(2){
 					<td>
 						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>&category=<%=category %>" class="outer">
 							<span class="depth1">
+							<%if(vo.getSet_check()==0){ %>
 								<span class="depth2">
-									<label class="name"><%=vo.getPname() %></label>
+								<label class="name"><%=vo.getPname() %></label>
 									<%
 									if(vo.getHashtag()!=null){
 										for(int v=0; v<vo.getHashtag().length; v++){
@@ -128,6 +120,25 @@ div.pagination a:nth-child(2){
 									 %>
 									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
 								</span>
+							<%}else{ 
+								%>
+								<span class="depth2_no_bg">
+								<label class="name"><%=vo.getPname() %></label>
+									<%
+									if(vo.getHashtag()!=null){
+										for(int v=0; v<vo.getHashtag().length; v++){
+										%>
+										<label class="hashtag"><%=vo.getHashtag()[v] %></label>
+										 <%
+										 if(v>=2){
+												v = vo.getHashtag().length;
+											}  
+										}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
+								</span>
+								<%} %>
 							</span>
 						</a>
 					</td>
@@ -147,16 +158,10 @@ div.pagination a:nth-child(2){
 	<!-- **************page********* -->
 	<!-- **************page********* -->
 	<!-- **************page********* -->
+	
 	<div class="pagination" id="pagination">
 		<div id="ampaginationsm"></div>
 	</div>
-	<!-- 
-			<a href="menu_icecream_1.jsp">&lt;</a>
-			<a href="menu_icecream_1.jsp">1</a>
-			<a href="menu_icecream_2.jsp">2</a>
-			<a href="menu_icecream_3.jsp">3</a>
-			<a href="menu_icecream_2.jsp">&gt;</a>
-	 -->
 	</section>	
 </div>
 
