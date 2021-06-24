@@ -41,8 +41,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
-<link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
 <link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
@@ -80,7 +79,7 @@
 	<!-- content -->
 	<div class="content">
 		<section class="board_list">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<table class="content_layout">
 				<tr>
 					<td colspan="3">
@@ -95,7 +94,7 @@
 					<th>등록일</th>
 				</tr>
 				<%
-					// 공지사항 목록 생성
+					// 이벤트 목록 생성
 				StringBuffer tbody = new StringBuffer("");
 				for (EventVO vo : list) {
 					tbody.append("<tr>");

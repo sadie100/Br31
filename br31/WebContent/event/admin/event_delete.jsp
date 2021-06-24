@@ -13,7 +13,7 @@ EventDAO dao = new EventDAO();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
 </head>
 <body>
 	<!-- header -->
@@ -22,7 +22,7 @@ EventDAO dao = new EventDAO();
 	<!-- content -->
 	<div class="content">
 		<section class="event_delete">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<div class="content_layout">
 				<h3>정말로 삭제하시겠습니까?</h3> <img src="../../images/img1.jpg">
 				<div>

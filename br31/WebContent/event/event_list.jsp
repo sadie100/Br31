@@ -1,11 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.br31.vo.EventVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.br31.dao.EventDAO"%>
+<%@page import="com.br31.comms.Commons"%>
+<%
+	//
+String rpage = request.getParameter("page");
+EventDAO dao = new EventDAO();
+Commons commons = new Commons();
+HashMap<String, Integer> map = commons.getPage(rpage, dao);
+//System.out.println(map.get("start"));
+//System.out.println(map.get("end"));
+ArrayList<EventVO> list = dao.getList(map.get("start"), map.get("end"));
+
+//페이징 처리 - startCount, endCount 구하기
+/* int startCount = 0;
+int endCount = 0;
+int pageSize = 5;	//한페이지당 게시물 수
+int reqPage = 1;	//요청페이지	
+int pageCount = 1;	//전체 페이지 수
+int dbCount = dao.execTotalCount();	//DB에서 가져온 전체 행수
+
+//총 페이지 수 계산
+if(dbCount % pageSize == 0){
+	pageCount = dbCount/pageSize;
+}else{
+	pageCount = dbCount/pageSize+1;
+}
+
+//요청 페이지 계산
+if(rpage != null){
+	reqPage = Integer.parseInt(rpage);
+	startCount = (reqPage-1) * pageSize+1;
+	endCount = reqPage *pageSize;
+}else{
+	startCount = 1;
+	endCount = 5;
+} 
+*/
+
+//EventDAO dao = new EventDAO();
+//ArrayList<BoardVO> list = dao.getList();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
+<script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/br31/js/am-pagination.js"></script>
+<script>
+	$(document).ready(
+			function() {
+
+				var pager = jQuery('#ampaginationsm').pagination({
+
+					maxSize : 7, // max page size
+					totals :<%=map.get("dbCount")%>, // total pages	
+					page :<%=map.get("rpage")%>, // initial page		
+					pageSize : <%=map.get("pageSize")%>, // max number items per page
+
+					// custom labels		
+					lastText : '&raquo;&raquo;',
+					firstText : '&laquo;&laquo;',
+					prevText : '&laquo;',
+					nextText : '&raquo;',
+
+					btnSize : 'sm' // 'sm'  or 'lg'		
+				});
+
+				jQuery('#ampaginationsm').on(
+						'am.pagination.change',
+						function(e) {
+							jQuery('.showlabelsm').text(
+									'The selected page no: ' + e.page);
+							$(location).attr(
+									'href',
+									"http://localhost:9000/br31/event/event_list.jsp?page="
+											+ e.page);
+						});
+
+			});
+</script>
 </head>
 <body id="br_event">
 	<!-- header -->
@@ -25,19 +105,19 @@
                 <div class="tabmenu">
                     <ul>
                         <li class="all">
-                            <a href="/event/list.php" class="on">ALL</a>
+                            <a href="event_list.jsp" class="on">ALL</a>
                         </li>
                         <li class="store">
-                            <a href="/event/list.php?flag=A">STORE EVENT</a>
+                            <a href="event_list.jsp">STORE EVENT</a>
                         </li>
                         <li class="online">
-                            <a href="/event/list.php?flag=B">ONLINE EVENT</a>
+                            <a href="event_list.jsp">ONLINE EVENT</a>
                         </li>
                         <!-- li class="mobile">
 							<a href="/event/list.php?flag=D">MOBILE EVENT</a>
 						</li -->
                         <li class="happypoint">
-                            <a href="/event/list.php?flag=C">HAPPYPOINT EVENT </a>
+                            <a href="event_list.jsp">HAPPYPOINT EVENT </a>
                         </li>
                     </ul>
                 </div>
@@ -61,87 +141,21 @@
                                 <span class="period">2020-10-01~2020-10-26</span>
                             </a>
                         </li>-->
-						
-                                                            <li>
-                                        <a href="/menu/fom.php#area4">
-                                            <figure><img src="../images/1685842555.jpg" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_online.gif" alt="ONLINE EVENT"></span>
-                                            <span class="title">5월 이달의맛 인스타그램에 사진을 올려주세요!</span>
-                                            <span class="period">2021-05-01~2021-05-31</span>
-                                        </a>
-                                    </li>
+						<%
+					// 공지사항 목록 생성
+				StringBuffer tbody = new StringBuffer("");
+				for (EventVO vo : list) {
+					tbody.append("<li>");
+					tbody.append("<a href='event_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'>");					
+					tbody.append("<figure><img src='http://localhost:9000/br31/upload/" + vo.getNfile() + "' alt=''></figure>");
+					tbody.append("<span class='title'>"+vo.getTitle()+"</span>");
+					tbody.append("<span class=\"period\">" + vo.getMdate() + "</span>");
+					tbody.append("</a>");
+					tbody.append("</li>");
+				}
+				out.write(tbody.toString());
+				%>
 
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=8964">
-                                            <figure><img src="../images/1662366722.jpg" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_happypoint.gif" alt="HAPPYPOINT EVENT"></span>
-                                            <span class="title">가장 먼저 맛보는 이달의 맛! 구독 서비스 핑크버드!</span>
-                                            <span class="period">2021-05-22~2021-05-27</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=8944">
-                                            <figure><img src="../images/1644051470.jpg" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_happypoint.gif" alt="HAPPYPOINT EVENT"></span>
-                                            <span class="title">메가 해피 데이즈! 케이크 최대 7,000원 OFF!</span>
-                                            <span class="period">2021-05-14~2021-06-13</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=8624">
-                                            <figure><img src="../images/1630631151.jpg" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
-                                            <span class="title">KT 멤버십 고객이라면 누구나 파인트 30% 할인!</span>
-                                            <span class="period">상시진행</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=4922">
-                                            <figure><img src="../images/1639297260.png" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
-                                            <span class="title">제휴 할인 카드 혜택 안내</span>
-                                            <span class="period">상시진행</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=8324">
-                                            <figure><img src="../images/1625114283.png" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
-                                            <span class="title">매월 25일, 50% M포인트 사용</span>
-                                            <span class="period">상시진행</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=3722">
-                                            <figure><img src="../images/1570702843.png" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_online.gif" alt="ONLINE EVENT"></span>
-                                            <span class="title">2018 한글날 기념 무료 글꼴 공개! 배스킨라빈스체</span>
-                                            <span class="period">상시진행</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="view.php?flag=&amp;seq=3302">
-                                            <figure><img src="../images/1578277305.png" alt=""></figure>
-                                            <span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
-                                            <span class="title">1회용 컵 사용 줄이기 안내</span>
-                                            <span class="period">상시진행</span>
-                                        </a>
-                                    </li>
-                                                            <li>
-                            <a href="/store/catering.php">
-                                <figure><img src="/upload/event/images/banner_delivery.png" alt="해피오더 딜리버리"></figure>
-                                <span class="type"><img src="../images/stit_store.gif" alt="STORE EVENT"></span>
-                                <span class="title">해피오더 딜리버리로 간편하게 주문하세요!</span>
-                                <span class="period">상시진행</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
