@@ -41,7 +41,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31_m.css">
 <link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
@@ -71,6 +71,8 @@
 		
  	});
 </script>
+
+
 </head>
 <body>
 	<!-- header -->
@@ -79,7 +81,11 @@
 	<!-- content -->
 	<div class="content">
 		<section class="board_list">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h3 class="line_title">
+			<span> <img
+				src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
+			</span> [관리자] 공지사항
+			</h3>
 			<table class="content_layout">
 				<tr>
 					<td colspan="3">

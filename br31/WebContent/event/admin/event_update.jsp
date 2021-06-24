@@ -18,7 +18,7 @@ dao.close();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31_m.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 	window.onload = function() {
@@ -58,7 +58,10 @@ span#fname {
 	<!-- content -->
 	<div class="content">
 		<section class="board_write">
-			<h1 class="title">관리자 - 이벤트</h1>
+			<h3 class="line_title">
+				<span> <img src="../../images/eventtitle.png" alt="event">
+				</span> [관리자] 이벤트
+			</h3>
 			<form name="event_update" action="event_update_process.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="<%=vo.getArticleno()%>" name="articleno" id="articleno">
 				<table class="content_layout">
