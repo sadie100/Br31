@@ -26,7 +26,7 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 	<!-- content -->
 	<div class="content">
 		<section class="event_content">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<table class="content_layout">
 				<tr>
 					<th>번호</th>
@@ -44,6 +44,9 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 						<%
 							if (vo.getNsfile() != null) {
 							out.write("<img alt='' src='http://localhost:9000/br31/upload/" + vo.getNsfile() + "'> ");
+							out.write("<br>");
+							out.write("<br>");
+							out.write("<img alt='' src='http://localhost:9000/br31/upload/" + vo.getNsfile2() + "'> ");
 						}
 						%>
 						<br>
@@ -52,16 +55,16 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 				</tr>
 				<tr>
 					<td colspan="6">
-						<a href="Event_update.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
+						<a href="event_update.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
 							<button type="button" class="btn_style2">수정</button>
 						</a>
-						<a href="Event_delete.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
+						<a href="event_delete.jsp?articleno=<%=vo.getArticleno()%>&rno=<%=rno%>">
 							<button type="button" class="btn_style2">삭제</button>
 						</a>
-						<a href="Event_list.jsp">
+						<a href="event_list.jsp">
 							<button type="button" class="btn_style2">목록</button>
 						</a>
-						<a href="http://localhost:9000/br31/adminindex.jsp">
+						<a href="http://localhost:9000/br31/adminIndex.jsp">
 							<button type="button" class="btn_style2">홈으로</button>
 						</a>
 					</td>

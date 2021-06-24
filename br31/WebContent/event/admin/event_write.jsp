@@ -14,7 +14,7 @@
 	<!-- content -->
 	<div class="content">
 		<section class="board_write">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<form name="event_write" action="event_write_process.jsp" method="post" enctype="multipart/form-data">
 				<table class="content_layout">
 					<tr>
@@ -30,14 +30,20 @@
 						</td>
 					</tr>
 					<tr>
-						<th>파일첨부</th>
+						<th>파일첨부(리스트)</th>
 						<td>
 							<input type="file" name="nfile">
 						</td>
 					</tr>
 					<tr>
+						<th>파일첨부(본문)</th>
+						<td>
+							<input type="file" name="nfile2">
+						</td>
+					</tr>
+					<tr>
 						<td colspan="2">
-							<button type="button" class="btn_style2" onclick="EventFormCheck()">저장</button>
+							<button type="button" class="btn_style2" onclick="eventFormCheck()">저장</button>
 							<button type="reset" class="btn_style2">취소</button>
 							<a href="event_list.jsp"><button type="button" class="btn_style2">목록</button></a> <a href="http://localhost:9000/br31/adminIndex.jsp"><button type="button" class="btn_style2">홈으로</button></a>
 						</td>

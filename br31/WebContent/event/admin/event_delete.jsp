@@ -22,7 +22,7 @@ EventDAO dao = new EventDAO();
 	<!-- content -->
 	<div class="content">
 		<section class="event_delete">
-			<h1 class="title">관리자 - 공지사항</h1>
+			<h1 class="title">관리자 - 이벤트</h1>
 			<div class="content_layout">
 				<h3>정말로 삭제하시겠습니까?</h3> <img src="../../images/img1.jpg">
 				<div>

@@ -26,6 +26,8 @@ vo.setTitle(multi.getParameter("title"));
 vo.setNcontent(multi.getParameter("ncontent"));
 vo.setNfile(multi.getOriginalFileName("nfile"));
 vo.setNsfile(multi.getFilesystemName("nfile"));
+vo.setNfile2(multi.getOriginalFileName("nfile2"));
+vo.setNsfile2(multi.getFilesystemName("nfile2"));
 
 EventDAO dao = new EventDAO();
 boolean result = dao.getInsertResult(vo);

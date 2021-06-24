@@ -36,6 +36,8 @@ if (multi.getOriginalFileName("nfile") != null) {
 	vo.setNcontent(multi.getParameter("ncontent"));
 	vo.setNfile(multi.getOriginalFileName("nfile"));
 	vo.setNsfile(multi.getFilesystemName("nfile"));
+	vo.setNfile2(multi.getOriginalFileName("nfile2"));
+	vo.setNsfile2(multi.getFilesystemName("nfile2"));
 	result = dao.getUpdateResult(vo);
 } else {
 	vo.setArticleno(Integer.parseInt(articleno));
@@ -44,6 +46,7 @@ if (multi.getOriginalFileName("nfile") != null) {
 	
 	result = dao.getUpdateResultNofile(vo);
 }
+
 
 if (result) {
 	response.sendRedirect("event_list.jsp");
