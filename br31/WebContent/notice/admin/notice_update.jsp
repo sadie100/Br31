@@ -65,7 +65,7 @@ span#fname {
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="Title" value="<%=vo.getTitle()%>">
+							<input type="text" name="title" value="<%=vo.getTitle()%>">
 						</td>
 					</tr>
 					<tr>
