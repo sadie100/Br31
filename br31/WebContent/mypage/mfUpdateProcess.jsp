@@ -4,7 +4,7 @@
 <%
 	String id = request.getParameter("id");
 	String pname = request.getParameter("pname");
-	
+	 
 	MypageDAO dao = new MypageDAO();
 	int result = dao.getmfUpdateResult(id, pname);
 	

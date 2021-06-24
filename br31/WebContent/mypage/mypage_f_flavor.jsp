@@ -3,7 +3,7 @@
 <%@ page import = "com.br31.vo.*, com.br31.dao.*, java.util.*" %>
 <%
 	SessionVO svo = (SessionVO)session.getAttribute("svo");
-	if(svo != null){	
+	if(svo != null){	 
 		
 		MypageDAO dao = new MypageDAO();
 		

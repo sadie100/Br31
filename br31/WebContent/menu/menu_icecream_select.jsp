@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
  <%
+ 
  	String pname = request.getParameter("pname");
  	String category = request.getParameter("category");
  	MenuDAO dao = new MenuDAO();

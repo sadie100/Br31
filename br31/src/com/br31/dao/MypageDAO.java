@@ -7,6 +7,7 @@ import com.br31.vo.MenuVO;
 public class MypageDAO extends DBConn{
 	MenuVO mvo = new MenuVO();
 	
+	
 	public int getmfUpdateResult(String id,String pname) {
 		int result = 0;
 		
