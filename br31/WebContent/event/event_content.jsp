@@ -12,7 +12,7 @@ EventDAO dao = new EventDAO();
 
 EventVO vo = dao.getContent(Integer.parseInt(articleno));
 String content = null;
-if (vo != null) {
+if (vo != null && vo.getNcontent()!=null) {
 	content = vo.getNcontent().replaceAll("\n", "<br>");
 }
 %>
@@ -66,7 +66,7 @@ if (vo != null) {
 					<p><img src="http://localhost:9000/br31/upload/<%=vo.getNfile2() %>"><br style="clear:both;">&nbsp;</p>				</div>
 
 				<div class="event_view_alert">
-				<%=content %>
+				<%=content==null?"":content %>
 					</div>
 
 				<div class="event_view_btn">

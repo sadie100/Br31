@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="com.br31.vo.NoticeVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
@@ -50,7 +50,8 @@ if(rpage != null){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
-<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
+<link rel="stylesheet"
+	href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
@@ -62,7 +63,7 @@ if(rpage != null){
 					maxSize : 7, // max page size
 					totals :<%=map.get("dbCount")%>, // total pages	
 					page :<%=map.get("rpage")%>, // initial page		
-					pageSize : <%=map.get("pageSize")%>, // max number items per page
+					pageSize :<%=map.get("pageSize")%>, // max number items per page
 
 					// custom labels		
 					lastText : '&raquo;&raquo;',
@@ -93,12 +94,11 @@ if(rpage != null){
 	<!-- content -->
 	<div id="content">
 		<h3 class="line_title">
-			<span>
-				<img src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
-			</span>
-			배스킨라빈스의 신제품 안내, 신규 CF등 다양한 소식을 알려드립니다!
+			<span> <img
+				src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
+			</span> 배스킨라빈스의 신제품 안내, 신규 CF등 다양한 소식을 알려드립니다!
 		</h3>
-		
+
 		<div class="inner_content">
 			<div class="list_search">
 				<form name="searchform" method="get" action="notice_list.php">
@@ -108,17 +108,19 @@ if(rpage != null){
 							<option value="">전체</option>
 							<option value="TITLE">제목</option>
 							<option value="CONTS">내용</option>
-						</select>
-						<input type="text" name="searchword" value="" title="검색어 입력" class="inline">
+						</select> <input type="text" name="searchword" value="" title="검색어 입력"
+							class="inline">
 						<p class="submit">
 							<button type="submit">검색</button>
 						</p>
 					</fieldset>
 				</form>
 			</div>
-			<p class="result_num">총 <span><%=dao.execTotalCount() %></span> 건이 검색되었습니다.</p>
+			<p class="result_num">
+				총 <span><%=dao.execTotalCount()%></span> 건이 검색되었습니다.
+			</p>
 
-			<div class="list_wrap">				
+			<div class="list_wrap">
 
 				<!-- 리스트 -->
 				<table class="borad_table">
@@ -129,21 +131,23 @@ if(rpage != null){
 					</colgroup>
 					<tbody>
 
-					<%
-					// 공지사항 목록 생성
-				StringBuffer tbody = new StringBuffer("");
-				for (NoticeVO vo : list) {
-					tbody.append("<tr>");
-					tbody.append("<td class=\"num\">" + vo.getRno() + "</td>");
-					tbody.append("<td class=\"title\">");
-					tbody.append("<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno() + "'class=\"tit\">"+vo.getTitle()+"</a>");
-					tbody.append("</td>");
-					tbody.append("<td class=\"period\">" + vo.getMdate() + "</td>");
-					tbody.append("</tr>");
-				}
-				out.write(tbody.toString());
-				%>
-				<!-- 
+						<%
+							// 공지사항 목록 생성
+						StringBuffer tbody = new StringBuffer("");
+						for (NoticeVO vo : list) {
+							tbody.append("<tr>");
+							tbody.append("<td class=\"num\">" + vo.getRno() + "</td>");
+							tbody.append("<td class=\"title\">");
+							tbody.append("<a href='notice_content.jsp?articleno=" + vo.getArticleno() + "&rno=" + vo.getRno()
+							+ "'class=\"tit\">" + vo.getTitle() + "</a>");
+							tbody.append("</td>");
+							tbody.append("<td class=\"period\">" + vo.getMdate() + "</td>");
+							tbody.append("</tr>");
+						}
+						out.write(tbody.toString());
+						dao.close();
+						%>
+						<!-- 
 																<tr>
 							<td class="num">51</td>
 							<td class="title">
@@ -281,27 +285,19 @@ if(rpage != null){
 							<td class="period">2019-05-13</td>
 						</tr>
 						 -->
-										</tbody>
-				</table> 
-				
-				<!-- 페이징 -->
-				<div class="search_pagination">
-							<nav class="pagination">
-			<ul>
-	<li class="bu prev"><a href="#">◀</a></li>
-	<li><strong>1</strong></li>
-<li><a href="?Page=2&amp;find=&amp;searchword=">2</a></li>
-<li><a href="?Page=3&amp;find=&amp;searchword=">3</a></li>
-<li><a href="?Page=4&amp;find=&amp;searchword=">4</a></li>
-	<li class="bu next"><a href="#">▶</a>
-		</li></ul>
-	</nav>
-				</div>
+						<!-- 페이징 -->
+						<tr>
+							<td colspan=3><div id="ampaginationsm"></div></td>
+						</tr>
+					</tbody>
+				</table>
+
+
 			</div>
 		</div>
 
 	</div>
-	
+
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
 
