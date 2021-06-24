@@ -13,7 +13,7 @@ EventDAO dao = new EventDAO();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
 </head>
 <body>
 	<!-- header -->

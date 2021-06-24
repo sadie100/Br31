@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
 <script type="text/javascript" src="http://localhost:9000/br31/js/br31.js"></script>
 </head>
 <body>
