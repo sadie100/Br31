@@ -14,6 +14,7 @@
 	int pageSize = 20;	//한 페이지당 게시물 수
 	int reqPage = 1;	//요청페이지
 	int pageCount = 1;	//전체페이지 수
+	int dbCount = 0;
 	
 	if(rpage!=null){
 		reqPage = Integer.parseInt(rpage);
@@ -23,25 +24,51 @@
 		startCount = 1;
 		endCount = pageSize;
 	}
+	String pname="";
+	String nutrient="";
+	String sorting="";
+	String[] allergies= null;
+	String all_line ="";
 	
 	ArrayList<MenuVO> list;	
+	boolean search = false;
 	if(request.getParameter("pname")==null &&request.getParameter("nutrient")==null
 		&&request.getParameter("sorting")==null && request.getParameter("allergy")==null){		//header에서 갓 넘어갔을때
-		list = dao.getAllNutrientsList(category);	
+		search=false;
+		list = dao.getAllNutrientsList(category, startCount, endCount);	
+		dbCount = dao.getDbCount(category);	//DB에서 가져온 전체 행수
 	}else{
+		/*
 		String pname = request.getParameter("pname");
 		String nutrient = request.getParameter("nutrient");
 		String sorting = request.getParameter("sorting");
 		String[] allergies = request.getParameterValues("allergy");
-		if(pname.equals("")&&nutrient.equals("전체")&&sorting.equals("전체")&&allergies==null){
-			list = dao.getAllNutrientsList(category);
-		}else{
-			list = dao.getNutrientSearchResult(category,pname,nutrient,sorting,allergies);
+		*/
+		pname = request.getParameter("pname");
+		nutrient = request.getParameter("nutrient");
+		sorting = request.getParameter("sorting");
+		allergies = request.getParameterValues("allergy");
+		all_line ="";
+		if(allergies!=null){
+			for(int i=0;i<allergies.length;i++){
+				if(i==allergies.length-1){
+					all_line += "allergy="+ allergies[i];
+				}else{
+					all_line += "allergy="+ allergies[i] + "&";
+				}
+			}
 		}
+		search=true;
+		if(pname.equals("")&&nutrient.equals("전체")&&sorting.equals("전체")&&allergies==null){
+			list = dao.getAllNutrientsList(category, startCount, endCount);
+			dbCount = dao.getDbCount(category);	//DB에서 가져온 전체 행수
+		}else{
+			list = dao.getNutrientSearchResult(category,pname,nutrient,sorting,allergies, startCount, endCount);
+			dbCount = dao.getNutrientSearchResultCount(category,pname,nutrient,sorting,allergies);
+ 		}
 	}
 	
-	int dbCount = list.size();	//DB에서 가져온 전체 행수
-	
+	dao.close();
 	if(dbCount % pageSize ==0){
 		pageCount = dbCount/pageSize;
 	}else{
@@ -54,6 +81,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://localhost:9000/br31/nutrient/nutrient.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/am-pagination.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
@@ -83,9 +111,13 @@
 		
 		jQuery("#ampaginationsm").on("am.pagination.change",function(e){
 			   jQuery(".showlabelsm").text("The selected page no: "+e.page);
-	           $(location).attr("href", "http://localhost:9000/br31/menu/menu_icecream.jsp?page="+e.page);         
+			  <% if(search==false){ %>
+	          		$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?page="+e.page);
+	          	<%}else{%>
+	          	 	$(location).attr("href", "http://localhost:9000/br31/nutrient/nutrient_default.jsp?pname=<%=pname%>&nutrient=<%=nutrient%>&sorting=<%=sorting%>&<%=all_line%>&page="+e.page);
+	           <%}%>
 	    });
-		<%if(list.size()<pageSize){%>
+		<%if(dbCount<pageSize){%>
 			$("#pagination").hide();
 		<%}%>
 	});
@@ -172,7 +204,7 @@
 	</section>
 	<section class="search_result">
 		<img src="http://localhost:9000/br31/nutrient/images/h_nutrition_result.png" class="title">
-		<label class="search_result">검색결과 총 <%=list.size() %>건 검색되었습니다.</label>
+		<div><label class="search_result">검색 결과 총 </label><label class="search_count"><%=dbCount %></label><label class="search_result">건 검색되었습니다.</label></div>
 		<table class="search_result">
 			<tr>
 				<th>제품명</th>

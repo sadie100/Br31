@@ -8,7 +8,6 @@
  	MenuVO vo = dao.getMenuIcecreamContent(pname);
  	String pre_pname = dao.getNextMenuPname(pname, category, "previous"); 
  	String next_pname = dao.getNextMenuPname(pname, category, "next");
- 	dao.close();
  	
  	int height;
  	if(vo.getRec_flavor()!=null){
@@ -138,23 +137,43 @@
 	 	</label>
 		<h1 class="kor_name" id="kor_name"><%=vo.getPname() %></h1>
 		<label class="p_explain"><%=vo.getIntro() %></label>
-		<div class="bg">
-			<div class="icecream_img">
-				<img src="images/<%=vo.getPsfile()%>">
+		<%if(vo.getSet_check()==0){ %>
+			<div class="bg">
+				<div class="icecream_img">
+					<img src="images/<%=vo.getPsfile()%>">
+				</div>
+					<div class="arrowbox" id="arrowbox"><span>좋아하는 플레이버 등록</span></div>
+				<div class="icons">
+					<!-- DB에서 데이터를 가져와서 해당 데이터가 선택 되어 있으면 아이디를 star_button_onclick으로 바꾸기 -->
+					<% if(result == 1){ %>
+					<a href="#"><img src="http://localhost:9000/br31/images/star_button_onclick.PNG" name = "btn_star" id="star_button_onclick"></a>
+					<% }else{ %>
+					<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" name = "btn_star" id="star_button"></a>
+					<% } %>
+					<a href="https://www.facebook.com/search/posts/?q=<%=pname%>" target="_blank"><img src="images/icon_facebook.png"></a>
+					<a href="https://twitter.com/search?q=<%=pname %>&src=typed_query" target="_blank"><img src="images/icon_twitter.png"></a>
+					<a href="#" id="copy_link"><img src="images/icon_copy.png"></a>
+				</div>
 			</div>
-				<div class="arrowbox" id="arrowbox"><span>좋아하는 플레이버 등록</span></div>
-			<div class="icons">
-				<!-- DB에서 데이터를 가져와서 해당 데이터가 선택 되어 있으면 아이디를 star_button_onclick으로 바꾸기 -->
-				<% if(result == 1){ %>
-				<a href="#"><img src="http://localhost:9000/br31/images/star_button_onclick.PNG" name = "btn_star" id="star_button_onclick"></a>
-				<% }else{ %>
-				<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" name = "btn_star" id="star_button"></a>
-				<% } %>
-				<a href="https://www.facebook.com/search/posts/?q=<%=pname%>" target="_blank"><img src="images/icon_facebook.png"></a>
-				<a href="https://twitter.com/search?q=<%=pname %>&src=typed_query" target="_blank"><img src="images/icon_twitter.png"></a>
-				<a href="#" id="copy_link"><img src="images/icon_copy.png"></a>
+		<%}else{ %>
+			<div class="no_bg">
+				<div class="icecream_img">
+					<img src="images/<%=vo.getPsfile()%>">
+				</div>
+					<div class="arrowbox" id="arrowbox"><span>좋아하는 플레이버 등록</span></div>
+				<div class="icons">
+					<!-- DB에서 데이터를 가져와서 해당 데이터가 선택 되어 있으면 아이디를 star_button_onclick으로 바꾸기 -->
+					<% if(result == 1){ %>
+					<a href="#"><img src="http://localhost:9000/br31/images/star_button_onclick.PNG" name = "btn_star" id="star_button_onclick"></a>
+					<% }else{ %>
+					<a href="#"><img src="http://localhost:9000/br31/images/star_button.PNG" name = "btn_star" id="star_button"></a>
+					<% } %>
+					<a href="https://www.facebook.com/search/posts/?q=<%=pname%>" target="_blank"><img src="images/icon_facebook.png"></a>
+					<a href="https://twitter.com/search?q=<%=pname %>&src=typed_query" target="_blank"><img src="images/icon_twitter.png"></a>
+					<a href="#" id="copy_link"><img src="images/icon_copy.png"></a>
+				</div>
 			</div>
-		</div>
+		<%} %>
 	</section>
 	<section class="size_info">
 		<div class="depth1">

@@ -9,7 +9,6 @@
 	
 	MenuDAO dao = new MenuDAO();
 	ArrayList<MenuVO> list = dao.getSearchResult(category, pname, hashtag, allergies);
-	//dao 다듬고, 적용하면 끝!
 %>
 <!DOCTYPE html>
 <html>
@@ -73,16 +72,45 @@
 					if(i%4==1){%>
 					<tr class="src_one">
 					<% }%>
-					<td>
-						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>" class="outer">
+					<td class="src_one">
+					<%if(category.toUpperCase().equals("ICECREAM")){ %>
+						<a href="menu_icecream_select.jsp?pname=<%=vo.getPname()%>&category=<%=category %>" class="outer">
 							<span class="depth1">
+							<% if(vo.getSet_check()==0){%>
 								<span class="depth2">
 									<label class="name"><%=vo.getPname() %></label>
 									<%
 									if(vo.getHashtag()!=null){
 										for(String hash : vo.getHashtag()){%>
-										<!-- <a href="#" class="hashtag"><%=hash %></a>-->
-										<!-- <span class="depth3"><input type="submit" class="hashtag" onclick="location.href='menu_search_result.jsp?pname=<%=vo.getPname()%>'" value="<%=hash %>"></span>-->
+										<label class="hashtag"><%=hash %></label>
+										 <%}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
+								</span>
+							<%}else{ %>
+								<span class="depth2_no_bg">
+									<label class="name"><%=vo.getPname() %></label>
+									<%
+									if(vo.getHashtag()!=null){
+										for(String hash : vo.getHashtag()){%>
+										<label class="hashtag"><%=hash %></label>
+										 <%}
+									}
+									 %>
+									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
+								</span>
+							<%} %>
+							</span>
+						</a>
+					<%}else{ %>
+						<a href="menu_coffee_select.jsp?pname=<%=vo.getPname()%>&category=<%=category %>" class="outer">
+							<span class="depth1">
+								<span class="depth2_no_bg">
+									<label class="name"><%=vo.getPname() %></label>
+									<%
+									if(vo.getHashtag()!=null){
+										for(String hash : vo.getHashtag()){%>
 										<label class="hashtag"><%=hash %></label>
 										 <%}
 									}
@@ -91,6 +119,7 @@
 								</span>
 							</span>
 						</a>
+					<%} %>
 					</td>
 				<% 
 				if(i%4==0 || vo.getPname().equals(list.get(list.size()-1).getPname())){ %>

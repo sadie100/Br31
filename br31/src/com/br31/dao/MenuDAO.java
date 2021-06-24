@@ -54,18 +54,47 @@ public class MenuDAO extends DBConn{
 			return list;
 		}
 		
+		//Select --> 전체 페이지 수 구하기
+		public int getDbCount(String category) {
+			int result=0;
+			String sql= "";
+			if(category.equals("all")) {
+				sql = " select count(*) from br31_menu ";
+				getPreparedStatement(sql);
+			}else {
+				sql = " select count(*) from br31_menu where category = ? ";
+				try {
+					getPreparedStatement(sql);
+					pstmt.setString(1, category.toUpperCase());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			try {
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
 		//Select --> 아이스크림 메뉴 리스트(페이징 처리)
 		public ArrayList<MenuVO> getMenuIcecreamList(String status, int start, int end) {
 			ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 			String sql = "";
 			
 			if(status.equals("icecream")) {
-				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
-						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='ICECREAM' " + 
+				sql = " SELECT PNAME, HASHTAG, PSFILE, SET_CHECK FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE, SET_CHECK " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE, SET_CHECK FROM BR31_MENU WHERE CATEGORY='ICECREAM' " + 
 						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
 			}else if(status.equals("coffee")){
-				sql = " SELECT PNAME, HASHTAG, PSFILE FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE " + 
-						" FROM (SELECT PNAME, HASHTAG, PSFILE FROM BR31_MENU WHERE CATEGORY='COFFEE' " + 
+				sql = " SELECT PNAME, HASHTAG, PSFILE, SET_CHECK FROM (SELECT ROWNUM RNO, PNAME, HASHTAG, PSFILE, SET_CHECK " + 
+						" FROM (SELECT PNAME, HASHTAG, PSFILE, SET_CHECK FROM BR31_MENU WHERE CATEGORY='COFFEE' " + 
 						" ORDER BY ORDER_NUM desc)) WHERE RNO BETWEEN ? AND ? ";
 			}
 			
@@ -88,12 +117,12 @@ public class MenuDAO extends DBConn{
 						}
 					}
 					vo.setPsfile(rs.getString(3));
+					vo.setSet_check(rs.getInt(4));
 					list.add(vo);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			close();
 			return list;
 		}
 	//Select --> 아이스크림 메뉴 리스트
@@ -703,7 +732,7 @@ public class MenuDAO extends DBConn{
 	//Select ---> menu 조회 - 아이스크림
 	public MenuVO getMenuIcecreamContent(String pname) {
 		MenuVO vo = new MenuVO();
-		String sql = " select pname, eng_pname, intro, rec_flavor, psfile from br31_menu where pname = ? ";
+		String sql = " select pname, eng_pname, intro, rec_flavor, psfile, set_check from br31_menu where pname = ? ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -719,6 +748,7 @@ public class MenuDAO extends DBConn{
 					vo.setRec_flavor(getStringList(rs.getString(4)));
 				}
 				vo.setPsfile(rs.getString(5));
+				vo.setSet_check(rs.getInt(6));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -757,6 +787,65 @@ public class MenuDAO extends DBConn{
 		return result;
 	}
 	
+	//Select ---> 영양정보 조회 - 기본화면(전체출력) - 페이징 처리
+	public ArrayList<MenuVO> getAllNutrientsList(String category, int start, int end){
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		String sql = " select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+				" allergy, set_check from (select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+				" allergy, set_check from (select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+				" from br31_menu order by pname)) where rno between ? and ? ";
+		
+		if(category.equals("icecream")) {
+			sql = " select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+					" allergy, set_check from (select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+					" allergy, set_check from (select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+					" from br31_menu where category = 'ICECREAM' order by pname)) where rno between ? and ? ";
+		}else if(category.equals("coffee")) {
+			sql = " select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+					" allergy, set_check from (select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+					" allergy, set_check from (select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+					" from br31_menu where category = 'COFFEE' order by pname)) where rno between ? and ? ";
+		}
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MenuVO vo = new MenuVO();
+				
+				vo.setPname(rs.getString(2));
+				
+				if(rs.getString(3)!=null) {		//1회제공량이 null이 아닐때
+					vo.setOne_amount(rs.getString(3));
+				}
+				
+				if(rs.getString(4)!=null) {		//열량이 null이 아닐 때
+					vo.setKcal(rs.getString(4));
+				}
+				
+				vo.setNatrium(rs.getInt(5));
+				vo.setSugar(rs.getInt(6));
+				vo.setFat(rs.getInt(7));
+				vo.setProtein(rs.getInt(8));
+				vo.setCaffeine(rs.getInt(9));
+				
+				if(rs.getString(10)!=null) {		//알러지가 null이 아닐 때
+					String[] alist = getStringList(rs.getString(10));
+					vo.setAllergy(alist);
+				}
+				
+				vo.setSet_check(rs.getInt(11));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	//Select ---> 영양정보 조회 - 기본화면(전체출력)
 	public ArrayList<MenuVO> getAllNutrientsList(String category){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
@@ -806,14 +895,180 @@ public class MenuDAO extends DBConn{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		close();
 		return list;
 	}
 	
+	//select --> 영양성분 조회 - 검색결과 출력 - 페이징 처리
+	public ArrayList<MenuVO> getNutrientSearchResult(String category, String pname, String nutrient, String sorting, String[] allergies, int start, int end){
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		String sql = " select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+				" allergy, set_check from (select rownum rno, pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, " + 
+				" allergy, set_check from (select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+				" from br31_menu ";
+		int w_check = 0;	//where절 체크 변수
+		if(!category.equals("all")) {
+			sql += " where category = " + category.toUpperCase();
+			w_check = 1;
+		}
+		if(!pname.equals("")) {
+			if(w_check==0) {
+				sql += " where pname like '%" +pname +"%'";
+				w_check = 1;
+			}else {
+				sql += " and pname like '%" +pname +"%'";
+			}
+		}
+		if(allergies!=null) {
+			//String allergy = getString(allergies);
+			if(w_check==0) {	//where절이 안들어갔을 때
+				for(int i=0;i<allergies.length;i++) {
+					if(i==0) {
+						sql += " where allergy like '%"+allergies[i]+"%'";
+					}else {
+						sql += " and allergy like '%"+allergies[i]+"%'";
+					}
+				}
+				w_check=1;
+			}else {	//where절이 이미 있을 때
+				for(int i=0;i<allergies.length;i++) {
+					sql += " and allergy like '%"+allergies[i]+"%'";
+				}
+			}
+		}
+		if(!sorting.equals("전체")) {	//영양성분, 정렬순서 둘다 선택했을때
+			if(w_check==0) {	//where 절이 안들어갔을 떄
+				if(sorting.equals("높은순")) {
+					sql += " where set_check=0 order by to_number("+nutrient+") desc";
+				}else {	//낮은순
+					sql += " where set_check=0 order by to_number("+nutrient+")";
+				}
+				w_check=1;
+			}else {		//where절이 이미 있을 때
+				if(sorting.equals("높은순")) {
+					sql += " and set_check=0 order by to_number("+nutrient+") desc";
+				}else {	//낮은순
+					sql += " and set_check=0 order by to_number("+nutrient+")";
+				}
+			}
+		}else if(sorting.equals("전체") && !nutrient.equals("전체")){	//영양성분만 선택했을때(기본정렬: 오름차순)
+			if(w_check==0) {
+				sql += " where set_check=0 order by to_number("+nutrient+")";
+				w_check=1;
+			}else {
+				sql += " and set_check=0 order by to_number("+nutrient+")";
+			}
+		}else if(sorting.equals("전체") && nutrient.equals("전체")) {	//정렬 선택을 안했을때(이름 오름차순)
+			sql += " order by pname";
+		}
+		sql += ")) where rno between " + start + " and " + end;
+				try {
+					getStatement();
+					rs = stmt.executeQuery(sql);
+					while(rs.next()) {
+						MenuVO vo = new MenuVO();
+						vo.setPname(rs.getString(2));
+						
+						if(rs.getString(3)!=null) {
+							vo.setOne_amount(rs.getString(3));
+						}
+						
+						if(rs.getString(4)!=null) {
+							vo.setKcal(rs.getString(4));
+						}
+						
+						vo.setNatrium(rs.getInt(5));
+						vo.setSugar(rs.getInt(6));
+						vo.setFat(rs.getInt(7));
+						vo.setProtein(rs.getInt(8));
+						vo.setCaffeine(rs.getInt(9));
+						
+						if(rs.getString(10)!=null) {
+							String[] alist = getStringList(rs.getString(10));
+							vo.setAllergy(alist);
+						}
+						
+						vo.setSet_check(rs.getInt(11));
+						
+						list.add(vo);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		return list;
+	}
+	
+	//select --> 영양성분 조회 - 전체 개수
+	public int getNutrientSearchResultCount(String category, String pname, String nutrient, String sorting, String[] allergies){
+		int result = 0;
+		String sql = "select count(*) from br31_menu ";
+		int w_check = 0;	//where절 체크 변수
+		if(!category.equals("all")) {
+			sql += " where category = " + category.toUpperCase();
+			w_check = 1;
+		}
+		if(!pname.equals("")) {
+			if(w_check==0) {
+				sql += " where pname like '%" +pname +"%'";
+				w_check = 1;
+			}else {
+				sql += " and pname like '%" +pname +"%'";
+			}
+		}
+		if(allergies!=null) {
+			//String allergy = getString(allergies);
+			if(w_check==0) {	//where절이 안들어갔을 때
+				for(int i=0;i<allergies.length;i++) {
+					if(i==0) {
+						sql += " where allergy like '%"+allergies[i]+"%'";
+					}else {
+						sql += " and allergy like '%"+allergies[i]+"%'";
+					}
+				}
+				w_check=1;
+			}else {	//where절이 이미 있을 때
+				for(int i=0;i<allergies.length;i++) {
+					sql += " and allergy like '%"+allergies[i]+"%'";
+				}
+			}
+		}
+		if(!sorting.equals("전체")) {	//영양성분, 정렬순서 둘다 선택했을때
+			if(w_check==0) {	//where 절이 안들어갔을 떄
+				if(sorting.equals("높은순")) {
+					sql += " where set_check=0 order by to_number("+nutrient+") desc";
+				}else {	//낮은순
+					sql += " where set_check=0 order by to_number("+nutrient+")";
+				}
+				w_check=1;
+			}else {		//where절이 이미 있을 때
+				if(sorting.equals("높은순")) {
+					sql += " and set_check=0 order by to_number("+nutrient+") desc";
+				}else {	//낮은순
+					sql += " and set_check=0 order by to_number("+nutrient+")";
+				}
+			}
+		}else if(sorting.equals("전체") && !nutrient.equals("전체")){	//영양성분만 선택했을때(기본정렬: 오름차순)
+			if(w_check==0) {
+				sql += " where set_check=0 order by to_number("+nutrient+")";
+				w_check=1;
+			}else {
+				sql += " and set_check=0 order by to_number("+nutrient+")";
+			}
+		}
+		try {
+			getStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	//select --> 영양성분 조회 - 검색결과 출력
 	public ArrayList<MenuVO> getNutrientSearchResult(String category, String pname, String nutrient, String sorting, String[] allergies){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
-		String sql = " select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
+		String sql = "select pname, one_amount, kcal, natrium, sugar, fat, protein, caffeine, allergy, set_check " + 
 				" from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
 		if(!category.equals("all")) {
@@ -868,7 +1123,6 @@ public class MenuDAO extends DBConn{
 				sql += " and set_check=0 order by to_number("+nutrient+")";
 			}
 		}
-		
 		try {
 			getStatement();
 			rs = stmt.executeQuery(sql);
@@ -902,14 +1156,13 @@ public class MenuDAO extends DBConn{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		close();
 		return list;
 	}
 	
 	//select ---> 메뉴 조회 부분의 검색 결과 출력
 	public ArrayList<MenuVO> getSearchResult(String category, String pname, String hashtag, String[] allergies){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
-		String sql = " select pname, hashtag, psfile from br31_menu where category = '" + category + "'";
+		String sql = " select pname, hashtag, psfile, set_check from br31_menu where category = '" + category.toUpperCase() + "'";
 		
 		if(!pname.equals("")) {
 			sql += " and pname like '%" +pname +"%'";
@@ -936,6 +1189,7 @@ public class MenuDAO extends DBConn{
 				vo.setPname(rs.getString(1));
 				vo.setHashtag(getStringList(rs.getString(2)));
 				vo.setPsfile(rs.getString(3));
+				vo.setSet_check(rs.getInt(4));
 				
 				list.add(vo);
 			}

@@ -131,6 +131,7 @@ form.nutrient_search button.btn_search{
 	border: none;
 	color: white;
 	font-size: 18px;
+	cursor : pointer;
 }
 
 
@@ -146,9 +147,12 @@ section.search_result img.title{
 	display: inline-block;
 }
 section.search_result label.search_result{
-	display: block;
 	font-size: 14px;
-	margin: 10px;
+	margin: 10px 0;
+}
+section.search_result label.search_count{
+	font-size: 14px;
+	color: rgb(255,90,150);
 }
 section.search_result table{
 	border-collapse: collapse;
@@ -164,7 +168,7 @@ section.search_result table th{
 	border-bottom: 1px solid rgb(216,209,204);
 }
 section.search_result table th:nth-child(1){
-	width: 100px; 
+	width: 200px; 
 }
 section.search_result table th:nth-child(2){
 	width: 200px; 
@@ -205,6 +209,7 @@ div.pagination {
 	margin: auto;
 	text-align: center;
 }
+/**
 div.pagination a{
 	border: 1px solid rgb(228,219,215);
 	display: inline-block;
@@ -224,3 +229,4 @@ div.pagination a:first-child, div.pagination a:last-child{
 	font-size: 20px;  
 	line-height: 40px; 
 }
+**/
