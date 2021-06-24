@@ -169,7 +169,9 @@ div.table table.menu_coffee th:nth-child(6){
 }
 
 
-
+label.label_must{
+	color: rgb(255,124,152);
+}
 
 /******메뉴관리 수정 ********/
 /******메뉴관리 수정 ********/

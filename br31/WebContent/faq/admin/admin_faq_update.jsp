@@ -88,7 +88,7 @@
 						<label><img src="http://localhost:9000/br31/images/icon_answer.gif" alt="answer_icon"></label>
 					</th>
 					<td>
-						<textarea name="content" id="content"><%= vo.getContent() %></textarea>
+						<textarea name="content" id="content"><%= vo.getContent().replace("<br>", "\r\n") %></textarea>
 					</td>
 				</tr>
 				<tr>

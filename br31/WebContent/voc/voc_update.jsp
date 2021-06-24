@@ -213,7 +213,7 @@
 						</tr>
 						<tr>
 							<th>내용<span>*</span></th>
-							<td colspan=3><textarea name="content" id="voc_content"><%= vo.getContent() %></textarea></td>
+							<td colspan=3><textarea name="content" id="voc_content"><%= vo.getContent().replace("<br>", "\r\n") %></textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>

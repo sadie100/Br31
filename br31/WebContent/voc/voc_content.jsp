@@ -108,7 +108,7 @@
 							<th>문   의   답   변</th>
 						</tr>
 						<tr>
-							<% if(vo.getAnswer() != null) { %>
+							<% if(vo.getAnswer() != null && !vo.getAnswer().equals("NULL")) { %>
 								<td><%= vo.getAnswer().replace("\r\n", "<br>") %></td>
 							<% } else { %>
 								<td style="color:red"> ※ 답변 대기 중인 문의입니다. </td>
