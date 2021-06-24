@@ -178,7 +178,6 @@ public class NoticeDAO extends DBConn {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		close();
 
 		return list;
 	}
