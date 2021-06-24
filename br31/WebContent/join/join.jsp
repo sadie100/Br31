@@ -223,7 +223,7 @@
 					<li>
 						<label>주소</label>
 						<input type = "text" name = "addr1" class = "li" id = "addr1">
-						<a href = "#"><button type = "button" name = "btn_addr" class = "btn_check" id = "btn_addr" onclick="sample4_execDaumPostcode()">우편번호 검색</button></a>
+						<button type = "button" name = "btn_addr" class = "btn_check" id = "btn_addr" onclick="sample4_execDaumPostcode()">우편번호 검색</button>
 						<input type = "text" name = "addr2" class = "li" id = "addr2">
 					</li>
 					<li>
