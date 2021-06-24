@@ -110,7 +110,7 @@
 						</tr>
 						<tr>
 							<td>
-								<textarea class="voc_answer" name="answer"><%= vo.getAnswer() %></textarea>
+								<textarea class="voc_answer" name="answer"><%= vo.getAnswer().replace("<br>", "\r\n") %></textarea>
 							</td>
 						</tr>
 					</table>
