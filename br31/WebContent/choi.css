@@ -597,6 +597,11 @@ div.content section.m_page, div.content section.m2_page{
 	margin:auto;
 }
 
+section.m3_page, section.m3_image{
+	width:91%;
+	margin:auto;
+}
+
 div.content section.m_page fieldset{
 	border: 1px solid rgb(198, 191, 179);
 	border-radius : 10px;
@@ -830,12 +835,17 @@ section.m1_page div:first-child{
 /*************
 	mypage_f_flavor_css
 *****************/
-div.content section.m2_page div.m_f_image{
+div.content section.m3_image div.m_f_image{
 	text-align:center;
 	margin:150px 0 70px 0;
 }
+section.m3_page div{
+	margin-bottom:100px;
 
-section.m2_page span{
+}
+
+section.m3_page span{
+	text-align:left;
 	margin-left:5px;
 	font-weight:600;
 }
@@ -850,7 +860,10 @@ div.r_flavor ul{
 	width:100%;
 	height:210px;
 	text-align:center;
+	
+	
 }
+
 div.r_flavor ul a{
 	text-decoration : none;
 }
@@ -860,6 +873,7 @@ div.r_flavor ul li{
 	width:180px;
 	margin:0;
 	float:left;
+	overflow:hidden;
 }
 
 div.r_flavor ul li span{
@@ -867,6 +881,7 @@ div.r_flavor ul li span{
 	font-size:11px;
 	padding:20px 25px 45px 25px;
 	color :rgb(148, 135, 128);
+	text-align:center;
 	margin:auto;
 }
 div.r_flavor ul li a img{
@@ -918,22 +933,19 @@ div.r_flavor ul li a img{
 	내가 좋아하는 플레이버
 ****/
 
-section.m2_page{
+section.m3_page{
 	clear:left;
+	display:inline-block;
+	margin-left:50px;
+	margin-bottom:100px;
+	
 }
 
-span.m2_title{
-	color: black;
-	font-size:15px;
-	display:block;
-}
 
 div.r_flavor{
 	margin-bottom:150px;
 
 }
-
-
 
 /*************
 	mypage_update_css
@@ -1026,19 +1038,19 @@ form.update_form li:last-child{
 	mypage_unregister_css
 *****************/
 
-div.content section.m3_page{
+div.content section.m4_page{
 	width:90%;
 	margin:auto;
 	text-align:center;
 }
 
-section.m3_page span{
+section.m4_page span{
 	font-size:25px;
 	display: block;
 	margin: 0 0 20px 0;
 }
 
-div.content section.m3_page div{
+div.content section.m4_page div{
 	margin-bottom:100px;
 }
 
@@ -1192,6 +1204,47 @@ section.ad_m_footer img{
 	width:30%;
 	margin:20px;
 }
+
+/**********
+	unregister_page.css
+**********/
+
+div.unregister{
+	text-align:center;
+	padding-bottom:180px;
+}
+
+div.unregister div img{
+	width:30%;
+}
+
+div.unregister_content{
+	margin-bottom:25px;
+}
+
+div.unregister_content span:first-child, div.unregister_content span:nth-child(2){
+	/*color:rgb(148, 135, 128);*/
+	color:rgb(128, 128, 161);
+	font-size: 20px;
+	font-weight:600;
+	
+}
+
+div.unregister_content p{
+	color:rgb(148, 135, 128);
+	font-size:15px;
+}
+
+div.unregister_content span:first-child{
+	color:tomato;
+}
+
+div.unregister_content span:last-child{
+	color:rgb(128, 128, 161);
+	font-size:17px;
+	
+}
+
 
 
 

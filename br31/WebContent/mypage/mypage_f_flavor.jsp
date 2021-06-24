@@ -8,9 +8,10 @@
 		MypageDAO dao = new MypageDAO();
 		
 		//즐겨찾기한 메뉴 리스트 받아오기 br31_f_flavor에서 아이디에 따른 pname 받아오기, menuVO, menuDAO를 이용해서 정보 가져오기
-		ArrayList<MenuVO> list = dao.getFlavorList(svo.getId());//pname, id 정보를 가져오기(해당아이디의 즐겨찾기 목록)
+		ArrayList<MenuVO> list = dao.getFlavorList(svo.getId());//pname, id, recflavor 정보를 가져오기(해당아이디의 즐겨찾기 목록)
+		ArrayList<MenuVO> reclist = dao.getRecFlavorList(svo.getId());//pname, id 정보를 가져오기(해당아이디의 즐겨찾기 목록)
 		
-		dao.close();
+		ArrayList<String> namelist = new ArrayList<String>();
 		
 %>    
 <!DOCTYPE html>
@@ -35,6 +36,7 @@
 								$(this).removeClass("btn_favor");
 								$(this).addClass("btn_favor_click");
 								$(this).attr("id","btn_favor_onclick");
+								location.reload();
 							}
 						}
 					});
@@ -102,47 +104,58 @@
 				</ul>
 			</nav>
 		</section>
-		<section class = "m2_page">
+		<section class = "m3_page">
 			<div>
-				<span class = "m2_title">추천플레이버</span>
+				<span class = "m_title">추천플레이버</span>
 				<div class = "r_flavor">
 					<ul>
-				<%for(MenuVO recvo : list){ %>
-					<%if(recvo.getRec_flavor() != null){ %>
-						<% for(String rec : recvo.getRec_flavor()){ %>
-						<li>
-							<a href = "http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=rec%>">
-								<span><%=rec %></span>
-								<% MenuVO rvo = dao.getRecomandMenu(rec); %>
-								<% System.out.println(rvo.getPsfile()); %>
-								<img src = "http://localhost:9000/br31/images/<%=rvo.getPsfile() %>">
-							</a>
-							<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value = "베리베리 스트로베리"></button>
-						</li>
-						<%} %>
-					<% } %>	
-				<%} %>		
-					</ul>	
+					<%for(MenuVO recvo : reclist){ %>
+						<%if(recvo.getRec_flavor() != null){ %>
+							<% for(String rec : recvo.getRec_flavor()){ %>
+							<% System.out.println(rec); %>
+								<% if(namelist.indexOf(rec) == -1){%>
+									<li>
+										<a href = "http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=rec%>">
+											<span><%=rec %></span>
+											<% MenuVO rvo = dao.getRecomandMenu(rec); %>
+											<img src = "http://localhost:9000/br31/menu/images/<%=rvo.getPsfile()%>">
+										</a>
+										<% int result = dao.getStarCount(svo.getId(), rec); %>
+										<% System.out.println(result); %>
+										<% if(result ==0){ %>
+											<button type = "button" class = "btn_favor" id = "btn_favor" name = "btn_f" value ="<%=rec %>"></button>
+										<%}else{ %>
+											<button type = "button" class = "btn_favor_click" id = "btn_favor_onclick" name = "btn_f" value = "<%=rec%>"></button>
+										<% } %>
+									</li>
+									<% namelist.add(rec); %>
+								<% } %>
+							<%} %>
+						<% } %>	
+					<%} %>		
+				</ul>	
 				</div>
 			</div>
 		</section>
-		<section class = "m_page">
-			<span class = "m_title">내가 좋아하는 플레이버</span>
-				<div class = "r_flavor">
-					<ul>
-						<%for(MenuVO vo : list){ %>
-						<li>
-							<a href = "http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=vo.getPname()%>">
-								<span><%= vo.getPname() %></span>
-								<img src = "http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">
-							</a>
-							<button type = "button" class = "btn_favor_click" id = "btn_favor_onclick" name = "btn_f" value = "<%=vo.getPname()%>"></button>
-						</li>
-						<%} %>	
-					</ul>	
+		<section class = "m3_page" >
+			<div>
+				<span class = "m_title">내가 좋아하는 플레이버</span>
+					<div class = "r_flavor">
+						<ul>
+							<%for(MenuVO vo : list){ %>
+							<li>
+								<a href = "http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=vo.getPname()%>">
+									<span><%= vo.getPname() %></span>
+									<img src = "http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">
+								</a>
+								<button type = "button" class = "btn_favor_click" id = "btn_favor_onclick" name = "btn_f" value = "<%=vo.getPname()%>"></button>
+							</li>
+							<%} %>	
+						</ul>	
 				</div>
+			</div>	
 		</section>
-		<section class = "m2_page">	
+		<section class = "m3_image">	
 			<div class = "m_f_image">	
 				<a href = "#"><img src = "http://localhost:9000/br31/images/btn_favor.jpg"></a>
 			</div>	

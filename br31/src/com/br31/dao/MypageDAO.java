@@ -52,7 +52,7 @@ public class MypageDAO extends DBConn{
 		return result;
 	}
 	
-	public ArrayList<MenuVO> getFlavorList(String id){
+	public ArrayList<MenuVO> getRecFlavorList(String id){
 		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
 		
 		String sql = "SELECT PNAME, PSFILE, REC_FLAVOR FROM BR31_MENU WHERE " + 
@@ -71,6 +71,35 @@ public class MypageDAO extends DBConn{
 				vo.setPname(rs.getString(1));
 				vo.setPsfile(rs.getString(2));
 				vo.setRec_flavor(rs.getString(3));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<MenuVO> getFlavorList(String id){
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		
+		String sql = "SELECT PNAME, PSFILE FROM BR31_MENU WHERE " + 
+				" PNAME IN (SELECT PNAME FROM BR31_F_FLAVOR WHERE ID = ?) ";
+		
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MenuVO vo = new MenuVO();
+				
+				vo.setPname(rs.getString(1));
+				vo.setPsfile(rs.getString(2));
 				
 				list.add(vo);
 			}
