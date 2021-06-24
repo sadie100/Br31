@@ -7,6 +7,6 @@
 	
 	MypageDAO dao = new MypageDAO();
 	int result = dao.getmfDeleteResult(id, pname);
-	
+	 
 	out.write(String.valueOf(result));
 %>

@@ -16,6 +16,7 @@ public class MenuVO {
 		}else {
 			String[] list = {text};
 			return list;
+			
 		}
 	}
 	

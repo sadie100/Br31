@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ page import="com.br31.dao.*, com.br31.vo.*, java.util.*" %>
  <%
+ 
  	String pname = request.getParameter("pname");
  	String category = request.getParameter("category");
  	MenuDAO dao = new MenuDAO();
@@ -60,32 +61,36 @@
 		//클릭이벤트 추가
 		$("img[name=btn_star]").click(function(){
 			<% if(svo != null){ %>
-			var btn_s = $("img[name=btn_star]").attr("id");
-				if(btn_s == "star_button"){
-					$.ajax({
-						url:"http://localhost:9000/br31/mypage/mfUpdateProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
-						success:function(result){
-							if(result==1){
-								$("#star_button").attr("src","http://localhost:9000/br31/images/star_button_onclick.PNG");
-								$("#star_button").attr("id","star_button_onclick");
-								location.reload();
+				<% if(vo.getSet_check()==0){%>
+					var btn_s = $("img[name=btn_star]").attr("id");
+						if(btn_s == "star_button"){
+								$.ajax({
+									url:"http://localhost:9000/br31/mypage/mfUpdateProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
+									success:function(result){
+										if(result==1){
+											$("#star_button").attr("src","http://localhost:9000/br31/images/star_button_onclick.PNG");
+											$("#star_button").attr("id","star_button_onclick");
+											location.reload();
+										}
+									}
+								});
+							}else{
+								$.ajax({
+									url:"http://localhost:9000/br31/mypage/mfDeleteProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
+									success:function(result){
+										if(result==1){
+											$("#star_button_onclick").attr("src","http://localhost:9000/br31/images/star_button.PNG");
+											$("#star_button_onclick").attr("id","star_button");
+											location.reload();
+										}
+									}
+								});
 							}
-						}
-					});
-				}else{
-					$.ajax({
-						url:"http://localhost:9000/br31/mypage/mfDeleteProcess.jsp?id=<%=svo.getId()%>&pname=<%=vo.getPname()%>",
-						success:function(result){
-							if(result==1){
-								$("#star_button_onclick").attr("src","http://localhost:9000/br31/images/star_button.PNG");
-								$("#star_button_onclick").attr("id","star_button");
-								location.reload();
-							}
-						}
-					});
-				}
-			<%}else{%>
-				alert("로그인후 이용가능합니다.");
+					<%}else{%>
+						alert("좋아하는 맛 등록은 팩 메뉴가 아닌 것만 가능합니다.");
+					<%}
+				}else{%>
+				alert("로그인 후 이용가능합니다.");
 				return false;
 			<%}%>
 			

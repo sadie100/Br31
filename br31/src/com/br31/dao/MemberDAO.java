@@ -25,6 +25,7 @@ public class MemberDAO extends DBConn{
 		ADMIN            VARCHAR2(1)	*/ 
 	
 	//전체 리스트 출력
+	
 		public ArrayList<MemberVO> getList(String category, String sname){
 			ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 			
