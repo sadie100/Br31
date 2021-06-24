@@ -111,12 +111,12 @@
 <!-- button -->
 	<span class="btn_index">
 		<%if(!pre_pname.equals("null")){ %>
-		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=pre_pname%>&category=<%=category%>"><button class="left" id="btn_left">&lt;</button></a>
+		<a href="http://localhost:9000/br31/menu/menu_coffee_select.jsp?pname=<%=pre_pname%>&category=<%=category%>"><button class="left" id="btn_left">&lt;</button></a>
 		<%} %>
 	</span>
 	<span class="btn_index">
 		<%if(!next_pname.equals("null")){ %>
-		<a href="http://localhost:9000/br31/menu/menu_icecream_select.jsp?pname=<%=next_pname%>&category=<%=category%>"><button class="right" id="btn_right">&gt;</button></a>
+		<a href="http://localhost:9000/br31/menu/menu_coffee_select.jsp?pname=<%=next_pname%>&category=<%=category%>"><button class="right" id="btn_right">&gt;</button></a>
 		<%} %>
 	</span>
 
