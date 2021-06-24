@@ -923,15 +923,27 @@ public class MenuDAO extends DBConn{
 			if(w_check==0) {	//where절이 안들어갔을 때
 				for(int i=0;i<allergies.length;i++) {
 					if(i==0) {
-						sql += " where allergy like '%"+allergies[i]+"%'";
+						if(allergies[i].equals("없음")) {
+							sql += " where allergy is null ";
+						}else {
+							sql += " where allergy like '%"+allergies[i]+"%'";
+						}
 					}else {
-						sql += " and allergy like '%"+allergies[i]+"%'";
+						if(allergies[i].equals("없음")) {
+							sql += " and allergy is null ";
+						}else {
+							sql += " and allergy like '%"+allergies[i]+"%'";
+						}
 					}
 				}
 				w_check=1;
 			}else {	//where절이 이미 있을 때
 				for(int i=0;i<allergies.length;i++) {
-					sql += " and allergy like '%"+allergies[i]+"%'";
+					if(allergies[i].equals("없음")) {
+						sql += " and allergy is null ";
+					}else {
+						sql += " and allergy like '%"+allergies[i]+"%'";
+					}
 				}
 			}
 		}

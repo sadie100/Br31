@@ -81,9 +81,14 @@
 									<label class="name"><%=vo.getPname() %></label>
 									<%
 									if(vo.getHashtag()!=null){
-										for(String hash : vo.getHashtag()){%>
-										<label class="hashtag"><%=hash %></label>
-										 <%}
+										for(int v=0; v<vo.getHashtag().length; v++){
+										%>
+										<label class="hashtag"><%=vo.getHashtag()[v] %></label>
+										 <%
+										 if(v>=2){
+												v = vo.getHashtag().length;
+											}  
+										}
 									}
 									 %>
 									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
@@ -93,9 +98,14 @@
 									<label class="name"><%=vo.getPname() %></label>
 									<%
 									if(vo.getHashtag()!=null){
-										for(String hash : vo.getHashtag()){%>
-										<label class="hashtag"><%=hash %></label>
-										 <%}
+										for(int v=0; v<vo.getHashtag().length; v++){
+										%>
+										<label class="hashtag"><%=vo.getHashtag()[v] %></label>
+										 <%
+										 if(v>=2){
+												v = vo.getHashtag().length;
+											}  
+										}
 									}
 									 %>
 									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
@@ -110,9 +120,14 @@
 									<label class="name"><%=vo.getPname() %></label>
 									<%
 									if(vo.getHashtag()!=null){
-										for(String hash : vo.getHashtag()){%>
-										<label class="hashtag"><%=hash %></label>
-										 <%}
+										for(int v=0; v<vo.getHashtag().length; v++){
+										%>
+										<label class="hashtag"><%=vo.getHashtag()[v] %></label>
+										 <%
+										 if(v>=2){
+												v = vo.getHashtag().length;
+											}  
+										}
 									}
 									 %>
 									<img src="http://localhost:9000/br31/menu/images/<%=vo.getPsfile() %>">				
