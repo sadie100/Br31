@@ -6,43 +6,39 @@
 <%@page import="com.br31.dao.NoticeDAO"%>
 <%@page import="com.br31.comms.Commons"%>
 <%
-	//
-String rpage = request.getParameter("page");
-NoticeDAO dao = new NoticeDAO();
-Commons commons = new Commons();
-HashMap<String, Integer> map = commons.getPage(rpage, dao);
-//System.out.println(map.get("start"));
-//System.out.println(map.get("end"));
-ArrayList<NoticeVO> list = dao.getList(map.get("start"), map.get("end"));
-
-//페이징 처리 - startCount, endCount 구하기
-/* int startCount = 0;
-int endCount = 0;
-int pageSize = 5;	//한페이지당 게시물 수
-int reqPage = 1;	//요청페이지	
-int pageCount = 1;	//전체 페이지 수
-int dbCount = dao.execTotalCount();	//DB에서 가져온 전체 행수
-
-//총 페이지 수 계산
-if(dbCount % pageSize == 0){
-	pageCount = dbCount/pageSize;
-}else{
-	pageCount = dbCount/pageSize+1;
-}
-
-//요청 페이지 계산
-if(rpage != null){
-	reqPage = Integer.parseInt(rpage);
-	startCount = (reqPage-1) * pageSize+1;
-	endCount = reqPage *pageSize;
-}else{
-	startCount = 1;
-	endCount = 5;
-} 
-*/
-
-//NoticeDAO dao = new NoticeDAO();
-//ArrayList<BoardVO> list = dao.getList();
+	String rpage = request.getParameter("page");
+	rpage = rpage==null ? "1" : rpage;
+	NoticeDAO dao = new NoticeDAO();	
+	
+	//페이징 처리 - startCount, endCount 구하기
+	int startCount = 0;
+	int endCount = 0;
+	int pageSize = 10;	//한페이지당 게시물 수
+	int reqPage = 1;	//요청페이지	
+	int pageCount = 1;	//전체 페이지 수
+	int dbCount = dao.execTotalCount();	//DB에서 가져온 전체 행수
+	
+	//총 페이지 수 계산
+	if(dbCount % pageSize == 0){
+		pageCount = dbCount/pageSize;
+	}else{
+		pageCount = dbCount/pageSize+1;
+	}
+	
+	//요청 페이지 계산
+	if(rpage != null){
+		reqPage = Integer.parseInt(rpage);
+		startCount = (reqPage-1) * pageSize+1;
+		endCount = reqPage *pageSize;
+	}else{
+		startCount = 1;
+		endCount = 5;
+	}
+	
+	ArrayList<NoticeVO> list = dao.getList(startCount, endCount);
+	
+	//NoticeDAO dao = new NoticeDAO();
+	//ArrayList<BoardVO> list = dao.getList();
 %>
 <!DOCTYPE html>
 <html>
@@ -55,37 +51,30 @@ if(rpage != null){
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script src="http://localhost:9000/br31/js/am-pagination.js"></script>
 <script>
-	$(document).ready(
-			function() {
-
-				var pager = jQuery('#ampaginationsm').pagination({
-
-					maxSize : 7, // max page size
-					totals :<%=map.get("dbCount")%>, // total pages	
-					page :<%=map.get("rpage")%>, // initial page		
-					pageSize :<%=map.get("pageSize")%>, // max number items per page
-
-					// custom labels		
-					lastText : '&raquo;&raquo;',
-					firstText : '&laquo;&laquo;',
-					prevText : '&laquo;',
-					nextText : '&raquo;',
-
-					btnSize : 'sm' // 'sm'  or 'lg'		
-				});
-
-				jQuery('#ampaginationsm').on(
-						'am.pagination.change',
-						function(e) {
-							jQuery('.showlabelsm').text(
-									'The selected page no: ' + e.page);
-							$(location).attr(
-									'href',
-									"http://localhost:9000/br31/notice/notice_list.jsp?page="
-											+ e.page);
-						});
-
-			});
+	$(document).ready(function(){
+		
+		var pager = jQuery('#ampaginationsm').pagination({
+		
+		    maxSize: 7,	    		// max page size
+		    totals: <%=dbCount%>,	// total pages	
+		    page: <%=rpage%>,		// initial page		
+		    pageSize: 10,			// max number items per page
+		
+		    // custom labels		
+		    lastText: '&raquo;&raquo;', 		
+		    firstText: '&laquo;&laquo;',		
+		    prevText: '&laquo;',		
+		    nextText: '&raquo;',
+				     
+		    btnSize:'sm'	// 'sm'  or 'lg'		
+		});
+		
+		jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+			   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+	           $(location).attr('href', "http://localhost:9000/br31/notice/notice_list.jsp?page="+e.page);         
+	    });
+		
+ 	});
 </script>
 </head>
 <body id="br_about">
