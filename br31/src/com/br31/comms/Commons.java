@@ -13,7 +13,7 @@ public class Commons {
 		// ?˜?´ì§? ì²˜ë¦¬ - startCount, endCount êµ¬í•˜ê¸?
 		int startCount = 0;
 		int endCount = 0;
-		int pageSize = 5; // ?•œ?˜?´ì§??‹¹ ê²Œì‹œë¬? ?ˆ˜
+		int pageSize = 10; // ?•œ?˜?´ì§??‹¹ ê²Œì‹œë¬? ?ˆ˜
 		int reqPage = 1; // ?š”ì²??˜?´ì§?
 		int pageCount = 1; // ? „ì²? ?˜?´ì§? ?ˆ˜
 		int dbCount = dao.execTotalCount(); // DB?—?„œ ê°?? ¸?˜¨ ? „ì²? ?–‰?ˆ˜

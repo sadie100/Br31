@@ -90,8 +90,8 @@
 					<li><a href="#">이벤트 관리</a>
 						<div class="submenu">
 							<ul>
-								<li><a href="http://localhost:9000/br31/event/admin_event_list.jsp">진행이벤트</a></li>
-								<li><a href="http://localhost:9000/br31/event/admin_event_list.jsp">당첨자발표</a></li>
+								<li><a href="http://localhost:9000/br31/event/admin/event_list.jsp">진행이벤트</a></li>
+								<li><a href="http://localhost:9000/br31/event/admin/event_list.jsp">당첨자발표</a></li>
 							</ul>
 						</div>
 					</li>

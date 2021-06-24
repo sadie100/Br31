@@ -13,7 +13,7 @@ Commons commons = new Commons();
 HashMap<String, Integer> map = commons.getPage(rpage, dao);
 //System.out.println(map.get("start"));
 //System.out.println(map.get("end"));
-ArrayList<EventVO> list = dao.getList(map.get("start"), map.get("end"));
+ArrayList<EventVO> list = dao.getList(1, 20);
 
 //페이징 처리 - startCount, endCount 구하기
 /* int startCount = 0;
