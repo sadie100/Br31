@@ -30,12 +30,33 @@
 		var map = new kakao.maps.Map(container, options);
 		 // 마커가 표시될 위치입니다 
         var markerPosition  = new kakao.maps.LatLng(37.499401,127.033339); 
+        var markerPosition2  = new kakao.maps.LatLng(37.401420,127.012345); 
+        var markerPosition3  = new kakao.maps.LatLng(37.314528,127.894264); 
+        var markerPosition4  = new kakao.maps.LatLng(36.499412,128.033825); 
+        var markerPosition5  = new kakao.maps.LatLng(37.234501,127.523339); 
+        var markerPosition6  = new kakao.maps.LatLng(35.625401,129.082339); 
+        var markerPosition7  = new kakao.maps.LatLng(37.499401,127.825639); 
+        var markerPosition8  = new kakao.maps.LatLng(37.491901,127.030839); 
 
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({position:markerPosition});
+        var marker2 = new kakao.maps.Marker({position:markerPosition2});
+        var marker3 = new kakao.maps.Marker({position:markerPosition3});
+        var marker4 = new kakao.maps.Marker({position:markerPosition4});
+        var marker5 = new kakao.maps.Marker({position:markerPosition5});
+        var marker6 = new kakao.maps.Marker({position:markerPosition6});
+        var marker7 = new kakao.maps.Marker({position:markerPosition7});
+        var marker8 = new kakao.maps.Marker({position:markerPosition8});
         
         //지도 표시
         marker.setMap(map);
+        marker2.setMap(map);
+        marker3.setMap(map);
+        marker4.setMap(map);
+        marker5.setMap(map);
+        marker6.setMap(map);
+        marker7.setMap(map);
+        marker8.setMap(map);
 	</script>
 			
 
