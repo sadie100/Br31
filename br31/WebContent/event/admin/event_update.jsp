@@ -1,4 +1,4 @@
-<%@page import="com.br31.vo.EventVO"%>
+<%@page import="com.br31.vo.EventVO"%> 
 <%@page import="com.br31.dao.EventDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%

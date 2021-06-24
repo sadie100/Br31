@@ -1,4 +1,4 @@
-<%@page import="com.br31.vo.NoticeVO"%>
+<%@page import="com.br31.vo.NoticeVO"%> 
 <%@page import="com.br31.dao.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
