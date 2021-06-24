@@ -66,7 +66,7 @@
 		
 		jQuery('#ampaginationsm').on('am.pagination.change',function(e){
 			   jQuery('.showlabelsm').text('The selected page no: '+e.page);
-	           $(location).attr('href', "http://localhost:9000/br31/admin/notice/notice_list.jsp?page="+e.page);         
+	           $(location).attr('href', "http://localhost:9000/br31/notice/admin/notice_list.jsp?page="+e.page);         
 	    });
 		
  	});

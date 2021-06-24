@@ -66,7 +66,7 @@
 		
 		jQuery('#ampaginationsm').on('am.pagination.change',function(e){
 			   jQuery('.showlabelsm').text('The selected page no: '+e.page);
-	           $(location).attr('href', "http://localhost:9000/br31/admin/Event/Event_list.jsp?page="+e.page);         
+	           $(location).attr('href', "http://localhost:9000/br31/event/admin/event_list.jsp?page="+e.page);         
 	    });
 		
  	});

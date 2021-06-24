@@ -111,9 +111,9 @@ $(document).ready(function(){
 	</div>
 	<div class="buttons">
 		<ul class="buttons">
+			<li><button type="button" class="update" id="btn_write">등록</button></li>
 			<li><button type="button" class="update" id="btn_update">수정</button></li>
 			<li><button type="button" class="update" id="btn_delete">삭제</button></li>
-			<li><button type="button" class="update" id="btn_write">등록</button></li>
 		</ul>
 	</div>
 <div class="table">

@@ -269,7 +269,7 @@
 				<tr>
 					<%  for(String r_ice:vo.getRec_flavor()){ %>
 						<td>
-							<a href="menu_icecream_select.jsp?pname=<%=r_ice%>">
+							<a href="menu_icecream_select.jsp?pname=<%=r_ice%>&category=icecream">
 								<span class="depth1">
 									<span class="depth2">
 										<label class="name"><%=r_ice %></label>

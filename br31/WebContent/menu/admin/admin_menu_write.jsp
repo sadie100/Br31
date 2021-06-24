@@ -164,7 +164,7 @@
 	<form name="menu_update" action="admin_menu_insert_process.jsp?category=<%=category %>&status=<%=status %>" method="post" class="menu_update" enctype="multipart/form-data">
 		<table class="menu_update_table">
 			<tr>
-				<th>이름</th>
+				<th>이름<label class="label_must"> *</label></th>
 				<td><input type="text" name="pname" id="pname"></td>
 			</tr>
 			<tr>
@@ -172,11 +172,11 @@
 				<td><input type="text" name="eng_pname" id="eng_pname"></td>
 			</tr>
 			<tr>
-				<th>설명</th>
+				<th>설명<label class="label_must"> *</label></th>
 				<td><input type="text" name="intro" id="intro"></td>
 			</tr>
 			<tr>
-				<th>배치 위치</th>
+				<th>배치 위치<label class="label_must"> *</label></th>
 				<td>
 				<input type="radio" id="promotion" name="order_type" value="promotion">
 				<label for="promotion">프로모션(최상단)</label>
@@ -192,9 +192,11 @@
 				<td>
 					<select id="rec_flavor_list" name="rec_flavor_list">
 						<option value="선택">선택</option>
-						<%for(MenuVO a_vo : list){ %>
-						<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
-						<%} %>
+						<%for(MenuVO a_vo : list){
+							if(a_vo.getSet_check()==0){%>
+								<option value="<%=a_vo.getPname()%>"><%=a_vo.getPname() %></option>
+							<%}
+						}%>
 					</select>
 					<input type="button" name = "btn_flavor" id="btn_flavor" value="지우기">
 				</td>
@@ -214,7 +216,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>메뉴 사진</th>
+				<th>메뉴 사진<label class="label_must"> *</label></th>
 				<td><input type="file" name="pfile" id="p_image"></td>
 			</tr>
 			<tr>
