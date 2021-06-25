@@ -46,8 +46,6 @@
                 
                 var guideTextBox = document.getElementById("guide");
                 
-                close();
-                
             }
             
         }).open();
@@ -85,6 +83,16 @@
 				alert("세번째 전화번호를 입력해주세요");
 				$("#phone3").focus();
 				return false
+				
+			}else if($("#addr1").val() == ""){
+				alert("우편번호를 입력해주세요.");
+				$("#addr1").focus();
+				return false
+				
+			}else if($("#addr2").val() == ""){
+				alert("상세주소를 입력해주세요.");
+				$("#addr2").focus();
+				return false	
 				
 			}else if($("#email1").val() == ""){
 				alert("이메일을 입력해주세요");
@@ -207,9 +215,9 @@
 						</li>
 						<li>
 							<label>주소</label>
-							<input type = "text" name = "addr1" class = "li" value="<%=vo.getAddr1()%>">
+							<input type = "text" name = "addr1" class = "li" value="<%=vo.getAddr1()%>" id = "addr1">
 							<button type = "button" name = "btn_adress" class = "btn_check" onclick="sample4_execDaumPostcode()">우편번호 검색</button>
-							<input type = "text" name = "addr2" class = "li" value ="<%=vo.getAddr2()%>">
+							<input type = "text" name = "addr2" class = "li" value ="<%=vo.getAddr2()%>" id = "addr2">
 						</li>
 						<li>
 							<label>이메일</label>
