@@ -68,7 +68,7 @@ if (vo != null && vo.getNcontent()!=null) {
 						<a href="notice_list.jsp">
 							<button type="button" class="btn_style2">목록</button>
 						</a>
-						<a href="http://localhost:9000/br31/adminindex.jsp">
+						<a href="http://localhost:9000/br31/adminIndex.jsp">
 							<button type="button" class="btn_style2">홈으로</button>
 						</a>
 					</td>
