@@ -10,7 +10,10 @@ String rno = request.getParameter("rno");
 EventDAO dao = new EventDAO();
 
 EventVO vo = dao.getContent(Integer.parseInt(articleno));
-String content = vo.getNcontent().replaceAll("\n", "<br>");
+String content = null;
+if (vo != null && vo.getNcontent()!=null) {
+	content = vo.getNcontent().replaceAll("\n", "<br>");
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -54,7 +57,7 @@ String content = vo.getNcontent().replaceAll("\n", "<br>");
 						}
 						%>
 						<br>
-						<%=content%>
+						<%=content==null?"":content %>
 					</td>
 				</tr>
 				<tr>
