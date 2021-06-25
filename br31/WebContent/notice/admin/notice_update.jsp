@@ -1,4 +1,4 @@
-<%@page import="com.br31.vo.NoticeVO"%>
+<%@page import="com.br31.vo.NoticeVO"%> 
 <%@page import="com.br31.dao.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -18,7 +18,7 @@ dao.close();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31_m.css">
 <script src="http://localhost:9000/br31/js/jquery-3.6.0.min.js"></script>
 <script>
 	window.onload = function() {
@@ -58,8 +58,12 @@ span#fname {
 	<!-- content -->
 	<div class="content">
 		<section class="board_write">
-			<h1 class="title">관리자 - 공지사항</h1>
-			<form name="notice_update" action="notice_update_process.jsp" method="post" enctype="multipart/form-data">
+			<h3 class="line_title">
+			<span> <img
+				src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
+			</span> [관리자] 공지사항
+			</h3>
+				<form name="notice_update" action="notice_update_process.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="<%=vo.getArticleno()%>" name="articleno" id="articleno">
 				<table class="content_layout">
 					<tr>

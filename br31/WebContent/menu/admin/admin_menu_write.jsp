@@ -67,7 +67,6 @@
 			var flavor = $("#rec_flavor_list").val();
 			if(flavor.search(/(\s)/)!=-1){
 				var re_flavor = flavor.replace(/(\s)/g,'^')
-				console.log(re_flavor);
 			}
 			if(flavor!="선택"){
 				if(flavor==$("#pname").val()){

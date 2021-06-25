@@ -351,10 +351,10 @@ section.main .instagram div img:hover {
 							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_1.jpg" alt="carousel1" width="1350" height="600"></a>
 						</div>
 						<div class="carousel-item">
-							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_2.jpg" alt="carousel2" width="1350" height="600"></a>
+							<a href="http://localhost:9000/br31/event/event_content.jsp?articleno=5&rno=5"><img src="http://localhost:9000/br31/images/main_carousel_2.jpg" alt="carousel2" width="1350" height="600"></a>
 						</div>
 						<div class="carousel-item">
-							<a href="#none"><img src="http://localhost:9000/br31/images/main_carousel_3.jpg" alt="carousel3" width="1350" height="600"></a>
+							<a href="http://localhost:9000/br31/event/event_content.jsp?articleno=3&rno=3"><img src="http://localhost:9000/br31/images/main_carousel_3.jpg" alt="carousel3" width="1350" height="600"></a>
 						</div>
 					</div>
 			
@@ -430,7 +430,7 @@ section.main .instagram div img:hover {
 				<ul>
 					<li>
 						<div><img src="http://localhost:9000/br31/images/h_store.png"></div>
-						<a href="#"><img src="http://localhost:9000/br31/images/img_store.jpg"></a>
+						<a href="http://localhost:9000/br31/map/map.jsp"><img src="http://localhost:9000/br31/images/img_store.jpg"></a>
 					</li>
 					<li>
 						<div><img src="http://localhost:9000/br31/images/h_happyorder_delivery.png"></div>

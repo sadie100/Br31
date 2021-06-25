@@ -1,4 +1,4 @@
-<%@page import="com.br31.dao.NoticeDAO"%>
+<%@page import="com.br31.dao.NoticeDAO"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//
@@ -13,7 +13,7 @@ NoticeDAO dao = new NoticeDAO();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31_m.css">
 </head>
 <body>
 	<!-- header -->
@@ -22,8 +22,12 @@ NoticeDAO dao = new NoticeDAO();
 	<!-- content -->
 	<div class="content">
 		<section class="notice_delete">
-			<h1 class="title">관리자 - 공지사항</h1>
-			<div class="content_layout">
+			<h3 class="line_title">
+			<span> <img
+				src="http://localhost:9000/br31/images/h_notice.png" alt="NOTICE">
+			</span> [관리자] 공지사항
+			</h3>
+				<div class="content_layout">
 				<h3>정말로 삭제하시겠습니까?</h3> <img src="../../images/img1.jpg">
 				<div>
 					<a href="notice_delete_process.jsp?articleno=<%=articleno%>">

@@ -59,7 +59,7 @@
 	<button id="btn_search">다시 검색하기</button>
 </div>
 <jsp:include page="menu_search_box.jsp">
-		<jsp:param name="category" value="ICECREAM" />
+		<jsp:param name="category" value="<%=category %>" />
 </jsp:include>
 
 <section class="icecream_menu">

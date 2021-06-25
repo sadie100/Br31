@@ -118,13 +118,16 @@
 	
 		$("#rec_flavor_list").change(function(){		//추천 플레이버 선택시
 			var flavor = $("#rec_flavor_list").val();
+			if(flavor.search(/(\s)/)!=-1){
+				var re_flavor = flavor.replace(/(\s)/g,'^')
+			}
 			if(flavor!="선택"){
 				if(flavor==$("#pname").val()){
 					alert("추천 플레이버는 다른 맛만 선택할 수 있습니다.")
 				}else{
 					var output = "";
 					output += "<span>"+flavor+"</span>";
-					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+flavor+">";
+					output += "<input type='hidden' name='rec_flavor' id='rec_flavor' value="+re_flavor+">";
 					$("#selected_rec_flavor").append(output);
 					
 				}

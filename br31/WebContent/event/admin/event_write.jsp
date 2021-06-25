@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31.css">
+<link rel="stylesheet" href="http://localhost:9000/br31/css/admin_br31_m.css">
 <script type="text/javascript" src="http://localhost:9000/br31/js/br31.js"></script>
 </head>
 <body>
@@ -14,7 +14,10 @@
 	<!-- content -->
 	<div class="content">
 		<section class="board_write">
-			<h1 class="title">관리자 - 이벤트</h1>
+			<h3 class="line_title">
+				<span> <img src="../../images/eventtitle.png" alt="event">
+				</span> [관리자] 이벤트
+			</h3>
 			<form name="event_write" action="event_write_process.jsp" method="post" enctype="multipart/form-data">
 				<table class="content_layout">
 					<tr>

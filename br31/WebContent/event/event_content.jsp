@@ -70,7 +70,7 @@ if (vo != null && vo.getNcontent()!=null) {
 					</div>
 
 				<div class="event_view_btn">
-					<a href="list.php">목록</a>
+					<a href="event_list.jsp">목록</a>
 				</div>
 			</div>
 		</div>

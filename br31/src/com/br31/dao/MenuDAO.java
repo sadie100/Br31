@@ -907,7 +907,7 @@ public class MenuDAO extends DBConn{
 				" from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
 		if(!category.equals("all")) {
-			sql += " where category = " + category.toUpperCase();
+			sql += " where category = '" + category.toUpperCase() +"'";
 			w_check = 1;
 		}
 		if(!pname.equals("")) {
@@ -1015,7 +1015,7 @@ public class MenuDAO extends DBConn{
 		String sql = "select count(*) from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
 		if(!category.equals("all")) {
-			sql += " where category = " + category.toUpperCase();
+			sql += " where category = '" + category.toUpperCase()+"' ";
 			w_check = 1;
 		}
 		if(!pname.equals("")) {
@@ -1084,7 +1084,7 @@ public class MenuDAO extends DBConn{
 				" from br31_menu ";
 		int w_check = 0;	//where절 체크 변수
 		if(!category.equals("all")) {
-			sql += " where category = " + category.toUpperCase();
+			sql += " where category = '" + category.toUpperCase() +"'";
 			w_check = 1;
 		}
 		if(!pname.equals("")) {

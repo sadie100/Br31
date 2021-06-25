@@ -93,15 +93,6 @@
 	});//ready
 
 </script>
-<style>
-	span#vfile_name {
-		margin-left: -175px;
-		padding-right: 500px;
-		background-color: white;
-		color: black;
-		font-weight: normal;
-	}
-</style>
 </head>
 <body>
 	<!-- header -->
