@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.br31.dao.*, com.br31.vo.*, java.util.*,com.br31.vo.SessionVO" %>
 <%
-	/* SessionVO svo = (SessionVO)session.getAttribute("svo");
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
 	if(svo != null){
-	if(svo.getId().equals("admin")){ */
+	if(svo.getId().equals("admin")){ 
 		
 		MemberDAO dao = new MemberDAO();
 		ArrayList<MemberVO> list = dao.getList();
@@ -171,7 +171,7 @@
 	</div>
 </body>
 </html>
-<%--  <% }else{%>
+<% }else{%>
 	<script>
 		window.alert("접근권한이 없습니다.");
 		location.href = "http://localhost:9000/br31/index.jsp";
@@ -182,4 +182,4 @@
 		window.alert("로그인후 사용이 가능합니다.");
 		location.href = "http://localhost:9000/br31/login/login.jsp";
 	</script>
-<% } %>  --%>
+<% } %> 
