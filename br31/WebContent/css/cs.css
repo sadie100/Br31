@@ -337,7 +337,14 @@ section.voc_write button {
 section.voc_write button:hover {
 	cursor: pointer;
 	background-color: slategray;
-} 
+}
+span#vfile_name {
+	margin-left: -183px;
+	padding-right: 500px;
+	background-color: white;
+	color: black;
+	font-weight: normal;
+}
 
 /************** 
 	faq 
