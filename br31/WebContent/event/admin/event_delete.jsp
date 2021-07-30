@@ -28,7 +28,7 @@ EventDAO dao = new EventDAO();
 			</span> [관리자] 이벤트
 			</h3>
 			<div class="content_layout">
-				<h3>정말로 삭제하시겠습니까?</h3> <img src="../../images/img1.jpg">
+				<h3>정말로 삭제하시겠습니까?</h3> 
 				<div>
 					<a href="event_delete_process.jsp?articleno=<%=articleno%>">
 						<button type="button" class="btn_style2">삭제완료</button>
